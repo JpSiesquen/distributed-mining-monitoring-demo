@@ -33,3 +33,9 @@ Ver [compatibilidad oficial de Microsoft](https://learn.microsoft.com/en-us/sql/
 - Ubuntu 22.04 tiene mantenimiento estándar hasta mayo de 2027; si el despliegue continúa más
   allá, habrá que validar una actualización o cobertura de mantenimiento antes de ese límite.
   Ver [ciclo oficial de Ubuntu](https://ubuntu.com/about/release-cycle).
+
+## Referencia de mantenimiento
+
+Antes de seleccionar una actualización, revisar sus problemas conocidos. Se documenta el
+[fallo de CU27 durante recuperación](../sql-server-2022-cu27.md); este hallazgo no cambia
+la versión principal aceptada ni aprueba CU27 para DEV/QA.

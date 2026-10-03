@@ -1,7 +1,7 @@
 # Spec 003 — CI mínima de compilación y pruebas
 
-- **Estado:** En revisión
-- **Fecha:** 2026-10-02
+- **Estado:** Aprobada
+- **Fecha:** 2026-10-03
 
 ## Contexto
 
@@ -44,7 +44,8 @@ primero compilación y, cuando las pruebas estén disponibles, compilación y pr
 
 ## Preguntas abiertas
 
-- **P1:** concretar disparadores, runner y versiones de acciones en el plan, tras revisar
-  permisos y condiciones del repositorio. No se ha creado ningún workflow.
+- **P1 resuelta en diseño:** disparadores, runner, versiones y permisos definidos en el
+  [plan aprobado](plan.md). Antes de habilitar, completar su revisión de dependencias,
+  seguridad y condiciones vigentes. No se ha creado ningún workflow.
 
 Referencia: [compilación y pruebas Node.js en GitHub Actions](https://docs.github.com/en/actions/tutorials/build-and-test-code/nodejs).

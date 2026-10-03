@@ -57,3 +57,5 @@ servidores. Docker forma parte del stack previsto y se incorpora con un alcance 
 - [Specs](../specs/README.md): alcance, criterios de aceptación y estado de cada entregable.
 - [ADR](adr/README.md): decisiones de arquitectura aceptadas y sus consecuencias.
 - [Topología](topologia-despliegue.md): distribución, comunicación y acceso administrativo.
+
+- [Riesgo conocido de SQL Server 2022 CU27](sql-server-2022-cu27.md): condición, efecto y mitigaciones publicadas.

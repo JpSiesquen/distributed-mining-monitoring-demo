@@ -1,12 +1,13 @@
 # Specs
 
+El proyecto sigue desarrollo guiado por especificaciones (Spec-Driven Development, SDD).
 Cada funcionalidad o entregable relevante se especifica antes de implementarse.
 
 | Spec | Entregable | Estado |
 |------|------------|--------|
 | [001](001-topologia-despliegue/spec.md) | Topología de despliegue | Aprobada |
-| [002](002-api-core-minimo/spec.md) | API Core mínimo con equipos simulados | En revisión (logs/pruebas) |
-| [003](003-ci-minima/spec.md) | CI mínima de compilación y pruebas | En revisión |
+| [002](002-api-core-minimo/spec.md) | API Core mínimo con equipos simulados | Spec, plan y tareas aprobados; ejecución pendiente |
+| [003](003-ci-minima/spec.md) | CI mínima de compilación y pruebas | Spec, plan y tareas aprobados; ejecución pendiente |
 
 ## Flujo
 
@@ -18,7 +19,15 @@ Cada funcionalidad o entregable relevante se especifica antes de implementarse.
 Una spec se considera cerrada cuando todos sus criterios de aceptación se cumplen y están
 verificados. Si la implementación cambia el alcance, se actualiza la spec en el mismo cambio.
 
-No se crean specs para cambios triviales.
+## Revisar decisiones y documentos
+
+Una aprobación corresponde a la versión revisada; los documentos pueden evolucionar.
+Si cambia el resultado esperado, revisar la spec; si cambia la solución, el plan; si cambian
+los pasos, las tareas. Evaluar el impacto en código y pruebas y validar los cambios relevantes
+antes de implementarlos. Mantener documentación e implementación coherentes en el mismo cambio.
+Una decisión de arquitectura sustituida se registra en un nuevo ADR, enlazado desde el anterior.
+
+No se crean specs para cambios triviales; el detalle documental debe ser proporcional al cambio.
 
 ## Plantilla de `spec.md`
 

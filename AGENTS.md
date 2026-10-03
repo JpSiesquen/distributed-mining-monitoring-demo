@@ -45,6 +45,9 @@ Las librerías se incorporan cuando la funcionalidad que cubren se implementa, n
 
 ## Flujo de trabajo
 
+Al retomar, leer `docs/roadmap.md` para identificar el punto actual y la próxima acción;
+abrir después solo las specs y ADR necesarios para ese paso.
+
 Las funcionalidades relevantes siguen un flujo guiado por especificaciones (ver `specs/README.md`):
 `spec.md` (qué y por qué) → `plan.md` (cómo) → `tasks.md` (pasos) → implementación.
 

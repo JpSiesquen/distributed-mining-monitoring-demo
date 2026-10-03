@@ -55,5 +55,6 @@ de cada componente, sin valores sensibles.
 En fase de especificación, sin servicios ni CI implementados. La topología está aprobada;
 los estados de los demás entregables se registran en el [índice de specs](specs/README.md).
 
-Consultar el [diseño de arquitectura](docs/architecture.md) y la
+Continuar desde el [roadmap técnico](docs/roadmap.md). Consultar el
+[diseño de arquitectura](docs/architecture.md) y la
 [topología de despliegue](docs/topologia-despliegue.md).

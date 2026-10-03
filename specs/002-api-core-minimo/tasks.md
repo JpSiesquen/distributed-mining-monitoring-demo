@@ -2,10 +2,10 @@
 
 - **Spec:** [002](spec.md)
 - **Plan:** [002](plan.md)
-- **Estado:** En revisión; pendientes de ejecución
+- **Estado:** Aprobadas; pendientes de ejecución
 
-Los IDs se ordenan antes de crear issues. Ejecutar solo después de validar la revisión de
-spec/plan. La CI se rige por la [spec 003](../003-ci-minima/spec.md), pendiente de aprobación.
+Spec, plan y tareas aprobados el 2026-10-03. Los IDs se ordenan antes de crear issues.
+La CI se rige por la [spec 003](../003-ci-minima/spec.md) y su plan, ambos aprobados.
 Instalaciones y ejecución de Actions requieren su autorización; esta lista no las ejecuta.
 
 - [ ] **T01 — Validar dependencias exactas.** Evaluar Express 4.21.x, TypeScript 5.x y los tipos
@@ -42,8 +42,10 @@ Instalaciones y ejecución de Actions requieren su autorización; esta lista no 
 
 - [ ] **T08 — Completar errores y diagnóstico.** 404 después de rutas; manejador 500 al final;
   entregar explícitamente errores asíncronos a Express 4 y registrar un evento seguro.
-  **Comprobar:** ruta desconocida devuelve 404 JSON; mock ausente provoca 500 genérico y
-  /health sigue respondiendo. Restaurar mock y confirmar recuperación; logs útiles sin secretos. R5/R7; CA5/CA7.
+  **Comprobar:** ruta desconocida devuelve 404 JSON. Usar una copia temporal de módulos
+  compilados sin equipment.json para verificar 500 genérico y /health disponible, sin modificar
+  el mock de trabajo. Limpiar recursos y confirmar respuesta normal con datos presentes;
+  logs útiles sin secretos. R5/R7; CA5/CA7.
 
 - [ ] **T09 — Automatizar contratos y errores.** node:test y aserciones/fetch nativos sobre la
   app compilada; casos /health, equipos, 404 y 500 con datos temporales y limpieza garantizada.

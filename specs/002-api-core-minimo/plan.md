@@ -1,9 +1,10 @@
 # Plan 002 — API Core mínimo con equipos simulados
 
 - **Spec:** [002](spec.md)
-- **Estado:** En revisión
+- **Estado:** Aprobado
 - **Revisión:** logs y pruebas básicas; conserva decisiones previas aprobadas.
 - **Aprobación de la versión anterior:** 2026-10-02
+- **Fecha de aprobación de la revisión:** 2026-10-03
 
 ## Enfoque
 
@@ -25,7 +26,7 @@ Express directo, contrato mínimo y dev compilado siguen aprobados. La revisión
 | `src/app.ts` | Crear Express, registrar rutas y respuestas 404/500. |
 | `src/routes/equipment.ts` | Atender el listado y leer el JSON mock. |
 | `src/data/equipment.json` | Equipos ficticios con identificador y nombre. |
-| 	est/api.test.mjs | Pruebas HTTP del JavaScript compilado con herramientas nativas de Node.js. |
+| `test/api.test.mjs` | Pruebas HTTP del JavaScript compilado con herramientas nativas de Node.js. |
 | `.env` (ignorado) | Configuración local de escucha, sin versionar. |
 
 Actualizar el `.env.example` existente en la raíz para documentar las variables del servicio.
@@ -88,9 +89,9 @@ sin instalar un framework HTTP adicional. Probar la aplicación compilada median
 temporal en loopback con puerto asignado por el sistema; cerrarlo después de la ejecución.
 Los casos comprueban estado HTTP y contrato JSON de /health, equipos y errores 404/500.
 
-Para el error de lectura, usar una copia temporal de los módulos/datos compilados o una
-alteración reversible controlada del mock de pruebas, sin tocar datos reales; restaurar en
-la limpieza incluso si la prueba falla y ejecutar ese caso sin concurrencia sobre el mismo archivo.
+Para el error de lectura, preparar una copia temporal de los módulos/datos compilados,
+omitir el archivo de equipos e iniciar la aplicación desde esa copia. No modificar el mock
+de trabajo. Cerrar el servidor y eliminar la copia temporal incluso si la prueba falla.
 No añadir un endpoint de fallo ni una configuración de producción solo para las pruebas.
 
 Agregar npm test para ejecutar las pruebas después de build. La CI inicial comprueba build
@@ -127,7 +128,7 @@ Ver [runner nativo de Node.js](https://nodejs.org/docs/latest-v24.x/api/test.htm
 | R2 | Ruta /api/equipment devuelve el arreglo id/name del archivo mock (CA2). |
 | R3 | Archivo ficticio local, sin driver ni conexión SQL Server (CA3). |
 | R4 | Variables de escucha documentadas y validadas; probar cambio de puerto y loopback (CA4). |
-| R5 | Respuestas JSON 404/500; probar ruta desconocida y fallo controlado de lectura del mock, restaurándolo después (CA5). |
+| R5 | Respuestas JSON 404/500; probar ruta desconocida y fallo controlado de lectura en una copia temporal sin modificar el mock de trabajo (CA5). |
 | R6 | dev compila/arranca; build genera dist/ con el JSON y start lo ejecuta; probar ambas rutas en desarrollo y compilación (CA6). |
 | R7 | Logs de eventos mínimos, sin volcados de configuración o secretos; verificar arranque y errores controlados (CA7). |
 | R8 | node:test comprueba rutas/contratos/errores y cierra recursos temporales; comando npm test (CA8). |

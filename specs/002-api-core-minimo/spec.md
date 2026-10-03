@@ -1,8 +1,9 @@
 # Spec 002 — API Core mínimo con equipos simulados
 
-- **Estado:** En revisión
+- **Estado:** Aprobada
 - **Revisión:** incorporación de logs y pruebas básicas; decisiones técnicas previas conservadas.
 - **Fecha:** 2026-10-02
+- **Fecha de aprobación de la revisión:** 2026-10-03
 
 ## Contexto
 
