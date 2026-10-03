@@ -13,14 +13,16 @@ Diseño de topología aprobado ([001](../specs/001-topologia-despliegue/plan.md)
 Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 [CI mínima](../specs/003-ci-minima/tasks.md) aprobados. Servicios y workflow aún sin implementar.
 
-**Siguiente:** revisar las dependencias de API Core (002/T01) mediante el
+**Siguiente:** integrar la revisión de dependencias de API Core (002/T01) mediante PR.
+Las cuatro versiones están aprobadas; autorización de instalación pendiente. Consultar el
 [backlog de GitHub](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues),
 respetando sus dependencias. Implementar el servicio con CI desde el primer build.
 
 **Prerrequisito de seguridad:** revisar [Shai-Hulud y malware en dependencias](seguridad-dependencias.md)
 antes de instalar o ejecutar Actions ([política](../AGENTS.md#política-de-dependencias-y-ejecución);
 [002/T01](../specs/002-api-core-minimo/tasks.md) y [003/T01](../specs/003-ci-minima/tasks.md)).
-Revisión prevista, todavía pendiente; lockfile y CI no sustituyen esta comprobación.
+Revisión preliminar registrada y alertas de Dependabot activadas; contrastar el grafo definitivo
+con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 
 ## Ruta de entregables
 

@@ -1,6 +1,6 @@
 # Seguridad de dependencias y ejecución
 
-Actualizado: 2026-10-03. Revisión de dependencias del proyecto pendiente.
+Actualizado: 2026-10-03. Selección de las cuatro dependencias aprobada; instalación pendiente.
 
 ## Riesgo documentado
 
@@ -23,13 +23,80 @@ Aplicar la [política de dependencias](../AGENTS.md#política-de-dependencias-y-
 - Mantener bloqueada la instalación o ejecución si la revisión o aprobación está pendiente.
 - En CI, aplicar los SHA y permisos mínimos aprobados, sin credenciales SQL, SSH ni Azure.
 
+Controles de ejecución aprobados el 2026-10-03:
+
+- Local: comandos npm con `--ignore-scripts` y `.npmrc` del proyecto con `ignore-scripts=true`.
+- CI: `npm ci --ignore-scripts`; conservar `contents: read` y credenciales no persistidas.
+- Si una dependencia exige un script, detenerse y validar una excepción concreta; no quitar
+  la protección ni ampliar permisos para que la instalación pase.
+- Antes de build/test, comprobar que su entorno no recibe secretos de producción o despliegue.
+- Cada actualización debe pasar por revisión de versiones, scripts y lockfile antes de ejecutarse.
+
+La configuración local y el workflow se comprobarán en sus respectivas tareas; todavía no existen.
+
 El lockfile aporta reproducibilidad; el check verde acredita solo las comprobaciones ejecutadas.
 Ninguno garantiza ausencia de malware. Desactivar scripts tampoco acredita la seguridad del código
 que se importará después; cualquier cambio del comando de instalación requiere validación.
+
+## Alertas de Dependabot
+
+Activadas y verificadas el 2026-10-03 en GitHub: grafo de dependencias, alertas de
+vulnerabilidades y alertas de malware. Consultar [alertas del repositorio](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/security/dependabot).
+
+El análisis requiere publicar los manifiestos y lockfiles en `main`; todavía no existen.
+Las alertas identifican dependencias con vulnerabilidades o malware conocidos en la base de
+avisos de GitHub; no sustituyen la revisión previa ni bloquean por sí solas una instalación.
+[Alcance de las alertas de malware](https://docs.github.com/en/code-security/concepts/supply-chain-security/malware-alerts).
+Las actualizaciones automáticas permanecen deshabilitadas; cada cambio mantiene su revisión y aprobación.
 
 ## Trazabilidad y evidencia
 
 - [002/T01](../specs/002-api-core-minimo/tasks.md): selección y revisión de dependencias.
 - [003/T01](../specs/003-ci-minima/tasks.md): revisión de Actions y autorización de `npm ci`.
-- Estado: sin revisión ejecutada ni evidencia de ausencia de compromiso. Registrar los resultados
-  en el PR correspondiente antes de habilitar instalaciones o CI.
+- Estado: revisión preliminar de #1 registrada abajo; las cuatro versiones aprobadas.
+  Autorización de instalación y grafo definitivo pendientes.
+  Incorporar la evidencia al PR antes de habilitar instalaciones o CI.
+
+## Revisión de la issue #1
+
+Fecha: 2026-10-03. Revisión preliminar realizada; Express, TypeScript y tipos aprobados en esta fecha.
+La aprobación de versiones no autoriza instalar ni ejecutar paquetes.
+Sin instalaciones, compilación ni ejecución de paquetes descargados.
+
+| Paquete aprobado | Versión | Uso | Tipo |
+|------------------|---------|-----|------|
+| `express` | `4.22.3` | Servidor y rutas HTTP | Producción |
+| `typescript` | `5.9.3` | Comprobación de tipos y compilación | Desarrollo |
+| `@types/express` | `4.17.25` | Tipos de Express 4 | Desarrollo |
+| `@types/node` | `24.19.1` | Tipos de Node.js 24 | Desarrollo |
+
+El rango anterior `4.21.x` conduce a Express `4.21.2`, que declara `qs@6.13.0`.
+Esa versión está afectada por avisos de disponibilidad, entre ellos
+[GHSA-4mjr-xmp4-gh2g](https://github.com/advisories/GHSA-4mjr-xmp4-gh2g), corregido en `6.16.0`.
+La explotabilidad depende del uso; no se ha reproducido un ataque contra el proyecto.
+Se aprueba Express `4.22.3`, que declara `qs~6.16.0`, antes que forzar una dependencia transitiva
+mediante overrides. La decisión mantiene Express 4; no autoriza la instalación.
+[Metadatos de Express](https://registry.npmjs.org/express/4.22.3);
+[commit de publicación](https://github.com/expressjs/express/commit/899b52494e74327905c16164decdc6e51f803af8).
+
+Consulta del registro oficial: Express procede de expressjs/express; TypeScript, de
+microsoft/TypeScript; los tipos, de DefinitelyTyped. El registro declara provenance para Express;
+no se ha verificado criptográficamente esa attestation.
+
+Se resolvieron preliminarmente 87 versiones directas/transitivas por sus rangos publicados.
+La consulta al endpoint de avisos de npm no devolvió coincidencias para ese conjunto.
+No se declararon preinstall/install/postinstall; `mime@1.6.0` declara un prepare que genera
+types.json. Se leyó ese script del archivo publicado y se comprobó su integridad SHA-512,
+sin ejecutarlo. No se auditó todo el código fuente; estos resultados no acreditan ausencia de malware.
+El grafo definitivo debe contrastarse con el lockfile al preparar el proyecto.
+
+Comandos propuestos para `api-core/`, cuando exista y se apruebe la instalación:
+
+```powershell
+npm install --save-exact --ignore-scripts express@4.22.3
+npm install --save-dev --save-exact --ignore-scripts typescript@5.9.3 @types/express@4.17.25 @types/node@24.19.1
+```
+
+`--ignore-scripts` evita ejecutar scripts de instalación; no protege frente al código importado
+posteriormente. El comando de CI incorpora esa protección. Las instalaciones y la ejecución
+de CI siguen pendientes de aprobación.

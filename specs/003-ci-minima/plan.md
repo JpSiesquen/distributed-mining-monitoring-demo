@@ -16,7 +16,7 @@ Archivo previsto: `.github/workflows/api-core-ci.yml`. No se crea en esta revisi
 Un job llamado `api-core` con pasos secuenciales:
 
 ```
-Obtener código → preparar Node.js → npm ci → npm run build → npm test
+Obtener código → preparar Node.js → npm ci --ignore-scripts → npm run build → npm test
 ```
 
 Los comandos npm se ejecutan en `api-core/`. El checkout ocurre antes de ejecutar comandos
@@ -49,7 +49,7 @@ Antes de habilitar, completar la revisión de seguridad y compatibilidad del run
 obtener aprobación de acciones, runtime y comandos. No asumir que aprobar el plan
 por sí solo autoriza ejecutar instalaciones o acciones externas.
 Las dependencias exactas y sus scripts se aprueban en T01 de 002; el comando de instalación
-previsto en CI es `npm ci`, con dependencias de producción y desarrollo necesarias para build.
+previsto en CI es `npm ci --ignore-scripts`, con dependencias de producción y desarrollo necesarias para build.
 
 Conservar el resultado y logs de cada ejecución en GitHub Actions. Un fallo de instalación,
 compilación o pruebas hace fallar el job; no usar continue-on-error ni ignorar códigos de salida.
@@ -86,7 +86,7 @@ Decisión registrada en el [ADR 0009](../../docs/adr/0009-ci-minima-api-core.md)
 | Requisito | Cómo se cumple |
 |-----------|----------------|
 | R1 | Un workflow con contents: read, sin secretos de despliegue ni credenciales persistidas. |
-| R2 | npm ci desde lockfile aprobado; build obligatorio y pruebas al existir, solo en api-core/. |
+| R2 | npm ci --ignore-scripts desde lockfile aprobado; build obligatorio y pruebas al existir, solo en api-core/. |
 | R3 | Pasos secuenciales sin ignorar fallos; verificar ejecuciones válidas y fallos controlados. |
 | R4 | Validar versiones/SHA, permisos, instalación y condiciones antes de incorporar el workflow. |
 

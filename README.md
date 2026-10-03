@@ -11,8 +11,8 @@ Frontend → BFF → API Core → Base de datos
 | Capa | Responsabilidad | Tecnología |
 |------|-----------------|------------|
 | Frontend | Interfaz de monitoreo | React 19 + Vite 6 + TypeScript |
-| BFF | Adaptación y agregación de datos para el frontend | Node.js + Express 4.21 + TypeScript |
-| API Core | Lógica de negocio y acceso a datos | Node.js + Express 4.21 + TypeScript |
+| BFF | Adaptación y agregación de datos para el frontend | Node.js + Express 4 + TypeScript; versión exacta por validar |
+| API Core | Lógica de negocio y acceso a datos | Node.js + Express 4.22.3 + TypeScript |
 | Base de datos | Persistencia | SQL Server |
 
 ## Stack técnico
@@ -20,7 +20,7 @@ Frontend → BFF → API Core → Base de datos
 - **Lenguajes:** TypeScript 5.x, JavaScript (ES Modules), HTML5, CSS, SQL
 - **Frontend:** React 19, Vite 6, TanStack Query, Zustand, React Hook Form, Zod, Material UI, Motion, Lucide React
 - **Visualización 3D:** Three.js, React Three Fiber, @react-three/drei
-- **Backend:** Node.js, Express 4.21, TypeScript
+- **Backend:** Node.js, Express 4, TypeScript; Express 4.22.3 aprobado para API Core
 - **Datos:** SQL Server; repositorios mock JSON para dominios sin fuente real
 - **Gestor de paquetes:** npm
 
