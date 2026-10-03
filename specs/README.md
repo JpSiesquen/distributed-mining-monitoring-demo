@@ -5,7 +5,8 @@ Cada funcionalidad o entregable relevante se especifica antes de implementarse.
 | Spec | Entregable | Estado |
 |------|------------|--------|
 | [001](001-topologia-despliegue/spec.md) | Topología de despliegue | Aprobada |
-| [002](002-api-core-minimo/spec.md) | API Core mínimo con equipos simulados | Aprobada |
+| [002](002-api-core-minimo/spec.md) | API Core mínimo con equipos simulados | En revisión (logs/pruebas) |
+| [003](003-ci-minima/spec.md) | CI mínima de compilación y pruebas | En revisión |
 
 ## Flujo
 

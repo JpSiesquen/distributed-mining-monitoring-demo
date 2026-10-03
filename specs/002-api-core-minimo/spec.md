@@ -1,6 +1,7 @@
 # Spec 002 — API Core mínimo con equipos simulados
 
-- **Estado:** Aprobada
+- **Estado:** En revisión
+- **Revisión:** incorporación de logs y pruebas básicas; decisiones técnicas previas conservadas.
 - **Fecha:** 2026-10-02
 
 ## Contexto
@@ -17,7 +18,8 @@ un listado de equipos simulados en JSON, tanto en desarrollo como desde su compi
 ## Alcance
 
 - **Incluye:** servicio HTTP, comprobación de disponibilidad, listado de equipos desde datos
-  mock JSON, configuración externa, respuestas básicas de error y ejecución compilada.
+  mock JSON, configuración externa, respuestas básicas de error, logs mínimos, pruebas
+  automatizadas y ejecución compilada.
 - **No incluye:** SQL Server ni driver, BFF, frontend, edición de equipos, autenticación,
   contenedores, proxy, despliegue cloud, CI/CD ni funcionalidades de visualización.
 
@@ -39,6 +41,13 @@ Los mocks son temporales para este listado; no sustituyen la integración SQL Se
 - **R6:** existen modos de desarrollo y producción; producción ejecuta JavaScript compilado
   desde `dist/`, con comandos `dev`, `build` y `start` documentados.
 
+- **R7:** registrar inicio, fallo de arranque y errores internos con información suficiente para
+  identificar el tipo de fallo, sin volcar variables de entorno, credenciales ni datos sensibles.
+- **R8:** automatizar comprobaciones del contrato de /health y /api/equipment y respuestas
+  404/500, usando datos ficticios; las pruebas deben terminar sin dejar procesos o archivos alterados.
+
+La CI mínima se especifica por separado en [003](../003-ci-minima/spec.md); no incluye despliegues.
+
 ## Criterios de aceptación
 
 - [ ] **CA1:** una petición GET a `/health` devuelve HTTP 200 y JSON de disponibilidad del servicio.
@@ -51,6 +60,12 @@ Los mocks son temporales para este listado; no sustituyen la integración SQL Se
   devuelve 500 JSON sin detalles internos ni secretos.
 - [ ] **CA6:** CA1/CA2 pasan en desarrollo y después de `npm run build` seguido de `npm start`,
   que ejecuta el JavaScript generado en `dist/`.
+
+- [ ] **CA7:** ante arranque correcto, puerto ocupado y fallo controlado del mock, los logs
+  permiten distinguir los eventos sin incluir credenciales, contenido del mock ni detalles sensibles.
+- [ ] **CA8:** después de build, npm test verifica 200/contrato JSON y los casos 404/500; una
+  respuesta incorrecta hace fallar la prueba y termina con código no cero. Las pruebas restauran
+  sus datos y cierran el servidor, sin requerir SQL Server ni servicios cloud.
 
 ## Preguntas abiertas
 

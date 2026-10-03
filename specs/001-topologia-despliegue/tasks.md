@@ -20,23 +20,28 @@ sustituye la aprobación de instalaciones ni de recursos con costo.
 
 Estas funcionalidades se definen y verifican en sus propias specs antes de desplegar.
 Se construyen primero API Core, después BFF y frontend, y finalmente la integración SQL Server.
+Cada componente incorpora configuración, logs, pruebas y CI según sus specs; esas comprobaciones
+no se posponen hasta completar el despliegue. Si SQL local usa Docker, validar primero sus fundamentos.
 
 - [ ] **T02 — Disponer del flujo local con datos mock.** Completar API Core con `/health`
   y `GET /api/equipment`, BFF consumiendo API Core y frontend consultando solo al BFF.
   **Comprobar:** el navegador muestra los equipos mock; el frontend no llama directamente a API Core.
   **Prepara:** el flujo que se validará en CA1/CA7; no demuestra todavía la topología desplegada.
 
-- [ ] **T03 — Disponer de la integración con SQL Server 2022.** Validar edición, actualización
+- [ ] **T03 — Disponer de la integración con SQL Server 2022.** Antes de instalar, elegir
+  ejecución local y, si usa Docker, completar sus fundamentos. Validar edición, actualización
   compatible, driver y esquema mínimo en el diseño de datos correspondiente.
   **Comprobar:** API Core consulta los equipos en SQL Server y BFF mantiene su acceso por API Core.
   **Prepara:** CA4/CA7/CA10; no instalar paquetes ni modificar el modelo sin su aprobación.
 
 ## 3. Preparación del despliegue
 
-Comenzar cuando T02/T03 estén completas. La ejecución con contenedores, si se elige,
-se define aquí antes de configurar Nginx y antes de aprovisionar Azure.
+T04 puede resolverse después del flujo mock de T02, antes de generar imágenes; no exige tener
+SQL integrado. La ejecución local de SQL se valida en T03. Completar T02/T03 y T04–T07 antes
+de la fase de red y despliegue. Así no se exige Docker para SQL sin haberlo definido antes.
 
-- [ ] **T04 — Concretar la ejecución de los servicios.** Validar el mecanismo de ejecución,
+- [ ] **T04 — Concretar la ejecución de los servicios.** Elegir antes de generar imágenes
+  o configurar servidores; puede preceder a T03. Validar el mecanismo de ejecución,
   arranque automático y persistencia, sin incorporar herramientas por anticipado.
   **Comprobar:** el procedimiento indica cómo iniciar cada componente, recuperarlo tras un
   reinicio y conservar datos/configuración. Registrar un ADR si corresponde.
@@ -88,14 +93,15 @@ Aplicar las restricciones básicas antes de exponer los servicios.
   **Cubre:** R5; CA5.
 
 - [ ] **T11 — Desplegar QA.** Instalar únicamente lo aprobado, aplicar el mecanismo de T04,
-  configuración de T05/T06 y firewall del sistema. Cada componente corre en su VM y los
+  configuración de T05/T06, logs y firewall del sistema. Cada componente corre en su VM y los
   servicios internos escuchan en la IP privada, sin puertos públicos adicionales.
   **Comprobar:** una consulta desde la entrada QA devuelve equipos mediante BFF → API Core
   → SQL Server; la URL HTTP devuelve el frontend.
   **Cubre:** R1–R4/R7; CA1 para QA.
 
 - [ ] **T12 — Desplegar DEV.** Configurar los cuatro componentes en su VM, con servicios
-  internos en loopback y datos/configuración separados de QA. Aplicar T04–T06.
+  internos en loopback y datos/configuración separados de QA. Si hay contenedores, verificar
+  su interfaz interna y el mapeo de puertos antes de publicar. Aplicar T04–T06.
   **Comprobar:** la entrada HTTP devuelve frontend y equipos; las capas se respetan en el
   código/configuración y solo API Core recibe credenciales de SQL Server.
   **Cubre:** R1/R2/R4/R7; CA1 para DEV y CA10.

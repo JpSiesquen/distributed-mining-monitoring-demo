@@ -160,7 +160,9 @@ la base de datos o una capa posterior puede tardar en estar disponible.
   configuración. El número de puerto no aporta protección por sí mismo.
 
 Las decisiones anteriores están validadas. Los valores concretos de aprovisionamiento y el
-mecanismo de ejecución se concretarán antes de las tareas de despliegue correspondientes.
+mecanismo de ejecución se concretarán antes de generar imágenes o configurar los servidores.
+Logs, pruebas y CI acompañan la construcción de cada componente bajo sus specs; los bloqueos
+y permisos de esta topología se aplican antes de exponer servicios.
 
 ## Respuesta a preguntas abiertas
 

@@ -24,11 +24,11 @@ Frontend → BFF → API Core → Base de datos
 - **Datos:** SQL Server; repositorios mock JSON para dominios sin fuente real
 - **Gestor de paquetes:** npm
 
-## Infraestructura
+## Infraestructura prevista
 
 - Contenedores con Docker
 - Reverse proxy con Nginx
-- Servicios desplegados en servidores separados
+- DEV consolidado en un servidor; QA distribuido en cuatro servidores
 - Entornos DEV y QA
 - CI/CD con GitHub Actions
 - Despliegue en Azure
@@ -47,8 +47,13 @@ distributed-mining-monitoring-demo/
 
 ## Configuración
 
-Las variables de entorno requeridas están documentadas en `.env.example`.
+Las variables de entorno se documentarán en `.env.example` al incorporar la configuración
+de cada componente, sin valores sensibles.
 
 ## Estado
 
-En desarrollo.
+En fase de especificación, sin servicios ni CI implementados. La topología está aprobada;
+los estados de los demás entregables se registran en el [índice de specs](specs/README.md).
+
+Consultar el [diseño de arquitectura](docs/architecture.md) y la
+[topología de despliegue](docs/topologia-despliegue.md).

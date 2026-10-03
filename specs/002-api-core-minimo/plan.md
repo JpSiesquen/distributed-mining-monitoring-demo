@@ -1,8 +1,9 @@
 # Plan 002 — API Core mínimo con equipos simulados
 
 - **Spec:** [002](spec.md)
-- **Estado:** Aprobado
-- **Fecha de aprobación:** 2026-10-02
+- **Estado:** En revisión
+- **Revisión:** logs y pruebas básicas; conserva decisiones previas aprobadas.
+- **Aprobación de la versión anterior:** 2026-10-02
 
 ## Enfoque
 
@@ -10,7 +11,7 @@ Crear un servicio local pequeño con el stack definido: Node.js, Express 4.21.x,
 TypeScript 5.x y ES Modules. Exponer únicamente la comprobación del servicio y el
 listado de equipos, sin SQL Server ni capas adicionales de aplicación.
 
-Las decisiones de este plan están aprobadas; las instalaciones requieren validación de paquetes y autorización explícita.
+Express directo, contrato mínimo y dev compilado siguen aprobados. La revisión de logs y pruebas se valida antes de implementar; las instalaciones requieren autorización explícita.
 
 ## Diseño
 
@@ -24,6 +25,7 @@ Las decisiones de este plan están aprobadas; las instalaciones requieren valida
 | `src/app.ts` | Crear Express, registrar rutas y respuestas 404/500. |
 | `src/routes/equipment.ts` | Atender el listado y leer el JSON mock. |
 | `src/data/equipment.json` | Equipos ficticios con identificador y nombre. |
+| 	est/api.test.mjs | Pruebas HTTP del JavaScript compilado con herramientas nativas de Node.js. |
 | `.env` (ignorado) | Configuración local de escucha, sin versionar. |
 
 Actualizar el `.env.example` existente en la raíz para documentar las variables del servicio.
@@ -74,6 +76,29 @@ El mecanismo de copia del JSON y los comandos exactos se concretan al implementa
 herramientas de Node.js ya disponibles; no incorporar un paquete solo para copiar un archivo.
 La carga local de `.env` puede usar la capacidad nativa de Node.js 24; no requiere dotenv.
 
+### Logs y pruebas básicas
+
+Registrar inicio y errores en la consola del proceso, con prefijo de evento y descripción
+segura. No añadir una librería de logging ni registrar la configuración completa, secretos,
+contenido del mock o datos de solicitudes. Conservar información útil para distinguir puerto
+ocupado, configuración inválida y fallo de lectura; no devolver detalles internos al cliente.
+
+Propuesta de pruebas: runner nativo node:test, aserciones nativas y fetch de Node.js 24,
+sin instalar un framework HTTP adicional. Probar la aplicación compilada mediante un servidor
+temporal en loopback con puerto asignado por el sistema; cerrarlo después de la ejecución.
+Los casos comprueban estado HTTP y contrato JSON de /health, equipos y errores 404/500.
+
+Para el error de lectura, usar una copia temporal de los módulos/datos compilados o una
+alteración reversible controlada del mock de pruebas, sin tocar datos reales; restaurar en
+la limpieza incluso si la prueba falla y ejecutar ese caso sin concurrencia sobre el mismo archivo.
+No añadir un endpoint de fallo ni una configuración de producción solo para las pruebas.
+
+Agregar npm test para ejecutar las pruebas después de build. La CI inicial comprueba build
+cuando esté disponible y añade npm test cuando los casos existan; se define en la
+[spec 003](../003-ci-minima/spec.md). No instalar dependencias ni generar un workflow en este ajuste.
+
+Ver [runner nativo de Node.js](https://nodejs.org/docs/latest-v24.x/api/test.html).
+
 ## Decisiones
 
 - **Aceptada — Express directo:** comenzar con el framework del stack. Se descarta el paso
@@ -104,6 +129,8 @@ La carga local de `.env` puede usar la capacidad nativa de Node.js 24; no requie
 | R4 | Variables de escucha documentadas y validadas; probar cambio de puerto y loopback (CA4). |
 | R5 | Respuestas JSON 404/500; probar ruta desconocida y fallo controlado de lectura del mock, restaurándolo después (CA5). |
 | R6 | dev compila/arranca; build genera dist/ con el JSON y start lo ejecuta; probar ambas rutas en desarrollo y compilación (CA6). |
+| R7 | Logs de eventos mínimos, sin volcados de configuración o secretos; verificar arranque y errores controlados (CA7). |
+| R8 | node:test comprueba rutas/contratos/errores y cierra recursos temporales; comando npm test (CA8). |
 
 ## Riesgos
 
