@@ -52,9 +52,15 @@ Definir una topología en la que:
   escuchan en interfaces públicas.
 - **R3 — Red privada:** la comunicación entre componentes se realiza por direcciones privadas.
 - **R4 — Flujos permitidos solo entre capas adyacentes:**
-  Nginx → BFF, BFF → API Core, API Core → base de datos. Cualquier otro flujo se rechaza.
+  Nginx → BFF, BFF → API Core, API Core → base de datos. En QA, cualquier otro flujo de
+  aplicación entre servidores se rechaza mediante reglas de red. En DEV, las capas se respetan
+  en el código y la configuración; solo API Core recibe las credenciales de la base de datos.
+  No se exige aislamiento de red entre procesos locales de DEV. Ver
+  [ADR 0005](../../docs/adr/0005-alcance-aislamiento-dev-qa.md).
 - **R5 — Acceso administrativo restringido:** el acceso SSH a los servidores solo se permite
-  desde direcciones autorizadas.
+  desde direcciones autorizadas. El acceso administrativo es independiente de los flujos de
+  aplicación de R4 y puede utilizar un salto SSH autorizado, sin habilitar saltos entre capas
+  para la aplicación. Ver [ADR 0006](../../docs/adr/0006-acceso-administrativo-proxyjump.md).
 - **R6 — Aislamiento de entornos:** ningún componente de QA puede comunicarse con componentes
   de DEV, y viceversa.
 - **R7 — Configuración externa:** las direcciones entre componentes se configuran mediante
@@ -75,6 +81,9 @@ Definir una topología en la que:
 - [ ] **CA7:** tras reiniciar cualquier servidor, el flujo completo vuelve a funcionar sin intervención.
 - [ ] **CA8:** existe un diagrama en `docs/` que coincide con la topología desplegada.
 - [ ] **CA9:** la topología solo utiliza máquinas virtuales, redes y reglas de firewall, sin servicios gestionados.
+
+- [ ] **CA10:** en DEV, el código y la configuración respetan las capas adyacentes; BFF no
+  accede directamente a SQL Server y las credenciales de base de datos se entregan solo a API Core.
 
 ## Preguntas abiertas
 

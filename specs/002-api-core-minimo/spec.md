@@ -1,0 +1,60 @@
+# Spec 002 — API Core mínimo con equipos simulados
+
+- **Estado:** Aprobada
+- **Fecha:** 2026-10-02
+
+## Contexto
+
+El BFF necesita una API que responda solicitudes de equipos antes de integrar SQL Server.
+Un conjunto de datos simulados permite construir y verificar ese flujo sin depender todavía
+de una base de datos, manteniendo la separación de capas del ADR 0001.
+
+## Objetivo
+
+Ejecutar localmente un API Core que permita comprobar que el servicio responde y consultar
+un listado de equipos simulados en JSON, tanto en desarrollo como desde su compilación.
+
+## Alcance
+
+- **Incluye:** servicio HTTP, comprobación de disponibilidad, listado de equipos desde datos
+  mock JSON, configuración externa, respuestas básicas de error y ejecución compilada.
+- **No incluye:** SQL Server ni driver, BFF, frontend, edición de equipos, autenticación,
+  contenedores, proxy, despliegue cloud, CI/CD ni funcionalidades de visualización.
+
+El stack final se mantiene en Node.js, Express 4.21.x, TypeScript 5.x y ES Modules con npm.
+Los mocks son temporales para este listado; no sustituyen la integración SQL Server prevista.
+
+## Requisitos
+
+- **R1:** `GET /health` devuelve HTTP 200 y JSON que indica que el servicio responde.
+  No certifica disponibilidad de SQL Server ni del sistema completo.
+- **R2:** `GET /api/equipment` devuelve HTTP 200 y un listado JSON de equipos simulados.
+  Cada equipo incluye únicamente un identificador y un nombre; no se incluye estado en este alcance.
+- **R3:** los datos proceden de un archivo JSON local sin información real ni credenciales;
+  el servicio puede ejecutarse sin base de datos.
+- **R4:** interfaz de escucha y puerto se configuran externamente; el puerto acordado para
+  API Core es 3002 y la ejecución local usa loopback. Documentar las variables en `.env.example`.
+- **R5:** una ruta inexistente devuelve HTTP 404 en JSON; un error interno devuelve HTTP 500
+  en JSON sin exponer detalles internos o información sensible.
+- **R6:** existen modos de desarrollo y producción; producción ejecuta JavaScript compilado
+  desde `dist/`, con comandos `dev`, `build` y `start` documentados.
+
+## Criterios de aceptación
+
+- [ ] **CA1:** una petición GET a `/health` devuelve HTTP 200 y JSON de disponibilidad del servicio.
+- [ ] **CA2:** GET a `/api/equipment` devuelve HTTP 200, JSON y los equipos del archivo mock,
+  con identificador y nombre para cada equipo.
+- [ ] **CA3:** CA1/CA2 funcionan sin SQL Server ni credenciales de base de datos.
+- [ ] **CA4:** cambiar el puerto por configuración mueve la escucha al nuevo puerto sin editar
+  código; `.env.example` describe las variables y la interfaz local es loopback.
+- [ ] **CA5:** una ruta inexistente devuelve 404 JSON; provocar un error interno controlado
+  devuelve 500 JSON sin detalles internos ni secretos.
+- [ ] **CA6:** CA1/CA2 pasan en desarrollo y después de `npm run build` seguido de `npm start`,
+  que ejecuta el JavaScript generado en `dist/`.
+
+## Preguntas abiertas
+
+- **P1 — Resuelta:** el listado incluye únicamente identificador y nombre del equipo.
+- **P2 — Resuelta:** comenzar directamente con Express, sin paso previo usando HTTP nativo.
+- **P3 — Resuelta:** dev compila TypeScript y arranca el JavaScript generado con Node.js.
+  Tras cambiar código, detener y ejecutar dev de nuevo; cualquier instalación requiere aprobación.

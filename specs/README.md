@@ -5,6 +5,7 @@ Cada funcionalidad o entregable relevante se especifica antes de implementarse.
 | Spec | Entregable | Estado |
 |------|------------|--------|
 | [001](001-topologia-despliegue/spec.md) | Topología de despliegue | Aprobada |
+| [002](002-api-core-minimo/spec.md) | API Core mínimo con equipos simulados | Aprobada |
 
 ## Flujo
 
@@ -44,4 +45,33 @@ Qué debe ser posible cuando esté terminado.
 
 ## Preguntas abiertas
 - ...
+```
+
+## Plantilla de `plan.md`
+
+```markdown
+# Plan NNN — Título
+
+- **Spec:** [NNN](spec.md)
+- **Estado:** Borrador | En revisión | Aprobado
+
+## Enfoque
+Resumen de la solución técnica en pocas líneas.
+
+## Diseño
+Componentes, configuración y diagramas necesarios para cumplir los requisitos.
+
+## Decisiones
+- Decisión, alternativa descartada y motivo. Las relevantes se registran como ADR.
+
+## Respuesta a preguntas abiertas
+- P1: ...
+
+## Trazabilidad
+| Requisito | Cómo se cumple |
+|-----------|----------------|
+| R1 | ... |
+
+## Riesgos
+- Riesgo y mitigación.
 ```
