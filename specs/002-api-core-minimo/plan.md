@@ -135,6 +135,9 @@ Ver [runner nativo de Node.js](https://nodejs.org/docs/latest-v24.x/api/test.htm
 
 ## Riesgos
 
+- Shai-Hulud: aplicar la [revisión previa](../../docs/seguridad-dependencias.md) antes de
+  instalar o ejecutar CI. Revisión pendiente; lockfile y CI verde no garantizan ausencia de malware.
+
 - **Mock ausente en dist/:** incluirlo en build y comprobar el endpoint después de compilar.
 - **JavaScript desactualizado:** dev recompila antes de arrancar; no ejecutar start si build falla.
 - **Errores asíncronos sin respuesta:** capturarlos y entregarlos al manejador 500 de Express 4.

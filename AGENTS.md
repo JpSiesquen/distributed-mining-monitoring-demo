@@ -2,6 +2,13 @@
 
 Guía de contribución para agentes de IA y colaboradores que trabajen en este repositorio.
 
+## Inicio de sesión y seguridad de ejecución
+
+Leer `docs/roadmap.md` y solo los documentos del paso actual.
+Riesgo prioritario: [Shai-Hulud](docs/seguridad-dependencias.md). Antes de instalar o ejecutar
+dependencias, aplicar la [política de dependencias](#política-de-dependencias-y-ejecución).
+Revisión y aprobación pendientes bloquean la ejecución; lockfile y CI verde no acreditan ausencia de malware.
+
 ## Contexto del proyecto
 
 Sistema distribuido de monitoreo de maquinaria minera, diseñado con servicios desacoplados,
@@ -84,6 +91,9 @@ Fuera de alcance salvo necesidad demostrada y validada:
 - Mantener `.env.example` actualizado con cada nueva variable, sin valores reales.
 - Nunca mostrar, copiar, registrar en logs, versionar ni insertar en código: tokens,
   contraseñas, claves privadas, credenciales de Azure, PAT de GitHub o secretos similares.
+
+El riesgo de [Shai-Hulud](docs/seguridad-dependencias.md) también afecta a la ejecución local
+y a CI. Aplicar la revisión de dependencias siguiente antes de instalar o ejecutar paquetes.
 
 ## Política de dependencias y ejecución
 

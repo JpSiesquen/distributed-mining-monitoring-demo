@@ -29,6 +29,24 @@ Una decisión de arquitectura sustituida se registra en un nuevo ADR, enlazado d
 
 No se crean specs para cambios triviales; el detalle documental debe ser proporcional al cambio.
 
+## Seguimiento en GitHub
+
+Las issues concretan tareas aprobadas: contexto breve, acciones, aceptación verificable y
+referencia a la spec. Las dependencias directas se enlazan por número; no se confunden con cierre.
+Un milestone agrupa cada entrega; el backlog permanece sin asignar hasta iniciar trabajo.
+Una issue por PR, con comprobaciones antes de integrar y `Closes #N` para su cierre.
+
+| Área | Alcance |
+|------|---------|
+| `area:backend` | BFF, API Core, rutas, contratos y lógica de servidor |
+| `area:frontend` | Interfaz y comunicación del cliente con BFF |
+| `area:datos` | Datos simulados, SQL Server, consultas y persistencia |
+| `area:infra` | Compilación, CI, ejecución, redes y despliegue |
+| `area:seguridad` | Permisos, secretos, aislamiento y revisión de dependencias |
+| `area:docs` | Especificaciones, ADR, instrucciones y evidencias |
+
+Tipo y prioridad son únicos por issue. La dificultad expresa riesgo de error, no volumen.
+
 ## Plantilla de `spec.md`
 
 ```markdown

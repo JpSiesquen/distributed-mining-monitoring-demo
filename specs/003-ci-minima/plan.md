@@ -92,6 +92,9 @@ Decisión registrada en el [ADR 0009](../../docs/adr/0009-ci-minima-api-core.md)
 
 ## Riesgos
 
+- Shai-Hulud: aplicar la [revisión previa](../../docs/seguridad-dependencias.md) antes de
+  instalar o ejecutar CI. Revisión pendiente; lockfile y CI verde no garantizan ausencia de malware.
+
 - Check verde sin pruebas: indicar la fase de build y añadir pruebas antes de cerrar CA3/003.
 - Scripts de instalación externos: aplicar evaluación y aprobación de dependencias de 002.
 - Dependencia o acción alterada: lockfile aprobado y acciones fijadas a SHA verificado.
