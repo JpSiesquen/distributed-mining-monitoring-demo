@@ -23,6 +23,7 @@ La actualización a Express 4.22.3 se aprobó el 2026-10-03; las instalaciones r
 |-----------------------|-----------------|
 | `package.json` | Dependencias y comandos dev/build/start. |
 | `.npmrc` | `ignore-scripts=true` para desactivar scripts automáticos de instalación. |
+| `src/index.ts` | Módulo mínimo para verificar compilación antes del servidor HTTP. |
 | `tsconfig.json` | Comprobación de tipos y generación de JavaScript en dist/. |
 | `src/server.ts` | Leer configuración, validarla y arrancar la escucha. |
 | `src/app.ts` | Crear Express, registrar rutas y respuestas 404/500. |
@@ -116,7 +117,8 @@ Ver [runner nativo de Node.js](https://nodejs.org/docs/latest-v24.x/api/test.htm
   de su dependencia qs; se mantiene Express 4 sin overrides. La
   [revisión registrada](../../docs/seguridad-dependencias.md) incluye finalidad y comandos.
   TypeScript 5.9.3, @types/express 4.17.25 y @types/node 24.19.1 aprobados el 2026-10-03.
-  Toda instalación requiere autorización; todavía no hay package.json ni lockfile de aplicación.
+  Toda instalación requiere autorización; package.json y lockfile preparados en la issue #3,
+  con instalación local realizada por el responsable, build válido y fallo de tipos sin emisión comprobados.
   Instalar con `--ignore-scripts` y mantener `.npmrc` con `ignore-scripts=true`;
   cualquier excepción de ejecución debe revisarse y aprobarse expresamente.
 
