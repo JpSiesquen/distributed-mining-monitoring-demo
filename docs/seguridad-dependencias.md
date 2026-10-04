@@ -1,6 +1,6 @@
 # Seguridad de dependencias y ejecución
 
-Actualizado: 2026-10-03. Selección de las cuatro dependencias aprobada; instalación pendiente.
+Actualizado: 2026-10-03. Selección aprobada, instalación local y compilación verificadas.
 
 ## Riesgo documentado
 
@@ -32,7 +32,9 @@ Controles de ejecución aprobados el 2026-10-03:
 - Antes de build/test, comprobar que su entorno no recibe secretos de producción o despliegue.
 - Cada actualización debe pasar por revisión de versiones, scripts y lockfile antes de ejecutarse.
 
-La configuración local y el workflow se comprobarán en sus respectivas tareas; todavía no existen.
+Configuración local preparada en la issue #3; npm confirmó `ignore-scripts=true`.
+Build válido y bloqueo de emisión ante error de tipos comprobados; esto no acredita ausencia de malware.
+El workflow todavía no existe y se comprobará en su propia tarea.
 
 El lockfile aporta reproducibilidad; el check verde acredita solo las comprobaciones ejecutadas.
 Ninguno garantiza ausencia de malware. Desactivar scripts tampoco acredita la seguridad del código
@@ -54,14 +56,15 @@ Las actualizaciones automáticas permanecen deshabilitadas; cada cambio mantiene
 - [002/T01](../specs/002-api-core-minimo/tasks.md): selección y revisión de dependencias.
 - [003/T01](../specs/003-ci-minima/tasks.md): revisión de Actions y autorización de `npm ci`.
 - Estado: revisión preliminar de #1 registrada abajo; las cuatro versiones aprobadas.
-  Autorización de instalación y grafo definitivo pendientes.
+  Instalación local realizada por el responsable; lockfile contrastado en la issue #3.
   Incorporar la evidencia al PR antes de habilitar instalaciones o CI.
 
 ## Revisión de la issue #1
 
 Fecha: 2026-10-03. Revisión preliminar realizada; Express, TypeScript y tipos aprobados en esta fecha.
 La aprobación de versiones no autoriza instalar ni ejecutar paquetes.
-Sin instalaciones, compilación ni ejecución de paquetes descargados.
+Esta revisión preliminar se realizó sin instalar ni ejecutar paquetes; la instalación posterior
+se registra abajo.
 
 | Paquete aprobado | Versión | Uso | Tipo |
 |------------------|---------|-----|------|
@@ -88,9 +91,28 @@ La consulta al endpoint de avisos de npm no devolvió coincidencias para ese con
 No se declararon preinstall/install/postinstall; `mime@1.6.0` declara un prepare que genera
 types.json. Se leyó ese script del archivo publicado y se comprobó su integridad SHA-512,
 sin ejecutarlo. No se auditó todo el código fuente; estos resultados no acreditan ausencia de malware.
-El grafo definitivo debe contrastarse con el lockfile al preparar el proyecto.
+El contraste posterior con el lockfile se registra abajo.
 
-Comandos propuestos para `api-core/`, cuando exista y se apruebe la instalación:
+### Instalación local — issue #3
+
+El responsable ejecutó los dos comandos indicados con `--ignore-scripts` en Warp.
+Ambos terminaron sin errores y npm reportó cero vulnerabilidades conocidas.
+Se comprobaron las cuatro versiones aprobadas mediante `npm ls --depth=0`.
+Lockfile v3: 82 paquetes, todos con origen en el registro npm oficial; ninguna entrada
+declara `hasInstallScript`. Conserva `qs@6.16.0` y `body-parser@1.20.8`.
+
+El grafo real tiene 82 paquetes frente a las 87 versiones de la resolución preliminar.
+81 coinciden con versiones e integridades revisadas; `get-intrinsic@1.3.0` se revisó
+adicionalmente: origen ljharb/get-intrinsic, integridad coincidente con el registro y sin
+scripts preinstall/install/postinstall/prepare declarados.
+[Metadatos oficiales](https://registry.npmjs.org/get-intrinsic/1.3.0).
+La diferencia refleja la resolución definitiva de npm; no demuestra ausencia de malware.
+
+Verificación de compilación: `npm run build` generó `dist/index.js`. Una copia temporal
+con número asignado a string produjo TS2322, código de salida 1 y ningún JavaScript emitido.
+La prueba conservó src/index.ts y dist/index.js, y eliminó sus archivos temporales.
+
+Comandos ejecutados por el responsable en `api-core/`:
 
 ```powershell
 npm install --save-exact --ignore-scripts express@4.22.3
@@ -98,5 +120,5 @@ npm install --save-dev --save-exact --ignore-scripts typescript@5.9.3 @types/exp
 ```
 
 `--ignore-scripts` evita ejecutar scripts de instalación; no protege frente al código importado
-posteriormente. El comando de CI incorpora esa protección. Las instalaciones y la ejecución
-de CI siguen pendientes de aprobación.
+posteriormente. El comando de CI incorpora esa protección. Nuevas instalaciones y la ejecución
+de CI requieren su propia autorización.
