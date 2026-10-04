@@ -22,13 +22,13 @@ las requiere.
 
 ### BFF (Backend for Frontend)
 
-Servicio previsto con Node.js, Express 4.21.x y TypeScript. Adapta o agrega respuestas del
+Servicio previsto con Node.js, Express 4 y TypeScript; versión exacta por validar al especificarlo. Adapta o agrega respuestas del
 API Core cuando lo requiere la interfaz; las transformaciones deben responder a una
 necesidad concreta.
 
 ### API Core
 
-Servicio previsto con Node.js, Express 4.21.x y TypeScript. Contiene la lógica de negocio
+Servicio previsto con Node.js, Express 4.22.3 y TypeScript. Contiene la lógica de negocio
 y concentra el acceso a datos.
 
 El primer alcance es una comprobación de salud y una consulta de equipos simulados desde

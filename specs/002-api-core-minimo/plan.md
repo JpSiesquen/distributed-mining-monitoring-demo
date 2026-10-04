@@ -8,11 +8,12 @@
 
 ## Enfoque
 
-Crear un servicio local pequeño con el stack definido: Node.js, Express 4.21.x,
+Crear un servicio local pequeño con el stack definido: Node.js, Express 4.22.3,
 TypeScript 5.x y ES Modules. Exponer únicamente la comprobación del servicio y el
 listado de equipos, sin SQL Server ni capas adicionales de aplicación.
 
-Express directo, contrato mínimo y dev compilado siguen aprobados. La revisión de logs y pruebas se valida antes de implementar; las instalaciones requieren autorización explícita.
+Express directo, contrato mínimo, dev compilado, logs y pruebas siguen aprobados.
+La actualización a Express 4.22.3 se aprobó el 2026-10-03; las instalaciones requieren autorización explícita.
 
 ## Diseño
 
@@ -21,6 +22,7 @@ Express directo, contrato mínimo y dev compilado siguen aprobados. La revisión
 | Archivo en `api-core/` | Responsabilidad |
 |-----------------------|-----------------|
 | `package.json` | Dependencias y comandos dev/build/start. |
+| `.npmrc` | `ignore-scripts=true` para desactivar scripts automáticos de instalación. |
 | `tsconfig.json` | Comprobación de tipos y generación de JavaScript en dist/. |
 | `src/server.ts` | Leer configuración, validarla y arrancar la escucha. |
 | `src/app.ts` | Crear Express, registrar rutas y respuestas 404/500. |
@@ -110,9 +112,13 @@ Ver [runner nativo de Node.js](https://nodejs.org/docs/latest-v24.x/api/test.htm
   dependencia que este flujo mínimo no necesita. Tras un cambio, detener y ejecutar dev de nuevo.
 - **Aceptada — contrato mínimo:** arreglo JSON con id y name, sin estado ni envoltorios
   adicionales. Implementación explícita de rutas, configuración y errores.
-- **Dependencias:** todavía no hay package.json ni lockfile de aplicación. Evaluar versiones
-  exactas de Express 4.21.x, TypeScript 5.x y tipos necesarios antes de proponer su instalación,
-  indicando paquete, finalidad, producción/desarrollo y comando. No cambiar el stack.
+- **Dependencias:** Express 4.22.3 aprobado el 2026-10-03 en lugar de 4.21.x, por los avisos
+  de su dependencia qs; se mantiene Express 4 sin overrides. La
+  [revisión registrada](../../docs/seguridad-dependencias.md) incluye finalidad y comandos.
+  TypeScript 5.9.3, @types/express 4.17.25 y @types/node 24.19.1 aprobados el 2026-10-03.
+  Toda instalación requiere autorización; todavía no hay package.json ni lockfile de aplicación.
+  Instalar con `--ignore-scripts` y mantener `.npmrc` con `ignore-scripts=true`;
+  cualquier excepción de ejecución debe revisarse y aprobarse expresamente.
 
 ## Respuesta a preguntas abiertas
 
@@ -136,7 +142,8 @@ Ver [runner nativo de Node.js](https://nodejs.org/docs/latest-v24.x/api/test.htm
 ## Riesgos
 
 - Shai-Hulud: aplicar la [revisión previa](../../docs/seguridad-dependencias.md) antes de
-  instalar o ejecutar CI. Revisión pendiente; lockfile y CI verde no garantizan ausencia de malware.
+  instalar o ejecutar CI. Revisión preliminar registrada; contrastar el grafo definitivo con
+  el lockfile. Lockfile y CI verde no garantizan ausencia de malware.
 
 - **Mock ausente en dist/:** incluirlo en build y comprobar el endpoint después de compilar.
 - **JavaScript desactualizado:** dev recompila antes de arrancar; no ejecutar start si build falla.

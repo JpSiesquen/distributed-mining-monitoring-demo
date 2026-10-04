@@ -30,6 +30,7 @@ primero compilación y, cuando las pruebas estén disponibles, compilación y pr
   El resultado correcto se muestra como check exitoso; no se presenta como evidencia de despliegue.
 - **R4:** revisar acciones externas, versiones, permisos, comandos de instalación y condiciones
   de uso/costo antes de habilitar el workflow. No ampliar permisos para resolver fallos sin validación.
+  Los scripts de instalación de dependencias quedan desactivados; cualquier excepción requiere revisión y aprobación.
 
 ## Criterios de aceptación
 
@@ -40,7 +41,7 @@ primero compilación y, cuando las pruebas estén disponibles, compilación y pr
 - [ ] **CA4:** pushes y pull requests ejecutan las comprobaciones acordadas; logs permiten
   identificar el paso que falló, sin secretos ni conexiones de despliegue.
 - [ ] **CA5:** la configuración solo comprueba componentes existentes; acciones y comandos
-  de instalación tienen aprobación antes de habilitarse.
+  de instalación tienen aprobación antes de habilitarse y no ejecutan scripts de dependencias automáticamente.
 
 ## Preguntas abiertas
 

@@ -11,14 +11,14 @@ Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
 - [ ] **T01 — Completar revisión previa.** Verificar versiones/SHA aprobados, notas de cambios,
   seguridad de las acciones y compatibilidad con el runner; revalidar visibilidad y costos.
   Depende de 002/T01 para dependencias exactas y scripts de instalación. Proponer el comando
-  `npm ci`, su finalidad y dependencias de producción/desarrollo; obtener autorización de ejecución.
+  `npm ci --ignore-scripts`, su finalidad y dependencias de producción/desarrollo; obtener autorización de ejecución.
   **Comprobar:** aprobaciones y fuentes registradas; no habilitar el workflow con revisión pendiente.
   R4; CA5.
 
 - [ ] **T02 — Crear workflow inicial de build.** Después de 002/T04 y de T01, crear
   .github/workflows/api-core-ci.yml: push a main y pull_request hacia main, un job api-core,
   ubuntu-22.04, contents: read, checkout/setup-node con los SHA del plan, credenciales no
-  persistidas y caché de npm desactivada. Preparar Node.js 24.21.0; ejecutar npm ci y
+  persistidas y caché de npm desactivada. Preparar Node.js 24.21.0; ejecutar npm ci --ignore-scripts y
   npm run build en api-core/. No llamar npm test antes de existir.
   **Comprobar:** YAML válido, rutas/scripts existentes, versión exacta y permisos mínimos;
   no hay secretos, despliegue, filtros de rutas ni opciones que ignoren fallos. R1/R2/R4; CA5.
@@ -36,7 +36,7 @@ Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
 
 - [ ] **T05 — Verificar fallos de pruebas e instalación.** En una rama de validación, alterar
   temporalmente una expectativa de contrato y comprobar el job fallido. Comprobar además
-  que un fallo controlado de npm ci termina el job antes de build/pruebas; restaurar los cambios.
+  que un fallo controlado de npm ci --ignore-scripts termina el job antes de build/pruebas; restaurar los cambios.
   **Comprobar:** los logs distinguen ambos fallos; no se usan continue-on-error ni códigos
   de salida ignorados; el código válido vuelve a pasar sin datos de prueba modificados. R3; CA3/CA4.
 

@@ -35,7 +35,7 @@ Ninguna capa debe saltarse a la siguiente.
 | Frontend | React 19 + Vite 6 |
 | Estado remoto y UI | TanStack Query, Zustand, React Hook Form, Zod, Material UI, Motion, Lucide React |
 | Visualización 3D | Three.js, React Three Fiber, @react-three/drei |
-| BFF y API Core | Node.js + Express 4.21.x + TypeScript |
+| BFF y API Core | Node.js + Express 4 + TypeScript; API Core: Express 4.22.3 aprobado |
 | Acceso a datos | Driver de SQL Server en API Core; repositorios mock JSON para dominios sin fuente real |
 | Gestor de paquetes | npm (`package-lock.json`, lockfileVersion 3) |
 | Infraestructura | Docker, Nginx, GitHub Actions, Azure |
@@ -130,6 +130,12 @@ Criterios de evaluación de paquetes:
   versiones recientes e incidentes de seguridad conocidos.
 - Revisar los scripts de ciclo de vida (`preinstall`, `install`, `postinstall`, `prepare`)
   y no ejecutar scripts sospechosos ni scripts obtenidos de Internet.
+- Instalar dependencias npm con `--ignore-scripts`, tanto localmente como en CI.
+  Configurar `ignore-scripts=true` en el `.npmrc` del proyecto al preparar su package.json.
+  Si un paquete requiere un script, detener la instalación y validar su necesidad, contenido
+  y comando antes de ejecutarlo; no desactivar esta protección para resolver un error.
+- Revalidar cada cambio de dependencias y contrastar el lockfile con la selección revisada.
+  Ejecutar build y pruebas sin credenciales de producción o despliegue en su entorno.
 
 ## Git
 

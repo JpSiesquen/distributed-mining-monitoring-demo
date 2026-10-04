@@ -8,13 +8,15 @@ Spec, plan y tareas aprobados el 2026-10-03. Los IDs se ordenan antes de crear i
 La CI se rige por la [spec 003](../003-ci-minima/spec.md) y su plan, ambos aprobados.
 Instalaciones y ejecución de Actions requieren su autorización; esta lista no las ejecuta.
 
-- [ ] **T01 — Validar dependencias exactas.** Evaluar Express 4.21.x, TypeScript 5.x y los tipos
-  necesarios. Proponer paquete, versión, finalidad, producción/desarrollo y comando exacto;
-  revisar scripts de instalación y obtener aprobación. Pruebas/logs usan herramientas nativas.
+- [ ] **T01 — Validar dependencias exactas.** Selección aprobada: Express 4.22.3, TypeScript 5.9.3,
+  @types/express 4.17.25 y @types/node 24.19.1. Revisión, finalidad y comandos registrados en
+  [seguridad de dependencias](../../docs/seguridad-dependencias.md); autorización de instalación
+  pendiente. Incorporar evidencia al PR. Pruebas/logs usan herramientas nativas.
   **Comprobar:** selección respeta el stack y no incluye ejecutores TS ni frameworks sin necesidad.
 
 - [ ] **T02 — Preparar proyecto y compilación.** package.json con ES Modules, lockfile npm y
-  tsconfig.json que comprueba tipos y genera dist/ sin emitir ante errores. Instalar solo lo aprobado.
+  tsconfig.json que comprueba tipos y genera dist/ sin emitir ante errores. Añadir `.npmrc`
+  con `ignore-scripts=true`; instalar solo lo aprobado, usando `--ignore-scripts`.
   **Comprobar:** compila un módulo mínimo; un error de tipos hace fallar build. Prepara R6/CA6.
 
 - [ ] **T03 — Configurar arranque y logs.** server.ts lee API_CORE_HOST/API_CORE_PORT; app.ts
