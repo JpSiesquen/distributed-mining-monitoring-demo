@@ -11,10 +11,11 @@ con DEV consolidado y QA distribuido según la topología aprobada.
 
 Diseño de topología aprobado ([001](../specs/001-topologia-despliegue/plan.md)); validación práctica pendiente.
 Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
-[CI mínima](../specs/003-ci-minima/tasks.md) aprobados. Servicios y workflow aún sin implementar.
+[CI mínima](../specs/003-ci-minima/tasks.md) aprobados. Arranque de API Core verificado;
+rutas HTTP y workflow pendientes.
 
-**Siguiente:** integrar el proyecto TypeScript de API Core (002/T02, issue #3),
-verificado con build válido y error de tipos sin emisión. Después, configurar arranque y logs (002/T03).
+**Siguiente:** integrar arranque y logs de API Core (002/T03, issue #5), verificados localmente.
+Después, habilitar los comandos build/start/dev (002/T04, issue #6).
 Revisión de dependencias integrada en PR #32; las cuatro versiones están aprobadas.
 Instalación local realizada y lockfile contrastado. Consultar el
 [backlog de GitHub](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues),

@@ -2,7 +2,7 @@
 
 - **Spec:** [002](spec.md)
 - **Plan:** [002](plan.md)
-- **Estado:** En ejecución; T01 integrada, T02 verificada y pendiente de integración
+- **Estado:** En ejecución; T01–T02 integradas, T03 verificada y pendiente de integración
 
 Spec, plan y tareas aprobados el 2026-10-03. Los IDs se ordenan antes de crear issues.
 La CI se rige por la [spec 003](../003-ci-minima/spec.md) y su plan, ambos aprobados.
@@ -23,10 +23,13 @@ Instalaciones y ejecución de Actions requieren su autorización; esta lista no 
   build genera dist/index.js. Caso temporal TS2322: salida 1, ningún JS emitido,
   archivos de trabajo intactos y limpieza completada. No hay servidor HTTP todavía.
 
-- [ ] **T03 — Configurar arranque y logs.** server.ts lee API_CORE_HOST/API_CORE_PORT; app.ts
+- [x] **T03 — Configurar arranque y logs.** server.ts lee API_CORE_HOST/API_CORE_PORT; app.ts
   crea Express. .env ignorado; variables en el .env.example de la raíz. Local: 127.0.0.1:3002.
   **Comprobar:** escucha local, puerto externo cambiado tras reinicio, fallo explícito para
   configuración inválida o puerto ocupado; logs de arranque/error no exponen secretos. R4/R7; CA4/CA7.
+  **Evidencia:** build válido y conexión TCP en 127.0.0.1:3002; reinicio con otro puerto
+  configurado correcto. Host/puerto ausentes o inválidos y puerto ocupado terminan con salida 1
+  y mensajes seguros. Procesos de verificación cerrados. Las rutas y scripts start/dev siguen pendientes.
 
 - [ ] **T04 — Habilitar build/start/dev antes de verificar rutas.** build compila; start ejecuta
   dist/server.js; dev hace build y solo tras su éxito hace start. Incorporar copia del mock
