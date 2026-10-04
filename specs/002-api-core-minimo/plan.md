@@ -23,7 +23,6 @@ La actualización a Express 4.22.3 se aprobó el 2026-10-03; las instalaciones r
 |-----------------------|-----------------|
 | `package.json` | Dependencias y comandos dev/build/start. |
 | `.npmrc` | `ignore-scripts=true` para desactivar scripts automáticos de instalación. |
-| `src/index.ts` | Módulo mínimo para verificar compilación antes del servidor HTTP. |
 | `tsconfig.json` | Comprobación de tipos y generación de JavaScript en dist/. |
 | `src/server.ts` | Leer configuración, validarla y arrancar la escucha. |
 | `src/app.ts` | Crear Express, registrar rutas y respuestas 404/500. |
@@ -65,6 +64,8 @@ Usar `API_CORE_HOST` y `API_CORE_PORT` como variables de escucha; en local sus v
 son `127.0.0.1` y `3002`. Validar que la configuración esté presente y que el puerto sea un
 entero válido antes de abrir la escucha. Si es inválida o el puerto está ocupado, informar
 el fallo de arranque y terminar; no cambiar silenciosamente a otro puerto.
+El host debe ser una dirección IP válida; el puerto, un entero entre 1 y 65535.
+Los logs de fallos usan mensajes definidos, sin imprimir el valor inválido ni el entorno completo.
 
 Flujo aceptado para los comandos, sin herramientas adicionales de ejecución TypeScript:
 
