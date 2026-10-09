@@ -2,7 +2,7 @@
 
 - **Spec:** [003](spec.md)
 - **Plan:** [003](plan.md)
-- **Estado:** En ejecución; T01–T02 completadas. Siguiente: T03
+- **Estado:** En ejecución; T01–T03 completadas. Siguiente: protección de main (#39)
 - **Fecha:** 2026-10-03
 
 Spec, plan y tareas aprobados el 2026-10-03. Esta lista no habilita Actions ni ejecuta instalaciones.
@@ -39,11 +39,16 @@ Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
   vulnerabilidades reportadas) y `tsc`, sin advertencias ni errores. SHA idénticos al plan,
   sin tabulaciones ni opciones que ignoren fallos. Disparadores y caso fallido: T03.
 
-- [ ] **T03 — Verificar build y disparadores.** Ejecutar un cambio válido mediante pull request
+- [x] **T03 — Verificar build y disparadores.** Ejecutar un cambio válido mediante pull request
   hacia main y verificar el push a main al integrar un cambio válido autorizado. Introducir
   un error de tipos controlado en una rama de validación; comprobar el fallo y restaurarlo.
   **Comprobar:** build válido pasa, error de tipos falla, ambos disparadores ejecutan el job;
   logs identifican compilación y no queda el error intencional en main. R3; CA1/CA2/CA4.
+  **Evidencia (2026-10-09):** pull request #38: dos ejecuciones correctas por pull_request.
+  Su integración ejecutó el job por push a main, correcto sobre bb9f737. Pull request de
+  validación #40 con error de tipos controlado: Build falla con TS2322 y salida 1; los pasos
+  previos pasan. Cerrado sin integrar y rama eliminada; el archivo no existe en main.
+  El pull request en rojo seguía siendo integrable; la protección de main se aborda en #39.
 
 - [ ] **T04 — Incorporar pruebas al mismo workflow.** Depende de 002/T09. Añadir npm test
   después de build; coordinar con 002/T10 sin duplicar job o workflow.
