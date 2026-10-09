@@ -2,7 +2,7 @@
 
 - **Spec:** [002](spec.md)
 - **Plan:** [002](plan.md)
-- **Estado:** En ejecución; T01–T03 integradas (PR #32–#34); T04 completada. Siguiente: T05
+- **Estado:** En ejecución; T01–T03 integradas (PR #32–#34); T04 completada. Siguiente: T05, mediante 003/T01-T02 (issues #4 y #7)
 
 Spec, plan y tareas aprobados el 2026-10-03. Los IDs se ordenan antes de crear issues.
 La CI se rige por la [spec 003](../003-ci-minima/spec.md) y su plan, ambos aprobados.
