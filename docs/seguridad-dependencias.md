@@ -1,6 +1,6 @@
 # Seguridad de dependencias y ejecución
 
-Actualizado: 2026-10-03. Selección aprobada, instalación local y compilación verificadas.
+Actualizado: 2026-10-09. Selección aprobada, instalación local, compilación y CI de build verificadas.
 
 ## Riesgo documentado
 
@@ -34,7 +34,8 @@ Controles de ejecución aprobados el 2026-10-03:
 
 Configuración local preparada en la issue #3; npm confirmó `ignore-scripts=true`.
 Build válido y bloqueo de emisión ante error de tipos comprobados; esto no acredita ausencia de malware.
-El workflow todavía no existe y se comprobará en su propia tarea.
+El workflow `api-core-ci.yml` aplica `npm ci --ignore-scripts` con `contents: read` y credenciales
+no persistidas; primera ejecución correcta en la issue #7. Un check verde no acredita ausencia de malware.
 
 El lockfile aporta reproducibilidad; el check verde acredita solo las comprobaciones ejecutadas.
 Ninguno garantiza ausencia de malware. Desactivar scripts tampoco acredita la seguridad del código

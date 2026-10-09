@@ -2,7 +2,7 @@
 
 - **Spec:** [003](spec.md)
 - **Plan:** [003](plan.md)
-- **Estado:** En ejecución; T01 completada. Siguiente: T02
+- **Estado:** En ejecución; T01–T02 completadas. Siguiente: T03
 - **Fecha:** 2026-10-03
 
 Spec, plan y tareas aprobados el 2026-10-03. Esta lista no habilita Actions ni ejecuta instalaciones.
@@ -26,13 +26,18 @@ Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
   dependencias aprobadas en 002/T01 (express de producción; typescript, @types/express y
   @types/node de desarrollo).
 
-- [ ] **T02 — Crear workflow inicial de build.** Después de 002/T04 y de T01, crear
+- [x] **T02 — Crear workflow inicial de build.** Después de 002/T04 y de T01, crear
   .github/workflows/api-core-ci.yml: push a main y pull_request hacia main, un job api-core,
   ubuntu-22.04, contents: read, checkout/setup-node con los SHA del plan, credenciales no
   persistidas y caché de npm desactivada. Preparar Node.js 24.21.0; ejecutar npm ci --ignore-scripts y
   npm run build en api-core/. No llamar npm test antes de existir.
   **Comprobar:** YAML válido, rutas/scripts existentes, versión exacta y permisos mínimos;
   no hay secretos, despliegue, filtros de rutas ni opciones que ignoren fallos. R1/R2/R4; CA5.
+  **Evidencia (2026-10-09):** primera ejecución en pull request correcta en sus cinco pasos.
+  El log muestra imagen ubuntu-22.04, GITHUB_TOKEN con Contents: read y Metadata: read,
+  persist-credentials: false, node v24.21.0, `npm ci --ignore-scripts` (82 paquetes, 0
+  vulnerabilidades reportadas) y `tsc`, sin advertencias ni errores. SHA idénticos al plan,
+  sin tabulaciones ni opciones que ignoren fallos. Disparadores y caso fallido: T03.
 
 - [ ] **T03 — Verificar build y disparadores.** Ejecutar un cambio válido mediante pull request
   hacia main y verificar el push a main al integrar un cambio válido autorizado. Introducir
