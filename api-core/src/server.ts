@@ -24,24 +24,19 @@ function startServer(): void {
     return;
   }
 
-  try {
-    const server = app.listen(port, host, () => {
-      console.info(`[startup] API Core listening on ${host}:${port}.`);
-    });
+  const server = app.listen(port, host, () => {
+    console.info(`[startup] API Core listening on ${host}:${port}.`);
+  });
 
-    server.on("error", (error: NodeJS.ErrnoException) => {
-      const reasons: Record<string, string> = {
-        EADDRINUSE: "Address or port already in use.",
-        EADDRNOTAVAIL: "Listen address is unavailable.",
-        EACCES: "Permission denied when opening the listen address."
-      };
-      console.error(`[startup_error] ${reasons[error.code ?? ""] ?? "Unable to start API Core."}`);
-      process.exitCode = 1;
-    });
-  } catch {
-    console.error("[startup_error] Unable to start API Core.");
+  server.on("error", (error: NodeJS.ErrnoException) => {
+    const reasons: Record<string, string> = {
+      EADDRINUSE: "Address or port already in use.",
+      EADDRNOTAVAIL: "Listen address is unavailable.",
+      EACCES: "Permission denied when opening the listen address."
+    };
+    console.error(`[startup_error] ${reasons[error.code ?? ""] ?? "Unable to start API Core."}`);
     process.exitCode = 1;
-  }
+  });
 }
 
 startServer();
