@@ -71,6 +71,9 @@ aprobadas el 2026-10-03 para el plan. Spec y plan completos aprobados en la mism
 - Pruebas añadidas por un cambio explícito del mismo workflow, sin duplicarlo.
 - Sin caché ni publicación de artefactos iniciales: incorporarlas solo con una necesidad concreta.
 - Permisos de lectura y acciones fijadas: limitar acceso y mantener identificable el código externo.
+- Configuración del repositorio (2026-10-09): solo acciones propias de GitHub y SHA completo
+  obligatorio, para que la fijación no dependa de la revisión manual. Una acción de terceros
+  requiere añadirla explícitamente a la lista permitida.
 
 Decisión registrada en el [ADR 0009](../../docs/adr/0009-ci-minima-api-core.md).
 
