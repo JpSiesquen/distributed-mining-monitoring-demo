@@ -2,18 +2,29 @@
 
 - **Spec:** [003](spec.md)
 - **Plan:** [003](plan.md)
-- **Estado:** Aprobadas; pendientes de ejecución
+- **Estado:** En ejecución; T01 completada. Siguiente: T02
 - **Fecha:** 2026-10-03
 
 Spec, plan y tareas aprobados el 2026-10-03. Esta lista no habilita Actions ni ejecuta instalaciones.
 Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
 
-- [ ] **T01 — Completar revisión previa.** Verificar versiones/SHA aprobados, notas de cambios,
+- [x] **T01 — Completar revisión previa.** Verificar versiones/SHA aprobados, notas de cambios,
   seguridad de las acciones y compatibilidad con el runner; revalidar visibilidad y costos.
   Depende de 002/T01 para dependencias exactas y scripts de instalación. Proponer el comando
   `npm ci --ignore-scripts`, su finalidad y dependencias de producción/desarrollo; obtener autorización de ejecución.
   **Comprobar:** aprobaciones y fuentes registradas; no habilitar el workflow con revisión pendiente.
   R4; CA5.
+  **Evidencia (2026-10-09):** `git ls-remote` confirma que las etiquetas checkout v7.0.1 y
+  setup-node v7.0.0 apuntan a los SHA del plan; sin avisos de seguridad publicados ni repositorios
+  archivados; action.yml de ambos commits declara node24 y setup-node expone package-manager-cache.
+  Se mantiene setup-node v7.0.0: v7.1.0 (publicada el 2026-10-08) no contiene correcciones de
+  seguridad. ubuntu-22.04 disponible sin aviso de retiro; vigilar su retiro al publicarse una
+  nueva imagen estable. Repositorio público: runners estándar gratuitos según la
+  [facturación de Actions](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
+  GITHUB_TOKEN por defecto de solo lectura y sin aprobación de PR. Acciones restringidas a las
+  propias de GitHub con SHA completo obligatorio. `npm ci --ignore-scripts` autorizado sobre las
+  dependencias aprobadas en 002/T01 (express de producción; typescript, @types/express y
+  @types/node de desarrollo).
 
 - [ ] **T02 — Crear workflow inicial de build.** Después de 002/T04 y de T01, crear
   .github/workflows/api-core-ci.yml: push a main y pull_request hacia main, un job api-core,
