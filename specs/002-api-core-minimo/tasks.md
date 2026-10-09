@@ -2,7 +2,7 @@
 
 - **Spec:** [002](spec.md)
 - **Plan:** [002](plan.md)
-- **Estado:** En ejecución; T01–T03 integradas (PR #32–#34). Siguiente: T04
+- **Estado:** En ejecución; T01–T03 integradas (PR #32–#34); T04 completada. Siguiente: T05
 
 Spec, plan y tareas aprobados el 2026-10-03. Los IDs se ordenan antes de crear issues.
 La CI se rige por la [spec 003](../003-ci-minima/spec.md) y su plan, ambos aprobados.
@@ -31,10 +31,14 @@ Instalaciones y ejecución de Actions requieren su autorización; esta lista no 
   configurado correcto. Host/puerto ausentes o inválidos y puerto ocupado terminan con salida 1
   y mensajes seguros. Procesos de verificación cerrados. Las rutas y scripts start/dev siguen pendientes.
 
-- [ ] **T04 — Habilitar build/start/dev antes de verificar rutas.** build compila; start ejecuta
+- [x] **T04 — Habilitar build/start/dev antes de verificar rutas.** build compila; start ejecuta
   dist/server.js; dev hace build y solo tras su éxito hace start. Incorporar copia del mock
   a dist/data/ cuando el archivo se añada en T07, sin paquete para copiar un archivo.
   **Comprobar:** dev y build/start arrancan; si build falla, dev no inicia JavaScript anterior. R6/CA6.
+  **Evidencia:** start carga .env con `node --env-file-if-exists` (sin dotenv; las variables del
+  entorno prevalecen). dev y build/start registran escucha y aceptan TCP en 127.0.0.1:3002.
+  Con un error de tipos temporal y dist/ previo presente, dev termina con salida 1 sin escuchar.
+  Archivo temporal eliminado y procesos de verificación cerrados.
 
 - [ ] **T05 — Incorporar CI inicial de compilación.** Después de aprobar spec/plan/tasks 003,
   aplicar su comprobación de instalación reproducible y build al proyecto que ya existe.

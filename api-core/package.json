@@ -6,7 +6,9 @@
     "node": "24.21.0"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node --env-file-if-exists=.env dist/server.js",
+    "dev": "npm run build && npm start"
   },
   "dependencies": {
     "express": "4.22.3"
