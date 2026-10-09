@@ -12,10 +12,10 @@ con DEV consolidado y QA distribuido según la topología aprobada.
 Diseño de topología aprobado ([001](../specs/001-topologia-despliegue/plan.md)); validación práctica pendiente.
 Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 [CI mínima](../specs/003-ci-minima/tasks.md) aprobados. Arranque, logs y comandos build/start/dev
-de API Core integrados (002/T03–T04); rutas HTTP y workflow pendientes.
+de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); rutas HTTP pendientes.
 
-**Siguiente:** workflow de compilación (003/T02, issue #7, que concreta 002/T05), antes de
-añadir rutas. Revisión previa de GitHub Actions completada (003/T01).
+**Siguiente:** verificar el build y los disparadores de la CI (003/T03, issue #8), antes de
+añadir rutas.
 Revisión de dependencias integrada en PR #32; las cuatro versiones están aprobadas.
 Instalación local realizada y lockfile contrastado. Consultar el
 [backlog de GitHub](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues),
