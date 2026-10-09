@@ -14,8 +14,8 @@ Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 [CI mínima](../specs/003-ci-minima/tasks.md) aprobados. Arranque, logs y comandos build/start/dev
 de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); rutas HTTP pendientes.
 
-**Siguiente:** verificar el build y los disparadores de la CI (003/T03, issue #8), antes de
-añadir rutas.
+**Siguiente:** exigir el check de CI para integrar en main (issue #39), antes de añadir rutas.
+Build y disparadores de la CI verificados (003/T03).
 Revisión de dependencias integrada en PR #32; las cuatro versiones están aprobadas.
 Instalación local realizada y lockfile contrastado. Consultar el
 [backlog de GitHub](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues),
