@@ -2,7 +2,7 @@
 
 - **Spec:** [002](spec.md)
 - **Plan:** [002](plan.md)
-- **Estado:** En ejecución; T01–T05 completadas (T05 mediante 003/T01–T03). Siguiente: T06 (issue #9)
+- **Estado:** En ejecución; T01–T06 completadas (T05 mediante 003/T01–T03). Siguiente: T07 (issue #10)
 
 Spec, plan y tareas aprobados el 2026-10-03. Los IDs se ordenan antes de crear issues.
 La CI se rige por la [spec 003](../003-ci-minima/spec.md) y su plan, ambos aprobados.
@@ -47,8 +47,10 @@ Instalaciones y ejecución de Actions requieren su autorización; esta lista no 
   **Evidencia:** cumplida mediante 003/T01–T03 (issues #4, #7 y #8): ejecución válida correcta
   y error de tipos controlado con job fallido; sin despliegue ni credenciales cloud.
 
-- [ ] **T06 — Añadir GET /health.** HTTP 200 con status ok en JSON, independiente de datos.
+- [x] **T06 — Añadir GET /health.** HTTP 200 con status ok en JSON, independiente de datos.
   **Comprobar:** curl.exe al endpoint en 127.0.0.1:3002 devuelve 200 JSON, sin SQL Server. R1/R3; CA1/CA3.
+  **Evidencia:** build válido; con dev en 127.0.0.1:3002, curl.exe -i /health devolvió
+  200, Content-Type application/json; charset=utf-8 y {"status":"ok"}, sin SQL Server.
 
 - [ ] **T07 — Añadir equipos mock y su ruta.** data/equipment.json con id/name ficticios;
   routes/equipment.ts lee mediante ruta relativa al módulo. Copiar JSON en build desde ahora.
