@@ -2,7 +2,7 @@
 
 - **Spec:** [003](spec.md)
 - **Plan:** [003](plan.md)
-- **Estado:** En ejecución; T01–T03 y T08 completadas. Siguiente: T04, tras las pruebas de 002
+- **Estado:** En ejecución; T01–T04 y T08 completadas. Siguiente: T05 (issue #14), después de #42
 - **Fecha:** 2026-10-03
 
 Spec, plan y tareas aprobados el 2026-10-03. Esta lista no habilita Actions ni ejecuta instalaciones.
@@ -50,10 +50,14 @@ Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
   previos pasan. Cerrado sin integrar y rama eliminada; el archivo no existe en main.
   El pull request en rojo seguía siendo integrable; la protección de main se aborda en #39.
 
-- [ ] **T04 — Incorporar pruebas al mismo workflow.** Depende de 002/T09. Añadir npm test
+- [x] **T04 — Incorporar pruebas al mismo workflow.** Depende de 002/T09. Añadir npm test
   después de build; coordinar con 002/T10 sin duplicar job o workflow.
   **Comprobar:** se ejecutan las pruebas del JavaScript compilado; comandos obligatorios,
   sin omitir el paso si falta el script ni aceptar una ejecución sin pruebas. R2; CA1/CA3/CA5.
+  **Evidencia (2026-10-10):** paso Test (`npm test`) después de Build en el job api-core, sin
+  acciones ni permisos nuevos. Pull request #51: el log de Test muestra 6 pruebas ejecutadas
+  sobre dist/, 6 pasan y 0 fallan. `npm test` apunta al archivo exacto: con un patrón sin
+  coincidencias Node.js termina con salida 0 y 0 pruebas; con un archivo ausente, salida 1.
 
 - [ ] **T05 — Verificar fallos de pruebas e instalación.** En una rama de validación, alterar
   temporalmente una expectativa de contrato y comprobar el job fallido. Comprobar además

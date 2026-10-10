@@ -86,6 +86,8 @@ Instalaciones y ejecución de Actions requieren su autorización; esta lista no 
   ejecutar build y npm test antes del cierre. No crear un workflow duplicado solo para los tests.
   **Comprobar:** check pasa con contratos correctos y falla con un caso incorrecto. Un check
   verde no acredita despliegue ni SQL Server. Cubre 003; evidencia adicional de CA8.
+  **Avance:** paso añadido y check correcto con contratos válidos (003/T04, issue #13).
+  El caso incorrecto se verifica en 003/T05 (issue #14).
 
 - [ ] **T11 — Documentar operación local.** README de api-core con entorno, dev/build/start/test,
   curl de rutas, logs y cómo diagnosticar un fallo; aclarar que /health no comprueba SQL.
