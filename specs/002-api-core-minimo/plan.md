@@ -45,6 +45,7 @@ conforme al [ADR 0002](../../docs/adr/0002-sql-server-y-repositorios-mock.md).
 - Ruta inexistente: HTTP 404 con un mensaje JSON sencillo.
 - Fallo al leer o interpretar el mock: HTTP 500 con un mensaje JSON genérico, sin rutas
   internas, contenido del archivo ni detalles sensibles.
+- Las respuestas no incluyen la cabecera `X-Powered-By`, para no anunciar el framework.
 
 ```mermaid
 flowchart LR

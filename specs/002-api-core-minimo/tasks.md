@@ -2,7 +2,7 @@
 
 - **Spec:** [002](spec.md)
 - **Plan:** [002](plan.md)
-- **Estado:** En ejecución; T01–T07 completadas (T05 mediante 003/T01–T03). Siguiente: T08 (issue #11)
+- **Estado:** En ejecución; T01–T08 completadas (T05 mediante 003/T01–T03). Siguiente: T09 (issue #12)
 
 Spec, plan y tareas aprobados el 2026-10-03. Los IDs se ordenan antes de crear issues.
 La CI se rige por la [spec 003](../003-ci-minima/spec.md) y su plan, ambos aprobados.
@@ -61,12 +61,16 @@ Instalaciones y ejecución de Actions requieren su autorización; esta lista no 
   Sin el JSON en dist/data, la ruta respondió 500 (ENOENT) y /health siguió en 200; el formato
   JSON del 500 y el log seguro corresponden a T08.
 
-- [ ] **T08 — Completar errores y diagnóstico.** 404 después de rutas; manejador 500 al final;
+- [x] **T08 — Completar errores y diagnóstico.** 404 después de rutas; manejador 500 al final;
   entregar explícitamente errores asíncronos a Express 4 y registrar un evento seguro.
   **Comprobar:** ruta desconocida devuelve 404 JSON. Usar una copia temporal de módulos
   compilados sin equipment.json para verificar 500 genérico y /health disponible, sin modificar
   el mock de trabajo. Limpiar recursos y confirmar respuesta normal con datos presentes;
   logs útiles sin secretos. R5/R7; CA5/CA7.
+  **Evidencia:** ruta desconocida: 404 {"error":"Not found"}. Copia temporal de dist/ sin
+  data/: equipos 500 {"error":"Internal server error"}, /health 200 y log
+  `[request_error] Request failed: ENOENT.` sin rutas ni contenido. Copia eliminada; con datos
+  presentes, equipos 200 y mock sin cambios. Respuestas sin cabecera X-Powered-By.
 
 - [ ] **T09 — Automatizar contratos y errores.** node:test y aserciones/fetch nativos sobre la
   app compilada; casos /health, equipos, 404 y 500 con datos temporales y limpieza garantizada.

@@ -12,9 +12,10 @@ con DEV consolidado y QA distribuido según la topología aprobada.
 Diseño de topología aprobado ([001](../specs/001-topologia-despliegue/plan.md)); validación práctica pendiente.
 Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 [CI mínima](../specs/003-ci-minima/tasks.md) aprobados. Arranque, logs y comandos build/start/dev
-de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); GET /health y GET /api/equipment con datos simulados integrados (002/T06–T07).
+de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); GET /health, GET /api/equipment con datos simulados y errores 404/500 en JSON integrados
+(002/T06–T08).
 
-**Siguiente:** respuestas 404/500 en JSON con diagnóstico seguro (002/T08, issue #11). Build, disparadores y protección de
+**Siguiente:** automatizar las pruebas de contratos HTTP (002/T09, issue #12). Build, disparadores y protección de
 main verificados (003/T03 y T08): main solo acepta pull requests con el check de CI exitoso.
 Revisión de dependencias integrada en PR #32; las cuatro versiones están aprobadas.
 Instalación local realizada y lockfile contrastado. Consultar el
