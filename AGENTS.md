@@ -139,6 +139,10 @@ Criterios de evaluación de paquetes:
 
 ## Git
 
+`main` está protegida por un ruleset: los cambios entran solo mediante pull request con el
+check `api-core` exitoso; push directo, force push y eliminación están bloqueados.
+Renombrar el job `api-core` exige actualizar el ruleset en el mismo cambio.
+
 Revisar el estado antes de cada commit:
 
 ```

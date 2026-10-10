@@ -1,7 +1,8 @@
 # Arquitectura
 
 Diseño objetivo del sistema distribuido de monitoreo de maquinaria minera.
-Describe las responsabilidades previstas; la implementación y el despliegue están pendientes.
+Describe las responsabilidades previstas. API Core está en implementación; BFF, frontend,
+integración con SQL Server y despliegue están pendientes.
 
 ## Flujo de comunicación
 

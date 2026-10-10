@@ -2,7 +2,7 @@
 
 - **Spec:** [002](spec.md)
 - **Plan:** [002](plan.md)
-- **Estado:** En ejecución; T01–T03 integradas (PR #32–#34); T04 completada. Siguiente: T05, mediante 003/T01-T02 (issues #4 y #7)
+- **Estado:** En ejecución; T01–T05 completadas (T05 mediante 003/T01–T03). Siguiente: T06 (issue #9)
 
 Spec, plan y tareas aprobados el 2026-10-03. Los IDs se ordenan antes de crear issues.
 La CI se rige por la [spec 003](../003-ci-minima/spec.md) y su plan, ambos aprobados.
@@ -40,10 +40,12 @@ Instalaciones y ejecución de Actions requieren su autorización; esta lista no 
   Con un error de tipos temporal y dist/ previo presente, dev termina con salida 1 sin escuchar.
   Archivo temporal eliminado y procesos de verificación cerrados.
 
-- [ ] **T05 — Incorporar CI inicial de compilación.** Después de aprobar spec/plan/tasks 003,
+- [x] **T05 — Incorporar CI inicial de compilación.** Después de aprobar spec/plan/tasks 003,
   aplicar su comprobación de instalación reproducible y build al proyecto que ya existe.
   **Comprobar:** una ejecución válida pasa; un error de tipos falla el job sin desplegar ni
   utilizar credenciales cloud. Esta tarea depende de 003 y no sustituye sus criterios de aceptación.
+  **Evidencia:** cumplida mediante 003/T01–T03 (issues #4, #7 y #8): ejecución válida correcta
+  y error de tipos controlado con job fallido; sin despliegue ni credenciales cloud.
 
 - [ ] **T06 — Añadir GET /health.** HTTP 200 con status ok en JSON, independiente de datos.
   **Comprobar:** curl.exe al endpoint en 127.0.0.1:3002 devuelve 200 JSON, sin SQL Server. R1/R3; CA1/CA3.
