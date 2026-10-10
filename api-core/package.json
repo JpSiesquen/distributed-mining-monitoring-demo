@@ -8,7 +8,8 @@
   "scripts": {
     "build": "tsc && node --input-type=module -e \"import { cpSync } from 'node:fs'; cpSync('src/data', 'dist/data', { recursive: true });\"",
     "start": "node --env-file-if-exists=.env dist/server.js",
-    "dev": "npm run build && npm start"
+    "dev": "npm run build && npm start",
+    "test": "node --test test/*.test.mjs"
   },
   "dependencies": {
     "express": "4.22.3"

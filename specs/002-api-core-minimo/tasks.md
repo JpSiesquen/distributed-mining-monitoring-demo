@@ -2,7 +2,7 @@
 
 - **Spec:** [002](spec.md)
 - **Plan:** [002](plan.md)
-- **Estado:** En ejecución; T01–T08 completadas (T05 mediante 003/T01–T03). Siguiente: T09 (issue #12)
+- **Estado:** En ejecución; T01–T09 completadas (T05 mediante 003/T01–T03). Siguiente: T10 (issue #13)
 
 Spec, plan y tareas aprobados el 2026-10-03. Los IDs se ordenan antes de crear issues.
 La CI se rige por la [spec 003](../003-ci-minima/spec.md) y su plan, ambos aprobados.
@@ -72,10 +72,15 @@ Instalaciones y ejecución de Actions requieren su autorización; esta lista no 
   `[request_error] Request failed: ENOENT.` sin rutas ni contenido. Copia eliminada; con datos
   presentes, equipos 200 y mock sin cambios. Respuestas sin cabecera X-Powered-By.
 
-- [ ] **T09 — Automatizar contratos y errores.** node:test y aserciones/fetch nativos sobre la
+- [x] **T09 — Automatizar contratos y errores.** node:test y aserciones/fetch nativos sobre la
   app compilada; casos /health, equipos, 404 y 500 con datos temporales y limpieza garantizada.
   **Comprobar:** npm test pasa tras build; alterar la respuesta esperada hace fallar la prueba.
   No quedan servidores abiertos ni archivos mock modificados. R8/CA8.
+  **Evidencia:** test/api.test.mjs con 6 casos (/health, equipos, 404, sin X-Powered-By, 500
+  genérico y /health sin mock); servidor en 127.0.0.1 con puerto 0. Tras build: 6 pasan en
+  menos de 1 s y el proceso termina solo. Con la expectativa de /health alterada, la prueba
+  falla; restaurada, vuelve a pasar. La copia temporal sin data/ se crea en dist/ y se elimina;
+  src/data sin cambios.
 
 - [ ] **T10 — Añadir pruebas a la CI existente.** Ampliar el job de T05 según spec 003;
   ejecutar build y npm test antes del cierre. No crear un workflow duplicado solo para los tests.
