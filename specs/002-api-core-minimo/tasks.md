@@ -2,7 +2,7 @@
 
 - **Spec:** [002](spec.md)
 - **Plan:** [002](plan.md)
-- **Estado:** En ejecución; T01–T06 completadas (T05 mediante 003/T01–T03). Siguiente: T07 (issue #10)
+- **Estado:** En ejecución; T01–T07 completadas (T05 mediante 003/T01–T03). Siguiente: T08 (issue #11)
 
 Spec, plan y tareas aprobados el 2026-10-03. Los IDs se ordenan antes de crear issues.
 La CI se rige por la [spec 003](../003-ci-minima/spec.md) y su plan, ambos aprobados.
@@ -52,10 +52,14 @@ Instalaciones y ejecución de Actions requieren su autorización; esta lista no 
   **Evidencia:** build válido; con dev en 127.0.0.1:3002, curl.exe -i /health devolvió
   200, Content-Type application/json; charset=utf-8 y {"status":"ok"}, sin SQL Server.
 
-- [ ] **T07 — Añadir equipos mock y su ruta.** data/equipment.json con id/name ficticios;
+- [x] **T07 — Añadir equipos mock y su ruta.** data/equipment.json con id/name ficticios;
   routes/equipment.ts lee mediante ruta relativa al módulo. Copiar JSON en build desde ahora.
   **Comprobar:** /api/equipment devuelve 200 y el arreglo esperado en dev y build/start;
   existe dist/data/equipment.json, sin depender de SQL Server. R2/R3/R6; CA2/CA3/CA6.
+  **Evidencia:** build copia src/data a dist/data con cpSync de Node.js, sin dependencias nuevas.
+  En build/start y en dev, /api/equipment devolvió 200 JSON con los 3 equipos y /health 200.
+  Sin el JSON en dist/data, la ruta respondió 500 (ENOENT) y /health siguió en 200; el formato
+  JSON del 500 y el log seguro corresponden a T08.
 
 - [ ] **T08 — Completar errores y diagnóstico.** 404 después de rutas; manejador 500 al final;
   entregar explícitamente errores asíncronos a Express 4 y registrar un evento seguro.
