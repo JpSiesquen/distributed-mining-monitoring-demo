@@ -26,7 +26,7 @@ un listado de equipos simulados en JSON, tanto en desarrollo como desde su compi
 
 El stack final se mantiene en Node.js, Express 4, TypeScript 5.x y ES Modules con npm.
 Express 4.22.3 aprobado el 2026-10-03 como actualización de mantenimiento por
-[revisión de dependencias](../../docs/seguridad-dependencias.md); instalación pendiente de autorización.
+[revisión de dependencias](../../docs/seguridad-dependencias.md); instalado con lockfile en T02.
 Los mocks son temporales para este listado; no sustituyen la integración SQL Server prevista.
 
 ## Requisitos

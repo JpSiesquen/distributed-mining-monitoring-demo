@@ -52,8 +52,10 @@ de cada componente, sin valores sensibles.
 
 ## Estado
 
-En fase de especificación, sin servicios ni CI implementados. La topología está aprobada;
-los estados de los demás entregables se registran en el [índice de specs](specs/README.md).
+API Core en implementación: compila, arranca con configuración validada y cuenta con CI en
+GitHub Actions. `main` solo acepta pull requests con el check de CI exitoso. Rutas HTTP, BFF,
+frontend, base de datos y despliegue están pendientes; la topología está aprobada.
+Los estados de cada entregable se registran en el [índice de specs](specs/README.md).
 
 Continuar desde el [roadmap técnico](docs/roadmap.md). Consultar el
 [diseño de arquitectura](docs/architecture.md) y la

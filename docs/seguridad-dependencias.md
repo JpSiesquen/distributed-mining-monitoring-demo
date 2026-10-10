@@ -46,7 +46,8 @@ que se importará después; cualquier cambio del comando de instalación requier
 Activadas y verificadas el 2026-10-03 en GitHub: grafo de dependencias, alertas de
 vulnerabilidades y alertas de malware. Consultar [alertas del repositorio](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/security/dependabot).
 
-El análisis requiere publicar los manifiestos y lockfiles en `main`; todavía no existen.
+El análisis usa los manifiestos y lockfiles publicados en `main`. Comprobado el 2026-10-09:
+el grafo incluye las dependencias de `api-core/package-lock.json` y no hay alertas abiertas.
 Las alertas identifican dependencias con vulnerabilidades o malware conocidos en la base de
 avisos de GitHub; no sustituyen la revisión previa ni bloquean por sí solas una instalación.
 [Alcance de las alertas de malware](https://docs.github.com/en/code-security/concepts/supply-chain-security/malware-alerts).
@@ -58,7 +59,7 @@ Las actualizaciones automáticas permanecen deshabilitadas; cada cambio mantiene
 - [003/T01](../specs/003-ci-minima/tasks.md): revisión de Actions y autorización de `npm ci`.
 - Estado: revisión preliminar de #1 registrada abajo; las cuatro versiones aprobadas.
   Instalación local realizada por el responsable; lockfile contrastado en la issue #3.
-  Incorporar la evidencia al PR antes de habilitar instalaciones o CI.
+  Revisión de Actions y autorización de `npm ci` completadas en la issue #4; CI habilitada en #7.
 
 ## Revisión de la issue #1
 

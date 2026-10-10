@@ -31,7 +31,7 @@ con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 
 | Orden | Entregable | Estado / dependencia |
 |-------|------------|----------------------|
-| 1 | API Core con equipos mock y CI de build/pruebas | Definido en 002/003; ejecución pendiente. |
+| 1 | API Core con equipos mock y CI de build/pruebas | En ejecución: build, arranque y CI obligatoria integrados; rutas y pruebas pendientes. |
 | 2 | BFF consumiendo API Core | Por especificar; requiere API Core verificable. |
 | 3 | Frontend consumiendo únicamente BFF | Por especificar; completar flujo local con mocks. |
 | 4 | Integración SQL Server y persistencia | Por especificar; mantener contrato entre capas. |

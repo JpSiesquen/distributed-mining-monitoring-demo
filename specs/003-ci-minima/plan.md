@@ -8,11 +8,12 @@
 
 Definir un workflow de GitHub Actions que compruebe únicamente API Core.
 Primero ejecutar instalación reproducible y compilación; añadir pruebas en el mismo job
-cuando existan. Spec y plan aprobados el 2026-10-03; implementación pendiente.
+cuando existan. Spec y plan aprobados el 2026-10-03. Build y protección de main
+implementados y verificados (T01–T03, T08); pruebas pendientes.
 
 ## Diseño
 
-Archivo previsto: `.github/workflows/api-core-ci.yml`. No se crea en esta revisión.
+Archivo: `.github/workflows/api-core-ci.yml`, creado en T02.
 Un job llamado `api-core` con pasos secuenciales:
 
 ```
@@ -115,7 +116,8 @@ Decisión registrada en el [ADR 0009](../../docs/adr/0009-ci-minima-api-core.md)
 ## Riesgos
 
 - Shai-Hulud: aplicar la [revisión previa](../../docs/seguridad-dependencias.md) antes de
-  instalar o ejecutar CI. Revisión pendiente; lockfile y CI verde no garantizan ausencia de malware.
+  instalar o ejecutar CI. Revisión previa completada en T01; lockfile y CI verde no garantizan
+  ausencia de malware.
 
 - Check verde sin pruebas: indicar la fase de build y añadir pruebas antes de cerrar CA3/003.
 - Scripts de instalación externos: aplicar evaluación y aprobación de dependencias de 002.
