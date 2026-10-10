@@ -2,7 +2,7 @@
 
 - **Spec:** [003](spec.md)
 - **Plan:** [003](plan.md)
-- **Estado:** En ejecución; T01–T03 completadas. Siguiente: protección de main (#39)
+- **Estado:** En ejecución; T01–T03 y T08 completadas. Siguiente: T04, tras las pruebas de 002
 - **Fecha:** 2026-10-03
 
 Spec, plan y tareas aprobados el 2026-10-03. Esta lista no habilita Actions ni ejecuta instalaciones.
@@ -71,8 +71,13 @@ Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
   **Comprobar:** marcar Implementada solo con todos los criterios verificados; sin casillas
   completadas por aprobación documental. La ejecución de las pruebas es necesaria para el cierre.
 
-- [ ] **T08 — Exigir el check en main.** Depende de T03; se ejecuta antes de las rutas de 002.
+- [x] **T08 — Exigir el check en main.** Depende de T03; se ejecuta antes de las rutas de 002.
   Crear el ruleset del plan sobre la rama por defecto, tras validar su configuración.
   **Comprobar:** un pull request de validación con error de tipos queda bloqueado; un push
   directo a main es rechazado; un pull request con el check exitoso se integra. El pull
   request de validación se cierra sin integrar. R5; CA6.
+  **Evidencia (2026-10-09):** ruleset activo sobre la rama por defecto, sin excepciones.
+  Pull request de validación #43 con error de tipos: check fallido, estado BLOCKED y merge
+  rechazado por la política de la rama; cerrado sin integrar. Push directo de un commit vacío
+  a main rechazado con GH013 (pull request y check `api-core` requeridos); main sin cambios.
+  La integración de este cambio con el check exitoso completa la verificación.
