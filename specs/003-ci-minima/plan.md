@@ -55,6 +55,24 @@ Conservar el resultado y logs de cada ejecución en GitHub Actions. Un fallo de 
 compilación o pruebas hace fallar el job; no usar continue-on-error ni ignorar códigos de salida.
 No configurar credenciales SQL, SSH o Azure ni invocar servicios del cliente.
 
+## Protección de main
+
+Configuración aprobada el 2026-10-09 para R5. Un ruleset de repositorio
+sobre la rama por defecto, con enforcement activo:
+
+| Regla | Selección | Motivo |
+|-------|-----------|--------|
+| Pull request obligatorio | 0 aprobaciones | Un único mantenedor; con 1 no podría integrar sus propios cambios |
+| Check obligatorio | `api-core`, emitido por GitHub Actions | Otra integración no puede publicar un estado con ese nombre |
+| Rama actualizada con main | No exigida | Un pull request a la vez; la CI por push a main detecta combinaciones |
+| Force push y eliminación | Bloqueados | Conservar el historial y la rama |
+| Excepciones | Ninguna, incluido el administrador | La regla no depende de la disciplina manual |
+
+Renombrar el job `api-core` exige actualizar el ruleset en el mismo cambio; de lo contrario,
+el check obligatorio nunca se reporta y bloquea todas las integraciones.
+Si GitHub Actions no está disponible, la integración espera; desactivar el ruleset solo de
+forma temporal, explícita y registrada.
+
 ## Decisiones
 
 Disparadores push a main y pull_request hacia main aprobados el 2026-10-03.
@@ -92,6 +110,7 @@ Decisión registrada en el [ADR 0009](../../docs/adr/0009-ci-minima-api-core.md)
 | R2 | npm ci --ignore-scripts desde lockfile aprobado; build obligatorio y pruebas al existir, solo en api-core/. |
 | R3 | Pasos secuenciales sin ignorar fallos; verificar ejecuciones válidas y fallos controlados. |
 | R4 | Validar versiones/SHA, permisos, instalación y condiciones antes de incorporar el workflow. |
+| R5 | Ruleset en main: pull request y check `api-core` obligatorios, sin force push ni eliminación. |
 
 ## Riesgos
 
