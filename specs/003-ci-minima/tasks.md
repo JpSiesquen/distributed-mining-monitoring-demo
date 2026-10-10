@@ -66,7 +66,13 @@ Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
   **Comprobar:** resultado verde describe solo las comprobaciones realizadas; no acredita
   SQL Server ni despliegue. Sin secretos o instrucciones incompatibles con el workflow. R3; CA4.
 
-- [ ] **T07 — Verificar y cerrar 003.** Registrar evidencia de CA1–CA5, incluyendo versiones,
+- [ ] **T07 — Verificar y cerrar 003.** Registrar evidencia de CA1–CA6, incluyendo versiones,
   permisos, ejecuciones válidas, fallos controlados y recuperación.
   **Comprobar:** marcar Implementada solo con todos los criterios verificados; sin casillas
   completadas por aprobación documental. La ejecución de las pruebas es necesaria para el cierre.
+
+- [ ] **T08 — Exigir el check en main.** Depende de T03; se ejecuta antes de las rutas de 002.
+  Crear el ruleset del plan sobre la rama por defecto, tras validar su configuración.
+  **Comprobar:** un pull request de validación con error de tipos queda bloqueado; un push
+  directo a main es rechazado; un pull request con el check exitoso se integra. El pull
+  request de validación se cierra sin integrar. R5; CA6.

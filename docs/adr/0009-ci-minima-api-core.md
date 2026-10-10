@@ -19,6 +19,8 @@ La spec y el plan 003 definen comprobaciones progresivas sobre componentes exist
 - Instalar desde lockfile aprobado, compilar y añadir pruebas al existir, en el mismo job.
 - Hacer fallar el job ante errores de instalación, compilación o pruebas; conservar logs.
 - Revisar dependencias, seguridad, compatibilidad y costos antes de habilitar la ejecución.
+- (2026-10-09) Exigir el check `api-core` y pull request para integrar en main mediante un
+  ruleset sin excepciones; restringir Actions a las propias de GitHub con SHA completo.
 
 ## Alternativas consideradas
 
@@ -33,5 +35,7 @@ La spec y el plan 003 definen comprobaciones progresivas sobre componentes exist
 - Las pruebas se incorporan al mismo flujo; no cerrar 003 hasta verificarlas.
 - La aprobación del diseño no equivale a implementación ni autoriza instalaciones por sí sola.
 - Mantener versiones y acciones requiere revisión explícita cuando se actualicen.
+- Renombrar el job exige actualizar el ruleset en el mismo cambio. Una indisponibilidad de
+  GitHub Actions detiene las integraciones hasta su recuperación.
 
 Referencia: [plan 003](../../specs/003-ci-minima/plan.md).
