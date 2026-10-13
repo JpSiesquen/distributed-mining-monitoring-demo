@@ -129,6 +129,9 @@ Decisión registrada en el [ADR 0009](../../docs/adr/0009-ci-minima-api-core.md)
 | R3 | Pasos secuenciales sin ignorar fallos; verificar ejecuciones válidas y fallos controlados. |
 | R4 | Validar versiones/SHA, permisos, instalación y condiciones antes de incorporar el workflow. |
 | R5 | Ruleset en main: pull request y check `api-core` obligatorios, sin force push ni eliminación. |
+| R6 | Job limitado a cinco minutos; control de archivo y configuración npm antes de instalar; fallo y recuperación verificados en T09. |
+
+Operación y matriz de aceptación verificadas: [CI de API Core](../../docs/ci.md).
 
 ## Riesgos
 

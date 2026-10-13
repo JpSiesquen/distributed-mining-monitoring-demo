@@ -52,9 +52,10 @@ de cada componente, sin valores sensibles.
 
 ## Estado
 
-API Core en implementación: compila, arranca con configuración validada y cuenta con CI en
-GitHub Actions. `main` solo acepta pull requests con el check de CI exitoso. Rutas HTTP, BFF,
-frontend, base de datos y despliegue están pendientes; la topología está aprobada.
+API Core implementa salud, equipos simulados, errores JSON y seis pruebas de contrato.
+La [CI verificada](docs/ci.md) comprueba build y tests; `main` exige pull request y check exitoso.
+Documentación operativa y cierre de API Core pendientes; BFF, frontend, base de datos y
+despliegue pendientes. La topología está aprobada.
 Los estados de cada entregable se registran en el [índice de specs](specs/README.md).
 
 Continuar desde el [roadmap técnico](docs/roadmap.md). Consultar el

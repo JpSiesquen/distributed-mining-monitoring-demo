@@ -2,7 +2,7 @@
 
 - **Spec:** [003](spec.md)
 - **Plan:** [003](plan.md)
-- **Estado:** En ejecución; T01–T04, T08–T09 integradas. T05 verificada; integración pendiente. Siguiente: T06 (issue #15).
+- **Estado:** T01–T09 completadas y verificadas; documentación de cierre pendiente de integración (issue #15).
 - **Fecha:** 2026-10-03
 - **Ampliación #42:** T09 integrada en PR #52 el 2026-10-12.
 
@@ -72,15 +72,19 @@ Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
   [Restauración completa](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38330429291)
   en verde; árbol de la rama idéntico a main. PR #54 cerrado sin integrar.
 
-- [ ] **T06 — Documentar uso y diagnóstico.** Documentar disparadores, pasos, versiones,
+- [x] **T06 — Documentar uso y diagnóstico.** Documentar disparadores, pasos, versiones,
   acceso a logs y diferencia entre build inicial y build con pruebas. Enlazar la evidencia.
   **Comprobar:** resultado verde describe solo las comprobaciones realizadas; no acredita
   SQL Server ni despliegue. Sin secretos o instrucciones incompatibles con el workflow. R3; CA4.
+  **Evidencia:** [docs/ci.md](../../docs/ci.md), contrastado con workflow y package.json.
 
-- [ ] **T07 — Verificar y cerrar 003.** Registrar evidencia de CA1–CA6, incluyendo versiones,
+- [x] **T07 — Verificar y cerrar 003.** Registrar evidencia de CA1–CA8, incluyendo versiones,
   permisos, ejecuciones válidas, fallos controlados y recuperación.
   **Comprobar:** marcar Implementada solo con todos los criterios verificados; sin casillas
   completadas por aprobación documental. La ejecución de las pruebas es necesaria para el cierre.
+  **Evidencia (2026-10-12):** [matriz de aceptación](../../docs/ci.md#evidencia-de-aceptación),
+  runs de PR/push con seis pruebas, fallos de tipos/contrato/instalación/política y recuperación.
+  Ruleset actual contrastado; documentación de cierre pendiente de integrar.
 
 - [x] **T08 — Exigir el check en main.** Depende de T03; se ejecuta antes de las rutas de 002.
   Crear el ruleset del plan sobre la rama por defecto, tras validar su configuración.
