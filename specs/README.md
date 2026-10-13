@@ -5,11 +5,20 @@ Cada funcionalidad o entregable relevante se especifica antes de implementarse.
 Los números de spec y de fase son independientes; la secuencia de fases se mantiene en
 el [roadmap técnico](../docs/roadmap.md#fases-y-entregables).
 
-| Spec | Entregable | Estado |
-|------|------------|--------|
-| [001](001-topologia-despliegue/spec.md) | Topología de despliegue | Aprobada |
-| [002](002-api-core-minimo/spec.md) | API Core mínimo con equipos simulados | Implementada; CA1–CA8 verificados y operación documentada |
-| [003](003-ci-minima/spec.md) | CI mínima de compilación y pruebas | Implementada; CA1–CA8 verificados y documentación de cierre completada |
+La tabla está ordenada por fase de ejecución. Cada carpeta dispone de `spec.md`, `plan.md`
+y `tasks.md`; las reservas vacías permiten ver la ruta y no aprueban alcance ni implementación.
+
+| Fase | Carpeta / spec | Entregable | Estado |
+|------|----------------|------------|--------|
+| 1–2 | [002-api-core-minimo](002-api-core-minimo/spec.md) | API Core con datos mock | Implementada y verificada |
+| 1–2 | [003-ci-minima](003-ci-minima/spec.md) | CI de compilación y pruebas | Implementada y verificada |
+| 3 | [004-bff-minimo](004-bff-minimo/spec.md) | BFF consumiendo API Core | Spec, plan y tareas aprobados; ejecución pendiente |
+| 4 | [005-frontend-minimo](005-frontend-minimo/spec.md) | Frontend consumiendo BFF | Reservada; documentos vacíos |
+| 5 | [006-integracion-sql-server](006-integracion-sql-server/spec.md) | Integración SQL Server | Reservada; documentos vacíos |
+| 6 | [007-docker-nginx](007-docker-nginx/spec.md) | Empaquetado y entrada HTTP | Reservada; documentos vacíos |
+| 7 | [001-topologia-despliegue](001-topologia-despliegue/spec.md) | Despliegue DEV/QA | Diseño aprobado; implementación pendiente |
+| 8 | [008-promocion-artefactos-cd](008-promocion-artefactos-cd/spec.md) | Promoción de artefactos y CD | Reservada; documentos vacíos |
+| 9 (condicional) | [009-ampliaciones](009-ampliaciones/spec.md) | Ampliaciones justificadas | Reservada; definir solo ante requisitos concretos |
 
 ## Flujo
 
