@@ -1,6 +1,6 @@
 # Spec 003 — CI mínima de compilación y pruebas
 
-- **Estado:** Implementada; CA1–CA8 verificados el 2026-10-12. Documentación de cierre pendiente de integración.
+- **Estado:** Implementada; CA1–CA8 verificados el 2026-10-12.
 - **Fecha:** 2026-10-03
 - **Ampliación #42:** R6/CA7–CA8 aprobados el 2026-10-12.
 

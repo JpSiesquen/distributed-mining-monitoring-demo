@@ -2,7 +2,7 @@
 
 - **Spec:** [003](spec.md)
 - **Plan:** [003](plan.md)
-- **Estado:** T01–T09 completadas y verificadas; documentación de cierre pendiente de integración (issue #15).
+- **Estado:** T01–T09 completadas y verificadas; documentación de cierre en docs/ci.md (issue #15).
 - **Fecha:** 2026-10-03
 - **Ampliación #42:** T09 integrada en PR #52 el 2026-10-12.
 
@@ -84,7 +84,7 @@ Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
   completadas por aprobación documental. La ejecución de las pruebas es necesaria para el cierre.
   **Evidencia (2026-10-12):** [matriz de aceptación](../../docs/ci.md#evidencia-de-aceptación),
   runs de PR/push con seis pruebas, fallos de tipos/contrato/instalación/política y recuperación.
-  Ruleset actual contrastado; documentación de cierre pendiente de integrar.
+  Ruleset actual contrastado y documentación de cierre completada.
 
 - [x] **T08 — Exigir el check en main.** Depende de T03; se ejecuta antes de las rutas de 002.
   Crear el ruleset del plan sobre la rama por defecto, tras validar su configuración.

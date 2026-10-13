@@ -15,9 +15,9 @@ Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); GET /health, GET /api/equipment con datos simulados y errores 404/500 en JSON integrados
 (002/T06–T08); pruebas de contratos con `npm test` (002/T09), ejecutadas en CI (003/T04).
 
-**Siguiente:** integrar la documentación y cierre verificado de CI (issue #15, spec 003).
-CA1–CA8 contrastados y enlazados en [CI de API Core](ci.md). Después, documentar operación
-y completar el cierre de API Core (issue #16). Evidencia de fallos integrada en PR #55.
+**Siguiente:** documentar operación y completar el cierre de API Core (issue #16).
+CI implementada (spec 003); CA1–CA8 contrastados y enlazados en [CI de API Core](ci.md).
+Evidencia de fallos integrada en PR #55.
 Endurecimiento integrado en PR #52:
 límite de 5 minutos y control de `.npmrc` antes de instalar. Build, disparadores y protección de
 main verificados (003/T03 y T08): main solo acepta pull requests con el check de CI exitoso.
@@ -36,7 +36,7 @@ con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 
 | Orden | Entregable | Estado / dependencia |
 |-------|------------|----------------------|
-| 1 | API Core con equipos mock y CI de build/pruebas | Rutas, errores JSON, seis pruebas y CI endurecida integrados; CA1–CA8 de CI verificados. Pendiente: integrar documentación CI y completar operación/cierre de API Core. |
+| 1 | API Core con equipos mock y CI de build/pruebas | Rutas, errores JSON, seis pruebas y CI endurecida integrados; CI documentada y CA1–CA8 verificados. Pendiente: documentación operativa y cierre de API Core. |
 | 2 | BFF consumiendo API Core | Por especificar; requiere API Core verificable. |
 | 3 | Frontend consumiendo únicamente BFF | Por especificar; completar flujo local con mocks. |
 | 4 | Integración SQL Server y persistencia | Por especificar; mantener contrato entre capas. |
