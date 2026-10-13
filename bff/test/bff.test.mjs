@@ -135,8 +135,13 @@ test("redirect does not contact another source", async t => {
 
 for (const phase of ["headers", "body"]) {
   test(`timeout covers delayed ${phase} and preserves health`, async t => {
+    let bodyStarted = false;
     await withBff(t, (_req, res) => {
-      if (phase === "body") { res.writeHead(200, { "content-type": "application/json" }); res.write("["); }
+      if (phase === "body") {
+        res.writeHead(200, { "content-type": "application/json" });
+        res.write("[");
+        bodyStarted = true;
+      }
       const timer = setTimeout(() => {
         if (phase === "body") res.end(JSON.stringify(equipment[0]) + "]");
         else json(res, equipment);
@@ -146,6 +151,7 @@ for (const phase of ["headers", "body"]) {
       const pending = request("/api/equipment");
       await expectJson(await request("/health"), 200, { status: "ok" });
       await expectJson(await pending, 504, { error: "Gateway timeout" });
+      if (phase === "body") assert.equal(bodyStarted, true, "Upstream body delay was exercised");
       assert.deepEqual(logs, ["[upstream_error] timeout."]);
     }, 50);
   });
