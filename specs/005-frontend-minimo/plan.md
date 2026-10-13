@@ -88,7 +88,8 @@ No añadir debouncing ni peticiones por pulsación: la búsqueda opera sobre dat
 Dev inicia Vite; build comprueba tipos antes de generar dist/; preview sirve el artefacto local.
 Test ejecuta una suite finita con salida no cero ante fallo, sin modo watch en CI.
 
-Proponer Vitest, jsdom y React Testing Library para verificar interacción y estados del DOM;
+Estrategia aprobada el 2026-10-13: Vitest, jsdom y React Testing Library para verificar
+interacción y estados del DOM;
 una prueba de función pura no acredita carga, mensajes o recuperación de la pantalla.
 Simular fetch en pruebas con fixtures id/name, respuestas inválidas, fallos y demoras controladas;
 restaurar mocks y limpiar renders. No incorporar servidor de mocks ni navegadores descargados.
@@ -114,7 +115,7 @@ Revisar compatibilidad, comandos, uso disponible de Actions y autorización ante
   La versión exacta y los comandos de instalación siguen pendientes de revisión y autorización.
 - React/React DOM de producción; Vite, plugin React, TypeScript y tipos de desarrollo;
   TanStack Query, Material UI y su motor de estilos de producción;
-  herramientas de pruebas indicadas de desarrollo.
+  herramientas de pruebas indicadas de desarrollo, selección aprobada el 2026-10-13.
   Versiones exactas, compatibilidad con Vite 6/Node 24 y comandos pendientes de revisión de seguridad.
 - Revisar scripts de instalación y binarios transitivos antes de ejecutar. Si ignore-scripts
   impide funcionar a un paquete, validar la causa y un comando específico; no desactivar la política.
@@ -126,8 +127,8 @@ Revisar compatibilidad, comandos, uso disponible de Actions y autorización ante
 - P1: dirección acordada; composición detallada propuesta arriba y revisión visual prevista.
 - P2: resuelta; proxy de mismo origen en dev/preview y configuración local aprobados el
   2026-10-13. Nginx se concreta en fase 6.
-- P3: TanStack Query y Material UI seleccionados y aprobados; herramientas de pruebas y ampliación de CI
-  pendientes. Versiones exactas y comandos por revisar.
+- P3: TanStack Query, Material UI y estrategia Vitest/jsdom/React Testing Library aprobados;
+  ampliación de CI pendiente. Versiones exactas y comandos por revisar.
 
 ## Trazabilidad
 
