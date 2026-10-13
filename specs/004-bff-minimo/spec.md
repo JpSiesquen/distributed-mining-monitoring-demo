@@ -1,6 +1,6 @@
 # Spec 004 — BFF mínimo para consulta de equipos
 
-- **Estado:** Aprobada el 2026-10-13; CA1–CA8 verificados, integración de CI y cierre documental pendientes
+- **Estado:** Implementada y verificada el 2026-10-13; CA1–CA8 acreditados en [operación](../../bff/README.md#evidencia-de-aceptación).
 - **Fecha:** 2026-10-13
 
 ## Contexto

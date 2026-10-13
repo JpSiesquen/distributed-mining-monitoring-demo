@@ -1,7 +1,7 @@
 # Plan 004 — BFF mínimo para consulta de equipos
 
 - **Spec:** [004](spec.md), aprobada el 2026-10-13
-- **Estado:** Aprobado el 2026-10-13; implementación pendiente.
+- **Estado:** Aprobado e implementado el 2026-10-13; verificación en [T01–T09](tasks.md).
 
 ## Enfoque
 
@@ -97,7 +97,7 @@ Actualizar documentación de CI y comprobar un fallo BFF bloqueado con API Core 
   en [seguridad de dependencias](../../docs/seguridad-dependencias.md#revisión-de-la-issue-59--bff);
   selección/comandos aprobados para #60. Contrastar el lockfile BFF definitivo en T02.
 - La separación de capas sigue [arquitectura](../../docs/architecture.md). La ampliación de CI
-  se registra en [ADR 0010](../../docs/adr/0010-ci-por-componente.md); implementación pendiente.
+  se registra en [ADR 0010](../../docs/adr/0010-ci-por-componente.md); jobs y checks BFF/API Core implementados.
 
 ## Respuesta a preguntas abiertas
 

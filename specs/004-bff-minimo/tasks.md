@@ -2,7 +2,7 @@
 
 - **Spec:** [004](spec.md)
 - **Plan:** [004](plan.md), aprobado el 2026-10-13
-- **Estado:** Aprobadas el 2026-10-13; T01–T08 verificadas, T09 pendiente
+- **Estado:** Aprobadas el 2026-10-13; T01–T09 verificadas. Cierre documental pendiente de integrar.
 
 Prerrequisito: API Core y CI de las specs 002/003 implementados y verificados.
 El orden introduce CI tras la compilación y pruebas al existir las rutas. Las casillas
@@ -31,7 +31,7 @@ T01–T09 corresponden, en orden, a las issues
   con ignore-scripts y sin credenciales sensibles. Prerrequisito de T02; R8.
   **Evidencia:** revisión del 2026-10-13 en seguridad de dependencias; 82 versiones del grafo
   existente contrastadas con registro y avisos actuales. Selección y comandos aprobados
-  explícitamente para #60; sin instalación en #59. Grafo definitivo BFF pendiente de T02.
+  explícitamente para #60; sin instalación en #59. Grafo definitivo contrastado en T02.
 
 - [x] **T02 — Preparar proyecto compilable.** Crear bff/package.json, .npmrc, lockfile v3,
   tsconfig estricto ES Modules y módulo mínimo. Instalar solo lo autorizado en T01 y
@@ -64,7 +64,7 @@ T01–T09 corresponden, en orden, a las issues
   entorno externo cambia puerto y origen tras reinicio. Diecisiete casos inválidos terminan
   con salida 1 y mensajes seguros; puerto ocupado falla sin fallback. Dev con TS2322 no
   arranca dist/ anterior; temporales y procesos limpiados. Comunicación HTTP con API Core
-  pendiente de T06; no se marca CA5 completa por esta comprobación parcial.
+  verificada después en T06; esta comprobación inicial era parcial.
 
 - [x] **T05 — Añadir salud independiente.** GET /health devuelve 200 JSON status ok;
   desactivar X-Powered-By. No consultar API Core desde esta ruta.
@@ -85,7 +85,7 @@ T01–T09 corresponden, en orden, a las issues
   arreglo. Fuentes controladas: 502 ante inaccesibilidad, estado inválido, JSON/contrato inválido
   y redirección (sin contactar destino); 504 ante demora de cabeceras/cuerpo. 404 JSON y health
   disponibles; logs por categoría sin datos internos. Nuevo origen/puerto tras reinicio cambian
-  la consulta. Recursos limpiados. CA2–CA6 combinan esta evidencia con T04/T05; suite T07 pendiente.
+  la consulta. Recursos limpiados. CA2–CA6 combinan esta evidencia con T04/T05; suite automatizada en T07.
 
 - [x] **T07 — Automatizar contratos y fallos.** Añadir node:test sobre la app compilada,
   con servidor HTTP controlado y puertos asignados por el sistema. Cubrir los casos de
@@ -109,9 +109,14 @@ T01–T09 corresponden, en orden, a las issues
   bloqueado en los tres. Recuperación 38482196835 correcta; árbol restaurado idéntico al
   cambio real, #90 cerrado sin integrar. Pasos omitidos y checks contrastados en docs/ci.md.
 
-- [ ] **T09 — Documentar operación y verificar cierre.** Redactar bff/README.md y actualizar
+- [x] **T09 — Documentar operación y verificar cierre.** Redactar bff/README.md y actualizar
   docs/ci.md, roadmap y estados pertinentes con comandos, configuración, rutas, diagnóstico
   y evidencia por CA. Verificar API Core → BFF en dev y build/start.
   **Comprobar:** CA1–CA8 acreditados antes de marcar spec implementada; documentación coincide
   con código, lockfile y CI. No completar 001/T02: el frontend sigue pendiente.
   Depende de T04–T08; todos los requisitos y criterios de aceptación.
+  **Evidencia:** [operación y matriz CA1–CA8](../../bff/README.md#evidencia-de-aceptación).
+  Flujo con API Core compilado real revalidado el 2026-10-13 en dev y build/start;
+  configuración externa, errores y limpieza correctos. CI de pruebas integrada en PR #89.
+  README, plan, ADR, índice y roadmap contrastados con scripts, fuentes y workflow.
+  001/T02 conserva su casilla pendiente: falta incorporar frontend.
