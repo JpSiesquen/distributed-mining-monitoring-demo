@@ -1,6 +1,6 @@
 # Spec 005 — Dashboard de equipos
 
-- **Estado:** Borrador; alcance inicial acordado, aprobación completa pendiente
+- **Estado:** Aprobada el 2026-10-13; implementación pendiente
 - **Fecha:** 2026-10-13
 
 ## Contexto
@@ -78,8 +78,9 @@ La planificación de 005 puede avanzar antes; no acredita esa implementación.
 
 ## Preguntas abiertas
 
-- **P1:** concretar dirección visual antes de implementar: composición, paleta, tipografía
-  y referencia o propuesta visual revisable. El dashboard cuidado está acordado; diseño pendiente.
+- **P1 — Dirección acordada (2026-10-13):** industrial oscuro con acento ámbar, tarjetas
+  sobrias, IDs monoespaciados y buen espaciado. Concretar composición y verificarla visualmente
+  antes del cierre; diseño detallado en el plan.
 - **P2:** definir comunicación de desarrollo y del artefacto estático con BFF, incluyendo
   origen/proxy, antes de decidir si hacen falta cambios de seguridad en el BFF.
 - **P3:** seleccionar únicamente librerías necesarias y definir pruebas/CI en el plan,
