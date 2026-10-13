@@ -1,6 +1,6 @@
 # Spec 002 — API Core mínimo con equipos simulados
 
-- **Estado:** Aprobada
+- **Estado:** Implementada; CA1–CA8 verificados el 2026-10-12.
 - **Revisión:** incorporación de logs y pruebas básicas; decisiones técnicas previas conservadas.
 - **Fecha:** 2026-10-02
 - **Fecha de aprobación de la revisión:** 2026-10-03
@@ -53,22 +53,25 @@ La CI mínima se especifica por separado en [003](../003-ci-minima/spec.md); no 
 
 ## Criterios de aceptación
 
-- [ ] **CA1:** una petición GET a `/health` devuelve HTTP 200 y JSON de disponibilidad del servicio.
-- [ ] **CA2:** GET a `/api/equipment` devuelve HTTP 200, JSON y los equipos del archivo mock,
+- [x] **CA1:** una petición GET a `/health` devuelve HTTP 200 y JSON de disponibilidad del servicio.
+- [x] **CA2:** GET a `/api/equipment` devuelve HTTP 200, JSON y los equipos del archivo mock,
   con identificador y nombre para cada equipo.
-- [ ] **CA3:** CA1/CA2 funcionan sin SQL Server ni credenciales de base de datos.
-- [ ] **CA4:** cambiar el puerto por configuración mueve la escucha al nuevo puerto sin editar
+- [x] **CA3:** CA1/CA2 funcionan sin SQL Server ni credenciales de base de datos.
+- [x] **CA4:** cambiar el puerto por configuración mueve la escucha al nuevo puerto sin editar
   código; `.env.example` describe las variables y la interfaz local es loopback.
-- [ ] **CA5:** una ruta inexistente devuelve 404 JSON; provocar un error interno controlado
+- [x] **CA5:** una ruta inexistente devuelve 404 JSON; provocar un error interno controlado
   devuelve 500 JSON sin detalles internos ni secretos.
-- [ ] **CA6:** CA1/CA2 pasan en desarrollo y después de `npm run build` seguido de `npm start`,
+- [x] **CA6:** CA1/CA2 pasan en desarrollo y después de `npm run build` seguido de `npm start`,
   que ejecuta el JavaScript generado en `dist/`.
 
-- [ ] **CA7:** ante arranque correcto, puerto ocupado y fallo controlado del mock, los logs
+- [x] **CA7:** ante arranque correcto, puerto ocupado y fallo controlado del mock, los logs
   permiten distinguir los eventos sin incluir credenciales, contenido del mock ni detalles sensibles.
-- [ ] **CA8:** después de build, npm test verifica 200/contrato JSON y los casos 404/500; una
+- [x] **CA8:** después de build, npm test verifica 200/contrato JSON y los casos 404/500; una
   respuesta incorrecta hace fallar la prueba y termina con código no cero. Las pruebas restauran
   sus datos y cierran el servidor, sin requerir SQL Server ni servicios cloud.
+
+Evidencia completa: [operación de API Core](../../api-core/README.md#evidencia-de-cierre)
+y [CI verificada](../../docs/ci.md). 001/T02 no se completa con este servicio aislado.
 
 ## Preguntas abiertas
 
