@@ -179,3 +179,15 @@ Fuentes: [Express](https://registry.npmjs.org/express/4.22.3),
 [TypeScript](https://registry.npmjs.org/typescript/5.9.3),
 [tipos Express](https://registry.npmjs.org/@types%2fexpress/4.17.25),
 [tipos Node](https://registry.npmjs.org/@types%2fnode/24.19.1).
+
+### Ejecución de CI BFF — issue #61
+
+Preparada el 2026-10-13, pendiente de autorización antes de publicar el workflow habilitado.
+Revalidación de SHA oficiales checkout/setup-node y action.yml: runtime node24, sin cambio
+de versiones respecto de API Core. Node de aplicación 24.21.0; Ubuntu 22.04 estándar;
+contents: read, persist-credentials: false y package-manager-cache: false.
+
+Comandos propuestos en bff/: comprobar .npmrc y valor efectivo ignore-scripts=true,
+npm ci --ignore-scripts y npm run build. El lockfile final de #60 ya está contrastado;
+no se incorporan dependencias ni scripts de instalación. Sin secretos de producción,
+despliegue o servicios SQL. No habilitar ni ejecutar hasta aprobar estos comandos para CI BFF.

@@ -6,7 +6,7 @@ Alcance y aceptación: [spec 003](../specs/003-ci-minima/spec.md).
 ## Ejecución
 
 Se ejecuta al hacer push a `main` y al abrir o actualizar un pull request hacia `main`.
-Un único job, `api-core`, usa `ubuntu-22.04`, Node.js `24.21.0` y un límite de cinco minutos.
+El job `api-core` usa `ubuntu-22.04`, Node.js `24.21.0` y un límite de cinco minutos.
 Los comandos se ejecutan en `api-core/`.
 
 ```text
@@ -39,6 +39,20 @@ Un fallo detiene los pasos posteriores; no hay `continue-on-error`.
 
 Un check verde acredita compilación y pruebas de este alcance. No acredita SQL Server,
 despliegue, disponibilidad de los servidores ni ausencia de malware.
+
+## Ampliación BFF — issue #61
+
+Job bff preparado, pendiente de autorizar ejecución y validar en GitHub. Ejecutará en bff/:
+política npm → npm ci --ignore-scripts → npm run build. Reutiliza runner, runtime, Actions
+fijadas y permisos de API Core, con cinco minutos y caché desactivada. Las pruebas HTTP
+se incorporarán cuando existan; build no acredita rutas ni consulta de equipos.
+
+Los SHA oficiales y runtime node24 de ambas Actions se revalidaron el 2026-10-13.
+El repositorio es público; la ejecución propuesta usa runners estándar hospedados, gratuitos
+según [facturación de Actions](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
+No crea artefactos almacenados ni caché npm. El check bff se exigirá junto a api-core solo
+después de validar una ejecución correcta; el ruleset actual aún exige únicamente api-core.
+La prueba de error de tipos deberá bloquear integración con api-core verde.
 
 ## Consultar resultados y diagnosticar
 
