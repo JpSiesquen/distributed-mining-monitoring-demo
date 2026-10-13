@@ -8,6 +8,23 @@ La integración real requiere BFF de la spec 004 implementado y verificado. Las 
 fixtures no cumplen ese prerrequisito. Instalar cada dependencia al abordar su funcionalidad,
 con revisión y comandos aprobados; las casillas representan ejecución verificada.
 
+## Issues de ejecución
+
+[Milestone Fase 4](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/milestone/5).
+T01–T10 corresponden, en orden, a las issues
+[#70](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/70),
+[#71](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/71),
+[#72](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/72),
+[#73](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/73),
+[#74](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/74),
+[#75](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/75),
+[#76](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/76),
+[#77](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/77),
+[#78](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/78) y
+[#79](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/79).
+
+## Tareas
+
 - [ ] **T01 — Revisar y autorizar dependencias.** Seleccionar versiones exactas compatibles
   de React 19/React DOM, Vite 6/plugin React, TypeScript/tipos, TanStack Query, Material UI/Emotion
   y Vitest/jsdom/React Testing Library. Revisar procedencia, avisos y scripts directos/transitivos.
