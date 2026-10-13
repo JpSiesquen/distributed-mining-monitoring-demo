@@ -124,3 +124,49 @@ npm install --save-dev --save-exact --ignore-scripts typescript@5.9.3 @types/exp
 `--ignore-scripts` evita ejecutar scripts de instalación; no protege frente al código importado
 posteriormente. El comando de CI incorpora esa protección. Nuevas instalaciones y la ejecución
 de CI requieren su propia autorización.
+
+## Revisión de la issue #59 — BFF
+
+Fecha: 2026-10-13. Revisión preliminar completada sin instalar ni ejecutar paquetes.
+Selección y comandos siguientes pendientes de aprobación para BFF; la aprobación previa
+en API Core no se extiende automáticamente a otra instalación.
+
+| Paquete propuesto | Versión | Finalidad | Tipo |
+|-------------------|---------|-----------|------|
+| express | 4.22.3 | Servidor y rutas del BFF | Producción |
+| typescript | 5.9.3 | Tipos y compilación | Desarrollo |
+| @types/express | 4.17.25 | Tipos de Express 4 | Desarrollo |
+| @types/node | 24.19.1 | Tipos de Node.js 24 | Desarrollo |
+
+Conservar las versiones exactas revisadas de API Core evita una divergencia injustificada;
+fetch, cancelación, logs y pruebas se resuelven con Node.js, sin dependencias adicionales.
+Runtime local comprobado: 24.21.0. Los mínimos declarados de Express y TypeScript admiten
+ese runtime; los paquetes de tipos corresponden a Express 4 y Node 24. Compilación y pruebas
+del BFF se verificarán al existir su proyecto, no se acreditan con esta revisión.
+
+Se reconsultaron los metadatos oficiales de las 82 versiones del lockfile actual de API Core:
+identidades e integridades coincidentes, sin paquetes deprecados ni entradas hasInstallScript
+en el lockfile. La consulta actual al endpoint de avisos npm no devolvió coincidencias.
+Origen directo: expressjs/express, microsoft/TypeScript y DefinitelyTyped.
+El único script de ciclo de vida declarado es prepare de mime@1.6.0; su lectura previa e
+integridad revisada se conservan. No se ejecutó. No se verificaron criptográficamente las
+attestations ni se auditó todo el código; no se acredita ausencia de malware.
+
+Esta evidencia corresponde al grafo existente, no a una resolución definitiva del BFF.
+En 004/T02 contrastar versiones, origen, integridades, avisos y scripts del lockfile nuevo;
+revisar cualquier diferencia antes de ejecutar build o pruebas. No forzar transitivas mediante
+overrides sin una decisión revisada.
+
+Comandos propuestos, exclusivamente en bff/ al preparar el proyecto en la issue #60,
+después de crear package.json y .npmrc con ignore-scripts=true:
+
+```powershell
+npm install --save-exact --ignore-scripts express@4.22.3
+npm install --save-dev --save-exact --ignore-scripts typescript@5.9.3 @types/express@4.17.25 @types/node@24.19.1
+```
+
+La issue #59 registra revisión y autorización; no realiza la instalación.
+Fuentes: [Express](https://registry.npmjs.org/express/4.22.3),
+[TypeScript](https://registry.npmjs.org/typescript/5.9.3),
+[tipos Express](https://registry.npmjs.org/@types%2fexpress/4.17.25),
+[tipos Node](https://registry.npmjs.org/@types%2fnode/24.19.1).

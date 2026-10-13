@@ -90,8 +90,9 @@ Actualizar documentación de CI y comprobar un fallo BFF bloqueado con API Core 
   cubre la respuesta completa, cancela la consulta al agotarse y devuelve 504.
 - Aprobada el 2026-10-13: configuración local de la tabla y plan completo.
 - Dependencias candidatas por coherencia con API Core: Express 4.22.3, TypeScript 5.9.3,
-  @types/express 4.17.25 y @types/node 24.19.1. Revalidar versiones, origen, avisos y scripts
-  directos/transitivos; su aprobación en API Core no autoriza instalarlas en BFF.
+  @types/express 4.17.25 y @types/node 24.19.1. Revisión preliminar del 2026-10-13 registrada
+  en [seguridad de dependencias](../../docs/seguridad-dependencias.md#revisión-de-la-issue-59--bff);
+  selección/comandos pendientes de aprobación. Contrastar el lockfile BFF definitivo en T02.
 - La separación de capas sigue [arquitectura](../../docs/architecture.md). La ampliación de CI
   se registra en [ADR 0010](../../docs/adr/0010-ci-por-componente.md); implementación pendiente.
 
