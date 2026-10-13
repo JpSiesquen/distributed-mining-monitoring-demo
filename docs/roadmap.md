@@ -15,7 +15,9 @@ Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); GET /health, GET /api/equipment con datos simulados y errores 404/500 en JSON integrados
 (002/T06–T08); pruebas de contratos con `npm test` (002/T09), ejecutadas en CI (003/T04).
 
-**Siguiente:** endurecer el workflow con límite de tiempo y control de `.npmrc` (issue #42). Build, disparadores y protección de
+**Siguiente:** integrar el endurecimiento del workflow (issue #42, PR #52), verificado con
+límite de 5 minutos, control de `.npmrc` y recuperación tras un fallo previo a la instalación.
+Después, verificar fallos de pruebas e instalación en CI (issue #14). Build, disparadores y protección de
 main verificados (003/T03 y T08): main solo acepta pull requests con el check de CI exitoso.
 Revisión de dependencias integrada en PR #32; las cuatro versiones están aprobadas.
 Instalación local realizada y lockfile contrastado. Consultar el

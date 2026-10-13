@@ -50,10 +50,12 @@ primero compilación y, cuando las pruebas estén disponibles, compilación y pr
   de instalación tienen aprobación antes de habilitarse y no ejecutan scripts de dependencias automáticamente.
 - [ ] **CA6:** un pull request con el check fallido no puede integrarse, un push directo a main
   es rechazado y un pull request con el check exitoso se integra normalmente.
-- [ ] **CA7:** el job declara un límite de tiempo aprobado y el código válido
+- [x] **CA7:** el job declara un límite de tiempo aprobado y el código válido
   mantiene el check exitoso, con los controles de configuración anteriores a npm ci.
-- [ ] **CA8:** retirar ignore-scripts=true de .npmrc en un PR de validación
+- [x] **CA8:** retirar ignore-scripts=true de .npmrc en un PR de validación
   hace fallar el job antes de la instalación; restaurarlo recupera el check exitoso.
+
+Evidencia de CA7–CA8: [T09](tasks.md), PR #52 y validación temporal #53 (cerrada sin integrar).
 
 ## Preguntas abiertas
 
