@@ -167,6 +167,14 @@ npm install --save-dev --save-exact --ignore-scripts typescript@5.9.3 @types/exp
 ```
 
 La issue #59 registra revisión y autorización; no realiza la instalación.
+
+Instalación #60 (2026-10-13): los comandos aprobados se ejecutaron en bff/ con ignore-scripts
+efectivo y sin credenciales heredadas ni configuración npm privada. npm reportó cero avisos.
+Lockfile v3 definitivo: 82 paquetes, todos con versiones e integridades coincidentes con
+el conjunto revalidado; origen registry.npmjs.org y ninguna entrada hasInstallScript.
+No hubo diferencias de grafo. npm ls confirma las cuatro versiones; build correcto y caso
+TS2322 controlado verificados. Este contraste no acredita ausencia de malware.
+
 Fuentes: [Express](https://registry.npmjs.org/express/4.22.3),
 [TypeScript](https://registry.npmjs.org/typescript/5.9.3),
 [tipos Express](https://registry.npmjs.org/@types%2fexpress/4.17.25),

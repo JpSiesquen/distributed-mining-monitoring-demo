@@ -1,8 +1,8 @@
 # Arquitectura
 
 Diseño objetivo del sistema distribuido de monitoreo de maquinaria minera.
-Describe las responsabilidades previstas. API Core con datos mock está implementado; BFF, frontend,
-integración con SQL Server y despliegue están pendientes.
+Describe las responsabilidades previstas. API Core con datos mock está implementado y BFF tiene
+base compilable; sus rutas, frontend, integración con SQL Server y despliegue están pendientes.
 
 ## Flujo de comunicación
 
@@ -23,7 +23,7 @@ las requiere.
 
 ### BFF (Backend for Frontend)
 
-Servicio previsto con Node.js, Express 4 y TypeScript; versión exacta por validar al especificarlo. Adapta o agrega respuestas del
+Proyecto compilable con Node.js, Express 4.22.3 y TypeScript; servidor y rutas pendientes. Adapta o agrega respuestas del
 API Core cuando lo requiere la interfaz; las transformaciones deben responder a una
 necesidad concreta.
 

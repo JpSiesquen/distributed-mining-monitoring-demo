@@ -1,6 +1,6 @@
 # Spec 004 — BFF mínimo para consulta de equipos
 
-- **Estado:** Aprobada el 2026-10-13; implementación pendiente
+- **Estado:** Aprobada el 2026-10-13; implementación parcial, base compilable verificada
 - **Fecha:** 2026-10-13
 
 ## Contexto

@@ -2,7 +2,7 @@
 
 - **Spec:** [004](spec.md)
 - **Plan:** [004](plan.md), aprobado el 2026-10-13
-- **Estado:** Aprobadas el 2026-10-13; pendientes de ejecución
+- **Estado:** Aprobadas el 2026-10-13; T01–T02 verificadas, T03–T09 pendientes
 
 Prerrequisito: API Core y CI de las specs 002/003 implementados y verificados.
 El orden introduce CI tras la compilación y pruebas al existir las rutas. Las casillas
@@ -33,11 +33,15 @@ T01–T09 corresponden, en orden, a las issues
   existente contrastadas con registro y avisos actuales. Selección y comandos aprobados
   explícitamente para #60; sin instalación en #59. Grafo definitivo BFF pendiente de T02.
 
-- [ ] **T02 — Preparar proyecto compilable.** Crear bff/package.json, .npmrc, lockfile v3,
+- [x] **T02 — Preparar proyecto compilable.** Crear bff/package.json, .npmrc, lockfile v3,
   tsconfig estricto ES Modules y módulo mínimo. Instalar solo lo autorizado en T01 y
   contrastar el lockfile con la selección revisada.
   **Comprobar:** ignore-scripts efectivo; build genera JavaScript en dist/. Un error de tipos
   termina con salida no cero y no emite código nuevo. R6; prepara CA6.
+  **Evidencia:** instalación autorizada realizada; 82 versiones/integridades coinciden con
+  el grafo revisado. npm ls confirma selección exacta. Build emite dist/index.js;
+  TS2322 temporal termina con salida 1 sin emisión ni cambio del JS anterior.
+  Fuente temporal retirada y build correcto restaurado. Sin servidor HTTP todavía.
 
 - [ ] **T03 — Incorporar CI de compilación del BFF.** Revalidar Actions, comandos y permisos;
   añadir job bff al workflow existente con los controles del plan. Conservar api-core.

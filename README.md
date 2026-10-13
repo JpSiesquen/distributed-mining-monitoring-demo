@@ -11,7 +11,7 @@ Frontend → BFF → API Core → Base de datos
 | Capa | Responsabilidad | Tecnología |
 |------|-----------------|------------|
 | Frontend | Interfaz de monitoreo | React 19 + Vite 6 + TypeScript |
-| BFF | Adaptación y agregación de datos para el frontend | Node.js + Express 4 + TypeScript; versión exacta por validar |
+| BFF | Adaptación y agregación de datos para el frontend | Node.js + Express 4.22.3 + TypeScript |
 | API Core | Lógica de negocio y acceso a datos | Node.js + Express 4.22.3 + TypeScript |
 | Base de datos | Persistencia | SQL Server |
 
@@ -55,7 +55,8 @@ de cada componente, sin valores sensibles.
 API Core implementa salud, equipos simulados, errores JSON y seis pruebas de contrato.
 La [CI verificada](docs/ci.md) comprueba build y tests; `main` exige pull request y check exitoso.
 La [operación de API Core](api-core/README.md) está documentada y la spec 002 verificada.
-BFF, frontend, integración de base de datos y despliegue pendientes. La topología está aprobada.
+BFF cuenta con [base compilable verificada](bff/README.md); servidor, rutas y su CI siguen pendientes.
+Frontend, integración de base de datos y despliegue pendientes. La topología está aprobada.
 Los estados de cada entregable se registran en el [índice de specs](specs/README.md).
 
 Continuar desde el [roadmap técnico](docs/roadmap.md). Consultar el
