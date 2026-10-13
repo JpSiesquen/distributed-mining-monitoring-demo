@@ -128,10 +128,11 @@ de CI requieren su propia autorización.
 ## Revisión de la issue #59 — BFF
 
 Fecha: 2026-10-13. Revisión preliminar completada sin instalar ni ejecutar paquetes.
-Selección y comandos siguientes pendientes de aprobación para BFF; la aprobación previa
-en API Core no se extiende automáticamente a otra instalación.
+Selección y comandos aprobados explícitamente el 2026-10-13 para BFF, a ejecutar en la
+issue #60. La issue #59 no instala paquetes; la aprobación previa de API Core no se utilizó
+como autorización de esta instalación.
 
-| Paquete propuesto | Versión | Finalidad | Tipo |
+| Paquete aprobado | Versión | Finalidad | Tipo |
 |-------------------|---------|-----------|------|
 | express | 4.22.3 | Servidor y rutas del BFF | Producción |
 | typescript | 5.9.3 | Tipos y compilación | Desarrollo |
@@ -157,7 +158,7 @@ En 004/T02 contrastar versiones, origen, integridades, avisos y scripts del lock
 revisar cualquier diferencia antes de ejecutar build o pruebas. No forzar transitivas mediante
 overrides sin una decisión revisada.
 
-Comandos propuestos, exclusivamente en bff/ al preparar el proyecto en la issue #60,
+Comandos aprobados, exclusivamente en bff/ al preparar el proyecto en la issue #60,
 después de crear package.json y .npmrc con ignore-scripts=true:
 
 ```powershell

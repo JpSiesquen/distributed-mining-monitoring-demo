@@ -15,8 +15,10 @@ Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); GET /health, GET /api/equipment con datos simulados y errores 404/500 en JSON integrados
 (002/T06–T08); pruebas de contratos con `npm test` (002/T09), ejecutadas en CI (003/T04).
 
-**Siguiente entrega ejecutable:** revisar y autorizar las dependencias del BFF
-([#59](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/59)) antes de instalar.
+**Siguiente entrega ejecutable:** preparar el proyecto compilable del BFF
+([#60](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/60)) después de integrar
+la revisión #59. Selección y comandos aprobados; instalación pendiente. Contrastar el lockfile
+definitivo antes de ejecutar código, según [seguridad de dependencias](seguridad-dependencias.md).
 La planificación 005 está aprobada e integrada en PR #69; sus diez
 [issues #70–#79](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/milestone/5)
 están publicadas desde las [tareas 005](../specs/005-frontend-minimo/tasks.md), sin implementación.

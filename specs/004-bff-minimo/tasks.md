@@ -24,11 +24,14 @@ T01–T09 corresponden, en orden, a las issues
 
 ## Tareas
 
-- [ ] **T01 — Revisar y autorizar dependencias.** Evaluar las versiones candidatas del plan,
+- [x] **T01 — Revisar y autorizar dependencias.** Evaluar las versiones candidatas del plan,
   origen, avisos, scripts directos/transitivos y comandos exactos. Registrar selección y
   aprobación en seguridad de dependencias antes de instalar.
   **Comprobar:** selección justificada sin paquetes adicionales de comodidad; instalación
   con ignore-scripts y sin credenciales sensibles. Prerrequisito de T02; R8.
+  **Evidencia:** revisión del 2026-10-13 en seguridad de dependencias; 82 versiones del grafo
+  existente contrastadas con registro y avisos actuales. Selección y comandos aprobados
+  explícitamente para #60; sin instalación en #59. Grafo definitivo BFF pendiente de T02.
 
 - [ ] **T02 — Preparar proyecto compilable.** Crear bff/package.json, .npmrc, lockfile v3,
   tsconfig estricto ES Modules y módulo mínimo. Instalar solo lo autorizado en T01 y
