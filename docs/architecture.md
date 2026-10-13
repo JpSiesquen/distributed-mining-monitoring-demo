@@ -2,7 +2,7 @@
 
 Diseño objetivo del sistema distribuido de monitoreo de maquinaria minera.
 Describe las responsabilidades previstas. API Core con datos mock está implementado y BFF tiene
-arranque compilado y salud propia; consulta de equipos, frontend, SQL y despliegue están pendientes.
+arranque compilado, salud y equipos vía API Core; frontend, SQL y despliegue están pendientes.
 
 ## Flujo de comunicación
 
@@ -23,8 +23,8 @@ las requiere.
 
 ### BFF (Backend for Frontend)
 
-Servidor con arranque compilado y /health en Node.js, Express 4.22.3 y TypeScript;
-consulta de equipos pendiente. Adapta o agrega respuestas del
+Servidor con arranque compilado, /health y consulta de equipos mediante API Core,
+en Node.js, Express 4.22.3 y TypeScript. Adapta o agrega respuestas del
 API Core cuando lo requiere la interfaz; las transformaciones deben responder a una
 necesidad concreta.
 
