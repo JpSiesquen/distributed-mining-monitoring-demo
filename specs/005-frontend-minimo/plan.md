@@ -20,7 +20,8 @@ No añadir indicadores de estado operativo ni navegación hacia vistas inexisten
 
 Propuesta de detalles: fondo carbón, superficies ligeramente más claras, borde discreto,
 texto claro y ámbar en acentos/foco. Tipografías del sistema, sin descargas externas.
-Definir colores y espaciados compartidos en CSS; comprobar contraste al implementarlos.
+Definir colores, tipografía y espaciados compartidos en un tema de Material UI,
+aplicado con ThemeProvider; comprobar contraste al implementarlos.
 Una columna en móvil y columnas adaptativas en escritorio. Nombres largos deben ajustar
 líneas; priorizar el contenido a 360 px. Revisar capturas a 360 px y 1280 px antes del cierre.
 
@@ -28,6 +29,8 @@ Carga: tarjetas de espera con mensaje accesible. Fuente vacía: mensaje propio.
 Sin coincidencias: explicar el filtro y ofrecer limpiar búsqueda. Error: mensaje genérico
 y botón Reintentar; sin datos falsos ni contador que presente el fallo como cero equipos.
 Controles HTML semánticos, foco visible y avisos de estado accesibles sin anuncios por pulsación.
+Usar Card, TextField, Button, Typography, Alert y Skeleton según su función en esta vista;
+composición responsive con Box. Mantener etiquetas y semántica accesibles al personalizarlos.
 
 ### Archivos propuestos en frontend/
 
@@ -38,7 +41,7 @@ Controles HTML semánticos, foco visible y avisos de estado accesibles sin anunc
 | src/main.tsx y src/App.tsx | Inicialización y composición del dashboard. |
 | src/equipment.ts | Contrato id/name, consulta HTTP, validación y filtrado. |
 | src/EquipmentCard.tsx | Presentación de un equipo. |
-| src/styles.css | Identidad, distribución responsive, foco y estados. |
+| src/theme.ts | Tema Material UI industrial oscuro/ámbar, tipografía, espaciados y foco. |
 | test/ | Pruebas de comportamiento y contratos. |
 | README.md | Configuración, comandos y verificación local. |
 
@@ -101,14 +104,17 @@ Revisar compatibilidad, comandos, uso disponible de Actions y autorización ante
 ## Decisiones
 
 - Aceptadas: contrato id/name, dashboard y estética industrial oscura con ámbar.
-- Propuestas: CSS propio para esta vista; alternativa Material UI cuando haya necesidad
-  concreta de componentes más complejos. No incorporar Motion, Zustand, Zod o 3D por anticipado.
+- Aprobada el 2026-10-13: Material UI desde esta fase para tarjetas, controles y estados,
+  con tema industrial oscuro/ámbar. Sustituye la propuesta inicial de componentes con CSS propio.
+  Su motor de estilos predeterminado requiere revisar @emotion/react y @emotion/styled junto
+  con @mui/material. No incorporar fuentes, paquetes de iconos, Motion, Zustand, Zod o 3D por anticipado.
 - Aprobada el 2026-10-13: selección de TanStack Query para estado remoto y recuperación,
   búsqueda local y reintento por botón; sin reintentos automáticos ni consultas por foco/reconexión.
   Alternativa: fetch con estado manual añade gestión propia de ciclo de vida.
   La versión exacta y los comandos de instalación siguen pendientes de revisión y autorización.
 - React/React DOM de producción; Vite, plugin React, TypeScript y tipos de desarrollo;
-  TanStack Query de producción y herramientas de pruebas indicadas de desarrollo.
+  TanStack Query, Material UI y su motor de estilos de producción;
+  herramientas de pruebas indicadas de desarrollo.
   Versiones exactas, compatibilidad con Vite 6/Node 24 y comandos pendientes de revisión de seguridad.
 - Revisar scripts de instalación y binarios transitivos antes de ejecutar. Si ignore-scripts
   impide funcionar a un paquete, validar la causa y un comando específico; no desactivar la política.
@@ -120,7 +126,7 @@ Revisar compatibilidad, comandos, uso disponible de Actions y autorización ante
 - P1: dirección acordada; composición detallada propuesta arriba y revisión visual prevista.
 - P2: resuelta; proxy de mismo origen en dev/preview y configuración local aprobados el
   2026-10-13. Nginx se concreta en fase 6.
-- P3: TanStack Query seleccionado y aprobado; herramientas de pruebas y ampliación de CI
+- P3: TanStack Query y Material UI seleccionados y aprobados; herramientas de pruebas y ampliación de CI
   pendientes. Versiones exactas y comandos por revisar.
 
 ## Trazabilidad
@@ -131,7 +137,7 @@ Revisar compatibilidad, comandos, uso disponible de Actions y autorización ante
 | R2 | Tarjetas id/name e identidad consistente; revisión visual. CA1/CA4. |
 | R3 | Filtro derivado y contador, sin llamadas por pulsación. CA2. |
 | R4 | Estados distintos, validación HTTP/JSON y reintento explícito. CA3. |
-| R5 | CSS responsive, HTML semántico y comprobación de teclado. CA4/CA5. |
+| R5 | Tema y composición responsive de Material UI, HTML semántico y teclado. CA4/CA5. |
 | R6 | Destino externo del proxy sin valores privados en bundle. CA6. |
 | R7 | Tipos/build, pruebas de DOM e integración compilada real. CA7. |
 | R8 | Job frontend y tres checks obligatorios tras validación. CA8. |
@@ -145,7 +151,9 @@ Revisar compatibilidad, comandos, uso disponible de Actions y autorización ante
 - Bundle estático no incluye el proxy: documentar diferencia entre preview local y despliegue con Nginx.
 - Presentación engañosa: no inventar métricas ni confundir fuente vacía, filtro vacío y fallo HTTP.
 
-Referencias técnicas: [proxy de Vite 6](https://v6.vite.dev/config/server-options#server-proxy),
+Referencias técnicas: [tema Material UI](https://mui.com/material-ui/customization/theming/),
+[dependencias de Material UI](https://mui.com/material-ui/getting-started/installation/),
+[proxy de Vite 6](https://v6.vite.dev/config/server-options#server-proxy),
 [preview](https://v6.vite.dev/config/preview-options),
 [variables de entorno](https://v6.vite.dev/guide/env-and-mode),
 [configuración de Query](https://tanstack.com/query/v5/docs/framework/react/guides/important-defaults),
