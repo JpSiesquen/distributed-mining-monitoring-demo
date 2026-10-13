@@ -1,6 +1,6 @@
 # Spec 003 — CI mínima de compilación y pruebas
 
-- **Estado:** Aprobada; ampliación R5/CA6 aprobada el 2026-10-09
+- **Estado:** Implementada; CA1–CA8 verificados el 2026-10-12.
 - **Fecha:** 2026-10-03
 - **Ampliación #42:** R6/CA7–CA8 aprobados el 2026-10-12.
 
@@ -40,15 +40,15 @@ primero compilación y, cuando las pruebas estén disponibles, compilación y pr
 
 ## Criterios de aceptación
 
-- [ ] **CA1:** un cambio válido de API Core obtiene un check exitoso de build; al completar las
+- [x] **CA1:** un cambio válido de API Core obtiene un check exitoso de build; al completar las
   pruebas de 002, también pasan en ese mismo workflow.
-- [ ] **CA2:** un error TypeScript controlado hace fallar el check de compilación.
+- [x] **CA2:** un error TypeScript controlado hace fallar el check de compilación.
 - [x] **CA3:** una prueba de contrato fallida hace fallar el job una vez añadidas las pruebas.
-- [ ] **CA4:** pushes y pull requests ejecutan las comprobaciones acordadas; logs permiten
+- [x] **CA4:** pushes y pull requests ejecutan las comprobaciones acordadas; logs permiten
   identificar el paso que falló, sin secretos ni conexiones de despliegue.
-- [ ] **CA5:** la configuración solo comprueba componentes existentes; acciones y comandos
+- [x] **CA5:** la configuración solo comprueba componentes existentes; acciones y comandos
   de instalación tienen aprobación antes de habilitarse y no ejecutan scripts de dependencias automáticamente.
-- [ ] **CA6:** un pull request con el check fallido no puede integrarse, un push directo a main
+- [x] **CA6:** un pull request con el check fallido no puede integrarse, un push directo a main
   es rechazado y un pull request con el check exitoso se integra normalmente.
 - [x] **CA7:** el job declara un límite de tiempo aprobado y el código válido
   mantiene el check exitoso, con los controles de configuración anteriores a npm ci.
@@ -56,6 +56,7 @@ primero compilación y, cuando las pruebas estén disponibles, compilación y pr
   hace fallar el job antes de la instalación; restaurarlo recupera el check exitoso.
 
 Evidencia de CA7–CA8: [T09](tasks.md), PR #52 y validación temporal #53 (cerrada sin integrar).
+Matriz completa de CA1–CA8: [CI de API Core](../../docs/ci.md#evidencia-de-aceptación).
 Evidencia de CA3 y propagación de fallo de instalación: [T05](tasks.md), PR temporal #54,
 con dos fallos independientes y recuperación verificados; cerrado sin integrar.
 
