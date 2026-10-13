@@ -2,7 +2,7 @@
 
 Servidor compilado de la [spec 004](../specs/004-bff-minimo/spec.md), con configuración externa
 y logs de arranque. /health verifica la disponibilidad propia; /api/equipment consulta
-únicamente API Core. Suite automatizada HTTP y ejecución de sus pruebas en CI pendientes.
+únicamente API Core. Suite automatizada HTTP verificada; incorporación de sus pruebas a CI pendiente.
 
 ## Configuración y comandos
 
@@ -84,5 +84,22 @@ El timeout configurado cancela la consulta; no hay caché ni reintentos del BFF.
 Verificado con API Core compilado real en dev/build-start; fuentes HTTP controladas verifican
 errores y demoras. Cambiar puerto/origen y reiniciar modifica la consulta sin editar código.
 
+## Pruebas
+
+Después de compilar:
+
+```powershell
+npm test
+```
+
+Once pruebas node:test sobre la app compilada y fuentes HTTP controladas: salud independiente,
+contrato id/name, arreglo vacío, 404, fuente inaccesible, estados no-200, JSON inválido,
+contratos inválidos, redirección rechazada y timeout de cabeceras/cuerpo. Verifican respuestas
+y logs seguros, sin SQL ni credenciales. Puertos del sistema; servidores/conexiones cerrados
+en finally incluso ante aserción fallida. La suite termina sin recursos pendientes.
+
+El archivo se indica explícitamente para que su ausencia falle. Expectativa incorrecta
+verificada en copia temporal: salida 1; suite de trabajo sin cambios y copia retirada.
+
 El job bff de [CI](../docs/ci.md#ampliación-bff--issue-61) comprueba política npm,
-instalación y build; integrado en PR #83. La suite HTTP se incorporará en #65 y a CI en #66.
+instalación y build; integrado en PR #83. Añadir npm test corresponde a #66.
