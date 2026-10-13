@@ -4,6 +4,7 @@
 - **Plan:** [003](plan.md)
 - **Estado:** En ejecución; T01–T04 y T08 completadas. Siguiente: T05 (issue #14), después de #42
 - **Fecha:** 2026-10-03
+- **Ampliación #42:** T09 aprobada el 2026-10-12; verificación en curso.
 
 Spec, plan y tareas aprobados el 2026-10-03. Esta lista no habilita Actions ni ejecuta instalaciones.
 Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
@@ -85,3 +86,10 @@ Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
   rechazado por la política de la rama; cerrado sin integrar. Push directo de un commit vacío
   a main rechazado con GH013 (pull request y check `api-core` requeridos); main sin cambios.
   La integración de este cambio con el check exitoso completa la verificación.
+
+- [ ] **T09 — Limitar el job y comprobar la política npm.** Issue #42; depende de T04.
+  Tras aprobar R6/CA7–CA8 y el plan, añadir timeout-minutes con el valor acordado y un paso
+  previo a npm ci que compruebe .npmrc y la configuración efectiva ignore-scripts=true.
+  Mantener nombre api-core, permisos, SHA y comando de instalación.
+  **Comprobar:** PR válido en verde; retirar la línea en un PR de validación provoca fallo
+  antes de instalar; restaurar recupera el check. Cerrar el PR de validación sin integrar.
