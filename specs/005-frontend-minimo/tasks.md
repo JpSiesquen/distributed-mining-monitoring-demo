@@ -2,7 +2,7 @@
 
 - **Spec:** [005](spec.md)
 - **Plan:** [005](plan.md), aprobado el 2026-10-13
-- **Estado:** En revisión; pendientes de ejecución
+- **Estado:** Aprobadas el 2026-10-13; pendientes de ejecución
 
 La integración real requiere BFF de la spec 004 implementado y verificado. Las pruebas con
 fixtures no cumplen ese prerrequisito. Instalar cada dependencia al abordar su funcionalidad,

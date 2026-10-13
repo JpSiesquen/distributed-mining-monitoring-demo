@@ -15,8 +15,8 @@ Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); GET /health, GET /api/equipment con datos simulados y errores 404/500 en JSON integrados
 (002/T06–T08); pruebas de contratos con `npm test` (002/T09), ejecutadas en CI (003/T04).
 
-**Siguiente:** revisar las [tareas 005 del dashboard de equipos](../specs/005-frontend-minimo/tasks.md).
-Spec y plan aprobados, tareas en revisión; sin implementación del frontend. La fase 3 tiene
+**Siguiente:** preparar las issues de fase 4 desde las [tareas 005 del dashboard de equipos](../specs/005-frontend-minimo/tasks.md)
+para revisión antes de publicarlas. Spec, plan y tareas aprobados; sin implementación del frontend. La fase 3 tiene
 [issues #59–#67](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/milestone/4)
 publicadas desde las [tareas 004](../specs/004-bff-minimo/tasks.md).
 Spec, plan y tareas del BFF aprobados; sin implementación iniciada. Planificar frontend no
@@ -46,7 +46,7 @@ con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 | 1 | API Core compilable con CI obligatoria | Completada; milestone cerrado. |
 | 2 | Rutas, errores y pruebas de API Core | Completada y documentada: CA1–CA8 de 002 y 003; milestone cerrado. |
 | 3 | BFF consumiendo API Core | Spec, plan y tareas 004 aprobados; nueve issues publicadas. Sin implementación. |
-| 4 | Dashboard consumiendo únicamente BFF | Spec y plan 005 aprobados, tareas en revisión. Industrial oscuro/ámbar, tarjetas, búsqueda, contador y estados visuales. Conserva [contrato 004/P1](../specs/004-bff-minimo/spec.md#preguntas-abiertas); integración requiere BFF implementado. |
+| 4 | Dashboard consumiendo únicamente BFF | Spec, plan y tareas 005 aprobados; implementación pendiente. Industrial oscuro/ámbar, tarjetas, búsqueda, contador y estados visuales. Conserva [contrato 004/P1](../specs/004-bff-minimo/spec.md#preguntas-abiertas); integración requiere BFF implementado. |
 | 5 | Integración SQL Server y persistencia | Por especificar; mantener contrato entre capas. |
 | 6 | Empaquetado con Docker y entrada Nginx | Concretar ejecución y verificar flujo completo local antes de desplegar. |
 | 7 | Despliegue y validación DEV/QA | Milestone de topología renumerado; ejecutar 001 y verificar sus prerrequisitos. Validar costos antes de aprovisionar. |
