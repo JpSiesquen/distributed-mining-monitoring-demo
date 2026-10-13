@@ -2,9 +2,9 @@
 
 - **Spec:** [003](spec.md)
 - **Plan:** [003](plan.md)
-- **Estado:** En ejecución; T01–T04 y T08 completadas, T09 verificada en PR #52. Siguiente: integrar #42 y ejecutar T05 (issue #14).
+- **Estado:** En ejecución; T01–T04, T08–T09 integradas. T05 verificada; integración pendiente. Siguiente: T06 (issue #15).
 - **Fecha:** 2026-10-03
-- **Ampliación #42:** T09 aprobada y verificada el 2026-10-12; integración pendiente.
+- **Ampliación #42:** T09 integrada en PR #52 el 2026-10-12.
 
 Spec, plan y tareas aprobados el 2026-10-03. Esta lista no habilita Actions ni ejecuta instalaciones.
 Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
@@ -60,11 +60,17 @@ Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
   sobre dist/, 6 pasan y 0 fallan. `npm test` apunta al archivo exacto: con un patrón sin
   coincidencias Node.js termina con salida 0 y 0 pruebas; con un archivo ausente, salida 1.
 
-- [ ] **T05 — Verificar fallos de pruebas e instalación.** En una rama de validación, alterar
+- [x] **T05 — Verificar fallos de pruebas e instalación.** En una rama de validación, alterar
   temporalmente una expectativa de contrato y comprobar el job fallido. Comprobar además
   que un fallo controlado de npm ci --ignore-scripts termina el job antes de build/pruebas; restaurar los cambios.
   **Comprobar:** los logs distinguen ambos fallos; no se usan continue-on-error ni códigos
   de salida ignorados; el código válido vuelve a pasar sin datos de prueba modificados. R3; CA3/CA4.
+  **Evidencia (2026-10-12):** PR temporal #54. [Expectativa incorrecta](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38330299235):
+  instalación/build correctos y Test fallido, ERR_ASSERTION y salida 1.
+  [Lockfile ausente](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38330372809):
+  Install dependencies fallido, EUSAGE y salida 1; Build y Test omitidos.
+  [Restauración completa](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38330429291)
+  en verde; árbol de la rama idéntico a main. PR #54 cerrado sin integrar.
 
 - [ ] **T06 — Documentar uso y diagnóstico.** Documentar disparadores, pasos, versiones,
   acceso a logs y diferencia entre build inicial y build con pruebas. Enlazar la evidencia.
