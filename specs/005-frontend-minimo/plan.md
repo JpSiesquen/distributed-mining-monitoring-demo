@@ -77,8 +77,10 @@ y reintento explícito de la consulta;
 useState conserva solo el texto de búsqueda. Fetch nativo comprueba estado HTTP y contrato
 antes de aceptar los datos. Derivar lista visible y contador del arreglo recibido, sin estados duplicados.
 Desactivar reintentos automáticos y consultas por foco/reconexión; el usuario reintenta mediante
-el botón. Usar la señal de cancelación de la consulta; proponer límite de diez segundos para
-que un fallo del proxy también termine, con margen sobre los cinco segundos del BFF.
+el botón. Combinar la señal de cancelación de la consulta con el límite de diez segundos,
+aprobado el 2026-10-13, que cubre la respuesta completa, incluida la lectura del cuerpo.
+Da margen sobre los cinco segundos del BFF; al agotarse, cancelar, mostrar error seguro
+y permitir reintento manual, incluso si el proxy o BFF queda bloqueado.
 
 Comparación parcial con normalización a minúsculas en ID/nombre, conservando el orden recibido.
 No añadir debouncing ni peticiones por pulsación: la búsqueda opera sobre datos locales.
@@ -105,6 +107,8 @@ Revisar compatibilidad, comandos, uso disponible de Actions y autorización ante
 ## Decisiones
 
 - Aceptadas: contrato id/name, dashboard y estética industrial oscura con ámbar.
+- Aprobado el 2026-10-13: límite inicial de diez segundos para la consulta completa al BFF,
+  con cancelación, mensaje de error y reintento manual.
 - Aprobada el 2026-10-13: Material UI desde esta fase para tarjetas, controles y estados,
   con tema industrial oscuro/ámbar. Sustituye la propuesta inicial de componentes con CSS propio.
   Su motor de estilos predeterminado requiere revisar @emotion/react y @emotion/styled junto
