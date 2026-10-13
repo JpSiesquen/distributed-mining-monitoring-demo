@@ -2,7 +2,7 @@
 
 - **Spec:** [004](spec.md)
 - **Plan:** [004](plan.md), aprobado el 2026-10-13
-- **Estado:** Aprobadas el 2026-10-13; T01–T07 verificadas, T08–T09 pendientes
+- **Estado:** Aprobadas el 2026-10-13; T01–T08 verificadas, T09 pendiente
 
 Prerrequisito: API Core y CI de las specs 002/003 implementados y verificados.
 El orden introduce CI tras la compilación y pruebas al existir las rutas. Las casillas
@@ -98,12 +98,16 @@ T01–T09 corresponden, en orden, a las issues
   y health independiente. Copia con expectativa 201 incorrecta: ERR_ASSERTION, salida 1,
   proceso termina naturalmente; suite de trabajo intacta y temporales retirados. CA7 cumplida.
 
-- [ ] **T08 — Incorporar y validar pruebas en CI.** Añadir npm test al job bff y contrastar
+- [x] **T08 — Incorporar y validar pruebas en CI.** Añadir npm test al job bff y contrastar
   el ruleset con los dos checks. Usar cambios temporales para verificar fallos sin integrarlos.
   **Comprobar:** instalación/build/pruebas correctos dan ambos checks verdes; prueba BFF
   incorrecta bloquea integración con api-core verde. Falta de protección npm falla antes
   de instalar; fallo de instalación impide build/test. Restaurar y enlazar ejecuciones.
   Depende de T03/T07; R8/CA8.
+  **Evidencia:** PR #89, suite correcta 38481714555. Casos separados en PR #90: aserción
+  38481897948, instalación 38482001925 y política 38482086736; api-core correcto y merge
+  bloqueado en los tres. Recuperación 38482196835 correcta; árbol restaurado idéntico al
+  cambio real, #90 cerrado sin integrar. Pasos omitidos y checks contrastados en docs/ci.md.
 
 - [ ] **T09 — Documentar operación y verificar cierre.** Redactar bff/README.md y actualizar
   docs/ci.md, roadmap y estados pertinentes con comandos, configuración, rutas, diagnóstico

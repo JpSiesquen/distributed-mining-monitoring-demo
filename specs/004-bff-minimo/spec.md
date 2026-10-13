@@ -1,6 +1,6 @@
 # Spec 004 — BFF mínimo para consulta de equipos
 
-- **Estado:** Aprobada el 2026-10-13; rutas y pruebas verificadas, CI de pruebas y cierre pendientes
+- **Estado:** Aprobada el 2026-10-13; CA1–CA8 verificados, integración de CI y cierre documental pendientes
 - **Fecha:** 2026-10-13
 
 ## Contexto
@@ -63,7 +63,7 @@ comandos y cambios de CI se revisarán en el plan antes de cualquier instalació
   arrancar con una compilación anterior.
 - [x] **CA7:** pruebas terminan con salida no cero ante una expectativa incorrecta y limpian
   procesos/recursos temporales. Funcionan sin SQL, frontend ni credenciales de despliegue.
-- [ ] **CA8:** CI conserva el check de API Core, ejecuta build/pruebas de BFF y bloquea
+- [x] **CA8:** CI conserva el check de API Core, ejecuta build/pruebas de BFF y bloquea
   integración ante fallo. Las Actions, comandos y protección aplicables se validan antes de habilitarlos.
 
 ## Preguntas abiertas

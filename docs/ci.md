@@ -45,8 +45,8 @@ despliegue, disponibilidad de los servidores ni ausencia de malware.
 
 Job bff verificado e integrado el 2026-10-13 en PR #83. Ejecuta en bff/:
 política npm → npm ci --ignore-scripts → npm run build. Reutiliza runner, runtime, Actions
-fijadas y permisos de API Core, con cinco minutos y caché desactivada. La suite HTTP local
-ya existe; npm test se incorporará al job en #66. Build no acredita las rutas por sí solo.
+fijadas y permisos de API Core, con cinco minutos y caché desactivada. El paso npm test
+ejecuta once pruebas HTTP tras build, validado en PR #89; integración de ese cambio pendiente.
 
 Los SHA oficiales y runtime node24 de ambas Actions se revalidaron el 2026-10-13.
 El repositorio es público; la ejecución usa runners estándar hospedados, gratuitos
@@ -60,9 +60,23 @@ de la app GitHub Actions (15368), sin retirar controles previos. Incorporado tra
 | Error de tipos BFF | TS2322/salida 1; api-core correcto; PR #84 BLOCKED con ambos checks exigidos: [ejecución 38477153451](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38477153451). |
 | Recuperación | Error retirado, árbol temporal idéntico al cambio real; ambos jobs correctos: [ejecución 38477303301](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38477303301). PR #84 cerrado sin integrar. |
 
-Estos casos acreditan compilación y bloqueo por tipos, no pruebas HTTP BFF. Suite de once
-pruebas verificada en 004/T07; ejecución y bloqueo por aserción en CI pendientes de T08.
-El futuro check frontend no se exige todavía.
+Los casos de #61 acreditan compilación y bloqueo por tipos. La suite HTTP y sus fallos en CI
+se verifican a continuación. El futuro check frontend no se exige todavía.
+
+## Pruebas BFF y detención de pasos — issue #66
+
+Ejecución npm test autorizada el 2026-10-13; no se añadieron dependencias ni permisos.
+
+| Caso | Evidencia / resultado |
+|------|----------------------|
+| Suite correcta | [38481714555](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38481714555): 11/11 BFF, ambos checks correctos. |
+| Expectativa incorrecta | [38481897948](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38481897948): instalación/build correctos, Test ERR_ASSERTION/salida 1; api-core correcto, PR #90 BLOCKED. |
+| Lockfile ausente | [38482001925](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38482001925): instalación EUSAGE/salida 1; Build/Test omitidos, PR #90 BLOCKED. |
+| .npmrc ausente | [38482086736](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38482086736): política falla antes de instalar; instalación/Build/Test omitidos, PR #90 BLOCKED. |
+| Restauración | [38482196835](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38482196835): ambos jobs correctos; árbol temporal idéntico al cambio real. PR #90 cerrado sin integrar. |
+
+Los fallos se provocaron por separado y se retiraron. El ruleset sigue exigiendo api-core/bff
+de GitHub Actions. Ningún caso negativo se integró; no usar continue-on-error para ocultar fallos.
 
 ## Consultar resultados y diagnosticar
 

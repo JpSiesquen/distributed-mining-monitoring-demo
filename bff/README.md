@@ -102,4 +102,5 @@ El archivo se indica explícitamente para que su ausencia falle. Expectativa inc
 verificada en copia temporal: salida 1; suite de trabajo sin cambios y copia retirada.
 
 El job bff de [CI](../docs/ci.md#ampliación-bff--issue-61) comprueba política npm,
-instalación y build; integrado en PR #83. Añadir npm test corresponde a #66.
+instalación, build y once pruebas. Build integrado en PR #83; ejecución de pruebas y bloqueo
+por aserción/fallos previos verificados en PR #89, pendiente de integración. Ver evidencia en docs/ci.md.
