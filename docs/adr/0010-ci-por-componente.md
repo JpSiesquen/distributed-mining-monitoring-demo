@@ -1,6 +1,6 @@
 # ADR 0010 — CI por componente
 
-- **Estado:** Aceptada; implementación pendiente
+- **Estado:** Aceptada; jobs y checks API Core/BFF implementados. Ampliación frontend pendiente.
 - **Fecha:** 2026-10-13
 
 ## Contexto

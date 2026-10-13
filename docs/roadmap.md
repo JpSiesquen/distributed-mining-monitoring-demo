@@ -15,13 +15,15 @@ Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); GET /health, GET /api/equipment con datos simulados y errores 404/500 en JSON integrados
 (002/T06–T08); pruebas de contratos con `npm test` (002/T09), ejecutadas en CI (003/T04).
 
-**Siguiente entrega ejecutable:** documentar operación y cerrar la spec BFF
-([#67](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/67)) después de integrar PR #89.
+**Paso actual:** integrar el cierre documental del BFF
+([#67](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/67)).
+**Siguiente entrega ejecutable:** revisar y autorizar dependencias del frontend
+([#70](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/70)), después de ese cierre.
 Revisión #59 integrada; base compilable, instalación autorizada y lockfile definitivo de 82 paquetes
 verificados en #60. Arranque, entorno y comandos start/dev verificados en #62;
 GET /health integrado en #63. Consulta de equipos vía API Core, 404/502/504 y logs seguros
 integrados en #64. Suite de once pruebas HTTP integrada en #65; ejecución y fallos en CI
-verificados en #66, PR #89 pendiente de integración.
+verificados en #66 e integrados en PR #89.
 [estado](../bff/README.md).
 La planificación 005 está aprobada e integrada en PR #69; sus diez
 [issues #70–#79](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/milestone/5)
@@ -29,9 +31,9 @@ están publicadas desde las [tareas 005](../specs/005-frontend-minimo/tasks.md),
 La fase 3 tiene
 [issues #59–#67](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/milestone/4)
 publicadas desde las [tareas 004](../specs/004-bff-minimo/tasks.md).
-Spec, plan y tareas del BFF aprobados; T01–T08 y CA1–CA8 verificados. Ruleset exige api-core/bff;
-casos negativos restaurados sin integrar. Cierre documental pendiente. Planificar frontend no
-completa el BFF ni elimina esa dependencia. La [estructura de specs](../specs/README.md)
+Spec BFF implementada; T01–T09 y CA1–CA8 verificados, con [matriz operativa](../bff/README.md#evidencia-de-aceptación).
+Ruleset exige api-core/bff; casos negativos restaurados sin integrar. Cierre documental #67
+pendiente de integración. 001/T02 sigue pendiente hasta verificar frontend. La [estructura de specs](../specs/README.md)
 incluye las reservas documentales de las fases restantes, ordenadas por ejecución.
 API Core mock implementado y CA1–CA8 verificados: [operación](../api-core/README.md).
 CI implementada (spec 003); CA1–CA8 contrastados y enlazados en [CI de API Core](ci.md).
@@ -56,7 +58,7 @@ con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 |-------|------------|----------------------|
 | 1 | API Core compilable con CI obligatoria | Completada; milestone cerrado. |
 | 2 | Rutas, errores y pruebas de API Core | Completada y documentada: CA1–CA8 de 002 y 003; milestone cerrado. |
-| 3 | BFF consumiendo API Core | Rutas/suite integradas; CI de pruebas verificada (004/T08, CA1–CA8), PR #89 pendiente de integración. Cierre documental pendiente. |
+| 3 | BFF consumiendo API Core | Implementado y verificado: 004/T01–T09, CA1–CA8. CI integrada; cierre documental #67 pendiente de integración. |
 | 4 | Dashboard consumiendo únicamente BFF | Spec, plan y tareas 005 aprobados; diez issues publicadas, implementación pendiente. Industrial oscuro/ámbar, tarjetas, búsqueda, contador y estados visuales. Conserva [contrato 004/P1](../specs/004-bff-minimo/spec.md#preguntas-abiertas); integración requiere BFF implementado. |
 | 5 | Integración SQL Server y persistencia | Por especificar; mantener contrato entre capas. |
 | 6 | Empaquetado con Docker y entrada Nginx | Concretar ejecución y verificar flujo completo local antes de desplegar. |

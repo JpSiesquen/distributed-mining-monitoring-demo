@@ -57,8 +57,8 @@ La [CI verificada](docs/ci.md) comprueba compilación y pruebas de API Core y BF
 `main` exige pull request y checks api-core/bff exitosos.
 La [operación de API Core](api-core/README.md) está documentada y la spec 002 verificada.
 BFF cuenta con [arranque, salud y equipos vía API Core verificados](bff/README.md),
-con errores seguros y once pruebas HTTP verificadas en CI. Integración de CI de pruebas
-y cierre documental pendientes.
+con errores seguros y once pruebas HTTP verificadas e integradas en CI. La spec 004
+acredita CA1–CA8; su [matriz operativa](bff/README.md#evidencia-de-aceptación) recoge la evidencia.
 Frontend, integración de base de datos y despliegue pendientes. La topología está aprobada.
 Los estados de cada entregable se registran en el [índice de specs](specs/README.md).
 

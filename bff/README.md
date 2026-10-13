@@ -2,7 +2,7 @@
 
 Servidor compilado de la [spec 004](../specs/004-bff-minimo/spec.md), con configuración externa
 y logs de arranque. /health verifica la disponibilidad propia; /api/equipment consulta
-únicamente API Core. Suite automatizada HTTP verificada; incorporación de sus pruebas a CI pendiente.
+únicamente API Core. Once pruebas HTTP se ejecutan en CI; ambos checks son obligatorios.
 
 ## Configuración y comandos
 
@@ -23,7 +23,7 @@ npm run dev
 | BFF_HOST | 127.0.0.1 | IP válida. |
 | BFF_PORT | 3001 | Entero de 1 a 65535. |
 | API_CORE_URL | http://127.0.0.1:3002 | Origen HTTP/HTTPS sin credenciales, path, query ni fragmento. |
-| API_CORE_TIMEOUT_MS | 5000 | Entero de 1 a 2147483647; límite HTTP se aplicará al implementar la consulta. |
+| API_CORE_TIMEOUT_MS | 5000 | Entero de 1 a 2147483647; limita la respuesta completa, incluidas cabeceras y cuerpo. |
 
 Todas son obligatorias. Reiniciar aplica cambios; QA usará las direcciones privadas acordadas.
 Start carga .env de forma nativa; las variables del entorno prevalecen. No versionar .env ni secretos.
@@ -103,4 +103,37 @@ verificada en copia temporal: salida 1; suite de trabajo sin cambios y copia ret
 
 El job bff de [CI](../docs/ci.md#ampliación-bff--issue-61) comprueba política npm,
 instalación, build y once pruebas. Build integrado en PR #83; ejecución de pruebas y bloqueo
-por aserción/fallos previos verificados en PR #89, pendiente de integración. Ver evidencia en docs/ci.md.
+por aserción/fallos previos verificados e integrados en PR #89. Ver [evidencia](../docs/ci.md).
+
+## Operación y diagnóstico
+
+Iniciar API Core en otra terminal siguiendo su [guía](../api-core/README.md), después iniciar
+el BFF con los comandos anteriores. Detener cada proceso con Ctrl+C. Para aplicar cambios
+de configuración, detener y volver a iniciar; `start` requiere un build correcto previo.
+
+| Señal | Comprobación |
+|-------|--------------|
+| `[startup_error]` | Revisar las cuatro variables y que host/puerto estén disponibles; el proceso termina con salida 1. |
+| 502 / `network` | Comprobar que API Core esté iniciado y accesible desde el BFF en el origen configurado. |
+| 502 / `upstream_status`, `invalid_json` o `invalid_contract` | Revisar estado y contrato de `/api/equipment` en API Core. |
+| 504 / `timeout` | Revisar disponibilidad y tiempo de respuesta de API Core; el límite incluye la lectura del cuerpo. |
+| `/health` devuelve 200, pero equipos falla | El BFF está disponible; revisar la comunicación y respuesta de API Core. |
+
+## Evidencia de aceptación
+
+Verificación del 2026-10-13 sobre la implementación integrada. La comprobación del flujo
+usa API Core compilado real y datos simulados, en dev y build/start; no requiere SQL.
+
+| Criterio | Evidencia |
+|----------|-----------|
+| CA1 | Health 200 JSON sin API Core; prueba automatizada de independencia y comprobación en ambos modos de arranque. |
+| CA2 | Mismo arreglo id/name a través de API Core real por HTTP, en dev y build/start. BFF no importa archivos de datos ni driver SQL. |
+| CA3 | Suite HTTP: fuente inaccesible, estado/JSON/contrato inválidos → 502; demora de cabeceras/cuerpo → 504; health disponible. |
+| CA4 | Suite: 404 JSON y mensajes/logs por categoría sin respuesta interna, URL de origen ni stack. |
+| CA5 | Cambio de origen/puerto tras reinicio verificado; diecisiete configuraciones inválidas y puerto ocupado terminan con salida 1. |
+| CA6 | Flujo correcto en dev y build/start; TS2322 impide emitir y arrancar código anterior desde dev. |
+| CA7 | Once pruebas correctas; expectativa incorrecta produce salida 1 y cierre de servidores/conexiones. |
+| CA8 | [CI y casos negativos](../docs/ci.md#pruebas-bff-y-detención-de-pasos--issue-66), PR #89 integrado y checks api-core/bff obligatorios. |
+
+La spec 004 acredita el tramo BFF → API Core. La tarea 001/T02 sigue pendiente hasta
+verificar también el frontend en el flujo completo.

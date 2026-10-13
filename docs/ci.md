@@ -1,8 +1,8 @@
 # CI de API Core y BFF
 
-Verificación API Core: 2026-10-12; BFF de compilación: 2026-10-13.
+Verificación API Core: 2026-10-12; BFF de compilación y pruebas: 2026-10-13.
 Workflow: [api-core-ci.yml](../.github/workflows/api-core-ci.yml).
-Alcance: [spec 003](../specs/003-ci-minima/spec.md) y [004/T03](../specs/004-bff-minimo/tasks.md).
+Alcance: [spec 003](../specs/003-ci-minima/spec.md) y [004/T03, T08](../specs/004-bff-minimo/tasks.md).
 
 ## Ejecución
 
@@ -46,7 +46,7 @@ despliegue, disponibilidad de los servidores ni ausencia de malware.
 Job bff verificado e integrado el 2026-10-13 en PR #83. Ejecuta en bff/:
 política npm → npm ci --ignore-scripts → npm run build. Reutiliza runner, runtime, Actions
 fijadas y permisos de API Core, con cinco minutos y caché desactivada. El paso npm test
-ejecuta once pruebas HTTP tras build, validado en PR #89; integración de ese cambio pendiente.
+ejecuta once pruebas HTTP tras build, validado e integrado en PR #89.
 
 Los SHA oficiales y runtime node24 de ambas Actions se revalidaron el 2026-10-13.
 El repositorio es público; la ejecución usa runners estándar hospedados, gratuitos
