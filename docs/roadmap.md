@@ -1,6 +1,6 @@
 # Roadmap técnico
 
-Actualizado: 2026-10-12.
+Actualizado: 2026-10-13.
 
 ## Objetivo
 
@@ -33,18 +33,23 @@ antes de instalar o ejecutar Actions ([política](../AGENTS.md#política-de-depe
 Revisión preliminar registrada y alertas de Dependabot activadas; contrastar el grafo definitivo
 con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 
-## Ruta de entregables
+## Fases y entregables
 
-| Orden | Entregable | Estado / dependencia |
+| Fase | Entregable | Estado / dependencia |
 |-------|------------|----------------------|
-| 1 | API Core con equipos mock y CI de build/pruebas | Implementado, documentado y verificado: CA1–CA8 de 002 y 003. |
-| 2 | BFF consumiendo API Core | Por especificar; requiere API Core verificable. |
-| 3 | Frontend consumiendo únicamente BFF | Por especificar; completar flujo local con mocks. |
-| 4 | Integración SQL Server y persistencia | Por especificar; mantener contrato entre capas. |
-| 5 | Empaquetado con Docker y entrada Nginx | Concretar ejecución y verificar flujo completo local antes de desplegar. |
-| 6 | Despliegue y validación DEV/QA | Ejecutar 001: Linux, Azure, red, acceso, aislamiento y recuperación; validar costos antes de aprovisionar. |
-| 7 | Promoción de artefactos y CD | Por especificar después del despliegue verificable. |
-| 8 | Ampliaciones de seguridad, observabilidad y UI/3D | Concretar solo ante requisitos demostrados. |
+| 1 | API Core compilable con CI obligatoria | Completada; milestone cerrado. |
+| 2 | Rutas, errores y pruebas de API Core | Completada y documentada: CA1–CA8 de 002 y 003; milestone cerrado. |
+| 3 | BFF consumiendo API Core | Por especificar; requiere API Core verificable. |
+| 4 | Frontend consumiendo únicamente BFF | Por especificar; completar flujo local con mocks. |
+| 5 | Integración SQL Server y persistencia | Por especificar; mantener contrato entre capas. |
+| 6 | Empaquetado con Docker y entrada Nginx | Concretar ejecución y verificar flujo completo local antes de desplegar. |
+| 7 | Despliegue y validación DEV/QA | Milestone de topología renumerado; ejecutar 001 y verificar sus prerrequisitos. Validar costos antes de aprovisionar. |
+| 8 | Promoción de artefactos y CD | Por especificar después del despliegue verificable. |
+| 9 (condicional) | Ampliaciones de seguridad, observabilidad y UI/3D | Concretar solo ante requisitos demostrados. |
+
+La numeración identifica fases de entrega, no specs. El milestone de topología pasó de
+Fase 3 a Fase 7 y sus prefijos de issues de 3-N a 7-N; conserva IDs, enlaces y dependencias.
+Los milestones/issues de las fases futuras se concretarán al aprobar sus specs.
 
 Logs, pruebas, configuración y seguridad acompañan cada entrega. Ampliar CI cuando exista
 cada componente; no posponerla al despliegue. Resolver dependencias de ejecución antes de empaquetar.

@@ -2,6 +2,8 @@
 
 El proyecto sigue desarrollo guiado por especificaciones (Spec-Driven Development, SDD).
 Cada funcionalidad o entregable relevante se especifica antes de implementarse.
+Los números de spec y de fase son independientes; la secuencia de fases se mantiene en
+el [roadmap técnico](../docs/roadmap.md#fases-y-entregables).
 
 | Spec | Entregable | Estado |
 |------|------------|--------|
