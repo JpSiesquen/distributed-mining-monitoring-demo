@@ -198,3 +198,8 @@ TS2322 con api-core correcto en 38477153451 y PR #84 bloqueado. Recuperación co
 en 38477303301; PR temporal cerrado sin integrar. Ruleset verificado por lectura posterior:
 api-core y bff obligatorios (app GitHub Actions 15368), restantes controles conservados.
 Evidencia enlazada en [CI](ci.md#ampliación-bff--issue-61).
+
+Ejecución npm test en CI BFF autorizada el 2026-10-13 en #66. Suite correcta y fallos
+independientes de aserción, instalación y política verificados; pasos posteriores omitidos
+cuando correspondía. PR temporal #90 restaurado/cerrado sin integrar; recuperación correcta.
+No se añadieron dependencias, permisos ni secretos. [Evidencia](ci.md#pruebas-bff-y-detención-de-pasos--issue-66).
