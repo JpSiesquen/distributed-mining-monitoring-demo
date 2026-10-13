@@ -39,7 +39,7 @@ describe("API Core with mock data", () => {
 
     assert.equal(response.status, 200);
     assert.match(response.headers.get("content-type"), /application\/json/);
-    assert.deepEqual(await response.json(), { status: "broken-for-validation" });
+    assert.deepEqual(await response.json(), { status: "ok" });
   });
 
   test("GET /api/equipment returns the mock equipment", async () => {
