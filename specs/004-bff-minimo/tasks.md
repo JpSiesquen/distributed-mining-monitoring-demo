@@ -2,7 +2,7 @@
 
 - **Spec:** [004](spec.md)
 - **Plan:** [004](plan.md), aprobado el 2026-10-13
-- **Estado:** Aprobadas el 2026-10-13; T01–T05 verificadas, T06–T09 pendientes
+- **Estado:** Aprobadas el 2026-10-13; T01–T06 verificadas, T07–T09 pendientes
 
 Prerrequisito: API Core y CI de las specs 002/003 implementados y verificados.
 El orden introduce CI tras la compilación y pruebas al existir las rutas. Las casillas
@@ -74,13 +74,18 @@ T01–T09 corresponden, en orden, a las issues
   {"status":"ok"}, sin X-Powered-By. Destino configurado de API Core sin escucha,
   comprobado antes/después; health disponible sin fuente. Procesos/temporales limpiados.
 
-- [ ] **T06 — Consultar equipos y gestionar fallos.** Usar fetch nativo hacia API Core;
+- [x] **T06 — Consultar equipos y gestionar fallos.** Usar fetch nativo hacia API Core;
   validar respuesta 200 y arreglo id/name. Limitar headers y cuerpo con la espera configurada.
   Incorporar 404/502/504 JSON genéricos y logs por categoría; capturar fallos asíncronos.
   **Comprobar:** API Core real entrega el mismo arreglo a través del BFF; fuente inaccesible,
   respuesta no exitosa, JSON/contrato inválido producen 502; demora de headers o cuerpo,
   504. Health permanece disponible y no hay lectura del mock, SQL ni datos sensibles
   en respuestas/logs. Depende de T05; R1/R3/R4/R7; CA2/CA3/CA4.
+  **Evidencia:** dev/build-start consultan API Core compilado real por HTTP y conservan su
+  arreglo. Fuentes controladas: 502 ante inaccesibilidad, estado inválido, JSON/contrato inválido
+  y redirección (sin contactar destino); 504 ante demora de cabeceras/cuerpo. 404 JSON y health
+  disponibles; logs por categoría sin datos internos. Nuevo origen/puerto tras reinicio cambian
+  la consulta. Recursos limpiados. CA2–CA6 combinan esta evidencia con T04/T05; suite T07 pendiente.
 
 - [ ] **T07 — Automatizar contratos y fallos.** Añadir node:test sobre la app compilada,
   con servidor HTTP controlado y puertos asignados por el sistema. Cubrir los casos de

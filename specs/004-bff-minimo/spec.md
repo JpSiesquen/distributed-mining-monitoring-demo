@@ -1,6 +1,6 @@
 # Spec 004 — BFF mínimo para consulta de equipos
 
-- **Estado:** Aprobada el 2026-10-13; implementación parcial, arranque y salud propia verificados
+- **Estado:** Aprobada el 2026-10-13; rutas, configuración y errores verificados, pruebas/CI completas pendientes
 - **Fecha:** 2026-10-13
 
 ## Contexto
@@ -50,16 +50,16 @@ comandos y cambios de CI se revisarán en el plan antes de cualquier instalació
 ## Criterios de aceptación
 
 - [x] **CA1:** /health devuelve 200 y JSON status ok aunque API Core esté detenido.
-- [ ] **CA2:** con API Core disponible, /api/equipment devuelve su arreglo id/name a través
+- [x] **CA2:** con API Core disponible, /api/equipment devuelve su arreglo id/name a través
   de HTTP; el BFF no lee archivos ni usa credenciales SQL.
-- [ ] **CA3:** API Core detenido, respuesta no exitosa o JSON/contrato inválido producen
+- [x] **CA3:** API Core detenido, respuesta no exitosa o JSON/contrato inválido producen
   502 JSON genérico; demora superior al límite produce 504 JSON genérico.
   /health del BFF sigue disponible.
-- [ ] **CA4:** ruta desconocida devuelve 404 JSON; respuestas y logs de fallo no exponen
+- [x] **CA4:** ruta desconocida devuelve 404 JSON; respuestas y logs de fallo no exponen
   configuración sensible ni detalles de la respuesta interna.
-- [ ] **CA5:** cambiar el destino de API Core o el puerto por configuración y reiniciar
+- [x] **CA5:** cambiar el destino de API Core o el puerto por configuración y reiniciar
   modifica la comunicación sin editar código. Valores inválidos y puerto ocupado fallan claramente.
-- [ ] **CA6:** CA1/CA2 funcionan en dev y después de build/start; un error de tipos impide
+- [x] **CA6:** CA1/CA2 funcionan en dev y después de build/start; un error de tipos impide
   arrancar con una compilación anterior.
 - [ ] **CA7:** pruebas terminan con salida no cero ante una expectativa incorrecta y limpian
   procesos/recursos temporales. Funcionan sin SQL, frontend ni credenciales de despliegue.

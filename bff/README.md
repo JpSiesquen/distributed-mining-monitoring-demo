@@ -1,8 +1,8 @@
 # BFF
 
 Servidor compilado de la [spec 004](../specs/004-bff-minimo/spec.md), con configuración externa
-y logs de arranque. /health verifica la disponibilidad propia; /api/equipment y pruebas
-automatizadas HTTP pendientes. Todavía no consulta API Core.
+y logs de arranque. /health verifica la disponibilidad propia; /api/equipment consulta
+únicamente API Core. Suite automatizada HTTP y ejecución de sus pruebas en CI pendientes.
 
 ## Configuración y comandos
 
@@ -60,5 +60,29 @@ Con el BFF iniciado, consultar GET http://127.0.0.1:3001/health en Postman o:
 curl.exe -i http://127.0.0.1:3001/health
 ```
 
+## Consulta de equipos
+
+Con API Core disponible, GET /api/equipment devuelve su mismo arreglo id/name por HTTP,
+sin acceder al mock en disco ni a SQL. Se exige estado 200 y objetos con id/name de texto,
+sin campos adicionales; no se siguen redirecciones hacia otros destinos.
+
+```powershell
+curl.exe -i http://127.0.0.1:3001/api/equipment
+```
+
+| Caso | Respuesta / diagnóstico |
+|------|-------------------------|
+| API Core responde correctamente | 200, arreglo id/name. |
+| Fuente inaccesible, estado distinto de 200 o JSON/contrato inválido | 502 {"error":"Bad gateway"}. |
+| Espera agotada, incluidas cabeceras y cuerpo | 504 {"error":"Gateway timeout"}. |
+| Ruta desconocida | 404 {"error":"Not found"}. |
+
+Logs [upstream_error]: network, upstream_status, invalid_json, invalid_contract o timeout.
+No registran URL de la fuente, respuesta interna, credenciales ni stack. Health sigue disponible.
+El timeout configurado cancela la consulta; no hay caché ni reintentos del BFF.
+
+Verificado con API Core compilado real en dev/build-start; fuentes HTTP controladas verifican
+errores y demoras. Cambiar puerto/origen y reiniciar modifica la consulta sin editar código.
+
 El job bff de [CI](../docs/ci.md#ampliación-bff--issue-61) comprueba política npm,
-instalación y build; integrado en PR #83. Todavía no hay pruebas HTTP BFF.
+instalación y build; integrado en PR #83. La suite HTTP se incorporará en #65 y a CI en #66.

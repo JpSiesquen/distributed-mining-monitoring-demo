@@ -48,6 +48,7 @@ El máximo del timeout evita que Node reduzca una demora fuera de rango a 1 ms;
 - GET /api/equipment: una petición GET a /api/equipment del origen configurado.
   Aceptar respuesta 200 JSON con arreglo de objetos id/name de texto y devolverlo sin
   añadir envoltorios ni campos. Rechazar JSON o contrato inválido con 502 genérico.
+  No seguir redirecciones: preservar R1 y evitar consultas a destinos ajenos al origen validado.
 - API Core inaccesible o con respuesta no exitosa: 502 JSON genérico.
 - Espera agotada: 504 JSON genérico. AbortSignal.timeout limita la consulta, incluida
   la lectura del cuerpo; no iniciar reintentos ni dejar una petición HTTP pendiente.
