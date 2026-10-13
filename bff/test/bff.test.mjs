@@ -55,7 +55,7 @@ test("health is independent of the upstream", async t => {
   let sourceCalls = 0;
   await withBff(t, (_req, res) => { sourceCalls++; json(res, equipment); }, async ({ request, source }) => {
     await close(source);
-    await expectJson(await request("/health"), 200, { status: "ok" });
+    await expectJson(await request("/health"), 201, { status: "ok" });
     assert.equal(sourceCalls, 0);
   });
 });
