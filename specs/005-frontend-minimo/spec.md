@@ -1,92 +1,107 @@
-# Spec 005 — Dashboard de equipos
+# Spec 005 — Integración de Mining Ops Console
 
-- **Estado:** Aprobada el 2026-10-13; implementación pendiente
-- **Fecha:** 2026-10-13
+- **Estado:** En revisión; revisión 2 del 2026-10-13.
+- **Decisiones aprobadas:** frontend en repo separado; primera entrega de lectura;
+  atención/cierre persistentes después; mantener Material UI y adaptar la consola.
+- La aprobación del alcance no aprueba aún esta revisión completa, su plan ni ejecución.
 
-## Contexto
+## Motivo del cambio
 
-API Core ofrece equipos simulados con id/name. La spec 004 define el BFF que los expondrá
-al frontend. Hace falta una interfaz que permita consultar y localizar equipos, con una
-presentación cuidada y comportamiento verificable ante carga, ausencia de datos o fallos.
+La revisión anterior proponía crear un dashboard de equipos id/name dentro de este repo.
+Se reutilizará la consola React/TypeScript de `mining-ops-console`, con panel de eventos,
+histórico, detalle y reporte. Su fuente actual y las acciones son simuladas/en memoria;
+la integración sustituirá esa fuente por HTTP. Git conserva la revisión anterior.
+
+El frontend permanece en su repo; este mantiene API Core, BFF e infraestructura.
+Los servicios se comunican mediante contratos HTTP. Las tareas/issues #70–#79 necesitan
+adaptación antes de ejecutarse; crear un frontend nuevo ya no es el resultado acordado.
 
 ## Objetivo
 
-Presentar un dashboard responsive de equipos con tarjetas, búsqueda y contador de resultados,
-consumiendo exclusivamente el BFF y manteniendo el contrato id/name aprobado.
+Verificar panel, histórico, detalle y reporte con eventos recibidos exclusivamente del BFF,
+que consulta API Core. Adaptar la presentación a Material UI conservando identidad industrial,
+reglas de dominio aplicables y accesibilidad. Registrar la pareja de versiones probada.
 
 ## Alcance
 
-- Incluye: composición visual consistente, tarjetas con ID y nombre, búsqueda local,
-  contador, estados de carga/vacío/error, recuperación de una consulta fallida,
-  accesibilidad básica, configuración externa, compilación, pruebas y CI.
-- No incluye: métricas operativas, estados inventados de maquinaria, gráficos sin fuente,
-  edición de equipos, autenticación, visualización 3D, SQL, contenedores ni despliegue.
+Incluye contrato de lectura de eventos, proveedor API Core/BFF con datos ficticios,
+integración de la consola existente, Material UI, filtros/contadores/reportes, estados de
+carga/vacío/error, recuperación, configuración externa, pruebas y CI por repositorio.
 
-Se conserva React 19, Vite 6 y TypeScript. Versiones exactas, librerías necesarias,
-comunicación local con BFF y comprobaciones de CI se concretarán en el plan. No incorporar
-por anticipado todas las librerías del stack ni ampliar el contrato de datos por presentación.
-
-Prerrequisito de integración real: BFF de la spec 004 implementado y verificado.
-La planificación de 005 puede avanzar antes; no acredita esa implementación.
+Queda para entregas posteriores: atención/cierre persistentes, identidad/autorización de
+operadores, SQL, ingesta real, MQTT, actualización continua, inferencia, 3D, Docker y despliegue.
+La consulta inicial no se presentará como tiempo real. No copiar material restringido al
+repo público; usar evidencia sintética/autorizada. Conservar identificación de datos simulados.
 
 ## Requisitos
 
-- **R1:** consultar GET /api/equipment únicamente mediante el BFF. No llamar a API Core,
-  SQL ni leer archivos del backend; la vista operativa no sustituye la fuente por mocks propios.
-- **R2:** presentar cada equipo con su ID y nombre en tarjetas de jerarquía visual clara,
-  dentro de una composición coherente en tipografía, espaciado, color y componentes.
-- **R3:** filtrar los datos recibidos por coincidencia parcial de ID o nombre, sin distinguir
-  mayúsculas/minúsculas. Mostrar el número de resultados visibles respecto del total recibido;
-  vaciar la búsqueda restaura la lista, sin modificar datos ni añadir llamadas por pulsación.
-- **R4:** distinguir carga inicial, lista disponible, fuente vacía, búsqueda sin coincidencias
-  y error de consulta. Un fallo no se presenta como lista vacía ni como operación correcta;
-  permitir reintentar y mostrar los datos al recuperarse la fuente.
-- **R5:** adaptar el dashboard a móvil y escritorio sin pérdida de contenido ni desbordamiento
-  horizontal de la página. Controles utilizables por teclado, foco visible, nombres accesibles,
-  texto legible y mensajes que no dependan únicamente del color.
-- **R6:** configurar la comunicación con BFF externamente, sin secretos en el código,
-  variables públicas del frontend, bundle o .env.example. La solución de origen/proxy local
-  se valida en el plan antes de modificar seguridad o configuración del BFF.
-- **R7:** comprobar tipos y producir un artefacto estático para verificar la aplicación
-  compilada. Las pruebas cubren filtrado, contador, estados y recuperación con datos controlados;
-  la integración real verifica Frontend → BFF → API Core con datos ficticios.
-- **R8:** ampliar CI para build y pruebas del frontend conservando las comprobaciones
-  obligatorias de API Core/BFF. Los fallos del frontend impiden integrar. Revisar dependencias,
-  Actions, comandos y protección aplicables antes de habilitar instalación o ejecución.
+- **R1 — Separación:** el navegador consulta únicamente BFF; BFF consulta API Core, sin SQL
+  ni mock propio de operación. Conservar `/api/equipment` id/name y pruebas existentes.
+- **R2 — Contrato:** acordar ruta, campos, null/opcionales, estados/categorías, fechas y zona
+  horaria, rangos, orden, respuesta vacía y errores antes de implementar. Partir de EventoCruce;
+  no asumir relación con los equipos actuales. Ambos repos referencian la misma revisión.
+  Validar JSON en ejecución: una interfaz TypeScript no valida datos recibidos.
+- **R3 — Proveedor:** API Core suministra eventos ficticios reproducibles; BFF valida y
+  expone el contrato. No incorporar SQL por esta migración. Acordar acceso/formato de evidencia.
+- **R4 — Lectura:** panel prioriza según dominio; histórico filtra; detalle muestra los
+  campos/evidencia disponibles; reporte usa el periodo seleccionado y datos recibidos.
+  Contadores y cifras no incorporan agregados inventados. Mantener las limitaciones del producto.
+- **R5 — Recuperación:** distinguir carga, fuente vacía, filtro vacío y fallo; red, estado
+  HTTP, JSON/contrato inválido o espera agotada no se presentan como éxito. Reintento explícito,
+  sin fallback al seed. Retirar simulador del recorrido integrado. Tomar/cerrar quedan
+  deshabilitados con explicación hasta implementar persistencia; no simular éxito de escritura.
+- **R6 — Presentación:** adaptar por pantallas a Material UI, tema industrial oscuro/ámbar,
+  jerarquía y densidad adecuadas. Preservar filtros, diálogo y evidencia; teclado, foco,
+  nombres accesibles, significado sin depender del color y respeto de movimiento reducido.
+- **R7 — Configuración:** entrada local de mismo origen mediante proxy Vite; destino BFF
+  externo al bundle. Mantener escucha/puertos y timeout aprobados salvo revisión explícita.
+  No llevar credenciales al navegador ni asumir que middleware Vercel resuelve seguridad on-premise.
+- **R8 — Verificación:** frontend tiene build/pruebas DOM en su repo; backend conserva
+  comprobaciones y añade pruebas del proveedor. Validar checks propios antes de exigirlos en
+  cada repo; planificar workflows/rulesets antes de cambiarlos. Verificar además el recorrido
+  frontend → BFF → API Core real: CI verde separada no acredita integración.
+- **R9 — Compatibilidad:** primero proveedor compatible, después consumidor. Registrar SHA
+  frontend, SHA backend y revisión del contrato. Conservar versión validada anterior para
+  recuperación; evitar cambios incompatibles antes de migrar consumidores. Una ejecución
+  local por repo basta para esta entrega; repos separados no equivalen a entornos separados.
+- **R10 — Seguridad:** revisar grafo y scripts de dependencias existentes/nuevas antes de
+  instalar o ejecutar; aplicar política Shai-Hulud e ignore-scripts. Aprobar comandos exactos
+  y scripts necesarios. Sin credenciales sensibles ni evidencia restringida en verificaciones.
 
 ## Criterios de aceptación
 
-- [ ] **CA1:** con BFF/API Core disponibles, las tarjetas muestran los mismos id/name de
-  la respuesta del BFF. La inspección de red confirma que no se consulta API Core directamente.
-- [ ] **CA2:** buscar por una parte de ID o nombre filtra sin distinguir mayúsculas/minúsculas.
-  El contador coincide con tarjetas visibles/total recibido; limpiar búsqueda restaura todos
-  los equipos y escribir no genera consultas HTTP por pulsación.
-- [ ] **CA3:** fuente demorada muestra carga; arreglo vacío y búsqueda sin coincidencias
-  muestran mensajes distintos. Fallo de red, respuesta no exitosa o datos inválidos muestran
-  error seguro; tras recuperar la fuente y reintentar se muestran los equipos.
-- [ ] **CA4:** a 360 px y 1280 px de ancho, contenido y controles son legibles y utilizables
-  sin desbordamiento horizontal. Revisión visual confirma jerarquía, alineación y estados completos.
-- [ ] **CA5:** búsqueda y reintento funcionan con teclado, foco visible y nombres accesibles;
-  ID/nombre y mensajes permanecen comprensibles sin depender del color.
-- [ ] **CA6:** configuración local y ejemplo permiten dirigir las consultas al BFF sin editar
-  la lógica de la vista. No hay credenciales ni detalles internos del backend en bundle o mensajes.
-- [ ] **CA7:** build comprueba tipos y produce el artefacto estático; pruebas verifican CA2/CA3
-  y una expectativa incorrecta genera salida no cero. CA1–CA5 se contrastan también en la
-  aplicación compilada y CA1 con BFF/API Core reales antes del cierre.
-- [ ] **CA8:** CI conserva checks API Core/BFF y comprueba frontend. Un fallo controlado de
-  frontend bloquea integración; recuperación verificada, sin SQL ni secretos de despliegue.
+- [ ] **CA1:** contrato documentado con ejemplos ficticios válidos/ inválidos; ambos repos
+  referencian la misma revisión. Ruta, fechas y evidencia acordadas antes de implementar.
+- [ ] **CA2:** proveedor API Core → BFF cumple contrato y conserva equipos/health; pruebas
+  cubren vacío, datos inválidos, indisponibilidad y timeout de cabeceras/cuerpo.
+- [ ] **CA3:** panel/histórico/detalle usan eventos del BFF; inspección de red confirma que
+  no se consulta API Core directamente ni se usa seed/simulador en el recorrido integrado.
+- [ ] **CA4:** prioridad, filtros y contadores corresponden a eventos recibidos; PDF refleja
+  periodo, datos y evidencia autorizada, sin cifras ajenas a la fuente.
+- [ ] **CA5:** carga/vacío/filtro vacío/error son distintos; recuperación y reintento permiten
+  continuar sin éxito ficticio. Tomar/cerrar no producen escrituras simuladas.
+- [ ] **CA6:** pantallas Material UI verificadas a 360/1280 px y por teclado, sin pérdida de
+  contenido, desbordamiento horizontal ni regresiones de diálogo/evidencia.
+- [ ] **CA7:** dev y build/preview usan backend real y configuración externa; sin secretos en
+  bundle/logs. Evidencia identifica ambos SHA y revisión del contrato probados.
+- [ ] **CA8:** build y pruebas DOM/proveedor pasan en sus repos; fallos controlados bloquean
+  el PR correspondiente. Checks y recuperación contrastados sin integrar casos negativos.
+- [ ] **CA9:** operación, configuración, compatibilidad y recuperación documentadas en ambos
+  repos. 001/T02 solo se completa con la vista de equipos y restantes requisitos de esa tarea;
+  consultar eventos no sustituye esa evidencia ni acredita SQL/despliegue/DEV/QA.
 
-## Preguntas abiertas
+## Decisiones y preguntas para el plan
 
-- **P1 — Dirección acordada (2026-10-13):** industrial oscuro con acento ámbar, tarjetas
-  sobrias, IDs monoespaciados y buen espaciado. Concretar composición y verificarla visualmente
-  antes del cierre; diseño detallado en el plan.
-- **P2 — Resuelta (2026-10-13):** proxy de mismo origen de Vite en desarrollo y preview
-  local, con destino BFF externo al bundle; configuración aprobada en el plan y ADR 0011.
-  No requiere modificar CORS del BFF. Nginx se concreta en fase 6.
-- **P3 — Resuelta (2026-10-13):** selección técnica, estrategia de pruebas y CI definidas
-  en el plan aprobado. Versiones exactas, compatibilidad y comandos se revisan antes de instalar.
+- Aprobado el 2026-10-13: dos repos; lectura en panel, histórico, detalle y reporte primero;
+  atención/cierre persistentes después.
+- Aprobado el 2026-10-13: mantener Material UI y adaptar la consola; CSS Modules no será
+  la solución final de las pantallas migradas. Concretar sustitución por pantalla en el plan.
+- Vigentes salvo revisión: React 19/Vite 6/TypeScript, TanStack Query, estrategia DOM, proxy
+  local y espera frontend de diez segundos. Versiones y comandos siguen sujetos a revisión.
+- Pendientes: contrato detallado, fechas/zona horaria, acceso a evidencia, configuración
+  concreta de CI por repo y orden de adaptación. No añadir polling automáticamente.
 
-El contrato 004/P1 se conserva: búsqueda y contador se calculan con el arreglo recibido.
-Cerrar 005 podrá acreditar el flujo local de 001/T02 únicamente con su evidencia completa;
-no acredita integración SQL, despliegue ni aislamiento DEV/QA.
+Esta revisión completa precede al nuevo plan y tareas/issues. Specs 002/004 conservan su
+verificación de equipos y salud; documentar sus ampliaciones de eventos contra esta revisión
+antes de implementar. Registrar repos separados y consecuencias de CI/topología mediante ADR
+aprobado. Este documento no autoriza instalaciones, implementación ni cambios de infraestructura.

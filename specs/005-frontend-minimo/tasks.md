@@ -1,8 +1,12 @@
 # Tareas 005 — Dashboard de equipos
 
 - **Spec:** [005](spec.md)
-- **Plan:** [005](plan.md), aprobado el 2026-10-13
-- **Estado:** Aprobadas el 2026-10-13; pendientes de ejecución
+- **Plan:** [005](plan.md), pendiente de adaptación a revisión 2.
+- **Estado:** Tareas anteriores pendientes de adaptación; no ejecutar #70–#79 con el alcance anterior.
+
+La [revisión 2](spec.md) reutiliza Mining Ops Console en otro repo y amplía lectura a eventos.
+Revisar secuencia y dependencias al aprobar el nuevo plan; la lista siguiente conserva
+trazabilidad del backlog anterior y no constituye autorización de implementación.
 
 La integración real requiere BFF de la spec 004 implementado y verificado. Las pruebas con
 fixtures no cumplen ese prerrequisito. Instalar cada dependencia al abordar su funcionalidad,

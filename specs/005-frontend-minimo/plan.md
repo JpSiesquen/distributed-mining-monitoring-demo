@@ -1,7 +1,11 @@
 # Plan 005 — Dashboard de equipos
 
-- **Spec:** [005](spec.md), aprobada el 2026-10-13
-- **Estado:** Aprobado el 2026-10-13; implementación pendiente
+- **Spec:** [005](spec.md), revisión 2 en revisión.
+- **Estado:** Plan anterior aprobado; pendiente de adaptación a la migración entre repositorios.
+
+El contenido siguiente describe el dashboard original y se conserva como referencia hasta
+aprobar el nuevo plan. No ejecutar: cambia la ubicación del frontend, el dominio de lectura
+y la distribución de CI. Siguen aprobados Material UI, lectura primero y dos repositorios.
 
 ## Enfoque
 
