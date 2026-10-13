@@ -45,8 +45,8 @@ despliegue, disponibilidad de los servidores ni ausencia de malware.
 
 Job bff verificado e integrado el 2026-10-13 en PR #83. Ejecuta en bff/:
 política npm → npm ci --ignore-scripts → npm run build. Reutiliza runner, runtime, Actions
-fijadas y permisos de API Core, con cinco minutos y caché desactivada. Las pruebas HTTP
-se incorporarán cuando existan; build no acredita rutas ni consulta de equipos.
+fijadas y permisos de API Core, con cinco minutos y caché desactivada. La suite HTTP local
+ya existe; npm test se incorporará al job en #66. Build no acredita las rutas por sí solo.
 
 Los SHA oficiales y runtime node24 de ambas Actions se revalidaron el 2026-10-13.
 El repositorio es público; la ejecución usa runners estándar hospedados, gratuitos
@@ -60,8 +60,9 @@ de la app GitHub Actions (15368), sin retirar controles previos. Incorporado tra
 | Error de tipos BFF | TS2322/salida 1; api-core correcto; PR #84 BLOCKED con ambos checks exigidos: [ejecución 38477153451](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38477153451). |
 | Recuperación | Error retirado, árbol temporal idéntico al cambio real; ambos jobs correctos: [ejecución 38477303301](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38477303301). PR #84 cerrado sin integrar. |
 
-Estos casos acreditan compilación y bloqueo por tipos, no pruebas HTTP BFF; esas pruebas
-se incorporan en 004/T07–T08. El futuro check frontend no se exige todavía.
+Estos casos acreditan compilación y bloqueo por tipos, no pruebas HTTP BFF. Suite de once
+pruebas verificada en 004/T07; ejecución y bloqueo por aserción en CI pendientes de T08.
+El futuro check frontend no se exige todavía.
 
 ## Consultar resultados y diagnosticar
 

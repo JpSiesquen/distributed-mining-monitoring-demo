@@ -2,7 +2,7 @@
 
 - **Spec:** [004](spec.md)
 - **Plan:** [004](plan.md), aprobado el 2026-10-13
-- **Estado:** Aprobadas el 2026-10-13; T01–T06 verificadas, T07–T09 pendientes
+- **Estado:** Aprobadas el 2026-10-13; T01–T07 verificadas, T08–T09 pendientes
 
 Prerrequisito: API Core y CI de las specs 002/003 implementados y verificados.
 El orden introduce CI tras la compilación y pruebas al existir las rutas. Las casillas
@@ -87,12 +87,16 @@ T01–T09 corresponden, en orden, a las issues
   disponibles; logs por categoría sin datos internos. Nuevo origen/puerto tras reinicio cambian
   la consulta. Recursos limpiados. CA2–CA6 combinan esta evidencia con T04/T05; suite T07 pendiente.
 
-- [ ] **T07 — Automatizar contratos y fallos.** Añadir node:test sobre la app compilada,
+- [x] **T07 — Automatizar contratos y fallos.** Añadir node:test sobre la app compilada,
   con servidor HTTP controlado y puertos asignados por el sistema. Cubrir los casos de
   T05/T06, ausencia de X-Powered-By y limpieza aun ante una aserción fallida.
   **Comprobar:** npm test pasa tras build; expectativa incorrecta causa salida no cero;
   servidores y conexiones se cierran. Sin SQL, frontend ni credenciales de despliegue.
   Depende de T06; R8/CA7 y evidencia automatizada de CA1–CA4.
+  **Evidencia:** test/bff.test.mjs, 11 pruebas correctas tras build. Cubren contrato/arreglo
+  vacío, 404/502/504, datos inválidos, redirección y demora de cabeceras/cuerpo; logs seguros
+  y health independiente. Copia con expectativa 201 incorrecta: ERR_ASSERTION, salida 1,
+  proceso termina naturalmente; suite de trabajo intacta y temporales retirados. CA7 cumplida.
 
 - [ ] **T08 — Incorporar y validar pruebas en CI.** Añadir npm test al job bff y contrastar
   el ruleset con los dos checks. Usar cambios temporales para verificar fallos sin integrarlos.
