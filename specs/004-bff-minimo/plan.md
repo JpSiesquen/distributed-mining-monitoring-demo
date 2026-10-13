@@ -33,12 +33,14 @@ en bff/.env, ignorado. No crear un repositorio de datos ni un cliente HTTP gené
 | BFF_HOST | 127.0.0.1 | Dirección IP válida. |
 | BFF_PORT | 3001 | Entero entre 1 y 65535; puerto ya acordado en 001. |
 | API_CORE_URL | http://127.0.0.1:3002 | Origen HTTP/HTTPS válido, sin credenciales, query ni fragmento. |
-| API_CORE_TIMEOUT_MS | 5000 | Entero positivo; valor inicial aprobado, no un SLA. |
+| API_CORE_TIMEOUT_MS | 5000 | Entero de 1 a 2147483647; valor inicial aprobado, no un SLA. |
 
 Host, puerto y URL se revisan antes de abrir la escucha. QA usará la IP privada del servicio
 correspondiente; no inventar sus direcciones. Ante configuración inválida o puerto ocupado,
 terminar con salida no cero y mensaje fijo; no imprimir valores sensibles ni elegir otro puerto.
 Los nombres y valores de esta tabla están aprobados para la operación local.
+El máximo del timeout evita que Node reduzca una demora fuera de rango a 1 ms;
+[límite de temporizadores](https://github.com/nodejs/node/blob/main/doc/api/timers.md).
 
 ### Rutas y comunicación
 

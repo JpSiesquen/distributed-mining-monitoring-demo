@@ -2,7 +2,7 @@
 
 - **Spec:** [004](spec.md)
 - **Plan:** [004](plan.md), aprobado el 2026-10-13
-- **Estado:** Aprobadas el 2026-10-13; T01–T03 verificadas, T04–T09 pendientes
+- **Estado:** Aprobadas el 2026-10-13; T01–T04 verificadas, T05–T09 pendientes
 
 Prerrequisito: API Core y CI de las specs 002/003 implementados y verificados.
 El orden introduce CI tras la compilación y pruebas al existir las rutas. Las casillas
@@ -53,13 +53,18 @@ T01–T09 corresponden, en orden, a las issues
   bff falla, api-core pasa y PR temporal #84 BLOCKED. Ruleset exige ambos checks;
   recuperación 38477303301 correcta y #84 cerrado sin integrar. Detalle en docs/ci.md.
 
-- [ ] **T04 — Configurar arranque, logs y comandos.** Crear app.ts/server.ts; validar las
+- [x] **T04 — Configurar arranque, logs y comandos.** Crear app.ts/server.ts; validar las
   cuatro variables del plan antes de escuchar y actualizar .env.example. Implementar
   start sobre dist/server.js y dev como build seguido de start solo tras éxito.
   **Comprobar:** dev y build/start arrancan; cambiar puerto/destino y reiniciar aplica
   configuración. Valores inválidos o puerto ocupado terminan con salida no cero y logs
   seguros. Un error de tipos impide que dev arranque una compilación anterior.
   Depende de T02; R5/R6/R7; CA5 y parte de CA6.
+  **Evidencia:** copia temporal con entorno ficticio y sin credenciales: start/dev aceptan TCP;
+  entorno externo cambia puerto y origen tras reinicio. Diecisiete casos inválidos terminan
+  con salida 1 y mensajes seguros; puerto ocupado falla sin fallback. Dev con TS2322 no
+  arranca dist/ anterior; temporales y procesos limpiados. Comunicación HTTP con API Core
+  pendiente de T06; no se marca CA5 completa por esta comprobación parcial.
 
 - [ ] **T05 — Añadir salud independiente.** GET /health devuelve 200 JSON status ok;
   desactivar X-Powered-By. No consultar API Core desde esta ruta.

@@ -43,7 +43,7 @@ despliegue, disponibilidad de los servidores ni ausencia de malware.
 
 ## Ampliación BFF — issue #61
 
-Job bff verificado el 2026-10-13 en PR #83; integración del cambio pendiente. Ejecuta en bff/:
+Job bff verificado e integrado el 2026-10-13 en PR #83. Ejecuta en bff/:
 política npm → npm ci --ignore-scripts → npm run build. Reutiliza runner, runtime, Actions
 fijadas y permisos de API Core, con cinco minutos y caché desactivada. Las pruebas HTTP
 se incorporarán cuando existan; build no acredita rutas ni consulta de equipos.
