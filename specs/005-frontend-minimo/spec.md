@@ -84,8 +84,8 @@ La planificación de 005 puede avanzar antes; no acredita esa implementación.
 - **P2 — Resuelta (2026-10-13):** proxy de mismo origen de Vite en desarrollo y preview
   local, con destino BFF externo al bundle; configuración aprobada en el plan y ADR 0011.
   No requiere modificar CORS del BFF. Nginx se concreta en fase 6.
-- **P3:** seleccionar únicamente librerías necesarias y definir pruebas/CI en el plan,
-  con revisión de versiones y comandos antes de instalar.
+- **P3 — Resuelta (2026-10-13):** selección técnica, estrategia de pruebas y CI definidas
+  en el plan aprobado. Versiones exactas, compatibilidad y comandos se revisan antes de instalar.
 
 El contrato 004/P1 se conserva: búsqueda y contador se calculan con el arreglo recibido.
 Cerrar 005 podrá acreditar el flujo local de 001/T02 únicamente con su evidencia completa;

@@ -1,7 +1,7 @@
 # Plan 005 — Dashboard de equipos
 
 - **Spec:** [005](spec.md), aprobada el 2026-10-13
-- **Estado:** En revisión; decisiones técnicas aprobadas, aprobación completa del plan pendiente
+- **Estado:** Aprobado el 2026-10-13; implementación pendiente
 
 ## Enfoque
 
@@ -70,7 +70,7 @@ Build produce archivos estáticos; preview verifica esos archivos y el proxy loc
 servidor de producción. En fase 6, Nginx asumirá la entrada de mismo origen definida en 001;
 el proxy de Vite no viaja dentro de dist/. Esa configuración requerirá su propio plan.
 
-### Estado y consulta propuestos
+### Estado y consulta aprobados
 
 TanStack Query 5, seleccionado y aprobado el 2026-10-13, gestiona carga, resultado, fallo
 y reintento explícito de la consulta;
@@ -85,7 +85,7 @@ y permitir reintento manual, incluso si el proxy o BFF queda bloqueado.
 Comparación parcial con normalización a minúsculas en ID/nombre, conservando el orden recibido.
 No añadir debouncing ni peticiones por pulsación: la búsqueda opera sobre datos locales.
 
-### Comandos, pruebas y CI propuestos
+### Comandos, pruebas y CI aprobados
 
 Dev inicia Vite; build comprueba tipos antes de generar dist/; preview sirve el artefacto local.
 Test ejecuta una suite finita con salida no cero ante fallo, sin modo watch en CI.
