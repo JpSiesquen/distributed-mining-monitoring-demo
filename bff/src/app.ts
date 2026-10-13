@@ -6,5 +6,10 @@ export type BffConfig = {
 };
 
 export function createApp(_config: BffConfig) {
-  return express();
+  const app = express();
+  app.disable("x-powered-by");
+  app.get("/health", (_req, res) => {
+    res.status(200).json({ status: "ok" });
+  });
+  return app;
 }

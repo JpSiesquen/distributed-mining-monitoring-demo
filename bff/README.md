@@ -1,7 +1,8 @@
 # BFF
 
 Servidor compilado de la [spec 004](../specs/004-bff-minimo/spec.md), con configuración externa
-y logs de arranque. Rutas /health y /api/equipment y pruebas HTTP pendientes; todavía no consulta API Core.
+y logs de arranque. /health verifica la disponibilidad propia; /api/equipment y pruebas
+automatizadas HTTP pendientes. Todavía no consulta API Core.
 
 ## Configuración y comandos
 
@@ -50,6 +51,14 @@ dist/ y node_modules/ están ignorados por Git.
 - Log de arranque: [startup] BFF listening on host:port. Fallos: [startup_error] con mensaje fijo,
   sin imprimir origen completo, valores sensibles o stack interno. No hay cambio automático de puerto.
 - Dev con error de tipos no inicia el servidor de la compilación anterior.
+- GET /health: 200 JSON {"status":"ok"}, sin X-Powered-By, incluso con API Core inaccesible;
+  comprobado en dev y build/start. No verifica equipos, SQL ni disponibilidad de API Core.
+
+Con el BFF iniciado, consultar GET http://127.0.0.1:3001/health en Postman o:
+
+```powershell
+curl.exe -i http://127.0.0.1:3001/health
+```
 
 El job bff de [CI](../docs/ci.md#ampliación-bff--issue-61) comprueba política npm,
 instalación y build; integrado en PR #83. Todavía no hay pruebas HTTP BFF.

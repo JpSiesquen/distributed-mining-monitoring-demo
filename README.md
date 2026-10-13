@@ -56,7 +56,7 @@ API Core implementa salud, equipos simulados, errores JSON y seis pruebas de con
 La [CI verificada](docs/ci.md) comprueba API Core y compilación del BFF;
 `main` exige pull request y checks api-core/bff exitosos.
 La [operación de API Core](api-core/README.md) está documentada y la spec 002 verificada.
-BFF cuenta con [arranque compilado y CI verificados](bff/README.md); sus rutas siguen pendientes.
+BFF cuenta con [arranque, CI y salud propia verificados](bff/README.md); consulta de equipos pendiente.
 Frontend, integración de base de datos y despliegue pendientes. La topología está aprobada.
 Los estados de cada entregable se registran en el [índice de specs](specs/README.md).
 
