@@ -15,18 +15,19 @@ Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); GET /health, GET /api/equipment con datos simulados y errores 404/500 en JSON integrados
 (002/T06–T08); pruebas de contratos con `npm test` (002/T09), ejecutadas en CI (003/T04).
 
-**Siguiente entrega ejecutable:** configurar arranque y comandos del BFF
-([#62](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/62)) después de integrar PR #83.
+**Siguiente entrega ejecutable:** añadir salud independiente del BFF
+([#63](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/63)) después de integrar #62.
 Revisión #59 integrada; base compilable, instalación autorizada y lockfile definitivo de 82 paquetes
-verificados en #60. Sin servidor/rutas HTTP BFF todavía; [estado](../bff/README.md).
+verificados en #60. Arranque, entorno y comandos start/dev verificados en #62;
+rutas HTTP BFF pendientes; [estado](../bff/README.md).
 La planificación 005 está aprobada e integrada en PR #69; sus diez
 [issues #70–#79](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/milestone/5)
 están publicadas desde las [tareas 005](../specs/005-frontend-minimo/tasks.md), sin implementación.
 La fase 3 tiene
 [issues #59–#67](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/milestone/4)
 publicadas desde las [tareas 004](../specs/004-bff-minimo/tasks.md).
-Spec, plan y tareas del BFF aprobados; T01–T03 verificados. Job bff y bloqueo ante error de
-tipos verificados; ruleset exige api-core/bff. PR #83 pendiente de integración. Planificar frontend no
+Spec, plan y tareas del BFF aprobados; T01–T04 verificados. CI integrada en PR #83;
+ruleset exige api-core/bff. #62 pendiente de integración. Planificar frontend no
 completa el BFF ni elimina esa dependencia. La [estructura de specs](../specs/README.md)
 incluye las reservas documentales de las fases restantes, ordenadas por ejecución.
 API Core mock implementado y CA1–CA8 verificados: [operación](../api-core/README.md).
@@ -52,7 +53,7 @@ con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 |-------|------------|----------------------|
 | 1 | API Core compilable con CI obligatoria | Completada; milestone cerrado. |
 | 2 | Rutas, errores y pruebas de API Core | Completada y documentada: CA1–CA8 de 002 y 003; milestone cerrado. |
-| 3 | BFF consumiendo API Core | Base compilable integrada; CI build verificada (004/T01–T03), PR #83 pendiente de integración. Arranque/rutas pendientes. |
+| 3 | BFF consumiendo API Core | Base compilable y CI integradas; arranque verificado (004/T04), #62 pendiente de integración. Rutas pendientes. |
 | 4 | Dashboard consumiendo únicamente BFF | Spec, plan y tareas 005 aprobados; diez issues publicadas, implementación pendiente. Industrial oscuro/ámbar, tarjetas, búsqueda, contador y estados visuales. Conserva [contrato 004/P1](../specs/004-bff-minimo/spec.md#preguntas-abiertas); integración requiere BFF implementado. |
 | 5 | Integración SQL Server y persistencia | Por especificar; mantener contrato entre capas. |
 | 6 | Empaquetado con Docker y entrada Nginx | Concretar ejecución y verificar flujo completo local antes de desplegar. |
