@@ -1,7 +1,7 @@
 # Arquitectura
 
 Diseño objetivo del sistema distribuido de monitoreo de maquinaria minera.
-Describe las responsabilidades previstas. API Core está en implementación; BFF, frontend,
+Describe las responsabilidades previstas. API Core con datos mock está implementado; BFF, frontend,
 integración con SQL Server y despliegue están pendientes.
 
 ## Flujo de comunicación
@@ -29,8 +29,8 @@ necesidad concreta.
 
 ### API Core
 
-Servicio previsto con Node.js, Express 4.22.3 y TypeScript. Contiene la lógica de negocio
-y concentra el acceso a datos.
+Servicio implementado con Node.js, Express 4.22.3 y TypeScript para el alcance mock.
+Contiene la lógica de negocio y concentra el acceso a datos; la integración SQL sigue pendiente.
 
 El primer alcance es una comprobación de salud y una consulta de equipos simulados desde
 un archivo JSON, sin conexión a SQL Server. La integración posterior usará SQL Server para

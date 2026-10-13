@@ -2,7 +2,7 @@
 
 - **Spec:** [002](spec.md)
 - **Plan:** [002](plan.md)
-- **Estado:** En ejecución; T01–T10 verificadas (CI mediante 003). Siguiente: T11, documentación operativa (issue #16), después de #15.
+- **Estado:** T01–T12 completadas y verificadas; documentación operativa y matriz de cierre en api-core/README.md.
 
 Spec, plan y tareas aprobados el 2026-10-03. Los IDs se ordenan antes de crear issues.
 La CI se rige por la [spec 003](../003-ci-minima/spec.md) y su plan, ambos aprobados.
@@ -90,10 +90,15 @@ Instalaciones y ejecución de Actions requieren su autorización; esta lista no 
   fallido; restauración: run 38330429291 correcto (003/T05, issue #14). PR temporal #54
   cerrado sin integrar y sin modificaciones remanentes en pruebas o datos.
 
-- [ ] **T11 — Documentar operación local.** README de api-core con entorno, dev/build/start/test,
+- [x] **T11 — Documentar operación local.** README de api-core con entorno, dev/build/start/test,
   curl de rutas, logs y cómo diagnosticar un fallo; aclarar que /health no comprueba SQL.
   **Comprobar:** comandos coinciden con package.json y .env.example, sin credenciales. R4/R6/R7.
+  **Evidencia:** [README operativo](../../api-core/README.md), instrucciones y diagnóstico contrastados con el servicio.
 
-- [ ] **T12 — Verificar y cerrar 002.** Registrar evidencia de CA1–CA8; ejecutar ambos modos
+- [x] **T12 — Verificar y cerrar 002.** Registrar evidencia de CA1–CA8; ejecutar ambos modos
   y pruebas pendientes/afectadas. Cerrar 003 por sus propios criterios cuando esté verificada.
   **Comprobar:** no marcar Implementada sin evidencia, ni completar T02 de 001 antes de BFF/frontend.
+  **Evidencia (2026-10-12):** copia temporal sin .env real ni credenciales SQL: scripts build/start
+  y dev, contratos 200/404/500, puerto cambiado, fallo de escucha y logs seguros correctos;
+  seis pruebas pasan. Procesos y temporales limpiados; 001/T02 permanece pendiente.
+  [Matriz CA1–CA8](../../api-core/README.md#evidencia-de-cierre); 003 cerrada por sus propios criterios.
