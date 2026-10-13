@@ -179,3 +179,22 @@ Fuentes: [Express](https://registry.npmjs.org/express/4.22.3),
 [TypeScript](https://registry.npmjs.org/typescript/5.9.3),
 [tipos Express](https://registry.npmjs.org/@types%2fexpress/4.17.25),
 [tipos Node](https://registry.npmjs.org/@types%2fnode/24.19.1).
+
+### Ejecución de CI BFF — issue #61
+
+Preparada y ejecución autorizada explícitamente el 2026-10-13 para publicar y validar CI BFF.
+Revalidación de SHA oficiales checkout/setup-node y action.yml: runtime node24, sin cambio
+de versiones respecto de API Core. Node de aplicación 24.21.0; Ubuntu 22.04 estándar;
+contents: read, persist-credentials: false y package-manager-cache: false.
+
+Comandos aprobados en bff/: comprobar .npmrc y valor efectivo ignore-scripts=true,
+npm ci --ignore-scripts y npm run build. El lockfile final de #60 ya está contrastado;
+no se incorporan dependencias ni scripts de instalación. Sin secretos de producción,
+despliegue o servicios SQL. Validar un caso correcto y un error de tipos sin integrar la prueba;
+añadir el check bff al ruleset después de validar su ejecución, conservando api-core.
+
+Validación de #61: ambos jobs correctos en ejecución 38477039523; error de tipos BFF
+TS2322 con api-core correcto en 38477153451 y PR #84 bloqueado. Recuperación correcta
+en 38477303301; PR temporal cerrado sin integrar. Ruleset verificado por lectura posterior:
+api-core y bff obligatorios (app GitHub Actions 15368), restantes controles conservados.
+Evidencia enlazada en [CI](ci.md#ampliación-bff--issue-61).

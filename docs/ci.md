@@ -1,12 +1,13 @@
-# CI de API Core
+# CI de API Core y BFF
 
-Verificada: 2026-10-12. Workflow: [api-core-ci.yml](../.github/workflows/api-core-ci.yml).
-Alcance y aceptación: [spec 003](../specs/003-ci-minima/spec.md).
+Verificación API Core: 2026-10-12; BFF de compilación: 2026-10-13.
+Workflow: [api-core-ci.yml](../.github/workflows/api-core-ci.yml).
+Alcance: [spec 003](../specs/003-ci-minima/spec.md) y [004/T03](../specs/004-bff-minimo/tasks.md).
 
 ## Ejecución
 
 Se ejecuta al hacer push a `main` y al abrir o actualizar un pull request hacia `main`.
-Un único job, `api-core`, usa `ubuntu-22.04`, Node.js `24.21.0` y un límite de cinco minutos.
+El job `api-core` usa `ubuntu-22.04`, Node.js `24.21.0` y un límite de cinco minutos.
 Los comandos se ejecutan en `api-core/`.
 
 ```text
@@ -33,12 +34,34 @@ Un fallo detiene los pasos posteriores; no hay `continue-on-error`.
 - Dependencias y ejecución aprobadas: [registro de seguridad](seguridad-dependencias.md)
   y [003/T01](../specs/003-ci-minima/tasks.md).
 - Sin credenciales SQL, SSH o Azure ni pasos de despliegue.
-- Ruleset `Proteger main`: PR obligatorio y check `api-core` de GitHub Actions exitoso;
+- Ruleset `Proteger main`: PR obligatorio y checks `api-core`/`bff` de GitHub Actions exitosos;
   bloquea push directo, force push y eliminación. No tiene excepciones.
   Cambiar el nombre del job exige actualizar el ruleset en el mismo cambio.
 
 Un check verde acredita compilación y pruebas de este alcance. No acredita SQL Server,
 despliegue, disponibilidad de los servidores ni ausencia de malware.
+
+## Ampliación BFF — issue #61
+
+Job bff verificado el 2026-10-13 en PR #83; integración del cambio pendiente. Ejecuta en bff/:
+política npm → npm ci --ignore-scripts → npm run build. Reutiliza runner, runtime, Actions
+fijadas y permisos de API Core, con cinco minutos y caché desactivada. Las pruebas HTTP
+se incorporarán cuando existan; build no acredita rutas ni consulta de equipos.
+
+Los SHA oficiales y runtime node24 de ambas Actions se revalidaron el 2026-10-13.
+El repositorio es público; la ejecución usa runners estándar hospedados, gratuitos
+según [facturación de Actions](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
+No crea artefactos almacenados ni caché npm. Ruleset 24823068 activo: exige api-core y bff
+de la app GitHub Actions (15368), sin retirar controles previos. Incorporado tras validar el nuevo job.
+
+| Caso | Resultado / evidencia |
+|------|-----------------------|
+| Build válido | api-core y bff correctos: [ejecución 38477039523](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38477039523). |
+| Error de tipos BFF | TS2322/salida 1; api-core correcto; PR #84 BLOCKED con ambos checks exigidos: [ejecución 38477153451](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38477153451). |
+| Recuperación | Error retirado, árbol temporal idéntico al cambio real; ambos jobs correctos: [ejecución 38477303301](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38477303301). PR #84 cerrado sin integrar. |
+
+Estos casos acreditan compilación y bloqueo por tipos, no pruebas HTTP BFF; esas pruebas
+se incorporan en 004/T07–T08. El futuro check frontend no se exige todavía.
 
 ## Consultar resultados y diagnosticar
 

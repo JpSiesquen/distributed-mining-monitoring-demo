@@ -28,4 +28,5 @@ dist/ y node_modules/ están ignorados por Git.
 - Caso temporal TS2322: salida 1, sin emisión nueva y sin cambiar la salida previa;
   fuente temporal retirada y build correcto restaurado.
 
-La CI actual verifica API Core; el job del BFF corresponde a la siguiente issue #61.
+El job bff de [CI](../docs/ci.md#ampliación-bff--issue-61) comprueba política npm,
+instalación y build; validado en PR #83, integración pendiente. Todavía no hay pruebas HTTP BFF.
