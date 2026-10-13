@@ -14,6 +14,10 @@ Ampliar el workflow existente con jobs separados `api-core` y `bff`, ambos oblig
 para integrar en main. Conservar controles, permisos mínimos y revisión de dependencias.
 Validar el nuevo job antes de exigir su check en el ruleset; incorporar pruebas al existir.
 
+Ampliación aprobada el 2026-10-13 para fase 4: añadir job frontend con build y pruebas
+al existir el componente. Exigir api-core, bff y frontend tras validar sus ejecuciones;
+mantener revisión de dependencias, permisos mínimos y límite de cinco minutos por job.
+
 ## Alternativas consideradas
 
 Añadir pasos BFF al job api-core reduce configuración, pero mezcla ejecución y diagnóstico
@@ -21,9 +25,10 @@ de dos componentes. Un workflow adicional no aporta una necesidad actual.
 
 ## Consecuencias
 
-Los fallos se identifican por componente; ambos checks deben pasar. Dos jobs consumen
+Los fallos se identifican por componente; todos los checks habilitados deben pasar. Los jobs consumen
 tiempo de runner y requieren revisar el uso disponible antes de habilitarlos.
 Un resultado verde acredita comprobaciones, no despliegue ni ausencia de malware.
 Este ADR amplía el alcance de ADR 0009; no modifica su decisión para API Core.
 
-Referencia: [plan 004](../../specs/004-bff-minimo/plan.md).
+Referencias: [plan 004](../../specs/004-bff-minimo/plan.md) y
+[plan 005](../../specs/005-frontend-minimo/plan.md).

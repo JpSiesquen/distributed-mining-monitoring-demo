@@ -1,7 +1,7 @@
 # Plan 005 — Dashboard de equipos
 
 - **Spec:** [005](spec.md), aprobada el 2026-10-13
-- **Estado:** En revisión; dirección visual acordada, decisiones técnicas pendientes
+- **Estado:** En revisión; decisiones técnicas aprobadas, aprobación completa del plan pendiente
 
 ## Enfoque
 
@@ -97,9 +97,10 @@ Simular fetch en pruebas con fixtures id/name, respuestas inválidas, fallos y d
 restaurar mocks y limpiar renders. No incorporar servidor de mocks ni navegadores descargados.
 Revisión visual/teclado e integración real se realizan además en navegador con build/preview.
 
-Añadir job frontend al workflow existente, preservando api-core y bff. Reutilizar runtime,
+Ampliación aprobada el 2026-10-13: añadir job frontend al workflow existente, preservando
+api-core y bff. Reutilizar runtime,
 runner, Actions fijadas y permisos mínimos revisados; control de .npmrc antes de npm ci
---ignore-scripts, seguido de build/test. Proponer límite de cinco minutos y caché desactivada.
+--ignore-scripts, seguido de build/test. Límite aprobado de cinco minutos y caché desactivada.
 Validar frontend antes de exigir su check junto a los otros dos en el ruleset. Verificar un
 fallo controlado que bloquee integración y su recuperación. No requerir servicios SQL o cloud.
 Revisar compatibilidad, comandos, uso disponible de Actions y autorización antes de habilitarlo.
@@ -124,15 +125,17 @@ Revisar compatibilidad, comandos, uso disponible de Actions y autorización ante
 - Revisar scripts de instalación y binarios transitivos antes de ejecutar. Si ignore-scripts
   impide funcionar a un paquete, validar la causa y un comando específico; no desactivar la política.
 - Comunicación local aprobada: [ADR 0011](../../docs/adr/0011-proxy-local-frontend-bff.md).
-  Ampliación de CI pendiente de aprobación. Este plan no autoriza instalaciones ni cambios del ruleset.
+- CI aprobada el 2026-10-13: job frontend y tres checks obligatorios, habilitados tras validar
+  los componentes; ampliación de [ADR 0010](../../docs/adr/0010-ci-por-componente.md).
+  La aprobación documental no ejecuta instalaciones ni modifica el ruleset.
 
 ## Respuesta a preguntas abiertas
 
 - P1: dirección acordada; composición detallada propuesta arriba y revisión visual prevista.
 - P2: resuelta; proxy de mismo origen en dev/preview y configuración local aprobados el
   2026-10-13. Nginx se concreta en fase 6.
-- P3: TanStack Query, Material UI y estrategia Vitest/jsdom/React Testing Library aprobados;
-  ampliación de CI pendiente. Versiones exactas y comandos por revisar.
+- P3: selección de TanStack Query/Material UI, estrategia Vitest/jsdom/React Testing Library
+  y ampliación de CI aprobadas. Versiones exactas y comandos se revisarán antes de instalar.
 
 ## Trazabilidad
 
