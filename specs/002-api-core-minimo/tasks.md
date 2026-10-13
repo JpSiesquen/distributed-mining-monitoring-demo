@@ -2,7 +2,7 @@
 
 - **Spec:** [002](spec.md)
 - **Plan:** [002](plan.md)
-- **Estado:** En ejecución; T01–T09 completadas (T05 mediante 003/T01–T03). Siguiente: T10 (issue #13)
+- **Estado:** En ejecución; T01–T10 verificadas (CI mediante 003). Siguiente: T11, documentación operativa (issue #16), después de #15.
 
 Spec, plan y tareas aprobados el 2026-10-03. Los IDs se ordenan antes de crear issues.
 La CI se rige por la [spec 003](../003-ci-minima/spec.md) y su plan, ambos aprobados.
@@ -82,12 +82,13 @@ Instalaciones y ejecución de Actions requieren su autorización; esta lista no 
   falla; restaurada, vuelve a pasar. La copia temporal sin data/ se crea en dist/ y se elimina;
   src/data sin cambios.
 
-- [ ] **T10 — Añadir pruebas a la CI existente.** Ampliar el job de T05 según spec 003;
+- [x] **T10 — Añadir pruebas a la CI existente.** Ampliar el job de T05 según spec 003;
   ejecutar build y npm test antes del cierre. No crear un workflow duplicado solo para los tests.
   **Comprobar:** check pasa con contratos correctos y falla con un caso incorrecto. Un check
   verde no acredita despliegue ni SQL Server. Cubre 003; evidencia adicional de CA8.
-  **Avance:** paso añadido y check correcto con contratos válidos (003/T04, issue #13).
-  El caso incorrecto se verifica en 003/T05 (issue #14).
+  **Evidencia:** paso Test integrado (003/T04, issue #13). Caso incorrecto: run 38330299235
+  fallido; restauración: run 38330429291 correcto (003/T05, issue #14). PR temporal #54
+  cerrado sin integrar y sin modificaciones remanentes en pruebas o datos.
 
 - [ ] **T11 — Documentar operación local.** README de api-core con entorno, dev/build/start/test,
   curl de rutas, logs y cómo diagnosticar un fallo; aclarar que /health no comprueba SQL.

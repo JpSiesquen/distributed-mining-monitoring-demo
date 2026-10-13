@@ -15,9 +15,10 @@ Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); GET /health, GET /api/equipment con datos simulados y errores 404/500 en JSON integrados
 (002/T06–T08); pruebas de contratos con `npm test` (002/T09), ejecutadas en CI (003/T04).
 
-**Siguiente:** integrar el endurecimiento del workflow (issue #42, PR #52), verificado con
-límite de 5 minutos, control de `.npmrc` y recuperación tras un fallo previo a la instalación.
-Después, verificar fallos de pruebas e instalación en CI (issue #14). Build, disparadores y protección de
+**Siguiente:** integrar la evidencia de fallos controlados de CI (issue #14), verificada con
+una expectativa incorrecta, ausencia de lockfile y restauración completa. Después, documentar
+CI (issue #15) y operación de API Core (issue #16). Endurecimiento integrado en PR #52:
+límite de 5 minutos y control de `.npmrc` antes de instalar. Build, disparadores y protección de
 main verificados (003/T03 y T08): main solo acepta pull requests con el check de CI exitoso.
 Revisión de dependencias integrada en PR #32; las cuatro versiones están aprobadas.
 Instalación local realizada y lockfile contrastado. Consultar el
@@ -34,7 +35,7 @@ con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 
 | Orden | Entregable | Estado / dependencia |
 |-------|------------|----------------------|
-| 1 | API Core con equipos mock y CI de build/pruebas | Rutas, errores JSON y seis pruebas integrados; CI obligatoria con build/test. Pendientes: endurecimiento del workflow, fallos controlados y documentación operativa. |
+| 1 | API Core con equipos mock y CI de build/pruebas | Rutas, errores JSON, seis pruebas y CI endurecida integrados; fallos y recuperación verificados. Pendiente: integrar evidencia y completar documentación operativa. |
 | 2 | BFF consumiendo API Core | Por especificar; requiere API Core verificable. |
 | 3 | Frontend consumiendo únicamente BFF | Por especificar; completar flujo local con mocks. |
 | 4 | Integración SQL Server y persistencia | Por especificar; mantener contrato entre capas. |
