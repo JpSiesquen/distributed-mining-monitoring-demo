@@ -2,7 +2,7 @@
 
 - **Spec:** [004](spec.md)
 - **Plan:** [004](plan.md), aprobado el 2026-10-13
-- **Estado:** Aprobadas el 2026-10-13; T01–T04 verificadas, T05–T09 pendientes
+- **Estado:** Aprobadas el 2026-10-13; T01–T05 verificadas, T06–T09 pendientes
 
 Prerrequisito: API Core y CI de las specs 002/003 implementados y verificados.
 El orden introduce CI tras la compilación y pruebas al existir las rutas. Las casillas
@@ -66,10 +66,13 @@ T01–T09 corresponden, en orden, a las issues
   arranca dist/ anterior; temporales y procesos limpiados. Comunicación HTTP con API Core
   pendiente de T06; no se marca CA5 completa por esta comprobación parcial.
 
-- [ ] **T05 — Añadir salud independiente.** GET /health devuelve 200 JSON status ok;
+- [x] **T05 — Añadir salud independiente.** GET /health devuelve 200 JSON status ok;
   desactivar X-Powered-By. No consultar API Core desde esta ruta.
   **Comprobar:** respuesta correcta con API Core detenido en dev y build/start.
   Depende de T04; R2/CA1.
+  **Evidencia:** dev y build/start en copia temporal sin credenciales devuelven 200 JSON
+  {"status":"ok"}, sin X-Powered-By. Destino configurado de API Core sin escucha,
+  comprobado antes/después; health disponible sin fuente. Procesos/temporales limpiados.
 
 - [ ] **T06 — Consultar equipos y gestionar fallos.** Usar fetch nativo hacia API Core;
   validar respuesta 200 y arreglo id/name. Limitar headers y cuerpo con la espera configurada.

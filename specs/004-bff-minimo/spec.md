@@ -1,6 +1,6 @@
 # Spec 004 — BFF mínimo para consulta de equipos
 
-- **Estado:** Aprobada el 2026-10-13; implementación parcial, base compilable verificada
+- **Estado:** Aprobada el 2026-10-13; implementación parcial, arranque y salud propia verificados
 - **Fecha:** 2026-10-13
 
 ## Contexto
@@ -49,7 +49,7 @@ comandos y cambios de CI se revisarán en el plan antes de cualquier instalació
 
 ## Criterios de aceptación
 
-- [ ] **CA1:** /health devuelve 200 y JSON status ok aunque API Core esté detenido.
+- [x] **CA1:** /health devuelve 200 y JSON status ok aunque API Core esté detenido.
 - [ ] **CA2:** con API Core disponible, /api/equipment devuelve su arreglo id/name a través
   de HTTP; el BFF no lee archivos ni usa credenciales SQL.
 - [ ] **CA3:** API Core detenido, respuesta no exitosa o JSON/contrato inválido producen
