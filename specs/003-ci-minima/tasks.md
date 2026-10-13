@@ -2,8 +2,9 @@
 
 - **Spec:** [003](spec.md)
 - **Plan:** [003](plan.md)
-- **Estado:** En ejecución; T01–T04 y T08 completadas. Siguiente: T05 (issue #14), después de #42
+- **Estado:** En ejecución; T01–T04 y T08 completadas, T09 verificada en PR #52. Siguiente: integrar #42 y ejecutar T05 (issue #14).
 - **Fecha:** 2026-10-03
+- **Ampliación #42:** T09 aprobada y verificada el 2026-10-12; integración pendiente.
 
 Spec, plan y tareas aprobados el 2026-10-03. Esta lista no habilita Actions ni ejecuta instalaciones.
 Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
@@ -85,3 +86,15 @@ Las tareas concretan T05 y T10 de 002; no crear workflows duplicados.
   rechazado por la política de la rama; cerrado sin integrar. Push directo de un commit vacío
   a main rechazado con GH013 (pull request y check `api-core` requeridos); main sin cambios.
   La integración de este cambio con el check exitoso completa la verificación.
+
+- [x] **T09 — Limitar el job y comprobar la política npm.** Issue #42; depende de T04.
+  Tras aprobar R6/CA7–CA8 y el plan, añadir timeout-minutes con el valor acordado y un paso
+  previo a npm ci que compruebe .npmrc y la configuración efectiva ignore-scripts=true.
+  Mantener nombre api-core, permisos, SHA y comando de instalación.
+  **Comprobar:** PR válido en verde; retirar la línea en un PR de validación provoca fallo
+  antes de instalar; restaurar recupera el check. Cerrar el PR de validación sin integrar.
+  **Evidencia (2026-10-12):** PR #52, [CI válida](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38329793557).
+  PR temporal #53: [línea retirada](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38329828502),
+  Verify npm script policy fallido; Install dependencies, Build y Test omitidos; merge bloqueado.
+  [Restauración](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38329888354) en verde;
+  PR #53 cerrado sin integrar. Job conserva api-core y declara timeout-minutes: 5.

@@ -9,7 +9,7 @@
 Definir un workflow de GitHub Actions que compruebe únicamente API Core.
 Primero ejecutar instalación reproducible y compilación; añadir pruebas en el mismo job
 cuando existan. Spec y plan aprobados el 2026-10-03. Build y protección de main
-implementados y verificados (T01–T03, T08); pruebas pendientes.
+implementados y verificados (T01–T04, T08), incluidas las seis pruebas de contrato.
 
 ## Diseño
 
@@ -57,6 +57,23 @@ compilación o pruebas hace fallar el job; no usar continue-on-error ni ignorar 
 No configurar credenciales SQL, SSH o Azure ni invocar servicios del cliente.
 
 ## Protección de main
+
+### Ampliación #42 — Aprobada (2026-10-12)
+
+- timeout-minutes: 5 en el job api-core. Las tres ejecuciones recientes
+  finalizaron en 11–15 segundos; cinco minutos dan margen sin aceptar una espera de horas.
+  Alternativa: diez minutos, con mayor margen y más espera ante un bloqueo; no se justifica
+  para el alcance actual. Revalidar el límite cuando crezca el trabajo del job.
+- Antes de npm ci, tras setup-node, exigir que .npmrc exista y contenga ignore-scripts=true;
+  comprobar también npm config get ignore-scripts para detectar una configuración efectiva distinta.
+- Mantener npm ci --ignore-scripts, los SHA, permisos y nombre api-core ya aprobados.
+- Verificar un PR válido y otro de validación con la línea retirada: el segundo debe fallar
+  antes de Install dependencies; restaurar la línea y comprobar recuperación.
+- No instalar paquetes nuevos ni añadir concurrencia, caché u otros controles a esta issue.
+
+R6/CA7–CA8, T09 y su implementación/validación en GitHub aprobados el 2026-10-12.
+
+### Ruleset aprobado
 
 Configuración aprobada el 2026-10-09 para R5. Un ruleset de repositorio
 sobre la rama por defecto, con enforcement activo:
