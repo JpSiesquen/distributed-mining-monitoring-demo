@@ -12,7 +12,7 @@ y `tasks.md`; las reservas vacías permiten ver la ruta y no aprueban alcance ni
 |------|----------------|------------|--------|
 | 1–2 | [002-api-core-minimo](002-api-core-minimo/spec.md) | API Core con datos mock | Implementada y verificada |
 | 1–2 | [003-ci-minima](003-ci-minima/spec.md) | CI de compilación y pruebas | Implementada y verificada |
-| 3 | [004-bff-minimo](004-bff-minimo/spec.md) | BFF consumiendo API Core | Spec, plan y tareas aprobados; ejecución pendiente |
+| 3 | [004-bff-minimo](004-bff-minimo/spec.md) | BFF consumiendo API Core | Base compilable verificada; rutas y CI BFF pendientes |
 | 4 | [005-frontend-minimo](005-frontend-minimo/spec.md) | Dashboard de equipos consumiendo BFF | Spec, plan y tareas aprobados; ejecución pendiente |
 | 5 | [006-integracion-sql-server](006-integracion-sql-server/spec.md) | Integración SQL Server | Reservada; documentos vacíos |
 | 6 | [007-docker-nginx](007-docker-nginx/spec.md) | Empaquetado y entrada HTTP | Reservada; documentos vacíos |
