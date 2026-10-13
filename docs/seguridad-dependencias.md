@@ -192,3 +192,9 @@ npm ci --ignore-scripts y npm run build. El lockfile final de #60 ya está contr
 no se incorporan dependencias ni scripts de instalación. Sin secretos de producción,
 despliegue o servicios SQL. Validar un caso correcto y un error de tipos sin integrar la prueba;
 añadir el check bff al ruleset después de validar su ejecución, conservando api-core.
+
+Validación de #61: ambos jobs correctos en ejecución 38477039523; error de tipos BFF
+TS2322 con api-core correcto en 38477153451 y PR #84 bloqueado. Recuperación correcta
+en 38477303301; PR temporal cerrado sin integrar. Ruleset verificado por lectura posterior:
+api-core y bff obligatorios (app GitHub Actions 15368), restantes controles conservados.
+Evidencia enlazada en [CI](ci.md#ampliación-bff--issue-61).

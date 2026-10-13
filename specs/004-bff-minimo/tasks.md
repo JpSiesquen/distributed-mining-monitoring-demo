@@ -2,7 +2,7 @@
 
 - **Spec:** [004](spec.md)
 - **Plan:** [004](plan.md), aprobado el 2026-10-13
-- **Estado:** Aprobadas el 2026-10-13; T01–T02 verificadas, T03–T09 pendientes
+- **Estado:** Aprobadas el 2026-10-13; T01–T03 verificadas, T04–T09 pendientes
 
 Prerrequisito: API Core y CI de las specs 002/003 implementados y verificados.
 El orden introduce CI tras la compilación y pruebas al existir las rutas. Las casillas
@@ -43,12 +43,15 @@ T01–T09 corresponden, en orden, a las issues
   TS2322 temporal termina con salida 1 sin emisión ni cambio del JS anterior.
   Fuente temporal retirada y build correcto restaurado. Sin servidor HTTP todavía.
 
-- [ ] **T03 — Incorporar CI de compilación del BFF.** Revalidar Actions, comandos y permisos;
+- [x] **T03 — Incorporar CI de compilación del BFF.** Revalidar Actions, comandos y permisos;
   añadir job bff al workflow existente con los controles del plan. Conservar api-core.
   Validar el job antes de exigir su check en el ruleset, dentro de esta entrega.
   **Comprobar:** ambos jobs pasan; un error de tipos del BFF falla su job con api-core correcto
   y bloquea integración al exigir ambos checks. Control de .npmrc previo a npm ci,
   permisos mínimos y límite de cinco minutos. Depende de T02; R8/CA8 parcial.
+  **Evidencia:** PR #83; ejecución correcta 38477039523. Negativo TS2322 38477153451:
+  bff falla, api-core pasa y PR temporal #84 BLOCKED. Ruleset exige ambos checks;
+  recuperación 38477303301 correcta y #84 cerrado sin integrar. Detalle en docs/ci.md.
 
 - [ ] **T04 — Configurar arranque, logs y comandos.** Crear app.ts/server.ts; validar las
   cuatro variables del plan antes de escuchar y actualizar .env.example. Implementar
