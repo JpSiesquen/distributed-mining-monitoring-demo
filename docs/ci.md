@@ -42,7 +42,7 @@ despliegue, disponibilidad de los servidores ni ausencia de malware.
 
 ## Ampliación BFF — issue #61
 
-Job bff preparado, pendiente de autorizar ejecución y validar en GitHub. Ejecutará en bff/:
+Job bff preparado y ejecución autorizada el 2026-10-13; validación en GitHub pendiente. Ejecutará en bff/:
 política npm → npm ci --ignore-scripts → npm run build. Reutiliza runner, runtime, Actions
 fijadas y permisos de API Core, con cinco minutos y caché desactivada. Las pruebas HTTP
 se incorporarán cuando existan; build no acredita rutas ni consulta de equipos.
