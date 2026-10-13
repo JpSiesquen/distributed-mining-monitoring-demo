@@ -69,7 +69,8 @@ el proxy de Vite no viaja dentro de dist/. Esa configuración requerirá su prop
 
 ### Estado y consulta propuestos
 
-TanStack Query 5 gestiona carga, resultado, fallo y reintento explícito de la consulta;
+TanStack Query 5, seleccionado y aprobado el 2026-10-13, gestiona carga, resultado, fallo
+y reintento explícito de la consulta;
 useState conserva solo el texto de búsqueda. Fetch nativo comprueba estado HTTP y contrato
 antes de aceptar los datos. Derivar lista visible y contador del arreglo recibido, sin estados duplicados.
 Desactivar reintentos automáticos y consultas por foco/reconexión; el usuario reintenta mediante
@@ -102,8 +103,10 @@ Revisar compatibilidad, comandos, uso disponible de Actions y autorización ante
 - Aceptadas: contrato id/name, dashboard y estética industrial oscura con ámbar.
 - Propuestas: CSS propio para esta vista; alternativa Material UI cuando haya necesidad
   concreta de componentes más complejos. No incorporar Motion, Zustand, Zod o 3D por anticipado.
-- TanStack Query responde al estado remoto y recuperación ya requeridos; alternativa fetch
-  con estado manual añade gestión propia de ciclo de vida. La selección requiere validación.
+- Aprobada el 2026-10-13: selección de TanStack Query para estado remoto y recuperación,
+  búsqueda local y reintento por botón; sin reintentos automáticos ni consultas por foco/reconexión.
+  Alternativa: fetch con estado manual añade gestión propia de ciclo de vida.
+  La versión exacta y los comandos de instalación siguen pendientes de revisión y autorización.
 - React/React DOM de producción; Vite, plugin React, TypeScript y tipos de desarrollo;
   TanStack Query de producción y herramientas de pruebas indicadas de desarrollo.
   Versiones exactas, compatibilidad con Vite 6/Node 24 y comandos pendientes de revisión de seguridad.
@@ -117,7 +120,8 @@ Revisar compatibilidad, comandos, uso disponible de Actions y autorización ante
 - P1: dirección acordada; composición detallada propuesta arriba y revisión visual prevista.
 - P2: resuelta; proxy de mismo origen en dev/preview y configuración local aprobados el
   2026-10-13. Nginx se concreta en fase 6.
-- P3: selección técnica y estrategia de pruebas/CI propuestas; versiones y comandos por revisar.
+- P3: TanStack Query seleccionado y aprobado; herramientas de pruebas y ampliación de CI
+  pendientes. Versiones exactas y comandos por revisar.
 
 ## Trazabilidad
 
