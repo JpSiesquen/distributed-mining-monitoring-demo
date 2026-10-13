@@ -14,5 +14,6 @@ tomada, las alternativas evaluadas y sus consecuencias.
 | [0007](0007-sistema-operativo-y-version-sql-server.md) | Sistema operativo y versión de SQL Server | Aceptada |
 | [0008](0008-red-privada-y-aislamiento-de-entornos.md) | Red privada y aislamiento de entornos | Aceptada |
 | [0009](0009-ci-minima-api-core.md) | CI mínima de API Core | Aceptada |
+| [0010](0010-ci-por-componente.md) | CI por componente; checks API Core y BFF obligatorios | Aceptada; implementación pendiente |
 
 Nuevos ADR: copiar la estructura de uno existente y numerar de forma correlativa.

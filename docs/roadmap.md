@@ -15,7 +15,12 @@ Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); GET /health, GET /api/equipment con datos simulados y errores 404/500 en JSON integrados
 (002/T06–T08); pruebas de contratos con `npm test` (002/T09), ejecutadas en CI (003/T04).
 
-**Siguiente:** especificar BFF consumiendo exclusivamente API Core, antes de implementarlo.
+**Siguiente:** redactar y revisar la spec 005 del frontend. La fase 3 tiene
+[issues #59–#67](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/milestone/4)
+publicadas desde las [tareas 004](../specs/004-bff-minimo/tasks.md).
+Spec, plan y tareas del BFF aprobados; sin implementación iniciada. Planificar frontend no
+completa el BFF ni elimina esa dependencia. La [estructura de specs](../specs/README.md)
+incluye las reservas documentales de las fases restantes, ordenadas por ejecución.
 API Core mock implementado y CA1–CA8 verificados: [operación](../api-core/README.md).
 CI implementada (spec 003); CA1–CA8 contrastados y enlazados en [CI de API Core](ci.md).
 Evidencia de fallos integrada en PR #55.
@@ -39,8 +44,8 @@ con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 |-------|------------|----------------------|
 | 1 | API Core compilable con CI obligatoria | Completada; milestone cerrado. |
 | 2 | Rutas, errores y pruebas de API Core | Completada y documentada: CA1–CA8 de 002 y 003; milestone cerrado. |
-| 3 | BFF consumiendo API Core | Por especificar; requiere API Core verificable. |
-| 4 | Frontend consumiendo únicamente BFF | Por especificar; completar flujo local con mocks. |
+| 3 | BFF consumiendo API Core | Spec, plan y tareas 004 aprobados; nueve issues publicadas. Sin implementación. |
+| 4 | Frontend consumiendo únicamente BFF | Por especificar; completar flujo local con mocks. Revisar necesidades de UI frente al [contrato acordado en 004/P1](../specs/004-bff-minimo/spec.md#preguntas-abiertas); adaptar solo ante un requisito concreto. |
 | 5 | Integración SQL Server y persistencia | Por especificar; mantener contrato entre capas. |
 | 6 | Empaquetado con Docker y entrada Nginx | Concretar ejecución y verificar flujo completo local antes de desplegar. |
 | 7 | Despliegue y validación DEV/QA | Milestone de topología renumerado; ejecutar 001 y verificar sus prerrequisitos. Validar costos antes de aprovisionar. |
@@ -50,6 +55,7 @@ con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 La numeración identifica fases de entrega, no specs. El milestone de topología pasó de
 Fase 3 a Fase 7 y sus prefijos de issues de 3-N a 7-N; conserva IDs, enlaces y dependencias.
 Los milestones/issues de las fases futuras se concretarán al aprobar sus specs.
+Las carpetas y archivos vacíos de specs son reservas de estructura; se completan al abordar cada fase.
 
 Logs, pruebas, configuración y seguridad acompañan cada entrega. Ampliar CI cuando exista
 cada componente; no posponerla al despliegue. Resolver dependencias de ejecución antes de empaquetar.
