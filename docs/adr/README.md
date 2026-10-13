@@ -15,5 +15,6 @@ tomada, las alternativas evaluadas y sus consecuencias.
 | [0008](0008-red-privada-y-aislamiento-de-entornos.md) | Red privada y aislamiento de entornos | Aceptada |
 | [0009](0009-ci-minima-api-core.md) | CI mínima de API Core | Aceptada |
 | [0010](0010-ci-por-componente.md) | CI por componente; checks API Core y BFF obligatorios | Aceptada; implementación pendiente |
+| [0011](0011-proxy-local-frontend-bff.md) | Proxy local entre frontend y BFF | Aceptada; implementación pendiente |
 
 Nuevos ADR: copiar la estructura de uno existente y numerar de forma correlativa.

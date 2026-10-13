@@ -81,8 +81,9 @@ La planificación de 005 puede avanzar antes; no acredita esa implementación.
 - **P1 — Dirección acordada (2026-10-13):** industrial oscuro con acento ámbar, tarjetas
   sobrias, IDs monoespaciados y buen espaciado. Concretar composición y verificarla visualmente
   antes del cierre; diseño detallado en el plan.
-- **P2:** definir comunicación de desarrollo y del artefacto estático con BFF, incluyendo
-  origen/proxy, antes de decidir si hacen falta cambios de seguridad en el BFF.
+- **P2 — Resuelta (2026-10-13):** proxy de mismo origen de Vite en desarrollo y preview
+  local, con destino BFF externo al bundle; configuración aprobada en el plan y ADR 0011.
+  No requiere modificar CORS del BFF. Nginx se concreta en fase 6.
 - **P3:** seleccionar únicamente librerías necesarias y definir pruebas/CI en el plan,
   con revisión de versiones y comandos antes de instalar.
 

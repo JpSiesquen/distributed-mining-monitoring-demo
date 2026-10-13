@@ -45,18 +45,18 @@ Controles HTML semánticos, foco visible y avisos de estado accesibles sin anunc
 Extraer otros componentes solo si mejoran la legibilidad de un caso concreto; sin router,
 store global ni sistema genérico de componentes para una sola vista.
 
-### Comunicación y configuración propuestas
+### Comunicación y configuración aprobadas el 2026-10-13
 
 El navegador solicita /api/equipment en su mismo origen. Los servidores locales de Vite
 para desarrollo y preview reenvían /api al BFF, conservando la ruta. No configurar CORS
 abierto ni permitir destinos arbitrarios indicados por el navegador.
 
-| Parámetro | Propuesta local | Uso |
+| Parámetro | Configuración local aprobada | Uso |
 |-----------|-----------------|-----|
 | BFF_URL | http://127.0.0.1:3001 | Variable de entorno del proxy; validar origen HTTP/HTTPS sin credenciales. |
 | Escucha local | 127.0.0.1 | Desarrollo y preview, sin exposición a la red. |
-| Puerto de desarrollo | 5173 | Puerto habitual de Vite; propuesta por aprobar. |
-| Puerto de preview | 4173 | Puerto habitual de Vite; propuesta por aprobar. |
+| Puerto de desarrollo | 5173 | Desarrollo local. |
+| Puerto de preview | 4173 | Verificación local del artefacto estático. |
 
 Usar strictPort para fallar si el puerto está ocupado. Cargar BFF_URL solo en la configuración
 de Vite; no usar prefijo VITE_ ni insertar el destino privado en el bundle. Registrar el ejemplo
@@ -109,13 +109,14 @@ Revisar compatibilidad, comandos, uso disponible de Actions y autorización ante
   Versiones exactas, compatibilidad con Vite 6/Node 24 y comandos pendientes de revisión de seguridad.
 - Revisar scripts de instalación y binarios transitivos antes de ejecutar. Si ignore-scripts
   impide funcionar a un paquete, validar la causa y un comando específico; no desactivar la política.
-- Comunicación local y ampliación de CI requieren aprobación; registrar las decisiones relevantes
-  como ADR al aprobarlas. Este plan no autoriza instalaciones ni cambios del ruleset.
+- Comunicación local aprobada: [ADR 0011](../../docs/adr/0011-proxy-local-frontend-bff.md).
+  Ampliación de CI pendiente de aprobación. Este plan no autoriza instalaciones ni cambios del ruleset.
 
 ## Respuesta a preguntas abiertas
 
 - P1: dirección acordada; composición detallada propuesta arriba y revisión visual prevista.
-- P2: proxy de mismo origen en dev/preview propuesto; Nginx se concreta en fase 6.
+- P2: resuelta; proxy de mismo origen en dev/preview y configuración local aprobados el
+  2026-10-13. Nginx se concreta en fase 6.
 - P3: selección técnica y estrategia de pruebas/CI propuestas; versiones y comandos por revisar.
 
 ## Trazabilidad
