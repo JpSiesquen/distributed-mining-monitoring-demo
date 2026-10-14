@@ -15,9 +15,10 @@ Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); GET /health, GET /api/equipment con datos simulados y errores 404/500 en JSON integrados
 (002/T06–T08); pruebas de contratos con `npm test` (002/T09), ejecutadas en CI (003/T04).
 
-**Paso actual:** revisar la [spec 005, revisión 2](../specs/005-frontend-minimo/spec.md)
-para reutilizar Mining Ops Console en su propio repositorio. Lectura de eventos primero y
-Material UI aprobados; atención persistente después. Revisión completa y nuevo plan pendientes.
+**Paso actual:** revisar el [plan 005 de migración](../specs/005-frontend-minimo/plan.md).
+Spec 005 revisión 2 aprobada: Mining Ops Console en su propio repo, lectura primero y
+Material UI; atención persistente después. GET /api/events con arreglo directo y UTC ficticia
+aprobados. Contrato detallado, evidencia y CI por repositorio propuestos en el nuevo plan.
 No ejecutar #70–#79 con el plan anterior ni instalar dependencias por esta propuesta.
 Revisión #59 integrada; base compilable, instalación autorizada y lockfile definitivo de 82 paquetes
 verificados en #60. Arranque, entorno y comandos start/dev verificados en #62;
@@ -61,7 +62,7 @@ con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 | 1 | API Core compilable con CI obligatoria | Completada; milestone cerrado. |
 | 2 | Rutas, errores y pruebas de API Core | Completada y documentada: CA1–CA8 de 002 y 003; milestone cerrado. |
 | 3 | BFF consumiendo API Core | Implementado y verificado: 004/T01–T09, CA1–CA8. Cierre #67 integrado en PR #91; milestone aún abierto. |
-| 4 | Mining Ops Console consumiendo únicamente BFF | Revisión 2 de 005 en revisión; lectura de eventos y adaptación Material UI aprobadas. Plan/tasks/issues requieren adaptación a dos repos; conservar contrato id/name existente. |
+| 4 | Mining Ops Console consumiendo únicamente BFF | Revisión 2 de 005 aprobada; plan de migración en borrador. Tasks/issues requieren adaptación a dos repos; conservar contrato id/name existente. |
 | 5 | Integración SQL Server y persistencia | Por especificar; mantener contrato entre capas. |
 | 6 | Empaquetado con Docker y entrada Nginx | Concretar ejecución y verificar flujo completo local antes de desplegar. |
 | 7 | Despliegue y validación DEV/QA | Milestone de topología renumerado; ejecutar 001 y verificar sus prerrequisitos. Validar costos antes de aprovisionar. |

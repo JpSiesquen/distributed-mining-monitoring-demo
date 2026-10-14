@@ -1,172 +1,179 @@
-# Plan 005 — Dashboard de equipos
+# Plan 005 — Integración de Mining Ops Console
 
-- **Spec:** [005](spec.md), revisión 2 en revisión.
-- **Estado:** Plan anterior aprobado; pendiente de adaptación a la migración entre repositorios.
+- **Spec:** [revisión 2](spec.md), aprobada el 2026-10-13.
+- **Estado:** Borrador para revisión; sustituirá al plan del dashboard original al aprobarse.
+- **Aprobado:** dos repos; lectura primero; Material UI; GET /api/events con arreglo directo;
+  fechas UTC explícitas para datos ficticios. No autoriza instalaciones ni implementación.
 
-El contenido siguiente describe el dashboard original y se conserva como referencia hasta
-aprobar el nuevo plan. No ejecutar: cambia la ubicación del frontend, el dominio de lectura
-y la distribución de CI. Siguen aprobados Material UI, lectura primero y dos repositorios.
+## Enfoque y autoridad
 
-## Enfoque
+Reutilizar la consola como base revisable, sin tratar su código/spec previa como autoridad
+absoluta del dominio. Corregir defectos de reglas, presentación y datos cuando se identifiquen;
+validar cambios de alcance antes de implementarlos.
 
-Crear una aplicación React 19 + Vite 6 + TypeScript con una vista de equipos.
-Consultar únicamente el BFF, conservar id/name y calcular búsqueda/contador en el cliente.
-Estética industrial oscura con acento ámbar, aprobada el 2026-10-13.
+Frontend permanece en `mining-ops-console`; API Core/BFF e infraestructura, en este repo.
+No crear otra aplicación en frontend/. Cada repo conserva su historial, PR y CI.
+API Core es la fuente de datos; el contrato aprobado es el acuerdo entre repos.
 
-## Diseño
+```text
+Navegador → Vite /api → BFF /api/events → API Core /api/events → JSON ficticio
+```
 
-### Composición visual
+La primera entrega no despliega DEV/QA/PROD ni añade SQL, MQTT, polling o escrituras.
+Conservar equipos id/name, health y controles existentes. Los datos del demo previo no se
+copian como datos de operación; crear fixtures nuevos sin información del cliente.
 
-Cabecera con identidad del producto y título Equipos; resumen del total recibido;
-barra de búsqueda con etiqueta visible; contador de resultados; cuadrícula de tarjetas.
-Cada tarjeta muestra nombre como información principal e ID monoespaciado secundario.
-No añadir indicadores de estado operativo ni navegación hacia vistas inexistentes.
+## Contrato propuesto de lectura v1
 
-Propuesta de detalles: fondo carbón, superficies ligeramente más claras, borde discreto,
-texto claro y ámbar en acentos/foco. Tipografías del sistema, sin descargas externas.
-Definir colores, tipografía y espaciados compartidos en un tema de Material UI,
-aplicado con ThemeProvider; comprobar contraste al implementarlos.
-Una columna en móvil y columnas adaptativas en escritorio. Nombres largos deben ajustar
-líneas; priorizar el contenido a 360 px. Revisar capturas a 360 px y 1280 px antes del cierre.
+GET /api/events devuelve 200 JSON con arreglo de EventoCruce; [] representa fuente vacía.
+Sin query de paginación ni envoltorio/total en esta entrega. Entregar una instantánea completa
+del conjunto ficticio; frontend filtra localmente y muestra conteos de ese conjunto, no de una
+operación real. Orden fuente: fechaHora descendente; empate por folio ascendente.
 
-Carga: tarjetas de espera con mensaje accesible. Fuente vacía: mensaje propio.
-Sin coincidencias: explicar el filtro y ofrecer limpiar búsqueda. Error: mensaje genérico
-y botón Reintentar; sin datos falsos ni contador que presente el fallo como cero equipos.
-Controles HTML semánticos, foco visible y avisos de estado accesibles sin anuncios por pulsación.
-Usar Card, TextField, Button, Typography, Alert y Skeleton según su función en esta vista;
-composición responsive con Box. Mantener etiquetas y semántica accesibles al personalizarlos.
+| Campos | Regla propuesta |
+|--------|-----------------|
+| folio | Texto no vacío, único en la respuesta; formato EV-AAAAMMDD-NNNN. |
+| estado | conforme, revision o no_conforme. |
+| categoria | null para conforme/revision; categoría activa para no_conforme. |
+| confianza | Número finito entre 0 y 1. No derivar por cuenta propia la clasificación. |
+| fechaHora | Fecha válida YYYY-MM-DDTHH:mm:ssZ; UTC explícita. |
+| puntoCaptura, camara, versionModelo, observacion | Textos no vacíos; valores ficticios en fixtures. |
+| turno | A, B o C declarado por la fuente; no inferir turnos reales desde la computadora. |
+| patente, empresa | Texto no vacío o null; no inventarlos si la fuente no los aporta. |
+| tipoTolva | eyectora o convencional, como catálogo propuesto sujeto a revisión de dominio. |
+| evidencia | null o { imagen, boundingBoxes }; clip queda fuera del contrato inicial. |
+| atencion | null o { estado, atendidoPor, fechaHora, comentario? }, solo lectura. |
+| derivacion | Requerida para revision: { motivo, resolucion? }; ausente en los otros estados. |
 
-### Archivos propuestos en frontend/
+Catálogo propuesto: sobrellenado_visual, mala_distribucion, tolva_levantada. cubre_lona no se
+activa por estar en el demo. Atención: pendiente/en_seguimiento/cerrado; motivos:
+polvo_en_suspension/oclusion_parcial/baja_confianza; resoluciones:
+descartado/confirmado_conforme/confirmado_no_conforme. Revisar la coherencia de estas reglas
+con el responsable; no añadir umbrales, métricas de seguridad ni inferencia por esta integración.
 
-| Archivo | Responsabilidad |
-|---------|-----------------|
-| package.json, lockfile y .npmrc | Versiones revisadas, comandos e ignore-scripts=true. |
-| tsconfig.json, vite.config.ts e index.html | Tipos, compilación, entrada y proxy local. |
-| src/main.tsx y src/App.tsx | Inicialización y composición del dashboard. |
-| src/equipment.ts | Contrato id/name, consulta HTTP, validación y filtrado. |
-| src/EquipmentCard.tsx | Presentación de un equipo. |
-| src/theme.ts | Tema Material UI industrial oscuro/ámbar, tipografía, espaciados y foco. |
-| test/ | Pruebas de comportamiento y contratos. |
-| README.md | Configuración, comandos y verificación local. |
+Campos desconocidos, obligatorios ausentes, tipos/rangos/fechas inválidos, folios duplicados
+y combinaciones incompatibles con el contrato producen rechazo; no aceptar parcialmente una
+respuesta inválida. comentario/etiqueta/resolucion opcionales se omiten, no llevan undefined en JSON.
 
-Extraer otros componentes solo si mejoran la legibilidad de un caso concreto; sin router,
-store global ni sistema genérico de componentes para una sola vista.
+Atención ficticia puede describir eventos ya atendidos; no equivale a sesión, autenticación
+ni registro de acciones reales. Si se aporta, fechaHora debe ser UTC válida y no anterior al evento.
+BoundingBoxes: x/y finitos >=0; ancho/alto >0; x+ancho e y+alto <=1; etiqueta opcional de texto.
 
-### Comunicación y configuración aprobadas el 2026-10-13
+Documentar el contrato canónico en docs/contratos/eventos-v1.md al aprobar el plan; vincular
+revisión/commit desde frontend. Mantener validadores explícitos de JSON y ejemplos equivalentes
+por componente, sin paquete compartido/generador/Zod añadido por anticipado.
 
-El navegador solicita /api/equipment en su mismo origen. Los servidores locales de Vite
-para desarrollo y preview reenvían /api al BFF, conservando la ruta. No configurar CORS
-abierto ni permitir destinos arbitrarios indicados por el navegador.
+### Evidencia y fechas
 
-| Parámetro | Configuración local aprobada | Uso |
-|-----------|-----------------|-----|
-| BFF_URL | http://127.0.0.1:3001 | Variable de entorno del proxy; validar origen HTTP/HTTPS sin credenciales. |
-| Escucha local | 127.0.0.1 | Desarrollo y preview, sin exposición a la red. |
-| Puerto de desarrollo | 5173 | Desarrollo local. |
-| Puerto de preview | 4173 | Verificación local del artefacto estático. |
+Propuesta: imágenes sintéticas propias del frontend bajo /evidencia/demo/, referenciadas por
+rutas locales del contrato. Admitir únicamente rutas de ese catálogo, sin URLs externas,
+traversal ni rutas del cliente. API Core transporta metadatos; no sirve imágenes del repo privado.
+No implementar clips ni proxy de imágenes. Comprobar compatibilidad del formato elegido con
+canvas/PDF antes de aceptarlo. La imagen es una ilustración de demostración, no detección real.
 
-Usar strictPort para fallar si el puerto está ocupado. Cargar BFF_URL solo en la configuración
-de Vite; no usar prefijo VITE_ ni insertar el destino privado en el bundle. Registrar el ejemplo
-en .env.example, sin credenciales. La aplicación mantiene la URL relativa al cambiar el destino.
-Si falta o es inválido el destino al iniciar dev/preview, fallar con mensaje seguro.
+Preparar al menos un evento con evidencia y otro sin ella para comprobar recuadros, ausencia
+explicada y PDF. Un fallo de imagen debe mostrarse en consola y reporte; no fingir evidencia.
 
-Build produce archivos estáticos; preview verifica esos archivos y el proxy local. No es un
-servidor de producción. En fase 6, Nginx asumirá la entrada de mismo origen definida en 001;
-el proxy de Vite no viaja dentro de dist/. Esa configuración requerirá su propio plan.
+UTC aprobada para fixtures: fechas, orden, filtros de periodo y PDF consistentes; mostrar UTC.
+No reinterpretar las horas antiguas sin zona como instantes reales ni asumir zona de faena.
+Adaptar domain/formato.ts y periodo.ts, incluidos límites de medianoche y periodo vacío.
 
-### Estado y consulta aprobados
+### Errores y tiempos
 
-TanStack Query 5, seleccionado y aprobado el 2026-10-13, gestiona carga, resultado, fallo
-y reintento explícito de la consulta;
-useState conserva solo el texto de búsqueda. Fetch nativo comprueba estado HTTP y contrato
-antes de aceptar los datos. Derivar lista visible y contador del arreglo recibido, sin estados duplicados.
-Desactivar reintentos automáticos y consultas por foco/reconexión; el usuario reintenta mediante
-el botón. Combinar la señal de cancelación de la consulta con el límite de diez segundos,
-aprobado el 2026-10-13, que cubre la respuesta completa, incluida la lectura del cuerpo.
-Da margen sobre los cinco segundos del BFF; al agotarse, cancelar, mostrar error seguro
-y permitir reintento manual, incluso si el proxy o BFF queda bloqueado.
+API Core valida su fixture: error de lectura/contrato → 500 JSON genérico, sin datos internos.
+BFF conserva logs por categoría y mensajes seguros: fuente inaccesible, estado no-200,
+JSON/contrato inválido o redirección → 502; espera completa agotada → 504. Health independiente.
+Usar API_CORE_TIMEOUT_MS existente (inicial 5000), sin cliente HTTP genérico nuevo.
 
-Comparación parcial con normalización a minúsculas en ID/nombre, conservando el orden recibido.
-No añadir debouncing ni peticiones por pulsación: la búsqueda opera sobre datos locales.
+Frontend usa fetch nativo con TanStack Query y validación de contrato; diez segundos para
+respuesta completa combinados con cancelación de la consulta. Sin retry automático ni refetch
+por foco/reconexión. En éxito inicial conservar la instantánea hasta reintento explícito; si
+la consulta falla no mostrar datos anteriores como vigentes ni habilitar PDF con datos inválidos.
+No reactivar sonido/popups del simulador al cargar la lista: no hay nuevos eventos en tiempo real.
 
-### Comandos, pruebas y CI aprobados
+## Cambios en este repositorio
 
-Dev inicia Vite; build comprueba tipos antes de generar dist/; preview sirve el artefacto local.
-Test ejecuta una suite finita con salida no cero ante fallo, sin modo watch en CI.
+| Archivo/componente | Cambio previsto |
+|--------------------|-----------------|
+| API Core: src/data/events.json | Fixtures completamente ficticios conformes a contrato. |
+| API Core: src/routes/events.ts y validación de dominio | Leer/validar fuente y exponer GET /api/events; usar manejo seguro existente. |
+| API Core: build y test | Verificar que copia data/events.json; añadir pruebas de lectura/error/contrato. |
+| BFF: src/app.ts y validador de eventos | Nueva ruta independiente de equipos; validación, abort, rechazo de redirecciones y fallos seguros. |
+| BFF: test | Casos correctos, vacío, inválidos, indisponible, timeout de cabeceras/cuerpo, logs/health. |
+| docs/contratos, specs 002/004, README/CI/roadmap | Registrar ampliación y evidencia sin invalidar criterios ya comprobados. |
 
-Estrategia aprobada el 2026-10-13: Vitest, jsdom y React Testing Library para verificar
-interacción y estados del DOM;
-una prueba de función pura no acredita carga, mensajes o recuperación de la pantalla.
-Simular fetch en pruebas con fixtures id/name, respuestas inválidas, fallos y demoras controladas;
-restaurar mocks y limpiar renders. No incorporar servidor de mocks ni navegadores descargados.
-Revisión visual/teclado e integración real se realizan además en navegador con build/preview.
+Sin dependencia nueva prevista en backend. No refactorizar rutas anteriores salvo necesidad
+concreta demostrada. Conservar checks api-core/bff y sus nombres, controles y permisos.
 
-Ampliación aprobada el 2026-10-13: añadir job frontend al workflow existente, preservando
-api-core y bff. Reutilizar runtime,
-runner, Actions fijadas y permisos mínimos revisados; control de .npmrc antes de npm ci
---ignore-scripts, seguido de build/test. Límite aprobado de cinco minutos y caché desactivada.
-Validar frontend antes de exigir su check junto a los otros dos en el ruleset. Verificar un
-fallo controlado que bloquee integración y su recuperación. No requerir servicios SQL o cloud.
-Revisar compatibilidad, comandos, uso disponible de Actions y autorización antes de habilitarlo.
+## Cambios en mining-ops-console
 
-## Decisiones
+| Archivo/componente | Cambio previsto |
+|--------------------|-----------------|
+| docs/spec.md y tasks/plan.md | Separar demo histórico de integración; referenciar contrato y este plan aprobado. |
+| package.json, lockfile, .npmrc y tests | Revisar grafo actual; incorporar solo paquetes aprobados, scripts finitos y protección npm. |
+| vite.config.ts y .env.example | Proxy /api al BFF_URL externo al bundle; 127.0.0.1, dev 5173/preview 4173, strictPort; sin apertura automática. |
+| src/main.tsx | QueryClientProvider y ThemeProvider/CssBaseline; tema oscuro/ámbar y tipografía del sistema. |
+| src/api/events.ts y domain/evento.ts | Consulta/validación del contrato; conservar vocabulario aplicable, sin duplicar estado remoto. |
+| src/App.tsx y features/panel/useIngesta.ts | Datos desde Query, selección por folio; retirar seed y simulador del flujo integrado, estados y reintento. |
+| PanelAlertas, Historico/Filtros | Adaptación MUI por pantalla; preservar prioridad/filtros/conteos, fuente/filtro vacío distintos. |
+| DetalleEvento, EncuadreEvidencia, BadgeEstado | MUI Dialog/controles/estados; preservar foco, Escape, overlays desde datos y fallback de imagen. |
+| FormularioCierre y domain/atencion.ts | Retirar invocación de tomar/cerrar del recorrido integrado; lectura con acciones deshabilitadas y explicación. |
+| VistaReporte/BotonReporte | MUI para pantalla/controles; conservar import dinámico del generador PDF. |
+| Portada/DocumentoReporte/config.ts | Quitar KPIS_DEMO/CRUCES_POR_JORNADA como cifras de operación; conteos del conjunto/periodo recibido, UTC y texto de datos sintéticos. |
+| CSS y estilos PDF | Migrar estilos de pantallas a tema/sx; conservar CSS puntual si MUI no cubre overlays. PDF mantiene sus estilos propios: MUI no renderiza el PDF. |
 
-- Aceptadas: contrato id/name, dashboard y estética industrial oscura con ámbar.
-- Aprobado el 2026-10-13: límite inicial de diez segundos para la consulta completa al BFF,
-  con cancelación, mensaje de error y reintento manual.
-- Aprobada el 2026-10-13: Material UI desde esta fase para tarjetas, controles y estados,
-  con tema industrial oscuro/ámbar. Sustituye la propuesta inicial de componentes con CSS propio.
-  Su motor de estilos predeterminado requiere revisar @emotion/react y @emotion/styled junto
-  con @mui/material. No incorporar fuentes, paquetes de iconos, Motion, Zustand, Zod o 3D por anticipado.
-- Aprobada el 2026-10-13: selección de TanStack Query para estado remoto y recuperación,
-  búsqueda local y reintento por botón; sin reintentos automáticos ni consultas por foco/reconexión.
-  Alternativa: fetch con estado manual añade gestión propia de ciclo de vida.
-  La versión exacta y los comandos de instalación siguen pendientes de revisión y autorización.
-- React/React DOM de producción; Vite, plugin React, TypeScript y tipos de desarrollo;
-  TanStack Query, Material UI y su motor de estilos de producción;
-  herramientas de pruebas indicadas de desarrollo, selección aprobada el 2026-10-13.
-  Versiones exactas, compatibilidad con Vite 6/Node 24 y comandos pendientes de revisión de seguridad.
-- Revisar scripts de instalación y binarios transitivos antes de ejecutar. Si ignore-scripts
-  impide funcionar a un paquete, validar la causa y un comando específico; no desactivar la política.
-- Comunicación local aprobada: [ADR 0011](../../docs/adr/0011-proxy-local-frontend-bff.md).
-- CI aprobada el 2026-10-13: job frontend y tres checks obligatorios, habilitados tras validar
-  los componentes; ampliación de [ADR 0010](../../docs/adr/0010-ci-por-componente.md).
-  La aprobación documental no ejecuta instalaciones ni modifica el ruleset.
+No copiar flota, patentes, nombres de faena ni imágenes reales a fixtures públicos. Revisar
+literales heredados y retirar detalles que no corresponden a los nuevos datos. No preservar
+componentes o reglas solo porque ya existen; registrar correcciones de alcance si aparecen.
 
-## Respuesta a preguntas abiertas
+## Secuencia de PR y puertas de verificación
 
-- P1: dirección acordada; composición detallada propuesta arriba y revisión visual prevista.
-- P2: resuelta; proxy de mismo origen en dev/preview y configuración local aprobados el
-  2026-10-13. Nginx se concreta en fase 6.
-- P3: selección de TanStack Query/Material UI, estrategia Vitest/jsdom/React Testing Library
-  y ampliación de CI aprobadas. Versiones exactas y comandos se revisarán antes de instalar.
+1. Documentos/ADR: aprobar revisión 005 y plan; reconciliar tasks/issues. ADR nuevo de repos
+   separados y CI sustituye solo la ampliación frontend de ADR0010; decisión backend permanece.
+   ADR0011 conserva proxy; revisar alcance /api/events sin alterar puertos/CORS automáticamente.
+2. Frontend: revisar seguridad y aprobar comandos antes de cualquier build/install. Establecer
+   baseline compilable, pruebas y CI inicial propias antes de migrar pantallas. Inspección visual
+   del original requiere acceso autorizado; no eludir su pantalla de acceso.
+3. Backend: contrato/fixtures y ruta API Core, después ruta BFF; PR pequeños con pruebas.
+   Integrar proveedor compatible antes de conectar consumidor; mantener equipos/health.
+4. Frontend: infraestructura Query/MUI/proxy y adquisición de datos; luego panel → histórico
+   → detalle/evidencia → reporte. Revisar cada pantalla y comportamiento antes de continuar.
+5. Integración: dev y build/preview con ambos servicios reales. Registrar pareja SHA y pruebas
+   de caídas/recuperación, medianoche, fuente vacía, filtros y evidencia/PDF. Corregir defectos.
+6. Cierre: docs de operación/compatibilidad y criterios de aceptación. Atención persistente
+   necesita otra entrega aprobada; no cerrar 001/T02 sin comprobar también su vista de equipos.
 
-## Trazabilidad
+## CI y pruebas propuestas
 
-| Requisito | Solución y comprobación |
-|-----------|-------------------------|
-| R1 | URL relativa y proxy a BFF; inspección de red e integración real. CA1. |
-| R2 | Tarjetas id/name e identidad consistente; revisión visual. CA1/CA4. |
-| R3 | Filtro derivado y contador, sin llamadas por pulsación. CA2. |
-| R4 | Estados distintos, validación HTTP/JSON y reintento explícito. CA3. |
-| R5 | Tema y composición responsive de Material UI, HTML semántico y teclado. CA4/CA5. |
-| R6 | Destino externo del proxy sin valores privados en bundle. CA6. |
-| R7 | Tipos/build, pruebas de DOM e integración compilada real. CA7. |
-| R8 | Job frontend y tres checks obligatorios tras validación. CA8. |
+- Backend: checks api-core/bff existentes, con nuevas pruebas del contrato; sin tercer job frontend aquí.
+- Frontend: job frontend en su propio repo, build + pruebas Vitest/RTL/jsdom; controles npm,
+  Actions oficiales fijadas a SHA revalidadas, runtime Node24.21.0, cinco minutos, permisos mínimos.
+  Revalidar compatibilidad y cuotas/costos de Actions del repo privado antes de habilitarlo.
+- Validar check frontend correcto/fallo de tipos/fallo de prueba/protección npm antes de exigirlo
+  en su ruleset. No modificar reglas existentes ni exponer secretos sin aprobación concreta.
+- Verificación de integración local con pareja SHA documentada; sin dispatch entre repos, PAT
+  compartidos ni clonación autenticada de repo privado en la CI pública.
+- Pruebas DOM cubren carga, vacío/filtro vacío, errores, cancelación/reintento, orden/filtros,
+  acciones deshabilitadas, periodo UTC y reportes. Verificar PDF generado y navegador real
+  además de mocks: comprobar contenido del documento, descarga, imágenes y limpieza de Blob.
 
-## Riesgos
+CA1/CA2: contrato/proveedor; CA3/CA5: consulta/recuperación; CA4: dominio/reporte;
+CA6: revisión visual/teclado; CA7: pareja compilada; CA8: CI; CA9: cierre documental.
 
-- Dependencias: aplicar [política y revisión](../../docs/seguridad-dependencias.md) antes de instalar;
-  no repetir la investigación histórica. Compatibilidad y scripts siguen pendientes de revisión.
-- BFF sin implementar: su disponibilidad es un prerrequisito del cierre; fixtures de pruebas no la acreditan.
-- DOM simulado no acredita distribución visual: revisar navegador, tamaños y teclado por separado.
-- Bundle estático no incluye el proxy: documentar diferencia entre preview local y despliegue con Nginx.
-- Presentación engañosa: no inventar métricas ni confundir fuente vacía, filtro vacío y fallo HTTP.
+## Dependencias, compatibilidad y recuperación
 
-Referencias técnicas: [tema Material UI](https://mui.com/material-ui/customization/theming/),
-[dependencias de Material UI](https://mui.com/material-ui/getting-started/installation/),
-[proxy de Vite 6](https://v6.vite.dev/config/server-options#server-proxy),
-[preview](https://v6.vite.dev/config/preview-options),
-[variables de entorno](https://v6.vite.dev/guide/env-and-mode),
-[configuración de Query](https://tanstack.com/query/v5/docs/framework/react/guides/important-defaults),
-[entornos de Vitest](https://vitest.dev/guide/environment).
+Conservar React19/Vite6/TypeScript y PDF existente si su revisión lo permite. Revisar Material
+UI/Emotion, Query y herramientas DOM según selección anterior; no fijar nuevas versiones ni
+instalar sin comandos aprobados. esbuild/fsevents aparecen con hasInstallScript: validar su
+necesidad/contenido y alternativa con scripts bloqueados, sin desactivar ignore-scripts.
+
+Cada PR identifica contrato y contraparte. Registrar SHA completo frontend/backend en evidencia,
+con comandos locales reproducibles. Si falla consumidor, no integrarlo/promoverlo; volver a la
+versión previamente validada sin reset/force push y mantener proveedor compatible. Git conserva
+el demo anterior. Un artefacto previo solo se reutiliza si existe y está identificado; no asumirlo.
+
+## Pendiente de aprobación del plan
+
+Reglas detalladas de contrato, catálogo sintético de evidencia, CI/ruleset del frontend y orden
+concreto de PR. Ruta/arreglo y UTC ya aprobados. Preparar tasks después de aprobar este plan;
+no ejecutar las diez issues originales ni publicar cambios del otro repo con este borrador.

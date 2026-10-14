@@ -1,7 +1,7 @@
 # Tareas 005 — Dashboard de equipos
 
 - **Spec:** [005](spec.md)
-- **Plan:** [005](plan.md), pendiente de adaptación a revisión 2.
+- **Plan:** [005](plan.md), nuevo borrador de migración pendiente de aprobación.
 - **Estado:** Tareas anteriores pendientes de adaptación; no ejecutar #70–#79 con el alcance anterior.
 
 La [revisión 2](spec.md) reutiliza Mining Ops Console en otro repo y amplía lectura a eventos.

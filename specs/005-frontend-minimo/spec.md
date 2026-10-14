@@ -1,9 +1,9 @@
 # Spec 005 — Integración de Mining Ops Console
 
-- **Estado:** En revisión; revisión 2 del 2026-10-13.
+- **Estado:** Revisión 2 aprobada el 2026-10-13; implementación pendiente.
 - **Decisiones aprobadas:** frontend en repo separado; primera entrega de lectura;
   atención/cierre persistentes después; mantener Material UI y adaptar la consola.
-- La aprobación del alcance no aprueba aún esta revisión completa, su plan ni ejecución.
+- La aprobación de esta revisión no aprueba todavía su plan ni ejecución.
 
 ## Motivo del cambio
 
@@ -96,9 +96,13 @@ repo público; usar evidencia sintética/autorizada. Conservar identificación d
   atención/cierre persistentes después.
 - Aprobado el 2026-10-13: mantener Material UI y adaptar la consola; CSS Modules no será
   la solución final de las pantallas migradas. Concretar sustitución por pantalla en el plan.
+- Aprobado el 2026-10-13: GET /api/events devuelve arreglo directo; fechas ficticias en UTC
+  explícita y presentación UTC. La zona real de faena se definirá al incorporar datos reales.
+- El repo existente es una base revisable: corregir/pulir lo necesario, sin tratar sus
+  decisiones o reglas como fuente absoluta de verdad.
 - Vigentes salvo revisión: React 19/Vite 6/TypeScript, TanStack Query, estrategia DOM, proxy
   local y espera frontend de diez segundos. Versiones y comandos siguen sujetos a revisión.
-- Pendientes: contrato detallado, fechas/zona horaria, acceso a evidencia, configuración
+- Pendientes: reglas detalladas de contrato, acceso a evidencia, configuración
   concreta de CI por repo y orden de adaptación. No añadir polling automáticamente.
 
 Esta revisión completa precede al nuevo plan y tareas/issues. Specs 002/004 conservan su
