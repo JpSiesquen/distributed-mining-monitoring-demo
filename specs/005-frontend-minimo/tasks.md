@@ -9,13 +9,34 @@ Una secuencia para dos repos: **backend** = distributed-mining-monitoring-demo;
 Las casillas acreditan ejecución, no aprobación documental. Instalaciones, ejecución de CI,
 cambios de rulesets y publicación de issues requieren las autorizaciones concretas aplicables.
 
-## Backlog anterior
+## Issues de ejecución
 
-#70–#79 y milestone Fase 4 describen el dashboard original; no corresponden automáticamente
-a estas quince tareas. Propuesta preparada: cinco issues backend y trece frontend;
-T01/T13/T15 se dividen por repo. Publicación y reconciliación pendientes de autorización,
-con enlaces de dependencia y trazabilidad hacia los reemplazos de las issues anteriores.
-No cerrar, trasladar ni publicar issues por redactar este documento. El historial conserva T01–T10 originales.
+Publicado y verificado el 2026-10-13: cinco issues en
+[backend](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/milestone/5) y trece en
+[frontend](https://github.com/JpSiesquen/mining-ops-console/milestone/1), sin asignar.
+T01/T13/T15 se dividen por repo. Prefijos 4-N identifican el orden conjunto, no IDs GitHub.
+
+| Tarea | Backend | Frontend |
+|-------|---------|----------|
+| T01 | [#93](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/93) | [#36](https://github.com/JpSiesquen/mining-ops-console/issues/36) |
+| T02 | — | [#37](https://github.com/JpSiesquen/mining-ops-console/issues/37) |
+| T03 | — | [#38](https://github.com/JpSiesquen/mining-ops-console/issues/38) |
+| T04 | — | [#39](https://github.com/JpSiesquen/mining-ops-console/issues/39) |
+| T05 | [#94](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/94) | — |
+| T06 | [#95](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/95) | — |
+| T07 | — | [#40](https://github.com/JpSiesquen/mining-ops-console/issues/40) |
+| T08 | — | [#41](https://github.com/JpSiesquen/mining-ops-console/issues/41) |
+| T09 | — | [#42](https://github.com/JpSiesquen/mining-ops-console/issues/42) |
+| T10 | — | [#43](https://github.com/JpSiesquen/mining-ops-console/issues/43) |
+| T11 | — | [#44](https://github.com/JpSiesquen/mining-ops-console/issues/44) |
+| T12 | — | [#45](https://github.com/JpSiesquen/mining-ops-console/issues/45) |
+| T13 | [#96](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/96) | [#46](https://github.com/JpSiesquen/mining-ops-console/issues/46) |
+| T14 | — | [#47](https://github.com/JpSiesquen/mining-ops-console/issues/47) |
+| T15 | [#97](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/97) | [#48](https://github.com/JpSiesquen/mining-ops-console/issues/48) |
+
+Las antiguas #70–#79 se cerraron como sustituidas, con enlaces a los reemplazos, y salieron
+del milestone activo. Su cierre no acredita implementación. T01–T15 siguen pendientes;
+la corrección editorial del frontend en PR #35 no completa el contrato ni la integración.
 
 ## Secuencia y comprobaciones
 
