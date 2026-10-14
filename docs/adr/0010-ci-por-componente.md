@@ -18,6 +18,11 @@ Ampliación aprobada el 2026-10-13 para fase 4: añadir job frontend con build y
 al existir el componente. Exigir api-core, bff y frontend tras validar sus ejecuciones;
 mantener revisión de dependencias, permisos mínimos y límite de cinco minutos por job.
 
+Revisión de alcance del 2026-10-13: frontend en repositorio separado, según revisión 2
+de spec 005. La ampliación frontend anterior requiere revisión del plan/ADR antes de
+ejecutarse; un check de otro repo no se convierte automáticamente en obligatorio aquí.
+Los checks api-core/bff existentes siguen vigentes.
+
 ## Alternativas consideradas
 
 Añadir pasos BFF al job api-core reduce configuración, pero mezcla ejecución y diagnóstico

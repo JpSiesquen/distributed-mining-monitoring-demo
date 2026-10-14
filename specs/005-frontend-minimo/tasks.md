@@ -1,102 +1,143 @@
-# Tareas 005 — Dashboard de equipos
+# Tareas 005 — Integración de Mining Ops Console
 
-- **Spec:** [005](spec.md)
-- **Plan:** [005](plan.md), aprobado el 2026-10-13
-- **Estado:** Aprobadas el 2026-10-13; pendientes de ejecución
+- **Spec:** [revisión 2](spec.md), aprobada el 2026-10-13.
+- **Plan:** [005](plan.md), aprobado el 2026-10-13.
+- **Estado:** Aprobadas el 2026-10-13; T01–T15 pendientes de ejecución.
 
-La integración real requiere BFF de la spec 004 implementado y verificado. Las pruebas con
-fixtures no cumplen ese prerrequisito. Instalar cada dependencia al abordar su funcionalidad,
-con revisión y comandos aprobados; las casillas representan ejecución verificada.
+Una secuencia para dos repos: **backend** = distributed-mining-monitoring-demo;
+**frontend** = mining-ops-console. No crear una segunda aplicación frontend aquí.
+Las casillas acreditan ejecución, no aprobación documental. Instalaciones, ejecución de CI,
+cambios de rulesets y publicación de issues requieren las autorizaciones concretas aplicables.
 
-## Issues de ejecución
+## Backlog anterior
 
-[Milestone Fase 4](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/milestone/5).
-T01–T10 corresponden, en orden, a las issues
-[#70](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/70),
-[#71](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/71),
-[#72](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/72),
-[#73](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/73),
-[#74](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/74),
-[#75](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/75),
-[#76](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/76),
-[#77](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/77),
-[#78](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/78) y
-[#79](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/79).
+#70–#79 y milestone Fase 4 describen el dashboard original; no corresponden automáticamente
+a estas quince tareas. Propuesta preparada: cinco issues backend y trece frontend;
+T01/T13/T15 se dividen por repo. Publicación y reconciliación pendientes de autorización,
+con enlaces de dependencia y trazabilidad hacia los reemplazos de las issues anteriores.
+No cerrar, trasladar ni publicar issues por redactar este documento. El historial conserva T01–T10 originales.
 
-## Tareas
+## Secuencia y comprobaciones
 
-- [ ] **T01 — Revisar y autorizar dependencias.** Seleccionar versiones exactas compatibles
-  de React 19/React DOM, Vite 6/plugin React, TypeScript/tipos, TanStack Query, Material UI/Emotion
-  y Vitest/jsdom/React Testing Library. Revisar procedencia, avisos y scripts directos/transitivos.
-  Registrar finalidad, tipo y comandos exactos antes de instalar; validar los binarios necesarios
-  sin desactivar ignore-scripts.
-  **Comprobar:** revisión y aprobaciones registradas en seguridad de dependencias; sin librerías
-  ajenas al alcance ni secretos en el entorno de ejecución. Prerrequisito de T02; R8.
+- [ ] **T01 — Alinear contrato y documentación de ambos repos.** Backend: crear
+  docs/contratos/eventos-v1.md desde el plan aprobado, con ejemplos sintéticos válidos/ inválidos;
+  registrar ADR de repos/CI y ampliaciones 002/004. Frontend: revisar docs/spec.md y tasks/plan.md,
+  referenciar contrato y mantener el demo histórico diferenciado. Proponer reconciliación de issues.
+  **Comprobar:** mismas rutas/campos/reglas/UTC/evidencia en ambos documentos; ninguna tarea crea
+  frontend duplicado ni exige su check en backend. Reglas heredadas revisadas, sin material restringido.
+  **Cobertura:** R1/R2/R9; CA1. Prerrequisito documental de la implementación.
 
-- [ ] **T02 — Preparar frontend compilable.** Crear proyecto React/TypeScript ES Modules,
-  .npmrc, lockfile v3, entrada HTML y configuración de tipos/build. Instalar solo lo autorizado
-  y contrastar el lockfile; no usar generadores que descarguen paquetes sin aprobación.
-  **Comprobar:** ignore-scripts efectivo; build comprueba tipos y genera dist/. Un error de
-  tipos produce salida no cero antes del empaquetado. R7; prepara CA7.
+- [ ] **T02 — Revisar dependencias y autorizar comandos del frontend.** Revisar package.json,
+  lockfile y grafo existente; compatibilidad React19/Vite6/Node24.21.0, MUI/Emotion, Query,
+  PDF y Vitest/RTL/jsdom. Verificar scripts transitivos, incluidos esbuild/fsevents; registrar
+  finalidad, tipo, versión y comando exactos antes de instalar/ejecutar. Revalidar cambios de grafo.
+  **Comprobar:** selección sin paquetes anticipados; ignore-scripts no se desactiva; cualquier
+  script necesario tiene necesidad/contenido/comando revisados y aprobados. Sin credenciales.
+  **Depende:** T01. **Cobertura:** R10; habilita T03, sin instalar en esta tarea.
 
-- [ ] **T03 — Incorporar CI inicial del frontend.** Tras T02, revalidar Actions, comandos,
-  compatibilidad y uso disponible; añadir job frontend de build con controles npm, permisos
-  mínimos, cinco minutos y caché desactivada. Conservar api-core/bff y exigir frontend solo
-  después de validar su ejecución, dentro de esta entrega.
-  **Comprobar:** tres checks pasan con build válido; error de tipos frontend bloquea integración
-  mientras los otros componentes pasan. Política npm comprobada antes de instalar. R8/CA8 parcial.
+- [ ] **T03 — Establecer baseline compilable del frontend existente.** Preparar .npmrc,
+  engines/scripts finitos, configuración de tipos y herramientas autorizadas sin regenerar el repo.
+  Ejecutar solo comandos aprobados, contrastar lockfile y documentar revisión. Registrar baseline
+  de pantallas/dominio con acceso permitido; corregir fallos identificados antes de migrar.
+  **Comprobar:** build produce dist; tipo incorrecto falla antes del empaquetado; fuente restaurada.
+  No asumir que el demo ya compila o que sus decisiones son correctas. Entorno sin secretos.
+  **Depende:** T02. **Cobertura:** R6/R8/R10; prepara CA6/CA7/CA8.
 
-- [ ] **T04 — Construir la composición visual.** Incorporar Material UI/Emotion revisados,
-  tema industrial oscuro/ámbar, tipografía del sistema, cabecera, tarjetas id/name, búsqueda
-  etiquetada, contador y componentes para carga/vacío/error. Sin indicadores operativos inventados.
-  **Comprobar:** composición a 360/1280 px, foco visible y nombres largos sin desbordamiento;
-  tarjetas y estados revisables con fixtures exclusivos de prueba. Sin mocks en la vista operativa.
-  Depende de T02/T03; R2/R5; prepara CA4/CA5.
+- [ ] **T04 — Introducir CI inicial en el repo frontend.** Revalidar Actions/SHA, comandos,
+  runtime y cuotas/costos del repo privado; preparar job frontend de build con controles npm,
+  permisos mínimos y cinco minutos. Autorizar ejecución concreta antes de habilitarla; validar
+  caso correcto y fallo de tipos antes de exigir check en su ruleset. Backend conserva sus dos checks.
+  **Comprobar:** falta de política falla antes de instalar; build incorrecto bloquea el PR del
+  frontend; recuperación verificada, negativos sin integrar. Sin tokens entre repos ni despliegue.
+  **Depende:** T03. **Cobertura:** R8/R10; CA8 parcial.
 
-- [ ] **T05 — Consultar al BFF y gestionar estados.** Configurar proxy /api en dev/preview
-  mediante BFF_URL validado, escucha local y strictPort. Actualizar .env.example y conectar
-  TanStack Query/fetch con validación HTTP/contrato, espera completa de diez segundos y cancelación.
-  Distinguir carga, fuente vacía y fallo; incorporar reintento por botón sin reintentos automáticos
-  ni consultas por foco/reconexión.
-  **Comprobar:** origen/destino se aplican sin editar la vista; no CORS abierto ni destino privado
-  en bundle. Fallo/JSON inválido/demora producen error seguro; recuperar fuente y reintentar muestra
-  datos. Con BFF real, verificar id/name y red sin acceso directo a API Core.
-  Depende de T04 y de 004 para integración real; R1/R4/R6; CA1/CA3/CA6.
+- [ ] **T05 — Entregar eventos desde API Core.** Backend: fixture sintético events.json,
+  validación explícita y GET /api/events; asegurar copia del JSON al artefacto compilado.
+  No copiar datos del cliente ni derivar clasificaciones/turnos reales. Incorporar pruebas nativas.
+  **Comprobar:** arreglo/orden/folios únicos, vacío y reglas de contrato; fixture ausente/ inválido
+  causa 500 seguro. Health/equipment y pruebas previas siguen pasando; sin SQL ni paquetes nuevos.
+  **Depende:** T01. **Cobertura:** R1/R2/R3; CA1/CA2.
 
-- [ ] **T06 — Incorporar búsqueda y contador.** Filtrar el arreglo recibido por ID/nombre
-  con coincidencia parcial sin distinguir mayúsculas/minúsculas. Derivar contador visible/total;
-  limpiar búsqueda restaura la lista. Diferenciar fuente vacía y filtro sin coincidencias.
-  **Comprobar:** tarjetas/contador coinciden con los datos; escribir no genera peticiones por
-  pulsación ni altera el arreglo. Depende de T05; R3/R4; CA2 y parte de CA3.
+- [ ] **T06 — Exponer eventos a través del BFF.** Backend: nueva ruta y validación de JSON;
+  usar timeout existente, rechazo de redirecciones y mensajes/logs seguros. Añadir pruebas HTTP.
+  **Comprobar:** contrato válido/vacío; fuente caída, estado/JSON/contrato inválidos → 502;
+  demora de cabeceras/cuerpo → 504. Health/equipment permanecen correctos. Fuente real API Core
+  consultada por HTTP; BFF no lee fixture ni accede a SQL. Integrar proveedor antes del consumidor.
+  **Depende:** T05. **Cobertura:** R1/R2/R3/R8; CA2 y prerrequisito CA3.
 
-- [ ] **T07 — Automatizar interacción y fallos.** Añadir herramientas de pruebas autorizadas
-  y suite finita sobre el DOM. Verificar búsqueda, contador, carga, fuente vacía, filtro vacío,
-  errores HTTP/JSON/contrato, timeout y recuperación por botón con fetch controlado.
-  Restaurar mocks, temporizadores y renders; comprobar cancelación y ausencia de consultas
-  por pulsación/foco/reconexión. No descargar navegadores ni incorporar servidor de mocks.
-  **Comprobar:** npm test pasa; expectativa incorrecta produce salida no cero, sin recursos
-  pendientes. Simulación DOM no sustituye revisión visual ni integración real.
-  Depende de T06; R7; CA2/CA3/CA7.
+- [ ] **T07 — Preparar consulta y contrato en frontend.** Crear src/api/events.ts,
+  validador y consulta Query; proxy dev/preview con BFF_URL validado, escucha/puertos aprobados,
+  strictPort y destino fuera del bundle. Adaptar tipos sin añadir paquete compartido.
+  **Comprobar:** JSON inválido rechazado; diez segundos incluyen cuerpo y cancelación; reintento
+  explícito sin retries/refetch automáticos. Pruebas controladas de fuente vacía/red/error/demora;
+  configuración inválida falla claramente. No declarar integración de pantallas todavía.
+  **Depende:** T03/T04/T06. **Cobertura:** R2/R5/R7; prepara CA3/CA5/CA7.
 
-- [ ] **T08 — Validar pruebas y bloqueo en CI.** Añadir test al job frontend y contrastar
-  tres checks obligatorios. Usar un cambio temporal de expectativa para verificar fallo sin
-  integrarlo; restaurar y enlazar ejecución correcta.
-  **Comprobar:** instalación/build/test pasan; fallo frontend bloquea integración con api-core/bff
-  correctos. Control npm falla antes de instalar si falta protección y los pasos siguientes no
-  continúan tras un fallo. Sin SQL ni credenciales de despliegue.
-  Depende de T03/T07; R8/CA8.
+- [ ] **T08 — Conectar App y composición Material UI.** ThemeProvider/QueryClientProvider,
+  tema oscuro/ámbar, cabecera/navegación y estados globales. App consume consulta; selección por
+  folio, sin copiar estado remoto. Retirar seed/simulador y sonido/popups de falsa ingesta en este
+  recorrido. Deshabilitar tomar/cerrar; no presentar vistas aún sin adaptar como integración terminada.
+  **Comprobar:** carga/vacío/error/reintento accesibles; caída no usa seed ni datos anteriores
+  como vigentes. Acciones explicadas/deshabilitadas, sin escrituras en memoria. Pruebas DOM.
+  **Depende:** T07. **Cobertura:** R4/R5/R6; CA3/CA5/CA6 parcial.
 
-- [ ] **T09 — Verificar diseño y flujo compilado.** Revisar en navegador real dev y
-  build/preview con BFF/API Core reales; inspeccionar red. A 360/1280 px comprobar distribución,
-  contraste, nombres largos, estados completos y uso por teclado. Corregir defectos observados
-  y registrar capturas/evidencia sin datos sensibles.
-  **Comprobar:** CA1–CA6 en el artefacto estático; carga, errores y recuperación no se confunden
-  con listas vacías. La UI solo consulta BFF. No acreditar esto con DOM simulado.
-  Depende de T05–T08 y de 004 verificada; R1–R7; CA1–CA7.
+- [ ] **T09 — Adaptar panel de alertas a Material UI.** Migrar PanelAlertas/TarjetaEvento/
+  BadgeEstado; revisar reglas de prioridad y conteos, sin conservarlas solo por existir.
+  **Comprobar:** orden/contadores corresponden a datos recibidos; estados con texto, teclado
+  y foco, nombres largos y vacío explicado. Pruebas de orden/conteo y revisión visual 360/1280 px.
+  **Depende:** T08. **Cobertura:** R4/R6; CA3/CA4/CA6 parcial.
 
-- [ ] **T10 — Documentar operación y cierre.** Redactar frontend/README.md con configuración,
-  comandos, rutas, diagnóstico y diferencia entre preview y producción. Actualizar docs/ci.md,
-  roadmap y estados, enlazando evidencia por criterio.
-  **Comprobar:** CA1–CA8 acreditados antes de marcar 005 implementada; comandos/configuración
-  coinciden con código y CI. Revisar 001/T02 solo con evidencia completa del flujo local;
-  no acreditar SQL, despliegue o aislamiento DEV/QA. Depende de T09; todos los requisitos.
+- [ ] **T10 — Adaptar histórico, filtros y fechas UTC.** Migrar Historico/Filtros a Material
+  UI y revisar formato/periodo. Filtros se calculan sobre eventos recibidos, sin peticiones por
+  pulsación. Distinguir ausencia de fuente y filtro sin coincidencias; permitir restablecer filtros.
+  **Comprobar:** valores/contadores/lista coinciden; orden cronológico estable, UTC visible,
+  límites de medianoche y periodos vacíos/ inválidos correctos. Pruebas DOM y teclado/visual.
+  **Depende:** T09. **Cobertura:** R4/R6; CA3/CA4/CA6 parcial.
+
+- [ ] **T11 — Adaptar detalle y evidencia sintética.** Migrar DetalleEvento/controles a MUI
+  Dialog; preparar ilustraciones de demostración bajo /evidencia/demo/ y catálogo de rutas
+  coincidente con fixtures. Mantener recuadros desde datos, imagen completa/recorte y atención solo lectura.
+  **Comprobar:** foco/Escape/retorno al disparador; recuadros válidos; ausencia/fallo de imagen
+  explicado. Sin URLs arbitrarias ni material real; al cambiar folio no queda detalle/encuadre viejo.
+  Verificación real de imágenes y pruebas DOM; tomar/cerrar siguen deshabilitados.
+  **Depende:** T10. **Cobertura:** R2/R4/R5/R6/R10; CA3/CA5/CA6 parcial.
+
+- [ ] **T12 — Adaptar reporte y verificar PDF.** Migrar VistaReporte/BotonReporte a MUI;
+  conservar carga diferida y renderizador/estilos PDF propios. Revisar Portada/config para retirar
+  KPI fijos/cifras de jornada sin fuente. Conteos del periodo recibido, UTC y datos sintéticos explícitos.
+  **Comprobar:** documento descargado contiene cifras/fechas/eventos correctos; ilustra evidencia
+  aprobada o explica ausencia/fallo, no finge mediciones. Periodo vacío/ inválido y consulta fallida
+  no generan reporte engañoso. Verificar descarga, liberación Blob, teclado y navegador real.
+  **Depende:** T11. **Cobertura:** R4/R5/R6/R10; CA4/CA5/CA6.
+
+- [ ] **T13 — Completar pruebas y bloqueo en CI de ambos repos.** Consolidar suites de
+  proveedor/DOM; añadir test al job frontend autorizado. Verificar correctos y fallos separados
+  de expectativa, política npm e instalación; documentar etapas omitidas y recuperación.
+  **Comprobar:** cada PR bloqueado por los checks de su repo; api-core/bff conservados,
+  frontend requerido en el suyo. Casos negativos sin integrar, recursos limpios. Sin SQL/secrets/dispatch.
+  **Depende:** T04/T06/T12. **Cobertura:** R8/R10; CA8.
+
+- [ ] **T14 — Acreditar la pareja frontend/backend real.** Ejecutar dev y build/preview con
+  BFF/API Core reales y datos ficticios. Registrar ambos SHA completos y revisión del contrato;
+  inspeccionar red y comprobar fallos/recuperación, filtros, detalle y PDF. Corregir defectos.
+  **Comprobar:** solo BFF como destino de datos; pantallas 360/1280 px y teclado; misma UTC y
+  cifras en pantalla/PDF; sin fallback ni escrituras simuladas. No sustituir esta evidencia por mocks.
+  **Depende:** T13. **Cobertura:** R1–R9; CA3–CA8.
+
+- [ ] **T15 — Documentar operación, compatibilidad y cierre.** README de ambos repos con
+  arranque/configuración/diagnóstico, contrato y pareja validada; evidencia por CA y recuperación
+  usando versión identificada, sin reset/force push. Actualizar estados y backlog reconciliado.
+  **Comprobar:** CA1–CA9 acreditados antes de marcar 005 implementada; cambios coinciden con
+  código/lockfiles/CI. 001/T02 queda pendiente si no se comprobó también su vista de equipos.
+  Atención persistente, SQL y despliegue siguen pendientes; no crear otra fase por esta redacción.
+  **Depende:** T14. **Cobertura:** R1–R10; CA9 y cierre de todos los criterios.
+
+## Orden resumido
+
+Contrato/documentos → revisión de seguridad → baseline/CI frontend → proveedor API Core/BFF
+→ consulta frontend → composición MUI → panel → histórico → detalle/evidencia → reporte
+→ pruebas/CI → pareja real → operación/cierre.
+
+T05/T06 pueden prepararse después de T01 con dependencias backend previamente aprobadas;
+T07 no comienza hasta tener proveedor integrado y base/CI frontend verificadas. Una aprobación
+no marca casillas: toda tarea debe aportar su evidencia en el repo donde se ejecuta.
