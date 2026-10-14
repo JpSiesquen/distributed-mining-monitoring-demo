@@ -2,7 +2,7 @@
 
 - **Spec:** [revisión 2](spec.md), aprobada el 2026-10-13.
 - **Plan:** [005](plan.md), aprobado el 2026-10-13.
-- **Estado:** En revisión; T01–T15 pendientes de ejecución.
+- **Estado:** Aprobadas el 2026-10-13; T01–T15 pendientes de ejecución.
 
 Una secuencia para dos repos: **backend** = distributed-mining-monitoring-demo;
 **frontend** = mining-ops-console. No crear una segunda aplicación frontend aquí.
@@ -12,8 +12,9 @@ cambios de rulesets y publicación de issues requieren las autorizaciones concre
 ## Backlog anterior
 
 #70–#79 y milestone Fase 4 describen el dashboard original; no corresponden automáticamente
-a estas quince tareas. Tras aprobar esta lista, preparar su reconciliación: conservar/adaptar
-lo útil y proponer issues separadas en el repo propietario, con enlaces de dependencia.
+a estas quince tareas. Propuesta preparada: cinco issues backend y trece frontend;
+T01/T13/T15 se dividen por repo. Publicación y reconciliación pendientes de autorización,
+con enlaces de dependencia y trazabilidad hacia los reemplazos de las issues anteriores.
 No cerrar, trasladar ni publicar issues por redactar este documento. El historial conserva T01–T10 originales.
 
 ## Secuencia y comprobaciones

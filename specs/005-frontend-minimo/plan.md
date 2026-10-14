@@ -177,7 +177,8 @@ el demo anterior. Un artefacto previo solo se reutiliza si existe y está identi
 ## Estado y próxima acción
 
 Plan completo aprobado, incluidas reglas de contrato, CI por repositorio y orden de PR.
-Las [tareas nuevas](tasks.md) están en revisión; aprobarlas antes de reconciliar el backlog.
+Las [tareas nuevas](tasks.md) están aprobadas; propuesta de reconciliación del backlog preparada,
+pendiente de autorización de publicación y cierre de issues anteriores.
 Definir recursos concretos de evidencia al implementar. No ejecutar las diez issues originales
 ni publicar cambios del otro repo por esta aprobación documental. Instalaciones, ejecución de
 CI, rulesets e integración de PR conservan sus autorizaciones concretas pendientes.
