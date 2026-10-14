@@ -98,11 +98,13 @@ repo público; usar evidencia sintética/autorizada. Conservar identificación d
   la solución final de las pantallas migradas. Concretar sustitución por pantalla en el plan.
 - Aprobado el 2026-10-13: GET /api/events devuelve arreglo directo; fechas ficticias en UTC
   explícita y presentación UTC. La zona real de faena se definirá al incorporar datos reales.
+- Aprobado el 2026-10-13: ilustraciones sintéticas identificadas como demostración en
+  /evidencia/demo/ del frontend; API Core entrega rutas/recuadros y no material restringido.
 - El repo existente es una base revisable: corregir/pulir lo necesario, sin tratar sus
   decisiones o reglas como fuente absoluta de verdad.
 - Vigentes salvo revisión: React 19/Vite 6/TypeScript, TanStack Query, estrategia DOM, proxy
   local y espera frontend de diez segundos. Versiones y comandos siguen sujetos a revisión.
-- Pendientes: reglas detalladas de contrato, acceso a evidencia, configuración
+- Pendientes: reglas detalladas de contrato, recursos concretos de evidencia, configuración
   concreta de CI por repo y orden de adaptación. No añadir polling automáticamente.
 
 Esta revisión completa precede al nuevo plan y tareas/issues. Specs 002/004 conservan su

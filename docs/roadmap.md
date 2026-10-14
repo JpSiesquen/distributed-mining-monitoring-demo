@@ -18,7 +18,8 @@ de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02
 **Paso actual:** revisar el [plan 005 de migración](../specs/005-frontend-minimo/plan.md).
 Spec 005 revisión 2 aprobada: Mining Ops Console en su propio repo, lectura primero y
 Material UI; atención persistente después. GET /api/events con arreglo directo y UTC ficticia
-aprobados. Contrato detallado, evidencia y CI por repositorio propuestos en el nuevo plan.
+aprobados, junto con evidencia sintética de demostración. Contrato detallado y CI por
+repositorio propuestos en el nuevo plan, pendiente de aprobación completa.
 No ejecutar #70–#79 con el plan anterior ni instalar dependencias por esta propuesta.
 Revisión #59 integrada; base compilable, instalación autorizada y lockfile definitivo de 82 paquetes
 verificados en #60. Arranque, entorno y comandos start/dev verificados en #62;

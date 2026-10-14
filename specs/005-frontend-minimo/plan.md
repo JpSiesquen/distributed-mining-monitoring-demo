@@ -3,7 +3,8 @@
 - **Spec:** [revisión 2](spec.md), aprobada el 2026-10-13.
 - **Estado:** Borrador para revisión; sustituirá al plan del dashboard original al aprobarse.
 - **Aprobado:** dos repos; lectura primero; Material UI; GET /api/events con arreglo directo;
-  fechas UTC explícitas para datos ficticios. No autoriza instalaciones ni implementación.
+  fechas UTC explícitas para datos ficticios y evidencia sintética de demostración.
+  No autoriza instalaciones ni implementación.
 
 ## Enfoque y autoridad
 
@@ -65,7 +66,8 @@ por componente, sin paquete compartido/generador/Zod añadido por anticipado.
 
 ### Evidencia y fechas
 
-Propuesta: imágenes sintéticas propias del frontend bajo /evidencia/demo/, referenciadas por
+Fuente aprobada el 2026-10-13: ilustraciones sintéticas identificadas como demostración,
+propias del frontend bajo /evidencia/demo/, referenciadas por
 rutas locales del contrato. Admitir únicamente rutas de ese catálogo, sin URLs externas,
 traversal ni rutas del cliente. API Core transporta metadatos; no sirve imágenes del repo privado.
 No implementar clips ni proxy de imágenes. Comprobar compatibilidad del formato elegido con
@@ -174,6 +176,7 @@ el demo anterior. Un artefacto previo solo se reutiliza si existe y está identi
 
 ## Pendiente de aprobación del plan
 
-Reglas detalladas de contrato, catálogo sintético de evidencia, CI/ruleset del frontend y orden
-concreto de PR. Ruta/arreglo y UTC ya aprobados. Preparar tasks después de aprobar este plan;
+Reglas detalladas de contrato, CI/ruleset del frontend y orden concreto de PR. Ruta/arreglo,
+UTC y fuente de evidencia sintética ya aprobados; definir los recursos concretos al implementar.
+Preparar tasks después de aprobar este plan;
 no ejecutar las diez issues originales ni publicar cambios del otro repo con este borrador.
