@@ -13,7 +13,7 @@ y `tasks.md`; las reservas vacías permiten ver la ruta y no aprueban alcance ni
 | 1–2 | [002-api-core-minimo](002-api-core-minimo/spec.md) | API Core con datos mock | Implementada y verificada |
 | 1–2 | [003-ci-minima](003-ci-minima/spec.md) | CI de compilación y pruebas | Implementada y verificada |
 | 3 | [004-bff-minimo](004-bff-minimo/spec.md) | BFF consumiendo API Core | Implementado; T01–T09 y CA1–CA8 verificados. Cierre documental integrado en PR #91. |
-| 4 | [005-frontend-minimo](005-frontend-minimo/spec.md) | Mining Ops Console consumiendo BFF | Revisión 2 aprobada; plan de migración en borrador. Tareas/issues requieren adaptación. |
+| 4 | [005-frontend-minimo](005-frontend-minimo/spec.md) | Mining Ops Console consumiendo BFF | Spec revisión 2 y plan aprobados; tareas T01–T15 en revisión, issues por reconciliar. |
 | 5 | [006-integracion-sql-server](006-integracion-sql-server/spec.md) | Integración SQL Server | Reservada; documentos vacíos |
 | 6 | [007-docker-nginx](007-docker-nginx/spec.md) | Empaquetado y entrada HTTP | Reservada; documentos vacíos |
 | 7 | [001-topologia-despliegue](001-topologia-despliegue/spec.md) | Despliegue DEV/QA | Diseño aprobado; implementación pendiente |

@@ -1,7 +1,7 @@
 # Plan 005 — Integración de Mining Ops Console
 
 - **Spec:** [revisión 2](spec.md), aprobada el 2026-10-13.
-- **Estado:** Borrador para revisión; sustituirá al plan del dashboard original al aprobarse.
+- **Estado:** Aprobado el 2026-10-13; sustituye al plan del dashboard original.
 - **Aprobado:** dos repos; lectura primero; Material UI; GET /api/events con arreglo directo;
   fechas UTC explícitas para datos ficticios y evidencia sintética de demostración.
   No autoriza instalaciones ni implementación.
@@ -24,7 +24,7 @@ La primera entrega no despliega DEV/QA/PROD ni añade SQL, MQTT, polling o escri
 Conservar equipos id/name, health y controles existentes. Los datos del demo previo no se
 copian como datos de operación; crear fixtures nuevos sin información del cliente.
 
-## Contrato propuesto de lectura v1
+## Contrato de lectura v1 aprobado
 
 GET /api/events devuelve 200 JSON con arreglo de EventoCruce; [] representa fuente vacía.
 Sin query de paginación ni envoltorio/total en esta entrega. Entregar una instantánea completa
@@ -145,7 +145,7 @@ componentes o reglas solo porque ya existen; registrar correcciones de alcance s
 6. Cierre: docs de operación/compatibilidad y criterios de aceptación. Atención persistente
    necesita otra entrega aprobada; no cerrar 001/T02 sin comprobar también su vista de equipos.
 
-## CI y pruebas propuestas
+## CI y pruebas previstas
 
 - Backend: checks api-core/bff existentes, con nuevas pruebas del contrato; sin tercer job frontend aquí.
 - Frontend: job frontend en su propio repo, build + pruebas Vitest/RTL/jsdom; controles npm,
@@ -174,9 +174,10 @@ con comandos locales reproducibles. Si falla consumidor, no integrarlo/promoverl
 versión previamente validada sin reset/force push y mantener proveedor compatible. Git conserva
 el demo anterior. Un artefacto previo solo se reutiliza si existe y está identificado; no asumirlo.
 
-## Pendiente de aprobación del plan
+## Estado y próxima acción
 
-Reglas detalladas de contrato, CI/ruleset del frontend y orden concreto de PR. Ruta/arreglo,
-UTC y fuente de evidencia sintética ya aprobados; definir los recursos concretos al implementar.
-Preparar tasks después de aprobar este plan;
-no ejecutar las diez issues originales ni publicar cambios del otro repo con este borrador.
+Plan completo aprobado, incluidas reglas de contrato, CI por repositorio y orden de PR.
+Las [tareas nuevas](tasks.md) están en revisión; aprobarlas antes de reconciliar el backlog.
+Definir recursos concretos de evidencia al implementar. No ejecutar las diez issues originales
+ni publicar cambios del otro repo por esta aprobación documental. Instalaciones, ejecución de
+CI, rulesets e integración de PR conservan sus autorizaciones concretas pendientes.
