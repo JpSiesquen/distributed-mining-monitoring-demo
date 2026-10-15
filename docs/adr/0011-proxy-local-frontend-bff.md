@@ -27,3 +27,8 @@ El proxy no forma parte de dist/ y preview no se utiliza como servidor de produc
 Nginx deberá implementar el reenvío al abordar fase 6. No se acredita despliegue con esta decisión.
 
 Referencia: [plan 005](../../specs/005-frontend-minimo/plan.md).
+
+Actualización documental del 2026-10-15: el frontend permanece en mining-ops-console y
+el mismo proxy /api cubrirá también /api/events al implementar 005. Se conservan escucha,
+puertos y destino externo al bundle. No se modifica la configuración publicada por este
+registro; ver [ADR 0012](0012-repositorios-separados-y-contrato-eventos.md).

@@ -47,6 +47,10 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
   **Comprobar:** mismas rutas/campos/reglas/UTC/evidencia en ambos documentos; ninguna tarea crea
   frontend duplicado ni exige su check en backend. Reglas heredadas revisadas, sin material restringido.
   **Cobertura:** R1/R2/R9; CA1. Prerrequisito documental de la implementación.
+  **Avance backend (#93):** contrato [eventos v1](../../docs/contratos/eventos-v1.md) y
+  [ADR 0012](../../docs/adr/0012-repositorios-separados-y-contrato-eventos.md) redactados;
+  revisión/integración pendientes. No completar T01/CA1 hasta que frontend #36 referencie
+  la revisión integrada. Endpoints/validadores e integración real siguen sin implementar.
 
 - [ ] **T02 — Revisar dependencias y autorizar comandos del frontend.** Revisar package.json,
   lockfile y grafo existente; compatibilidad React19/Vite6/Node24.21.0, MUI/Emotion, Query,

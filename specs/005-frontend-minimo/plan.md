@@ -60,8 +60,8 @@ Atención ficticia puede describir eventos ya atendidos; no equivale a sesión, 
 ni registro de acciones reales. Si se aporta, fechaHora debe ser UTC válida y no anterior al evento.
 BoundingBoxes: x/y finitos >=0; ancho/alto >0; x+ancho e y+alto <=1; etiqueta opcional de texto.
 
-Documentar el contrato canónico en docs/contratos/eventos-v1.md al aprobar el plan; vincular
-revisión/commit desde frontend. Mantener validadores explícitos de JSON y ejemplos equivalentes
+Contrato canónico: [eventos v1](../../docs/contratos/eventos-v1.md), redactado en #93; vincular
+su revisión/commit desde frontend al integrar. Mantener validadores explícitos de JSON y ejemplos equivalentes
 por componente, sin paquete compartido/generador/Zod añadido por anticipado.
 
 ### Evidencia y fechas

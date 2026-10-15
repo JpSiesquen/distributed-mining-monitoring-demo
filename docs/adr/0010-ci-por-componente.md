@@ -1,6 +1,6 @@
 # ADR 0010 — CI por componente
 
-- **Estado:** Aceptada; jobs y checks API Core/BFF implementados. Ampliación frontend pendiente.
+- **Estado:** Aceptada para API Core/BFF, implementados; ampliación frontend sustituida por [ADR 0012](0012-repositorios-separados-y-contrato-eventos.md).
 - **Fecha:** 2026-10-13
 
 ## Contexto
@@ -18,10 +18,10 @@ Ampliación aprobada el 2026-10-13 para fase 4: añadir job frontend con build y
 al existir el componente. Exigir api-core, bff y frontend tras validar sus ejecuciones;
 mantener revisión de dependencias, permisos mínimos y límite de cinco minutos por job.
 
-Revisión de alcance del 2026-10-13: frontend en repositorio separado, según revisión 2
-de spec 005. La ampliación frontend anterior requiere revisión del plan/ADR antes de
-ejecutarse; un check de otro repo no se convierte automáticamente en obligatorio aquí.
-Los checks api-core/bff existentes siguen vigentes.
+Revisión de alcance aprobada el 2026-10-13: frontend en repositorio separado, según revisión 2
+de spec 005. [ADR 0012](0012-repositorios-separados-y-contrato-eventos.md) sustituye la ampliación
+frontend anterior: check propio en su repo tras validación. Los checks api-core/bff existentes
+siguen vigentes; no añadir un tercer check aquí por esta integración.
 
 ## Alternativas consideradas
 

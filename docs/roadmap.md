@@ -1,6 +1,6 @@
 # Roadmap técnico
 
-Actualizado: 2026-10-13.
+Actualizado: 2026-10-15.
 
 ## Objetivo
 
@@ -18,6 +18,10 @@ de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02
 **Próxima entrega:** [T01](../specs/005-frontend-minimo/tasks.md), contrato y documentación:
 [backend #93](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/93) →
 [frontend #36](https://github.com/JpSiesquen/mining-ops-console/issues/36).
+[Contrato eventos v1](contratos/eventos-v1.md) y [ADR 0012](adr/0012-repositorios-separados-y-contrato-eventos.md)
+redactados en #93, pendientes de revisión/integración. Frontend #36 y T01 conjunta pendientes.
+El frontend publicado se preserva: antes de publicar cambios en su repo, verificar versión
+servida y desencadenantes de preview/producción; no asumir que un PR carece de efectos externos.
 Spec 005 revisión 2 aprobada: Mining Ops Console en su propio repo, lectura primero y
 Material UI; atención persistente después. GET /api/events con arreglo directo y UTC ficticia
 aprobados, junto con evidencia sintética de demostración. Spec, plan y T01–T15 aprobados,
