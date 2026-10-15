@@ -1,8 +1,9 @@
 # Arquitectura
 
 Diseño objetivo del sistema distribuido de monitoreo de maquinaria minera.
-Describe las responsabilidades previstas. API Core con datos mock está implementado y BFF tiene
-arranque compilado, salud y equipos vía API Core; frontend, SQL y despliegue están pendientes.
+Describe las responsabilidades previstas. API Core con datos mock y BFF con salud/equipos
+están implementados. La integración de la consola existente, SQL y el despliegue de esta
+arquitectura siguen pendientes.
 
 ## Flujo de comunicación
 
@@ -17,9 +18,11 @@ que es el único servicio con acceso a SQL Server. Ninguna capa omite la siguien
 
 ### Frontend
 
-Interfaz web prevista con React 19, Vite 6 y TypeScript. Presenta los datos de los equipos
-recibidos del BFF. Las librerías de UI y visualización se incorporan cuando su funcionalidad
-las requiere.
+Mining Ops Console permanece en su propio repo, con React 19, Vite 6 y TypeScript. Su
+integración de lectura consumirá eventos del BFF mediante el [contrato v1](contratos/eventos-v1.md).
+La aplicación publicada conserva su comportamiento mientras se prepara/verifica esa migración.
+No se duplica el frontend aquí. Las librerías se incorporan cuando su funcionalidad las requiere.
+Ver [ADR 0012](adr/0012-repositorios-separados-y-contrato-eventos.md).
 
 ### BFF (Backend for Frontend)
 

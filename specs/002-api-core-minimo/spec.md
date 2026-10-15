@@ -75,6 +75,11 @@ y [CI verificada](../../docs/ci.md). 001/T02 no se completa con este servicio ai
 
 ## Preguntas abiertas
 
+Ampliación posterior aprobada en [005](../005-frontend-minimo/spec.md): lectura de eventos
+según [eventos v1](../../docs/contratos/eventos-v1.md), implementación pendiente en #94.
+Esta entrega conserva equipos/health y sus criterios ya acreditados; no amplía id/name
+ni añade SQL por documentar el contrato.
+
 - **P1 — Resuelta:** el listado incluye únicamente identificador y nombre del equipo.
 - **P2 — Resuelta:** comenzar directamente con Express, sin paso previo usando HTTP nativo.
 - **P3 — Resuelta:** dev compila TypeScript y arranca el JavaScript generado con Node.js.
