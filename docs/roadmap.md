@@ -15,17 +15,23 @@ Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); GET /health, GET /api/equipment con datos simulados y errores 404/500 en JSON integrados
 (002/T06–T08); pruebas de contratos con `npm test` (002/T09), ejecutadas en CI (003/T04).
 
-**Próxima entrega:** [T01](../specs/005-frontend-minimo/tasks.md), contrato y documentación:
-[backend #93](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/93) →
-[frontend #36](https://github.com/JpSiesquen/mining-ops-console/issues/36).
+**Próxima entrega:** [T02](../specs/005-frontend-minimo/tasks.md), revisión de dependencias
+en [frontend #37](https://github.com/JpSiesquen/mining-ops-console/issues/37), sin nuevas instalaciones.
+T01/CA1 completadas: [backend #93](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/93)
+y [frontend #36](https://github.com/JpSiesquen/mining-ops-console/issues/36) integradas.
 [Contrato eventos v1](contratos/eventos-v1.md) y [ADR 0012](adr/0012-repositorios-separados-y-contrato-eventos.md)
-redactados en #93, pendientes de revisión/integración. Frontend #36 y T01 conjunta pendientes.
+integrados en backend 3de8694 y referenciados desde frontend
+[PR #50](https://github.com/JpSiesquen/mining-ops-console/pull/50), merge 15afc15a.
+Vercel READY y alias de producción contrastados con ese merge. Esto acredita publicación
+documental; endpoints de eventos, validadores y pantallas integradas siguen pendientes.
+La corrección transitiva de seguridad [frontend #49](https://github.com/JpSiesquen/mining-ops-console/pull/49)
+está integrada, con build local y despliegue verificados; no completa la selección de T02.
 El frontend publicado se preserva: antes de publicar cambios en su repo, verificar versión
 servida y desencadenantes de preview/producción; no asumir que un PR carece de efectos externos.
 Spec 005 revisión 2 aprobada: Mining Ops Console en su propio repo, lectura primero y
 Material UI; atención persistente después. GET /api/events con arreglo directo y UTC ficticia
-aprobados, junto con evidencia sintética de demostración. Spec, plan y T01–T15 aprobados,
-sin ejecución. PR #92 integrado; cinco issues backend y trece frontend publicadas con
+aprobados, junto con evidencia sintética de demostración. Spec, plan y T01–T15 aprobados;
+T01 completada, T02 en revisión y T03–T15 pendientes. PR #92 integrado; cinco issues backend y trece frontend publicadas con
 dependencias entre repos. [Mapa de tareas/issues](../specs/005-frontend-minimo/tasks.md#issues-de-ejecución).
 Corrección editorial frontend integrada en PR #35; no acredita migración ni contrato implementado.
 Instalaciones y ejecución de la migración siguen sujetas a las autorizaciones aplicables.
@@ -70,7 +76,7 @@ con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 | 1 | API Core compilable con CI obligatoria | Completada; milestone cerrado. |
 | 2 | Rutas, errores y pruebas de API Core | Completada y documentada: CA1–CA8 de 002 y 003; milestone cerrado. |
 | 3 | BFF consumiendo API Core | Implementado y verificado: 004/T01–T09, CA1–CA8. Cierre #67 integrado en PR #91; milestone aún abierto. |
-| 4 | Mining Ops Console consumiendo únicamente BFF | Spec revisión 2, plan y T01–T15 aprobados; 18 issues publicadas en sus dos repos. Ejecución pendiente; conservar contrato id/name existente. |
+| 4 | Mining Ops Console consumiendo únicamente BFF | T01/CA1 completadas; T02 en revisión. Contrato documentado en ambos repos; integración HTTP pendiente. Conservar contrato id/name existente. |
 | 5 | Integración SQL Server y persistencia | Por especificar; mantener contrato entre capas. |
 | 6 | Empaquetado con Docker y entrada Nginx | Concretar ejecución y verificar flujo completo local antes de desplegar. |
 | 7 | Despliegue y validación DEV/QA | Milestone de topología renumerado; ejecutar 001 y verificar sus prerrequisitos. Validar costos antes de aprovisionar. |

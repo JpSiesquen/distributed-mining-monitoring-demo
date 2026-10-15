@@ -2,7 +2,7 @@
 
 - **Spec:** [revisión 2](spec.md), aprobada el 2026-10-13.
 - **Plan:** [005](plan.md), aprobado el 2026-10-13.
-- **Estado:** Aprobadas el 2026-10-13; T01–T15 pendientes de ejecución.
+- **Estado:** Aprobadas el 2026-10-13; T01 completada el 2026-10-15, T02 en revisión y T03–T15 pendientes.
 
 Una secuencia para dos repos: **backend** = distributed-mining-monitoring-demo;
 **frontend** = mining-ops-console. No crear una segunda aplicación frontend aquí.
@@ -35,22 +35,24 @@ T01/T13/T15 se dividen por repo. Prefijos 4-N identifican el orden conjunto, no 
 | T15 | [#97](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/97) | [#48](https://github.com/JpSiesquen/mining-ops-console/issues/48) |
 
 Las antiguas #70–#79 se cerraron como sustituidas, con enlaces a los reemplazos, y salieron
-del milestone activo. Su cierre no acredita implementación. T01–T15 siguen pendientes;
+del milestone activo. Su cierre no acredita implementación. T01 completada; T02–T15 pendientes de cierre;
 la corrección editorial del frontend en PR #35 no completa el contrato ni la integración.
 
 ## Secuencia y comprobaciones
 
-- [ ] **T01 — Alinear contrato y documentación de ambos repos.** Backend: crear
+- [x] **T01 — Alinear contrato y documentación de ambos repos.** Backend: crear
   docs/contratos/eventos-v1.md desde el plan aprobado, con ejemplos sintéticos válidos/ inválidos;
   registrar ADR de repos/CI y ampliaciones 002/004. Frontend: revisar docs/spec.md y tasks/plan.md,
   referenciar contrato y mantener el demo histórico diferenciado. Proponer reconciliación de issues.
   **Comprobar:** mismas rutas/campos/reglas/UTC/evidencia en ambos documentos; ninguna tarea crea
   frontend duplicado ni exige su check en backend. Reglas heredadas revisadas, sin material restringido.
   **Cobertura:** R1/R2/R9; CA1. Prerrequisito documental de la implementación.
-  **Avance backend (#93):** contrato [eventos v1](../../docs/contratos/eventos-v1.md) y
-  [ADR 0012](../../docs/adr/0012-repositorios-separados-y-contrato-eventos.md) redactados;
-  revisión/integración pendientes. No completar T01/CA1 hasta que frontend #36 referencie
-  la revisión integrada. Endpoints/validadores e integración real siguen sin implementar.
+  **Evidencia:** backend [PR #99](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/99),
+  merge 3de8694, integra contrato [eventos v1](../../docs/contratos/eventos-v1.md) y
+  [ADR 0012](../../docs/adr/0012-repositorios-separados-y-contrato-eventos.md).
+  Frontend [PR #50](https://github.com/JpSiesquen/mining-ops-console/pull/50), merge 15afc15a,
+  referencia esa revisión inmutable; preview y producción Vercel verificados. #93/#36 cerradas.
+  CA1 cumplido; endpoints/validadores e integración HTTP siguen pendientes.
 
 - [ ] **T02 — Revisar dependencias y autorizar comandos del frontend.** Revisar package.json,
   lockfile y grafo existente; compatibilidad React19/Vite6/Node24.21.0, MUI/Emotion, Query,
@@ -59,6 +61,9 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
   **Comprobar:** selección sin paquetes anticipados; ignore-scripts no se desactiva; cualquier
   script necesario tiene necesidad/contenido/comando revisados y aprobados. Sin credenciales.
   **Depende:** T01. **Cobertura:** R10; habilita T03, sin instalar en esta tarea.
+  **Avance:** corrección del grafo existente integrada en
+  [frontend PR #49](https://github.com/JpSiesquen/mining-ops-console/pull/49), con build correcto.
+  Selección de MUI/Emotion, Query y pruebas en revisión en #37; no completar T02 por esa corrección parcial.
 
 - [ ] **T03 — Establecer baseline compilable del frontend existente.** Preparar .npmrc,
   engines/scripts finitos, configuración de tipos y herramientas autorizadas sin regenerar el repo.

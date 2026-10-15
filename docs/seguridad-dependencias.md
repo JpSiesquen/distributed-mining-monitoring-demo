@@ -1,6 +1,6 @@
 # Seguridad de dependencias y ejecución
 
-Actualizado: 2026-10-09. Selección aprobada, instalación local, compilación y CI de build verificadas.
+Actualizado: 2026-10-15. Selección backend aprobada; revisión de dependencias de migración frontend en curso.
 
 ## Riesgo documentado
 
@@ -40,6 +40,16 @@ no persistidas; primera ejecución correcta en la issue #7. Un check verde no ac
 El lockfile aporta reproducibilidad; el check verde acredita solo las comprobaciones ejecutadas.
 Ninguno garantiza ausencia de malware. Desactivar scripts tampoco acredita la seguridad del código
 que se importará después; cualquier cambio del comando de instalación requiere validación.
+
+## Revisión del frontend
+
+Revisión del frontend existente: corrección transitiva de PostCSS integrada en
+[mining-ops-console PR #49](https://github.com/JpSiesquen/mining-ops-console/pull/49), con
+build local y despliegue verificados. Su [registro canónico](https://github.com/JpSiesquen/mining-ops-console/blob/4a1ca1f2c4d51120ec9192f02aad9129bc92a824/docs/seguridad-dependencias.md)
+documenta versiones, controles y límites. La selección adicional de MUI/Emotion, Query y
+herramientas DOM sigue en [frontend #37](https://github.com/JpSiesquen/mining-ops-console/issues/37);
+no se considera aprobada por la corrección del grafo anterior. Esta referencia no acredita
+que las alertas/configuración del frontend sean las mismas que las del backend.
 
 ## Alertas de Dependabot
 

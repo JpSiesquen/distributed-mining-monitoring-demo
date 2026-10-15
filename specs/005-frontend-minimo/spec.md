@@ -70,8 +70,11 @@ repo público; usar evidencia sintética/autorizada. Conservar identificación d
 
 ## Criterios de aceptación
 
-- [ ] **CA1:** contrato documentado con ejemplos ficticios válidos/ inválidos; ambos repos
+- [x] **CA1:** contrato documentado con ejemplos ficticios válidos/ inválidos; ambos repos
   referencian la misma revisión. Ruta, fechas y evidencia acordadas antes de implementar.
+  Evidencia: backend [PR #99](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/99)
+  y frontend [PR #50](https://github.com/JpSiesquen/mining-ops-console/pull/50), integrados;
+  frontend fija el contrato al commit backend 3de8694. Resto de criterios pendiente.
 - [ ] **CA2:** proveedor API Core → BFF cumple contrato y conserva equipos/health; pruebas
   cubren vacío, datos inválidos, indisponibilidad y timeout de cabeceras/cuerpo.
 - [ ] **CA3:** panel/histórico/detalle usan eventos del BFF; inspección de red confirma que
@@ -104,7 +107,7 @@ repo público; usar evidencia sintética/autorizada. Conservar identificación d
   decisiones o reglas como fuente absoluta de verdad.
 - Vigentes salvo revisión: React 19/Vite 6/TypeScript, TanStack Query, estrategia DOM, proxy
   local y espera frontend de diez segundos. Versiones y comandos siguen sujetos a revisión.
-- Pendientes: reglas detalladas de contrato, recursos concretos de evidencia, configuración
+- Contrato v1 documentado y referenciado por ambos repos. Pendientes: recursos concretos de evidencia, configuración
   concreta de CI por repo y orden de adaptación. No añadir polling automáticamente.
 
 Esta revisión completa precede al nuevo plan y tareas/issues. Specs 002/004 conservan su
