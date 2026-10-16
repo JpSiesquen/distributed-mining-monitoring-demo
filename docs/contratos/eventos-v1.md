@@ -1,7 +1,7 @@
 # Contrato de lectura de eventos v1
 
 Registro: 2026-10-15. Derivado del [plan 005 aprobado](../../specs/005-frontend-minimo/plan.md).
-Estado: contrato aprobado; API Core #94 validada en PR #100 (pendiente integración) y BFF #95 pendiente.
+Estado: contrato aprobado; API Core #94 integrada en PR #100 (b774cf38); BFF #95 validada en PR #101 (pendiente integración).
 No modifica la aplicación frontend publicada ni acredita integración HTTP existente.
 
 ## Recorrido y respuesta
@@ -15,7 +15,7 @@ válida sin registros. El conjunto inicial se entrega completo, sin paginación,
 de filtrado ni envoltorio/total. El frontend filtra y cuenta solo los registros recibidos.
 Orden del proveedor: fechaHora descendente; empate por folio ascendente.
 
-API Core es la autoridad de datos. BFF valida la respuesta y conserva su contrato.
+API Core es la autoridad de datos. BFF valida la respuesta completa, incluido su orden y Content-Type application/json, y conserva el arreglo sin reordenarlo.
 El frontend valida el JSON antes de usarlo; TypeScript no valida datos en ejecución.
 Una respuesta inválida se rechaza completa, sin omitir silenciosamente registros.
 GET /api/equipment y /health conservan sus contratos y pruebas actuales.

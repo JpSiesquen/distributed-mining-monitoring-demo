@@ -2,7 +2,7 @@
 
 - **Spec:** [revisión 2](spec.md), aprobada el 2026-10-13.
 - **Plan:** [005](plan.md), aprobado el 2026-10-13.
-- **Estado:** Aprobadas el 2026-10-13; T01 completada el 2026-10-15, T02 completada; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 validada en PR #100, pendiente de integración y T06–T15 pendientes.
+- **Estado:** Aprobadas el 2026-10-13; T01 completada el 2026-10-15, T02 completada; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 integrada en PR #100; T06 validada en PR #101, pendiente integración y T07–T15 pendientes.
 
 Una secuencia para dos repos: **backend** = distributed-mining-monitoring-demo;
 **frontend** = mining-ops-console. No crear una segunda aplicación frontend aquí.
@@ -35,7 +35,7 @@ T01/T13/T15 se dividen por repo. Prefijos 4-N identifican el orden conjunto, no 
 | T15 | [#97](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/97) | [#48](https://github.com/JpSiesquen/mining-ops-console/issues/48) |
 
 Las antiguas #70–#79 se cerraron como sustituidas, con enlaces a los reemplazos, y salieron
-del milestone activo. Su cierre no acredita implementación. T01–T04 completadas; T05–T15 pendientes de cierre;
+del milestone activo. Su cierre no acredita implementación. T01–T05 completadas; T06–T15 pendientes de cierre;
 la corrección editorial del frontend en PR #35 no completa el contrato ni la integración.
 
 ## Secuencia y comprobaciones
@@ -83,14 +83,14 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
   **Depende:** T03. **Cobertura:** R8/R10; CA8 parcial.
   **Evidencia (2026-10-16):** [frontend PR #53](https://github.com/JpSiesquen/mining-ops-console/pull/53), head 9c45cafb, check frontend/Vercel verdes. Correcto 38914865846; TS2322 38915009193; política ausente 38915155808 (instalación/build omitidos); recuperación 38915316327; head final correcto 38915533974. Ruleset 25246100 exige PR/frontend, sin force push/eliminación; #54 BLOCKED y cerrado restaurado sin integrar. PR #53 integrado en 88d5b589; #39 cerrada, CI main 38920171582 correcta y producción verificada. [Registro](https://github.com/JpSiesquen/mining-ops-console/blob/9c45cafb31e4195456d0d6c597a70cfcaf60ad27/docs/ci.md).
 
-- [ ] **T05 — Entregar eventos desde API Core.** Backend: fixture sintético events.json,
+- [x] **T05 — Entregar eventos desde API Core.** Backend: fixture sintético events.json,
   validación explícita y GET /api/events; asegurar copia del JSON al artefacto compilado.
   No copiar datos del cliente ni derivar clasificaciones/turnos reales. Incorporar pruebas nativas.
   **Comprobar:** arreglo/orden/folios únicos, vacío y reglas de contrato; fixture ausente/ inválido
   causa 500 seguro. Health/equipment y pruebas previas siguen pasando; sin SQL ni paquetes nuevos.
   **Depende:** T01. **Cobertura:** R1/R2/R3; CA1/CA2.
   **Decisión (2026-10-16):** evidencia nula hasta T11; imágenes no catalogadas rechazadas, metadatos comprobados con catálogo aislado de pruebas. No se copian imágenes de faena.
-  **Evidencia:** [PR #100](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/100); build y 65 pruebas locales correctas en copia sin entorno real. [CI 38921955929](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38921955929) correcta con api-core/bff. Contrato, JSON copiado, vacío, orden/empates, rechazo íntegro y 500/logs seguros verificados; sin paquetes nuevos. Pendiente integración; #95 sigue pendiente.
+  **Evidencia:** [PR #100](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/100); build y 65 pruebas locales correctas en copia sin entorno real. [CI 38921955929](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38921955929) correcta con api-core/bff. Contrato, JSON copiado, vacío, orden/empates, rechazo íntegro y 500/logs seguros verificados; sin paquetes nuevos. PR #100 integrado en b774cf38; #94 cerrada y CI main 38923275808 correcta. #95 en validación.
 
 - [ ] **T06 — Exponer eventos a través del BFF.** Backend: nueva ruta y validación de JSON;
   usar timeout existente, rechazo de redirecciones y mensajes/logs seguros. Añadir pruebas HTTP.
@@ -98,6 +98,7 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
   demora de cabeceras/cuerpo → 504. Health/equipment permanecen correctos. Fuente real API Core
   consultada por HTTP; BFF no lee fixture ni accede a SQL. Integrar proveedor antes del consumidor.
   **Depende:** T05. **Cobertura:** R1/R2/R3/R8; CA2 y prerrequisito CA3.
+  **Avance local (2026-10-16):** build y 46 pruebas BFF correctos; integración reproducible con API Core compilado real por HTTP, incluyendo eventos/equipos, caída → 502 y health disponible. Sin paquetes, acceso a fixtures desde BFF ni cambios del workflow. Ver [operación](../../bff/README.md#eventos-de-lectura--95). [PR #101](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/101); [CI 38924815677](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38924815677) correcta con api-core/bff. Pendiente integración.
 
 - [ ] **T07 — Preparar consulta y contrato en frontend.** Crear src/api/events.ts,
   validador y consulta Query; proxy dev/preview con BFF_URL validado, escucha/puertos aprobados,

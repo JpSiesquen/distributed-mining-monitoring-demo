@@ -145,4 +145,4 @@ comprueban fuente vacía, orden y empates, copia de JSON, error seguro y aislami
 CI y estado de entrega: [tareas 005](../specs/005-frontend-minimo/tasks.md). BFF #95 y el
 consumo de la consola siguen pendientes: esta ruta aislada no acredita integración completa.
 
-Resultado de #94: build y 65 pruebas locales correctas; [CI 38921955929](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38921955929) con api-core/bff verdes. [PR #100](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/100) pendiente de integrar. Los logs no contienen cuerpo del fixture ni rutas internas, y los temporales de pruebas quedaron limpios.
+Resultado de #94: build y 65 pruebas locales correctas; [CI 38921955929](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38921955929) con api-core/bff verdes. [PR #100](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/100) integrado en b774cf38; CI main 38923275808 correcta. Los logs no contienen cuerpo del fixture ni rutas internas, y los temporales de pruebas quedaron limpios.
