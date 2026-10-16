@@ -23,7 +23,7 @@ Checkout → Node.js → política npm → instalación → build → pruebas de
 
 La suite conserva salud, equipos, 404 y errores seguros, y añade eventos v1: validación estricta,
 UTC, orden, folios, evidencia de prueba y respuestas 500 ante fuente ausente o inválida.
-La ampliación #94 pasa 65 pruebas localmente; sus ejecuciones CI se registran con el PR.
+La ampliación #94 pasa 65 pruebas localmente; [CI 38921955929](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38921955929) verifica api-core/bff en [PR #100](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/100).
 El archivo de pruebas se indica explícitamente para evitar un patrón sin coincidencias.
 Un fallo detiene los pasos posteriores; no hay `continue-on-error`.
 

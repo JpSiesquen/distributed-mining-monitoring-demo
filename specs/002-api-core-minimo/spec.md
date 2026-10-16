@@ -76,7 +76,7 @@ y [CI verificada](../../docs/ci.md). 001/T02 no se completa con este servicio ai
 ## Preguntas abiertas
 
 Ampliación posterior aprobada en [005](../005-frontend-minimo/spec.md): lectura de eventos
-según [eventos v1](../../docs/contratos/eventos-v1.md), implementación de #94 preparada y en validación.
+según [eventos v1](../../docs/contratos/eventos-v1.md), implementación de #94 validada en PR #100, pendiente de integración.
 La ampliación añade JSON sintético validado y errores 500 seguros; evidencia nula hasta T11.
 Esta entrega conserva equipos/health y sus criterios ya acreditados; no amplía id/name
 ni añade SQL por documentar el contrato.

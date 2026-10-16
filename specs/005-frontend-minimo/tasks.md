@@ -2,7 +2,7 @@
 
 - **Spec:** [revisión 2](spec.md), aprobada el 2026-10-13.
 - **Plan:** [005](plan.md), aprobado el 2026-10-13.
-- **Estado:** Aprobadas el 2026-10-13; T01 completada el 2026-10-15, T02 completada; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 en implementación y T06–T15 pendientes.
+- **Estado:** Aprobadas el 2026-10-13; T01 completada el 2026-10-15, T02 completada; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 validada en PR #100, pendiente de integración y T06–T15 pendientes.
 
 Una secuencia para dos repos: **backend** = distributed-mining-monitoring-demo;
 **frontend** = mining-ops-console. No crear una segunda aplicación frontend aquí.
@@ -90,6 +90,7 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
   causa 500 seguro. Health/equipment y pruebas previas siguen pasando; sin SQL ni paquetes nuevos.
   **Depende:** T01. **Cobertura:** R1/R2/R3; CA1/CA2.
   **Decisión (2026-10-16):** evidencia nula hasta T11; imágenes no catalogadas rechazadas, metadatos comprobados con catálogo aislado de pruebas. No se copian imágenes de faena.
+  **Evidencia:** [PR #100](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/100); build y 65 pruebas locales correctas en copia sin entorno real. [CI 38921955929](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38921955929) correcta con api-core/bff. Contrato, JSON copiado, vacío, orden/empates, rechazo íntegro y 500/logs seguros verificados; sin paquetes nuevos. Pendiente integración; #95 sigue pendiente.
 
 - [ ] **T06 — Exponer eventos a través del BFF.** Backend: nueva ruta y validación de JSON;
   usar timeout existente, rechazo de redirecciones y mensajes/logs seguros. Añadir pruebas HTTP.

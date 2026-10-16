@@ -1,7 +1,7 @@
 # Contrato de lectura de eventos v1
 
 Registro: 2026-10-15. Derivado del [plan 005 aprobado](../../specs/005-frontend-minimo/plan.md).
-Estado: contrato aprobado; API Core #94 en implementación y BFF #95 pendiente.
+Estado: contrato aprobado; API Core #94 validada en PR #100 (pendiente integración) y BFF #95 pendiente.
 No modifica la aplicación frontend publicada ni acredita integración HTTP existente.
 
 ## Recorrido y respuesta
