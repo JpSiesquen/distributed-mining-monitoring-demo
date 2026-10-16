@@ -134,15 +134,17 @@ clasifica por confianza ni omite registros inválidos. Ordena una copia sin alte
 Fixture ausente, JSON inválido o contrato incumplido → 500 genérico; los logs solo muestran
 categorías ENOENT/SyntaxError/TypeError. Salud y equipos siguen disponibles.
 
-El fixture contiene seis eventos totalmente ficticios. Evidencia nula hasta T11, decisión
-aprobada el 2026-10-16; cualquier imagen no catalogada se rechaza. Las pruebas de metadatos
-usan un catálogo aislado y no acreditan recursos existentes ni trasladan imágenes de faena.
+El fixture contiene seis eventos totalmente ficticios. T11 registra una ilustración sintética
+para EV-20261015-0002; los otros cinco conservan evidencia nula. La ruta exacta y el recuadro
+se documentan en el [catálogo acordado](../docs/contratos/eventos-v1.md#evidencia).
+API Core solo entrega metadatos; el PNG se sirve desde el frontend. No se traslada material
+de faena y cualquier ruta no catalogada se rechaza.
 Atención/derivación son lectura ficticia, no una escritura ni una sesión confirmada.
 
 Validación local en copia aislada sin .env ni credenciales heredadas; dependencias sin cambios,
 instalación existente contrastada con lockfile. Build y pruebas nativas de contrato/HTTP
 comprueban fuente vacía, orden y empates, copia de JSON, error seguro y aislamiento entre rutas.
-CI y estado de entrega: [tareas 005](../specs/005-frontend-minimo/tasks.md). BFF #95 y el
-consumo de la consola siguen pendientes: esta ruta aislada no acredita integración completa.
+CI y estado de entrega: [tareas 005](../specs/005-frontend-minimo/tasks.md). BFF #95 está
+integrada; las pantallas de la consola y el catálogo T11 siguen pendientes de entrega en main.
 
 Resultado de #94: build y 65 pruebas locales correctas; [CI 38921955929](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38921955929) con api-core/bff verdes. [PR #100](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/100) integrado en b774cf38; CI main 38923275808 correcta. Los logs no contienen cuerpo del fixture ni rutas internas, y los temporales de pruebas quedaron limpios.

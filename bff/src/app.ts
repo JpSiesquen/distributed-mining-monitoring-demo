@@ -1,3 +1,4 @@
+import { IMAGE_CATALOG } from "./domain/evidence-catalog.js";
 import express from "express";
 import { parseEvents } from "./domain/events.js";
 
@@ -67,8 +68,8 @@ export function createApp(config: BffConfig) {
       failure = "invalid_json";
       const data: unknown = await response.json();
       failure = "invalid_contract";
-      // The production image catalog remains empty until T11.
-      const events = parseEvents(data, new Set<string>());
+      // Synthetic image paths agreed with the frontend in T11.
+      const events = parseEvents(data, IMAGE_CATALOG);
       res.status(200).json(events);
     } catch {
       const timedOut = signal.aborted;

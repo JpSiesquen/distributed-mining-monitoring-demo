@@ -93,7 +93,18 @@
     "empresa": null,
     "versionModelo": "demo-v1",
     "observacion": "Registro ficticio de tolva levantada.",
-    "evidencia": null,
+    "evidencia": {
+      "imagen": "/evidencia/demo/camion-tolva-elevada.png",
+      "boundingBoxes": [
+        {
+          "y": 0.03,
+          "ancho": 0.22,
+          "etiqueta": "Área ilustrativa de tolva elevada",
+          "x": 0.32,
+          "alto": 0.28
+        }
+      ]
+    },
     "atencion": {
       "estado": "cerrado",
       "atendidoPor": "Operador demo",

@@ -2,7 +2,7 @@
 
 - **Spec:** [revisión 2](spec.md), aprobada el 2026-10-13.
 - **Plan:** [005](plan.md), aprobado el 2026-10-13.
-- **Estado:** Aprobadas el 2026-10-13; T01 completada el 2026-10-15, T02 completada; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 integrada en PR #100; T06 validada en PR #101, pendiente integración y T07–T15 pendientes.
+- **Estado:** Aprobadas el 2026-10-13; T01 completada el 2026-10-15, T02 completada; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 integrada en PR #100; T06 integrada en PR #101 (daf244ea) ; T07 integrada en PR frontend #55 y T08–T15 pendientes.
 
 Una secuencia para dos repos: **backend** = distributed-mining-monitoring-demo;
 **frontend** = mining-ops-console. No crear una segunda aplicación frontend aquí.
@@ -35,7 +35,7 @@ T01/T13/T15 se dividen por repo. Prefijos 4-N identifican el orden conjunto, no 
 | T15 | [#97](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/97) | [#48](https://github.com/JpSiesquen/mining-ops-console/issues/48) |
 
 Las antiguas #70–#79 se cerraron como sustituidas, con enlaces a los reemplazos, y salieron
-del milestone activo. Su cierre no acredita implementación. T01–T05 completadas; T06–T15 pendientes de cierre;
+del milestone activo. Su cierre no acredita implementación. T01–T07 completadas; T08–T15 pendientes de cierre;
 la corrección editorial del frontend en PR #35 no completa el contrato ni la integración.
 
 ## Secuencia y comprobaciones
@@ -90,23 +90,24 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
   causa 500 seguro. Health/equipment y pruebas previas siguen pasando; sin SQL ni paquetes nuevos.
   **Depende:** T01. **Cobertura:** R1/R2/R3; CA1/CA2.
   **Decisión (2026-10-16):** evidencia nula hasta T11; imágenes no catalogadas rechazadas, metadatos comprobados con catálogo aislado de pruebas. No se copian imágenes de faena.
-  **Evidencia:** [PR #100](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/100); build y 65 pruebas locales correctas en copia sin entorno real. [CI 38921955929](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38921955929) correcta con api-core/bff. Contrato, JSON copiado, vacío, orden/empates, rechazo íntegro y 500/logs seguros verificados; sin paquetes nuevos. PR #100 integrado en b774cf38; #94 cerrada y CI main 38923275808 correcta. #95 en validación.
+  **Evidencia:** [PR #100](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/100); build y 65 pruebas locales correctas en copia sin entorno real. [CI 38921955929](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38921955929) correcta con api-core/bff. Contrato, JSON copiado, vacío, orden/empates, rechazo íntegro y 500/logs seguros verificados; sin paquetes nuevos. PR #100 integrado en b774cf38; #94 cerrada y CI main 38923275808 correcta. #95 integrada en PR #101.
 
-- [ ] **T06 — Exponer eventos a través del BFF.** Backend: nueva ruta y validación de JSON;
+- [x] **T06 — Exponer eventos a través del BFF.** Backend: nueva ruta y validación de JSON;
   usar timeout existente, rechazo de redirecciones y mensajes/logs seguros. Añadir pruebas HTTP.
   **Comprobar:** contrato válido/vacío; fuente caída, estado/JSON/contrato inválidos → 502;
   demora de cabeceras/cuerpo → 504. Health/equipment permanecen correctos. Fuente real API Core
   consultada por HTTP; BFF no lee fixture ni accede a SQL. Integrar proveedor antes del consumidor.
   **Depende:** T05. **Cobertura:** R1/R2/R3/R8; CA2 y prerrequisito CA3.
-  **Avance local (2026-10-16):** build y 46 pruebas BFF correctos; integración reproducible con API Core compilado real por HTTP, incluyendo eventos/equipos, caída → 502 y health disponible. Sin paquetes, acceso a fixtures desde BFF ni cambios del workflow. Ver [operación](../../bff/README.md#eventos-de-lectura--95). [PR #101](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/101); [CI 38924815677](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38924815677) correcta con api-core/bff. Pendiente integración.
+  **Avance local (2026-10-16):** build y 46 pruebas BFF correctos; integración reproducible con API Core compilado real por HTTP, incluyendo eventos/equipos, caída → 502 y health disponible. Sin paquetes, acceso a fixtures desde BFF ni cambios del workflow. Ver [operación](../../bff/README.md#eventos-de-lectura--95). [PR #101](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/101); [CI 38924815677](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38924815677) correcta con api-core/bff. Integrado en daf244ea; #95 cerrada y CI main 38929191630 correcta.
 
-- [ ] **T07 — Preparar consulta y contrato en frontend.** Crear src/api/events.ts,
+- [x] **T07 — Preparar consulta y contrato en frontend.** Crear src/api/events.ts,
   validador y consulta Query; proxy dev/preview con BFF_URL validado, escucha/puertos aprobados,
   strictPort y destino fuera del bundle. Adaptar tipos sin añadir paquete compartido.
   **Comprobar:** JSON inválido rechazado; diez segundos incluyen cuerpo y cancelación; reintento
   explícito sin retries/refetch automáticos. Pruebas controladas de fuente vacía/red/error/demora;
   configuración inválida falla claramente. No declarar integración de pantallas todavía.
   **Depende:** T03/T04/T06. **Cobertura:** R2/R5/R7; prepara CA3/CA5/CA7.
+  **Avance local (2026-10-16):** frontend #40 preparado sobre 88d5b589; build y 44 pruebas correctos. Consulta/validación/Query y proxy dev/preview verificados; sin dependencias nuevas ni pantallas conectadas. [PR frontend #55](https://github.com/JpSiesquen/mining-ops-console/pull/55) publicado con autorización, head 51e2483c; CI 38931642622 correcta y preview READY. Integrado con autorización en c1148ade74b6b3741a07f3c6de18d81c7df6d257; #40 cerrada. CI main 38939401761 correcta; producción READY y alias contrastados con ese merge. T07 completada, T08 no iniciada. Las 44 pruebas son locales; CI solo build hasta #46.
 
 - [ ] **T08 — Conectar App y composición Material UI.** ThemeProvider/QueryClientProvider,
   tema oscuro/ámbar, cabecera/navegación y estados globales. App consume consulta; selección por
@@ -115,12 +116,14 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
   **Comprobar:** carga/vacío/error/reintento accesibles; caída no usa seed ni datos anteriores
   como vigentes. Acciones explicadas/deshabilitadas, sin escrituras en memoria. Pruebas DOM.
   **Depende:** T07. **Cobertura:** R4/R5/R6; CA3/CA5/CA6 parcial.
+  **Avance local (2026-10-16):** #41 preparada sobre frontend c1148ade; build y 55 pruebas correctos (once DOM). App remota/MUI, selección por folio, estados y atención de solo lectura. Exportación sin habilitar hasta #45 para evitar cifras fijas heredadas. [PR frontend #56](https://github.com/JpSiesquen/mining-ops-console/pull/56) publicado como borrador en 2d10f113; CI 38962269771 correcta y preview READY/SHA contrastado. Chrome local: seis eventos, detalle/solo lectura, Escape y caída/recuperación real de API Core correctos; servidores detenidos. Vercel sigue mostrando código de acceso; App autenticada sin revisar. Producción conserva c1148ade. No acredita revisión responsive completa ni T14 completa; T08 abierta. No integrar en main mientras el despliegue Vercel carezca de ruta de mismo origen al BFF; el proxy local no se publica en dist.
 
 - [ ] **T09 — Adaptar panel de alertas a Material UI.** Migrar PanelAlertas/TarjetaEvento/
   BadgeEstado; revisar reglas de prioridad y conteos, sin conservarlas solo por existir.
   **Comprobar:** orden/contadores corresponden a datos recibidos; estados con texto, teclado
   y foco, nombres largos y vacío explicado. Pruebas de orden/conteo y revisión visual 360/1280 px.
   **Depende:** T08. **Cobertura:** R4/R6; CA3/CA4/CA6 parcial.
+  **Avance local (2026-10-16):** #42 preparada con autorización sobre PR #56 (2d10f113), sin integrar T08. Build y 65 pruebas correctos (diez del panel); prioridad/conteos/teclado/nombres largos comprobados. DOM/layout de Chrome a 360/1280 px efectivos sin desbordamiento; capturas fallaron, no se aportan imágenes de revisión. Fixture restaurado, viewport restablecido y servidores detenidos. [PR frontend #57](https://github.com/JpSiesquen/mining-ops-console/pull/57) publicado como borrador sobre #56, head inicial cb235522; ahora incluye #43 mediante merge d6c239d1, con preview READY/SHA contrastado. Actions no ejecutado por filtro main, pendiente antes de integrar a main. App autenticada del preview sin revisar; producción c1148ade sin cambios. T09 abierta, sin merge.
 
 - [ ] **T10 — Adaptar histórico, filtros y fechas UTC.** Migrar Historico/Filtros a Material
   UI y revisar formato/periodo. Filtros se calculan sobre eventos recibidos, sin peticiones por
@@ -128,6 +131,7 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
   **Comprobar:** valores/contadores/lista coinciden; orden cronológico estable, UTC visible,
   límites de medianoche y periodos vacíos/ inválidos correctos. Pruebas DOM y teclado/visual.
   **Depende:** T09. **Cobertura:** R4/R6; CA3/CA4/CA6 parcial.
+  **Avance local (2026-10-16):** #43 preparada sobre PR #57 (cb235522), sin integrar T08/T09. Histórico/filtros MUI, vacío/restablecimiento y calendario/periodos UTC verificados. Build y 81 pruebas correctos (dieciséis nuevos); Chrome con servicios reales a 360/1280 px, scroll contenido y teclado. Capturas observadas; viewport restablecido, servidores detenidos. Aviso chunk 524,42 kB documentado. Sin cambio de zona de operación. [PR frontend #58](https://github.com/JpSiesquen/mining-ops-console/pull/58) integrado únicamente en la rama de #57, merge d6c239d1; árbol idéntico al head validado 4b90509d y preview del merge READY/SHA contrastado. Actions no ejecutado por filtro main; App autenticada sin revisar (login Vercel en navegador integrado). Producción c1148ade intacta; #43/T10 abiertas hasta entrega en main.
 
 - [ ] **T11 — Adaptar detalle y evidencia sintética.** Migrar DetalleEvento/controles a MUI
   Dialog; preparar ilustraciones de demostración bajo /evidencia/demo/ y catálogo de rutas
@@ -136,6 +140,15 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
   explicado. Sin URLs arbitrarias ni material real; al cambiar folio no queda detalle/encuadre viejo.
   Verificación real de imágenes y pruebas DOM; tomar/cerrar siguen deshabilitados.
   **Depende:** T10. **Cobertura:** R2/R4/R5/R6/R10; CA3/CA5/CA6 parcial.
+    **Avance local (2026-10-16):** preparada sobre PR #57 (d6c239d1), sin publicar. Catálogo
+    aprobado coordinado: un PNG sintético 1672×941 para EV-20261015-0002, resto sin imagen.
+    Build y 90 pruebas frontend, 65 API Core, 47 BFF e integración HTTP real correctos.
+    Navegador a 360/1280 px: recorte/completa, foco/Escape/retorno, reapertura/cambio de folio,
+    ausencia y fallo real sin recuadros; archivo restaurado y hash contrastado. Canvas y PDF
+    de compatibilidad correctos; reporte completo pendiente de T12. Servicios detenidos,
+    viewport restaurado; aviso chunk 529,58 kB. Sin dependencias ni cambios de producción.
+    Publicación del proveedor y borrador frontend dependiente pendientes de autorización;
+    T11 permanece abierta hasta entrega y comprobaciones de integración.
 
 - [ ] **T12 — Adaptar reporte y verificar PDF.** Migrar VistaReporte/BotonReporte a MUI;
   conservar carga diferida y renderizador/estilos PDF propios. Revisar Portada/config para retirar

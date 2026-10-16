@@ -15,10 +15,12 @@ Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); GET /health, GET /api/equipment con datos simulados y errores 404/500 en JSON integrados
 (002/T06–T08); pruebas de contratos con `npm test` (002/T09), ejecutadas en CI (003/T04).
 
-**Próxima entrega:** [T06](../specs/005-frontend-minimo/tasks.md), eventos a través del
-BFF en [#95](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/95).
-Validación estricta, 502/504 y pruebas preparadas; 46 casos BFF y la integración real
-con API Core pasan localmente. [PR #101](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/101) con api-core/bff verdes; pendiente integración.
+**Última entrega integrada:** T07 completada; [PR frontend #55](https://github.com/JpSiesquen/mining-ops-console/pull/55) integrado en c1148ade; #40 cerrada. CI main 38939401761 correcta y producción Vercel READY/alias verificados para ese merge. Build y 44 pruebas locales correctos; CI ejecuta build, pruebas en CI pendientes de #46.
+**En revisión:** [T08](../specs/005-frontend-minimo/tasks.md), [frontend #41](https://github.com/JpSiesquen/mining-ops-console/issues/41): conectar App/Query y composición Material UI. App/Query/MUI preparada; build y 55 pruebas locales correctos (once DOM). [PR frontend #56](https://github.com/JpSiesquen/mining-ops-console/pull/56) publicado como borrador en 2d10f113; CI 38962269771 correcta y preview READY/SHA contrastado. Flujo local Frontend → BFF → API Core observado en Chrome: seis eventos, detalle/solo lectura, caída y reintento correctos; servidores detenidos. App autenticada de Vercel sin revisar (código de acceso). Producción conserva c1148ade. No integrar en producción hasta validar una ruta de mismo origen al BFF: el proxy local Vite no existe en el despliegue Vercel actual. T08 permanece abierta; no se modifica infraestructura ni producción.
+**En revisión T09:** [frontend #42](https://github.com/JpSiesquen/mining-ops-console/issues/42), basada con autorización en PR #56 (2d10f113). Panel/tarjetas/estados MUI preparados; build y 65 pruebas correctos, DOM/layout a 360/1280 px y teclado verificados. Capturas no disponibles. [PR frontend #57](https://github.com/JpSiesquen/mining-ops-console/pull/57) borrador sobre #56; ahora incluye #43 mediante merge d6c239d1. Preview del merge READY/SHA contrastado. GitHub Actions no ejecutado por filtro de base main; queda pendiente. App autenticada del preview sin revisar (código de acceso). Sin merge; producción conserva c1148ade.
+**En revisión T10:** [frontend #43](https://github.com/JpSiesquen/mining-ops-console/issues/43) basada en PR #57 (cb235522): histórico/filtros MUI y periodos UTC preparados. Build y 81 pruebas correctos; navegador 360/1280 px, teclado y flujo local revisados, servicios detenidos. Aviso chunk 524,42 kB registrado. [PR frontend #58](https://github.com/JpSiesquen/mining-ops-console/pull/58) integrado con autorización únicamente en la rama de #57, merge d6c239d1; preview resultante READY/SHA contrastado. No integrado en main; #43 permanece abierta. Actions no ejecutado por filtro main; pendiente antes de integrar. Navegador integrado requiere login Vercel, App autenticada sin revisar. Producción c1148ade y convención UTC ficticia sin cambios.
+**Preparada localmente T11:** [frontend #44](https://github.com/JpSiesquen/mining-ops-console/issues/44), basada en PR #57 (d6c239d1): detalle MUI, recorte/completa y catálogo sintético coordinado. PNG 1672×941 asociado a EV-20261015-0002, otros cinco eventos sin imagen. Build y 90 pruebas frontend, 65 API Core, 47 BFF e integración HTTP real correctos. Navegador a 360/1280 px: imagen/recuadro, foco/Escape/retorno, reinicio de recorte, ausencia y fallo real sin overlays. PNG/canvas y PDF de compatibilidad verificados; reporte completo pendiente de T12. Archivo restaurado con hash idéntico; servicios detenidos y viewport restaurado. Aviso chunk 529,58 kB. Documentación y proveedor backend preparados, sin publicar ni integrar; producción intacta. Próximo paso: revisar/publicar proveedor y borrador frontend dependiente, con autorización.
+T06 integrada en [PR #101](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/101), merge daf244ea; #95 cerrada y [CI main 38929191630](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38929191630) correcta. Pasan 46 pruebas BFF e integración HTTP real con API Core.
 T05 completada: [PR #100](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/100)
 integrado en b774cf38; #94 cerrada, CI main 38923275808 correcta. BFF consume únicamente
 la fuente HTTP ya integrada. Evidencia nula hasta T11; sin paquetes nuevos.
@@ -37,7 +39,7 @@ y [frontend #36](https://github.com/JpSiesquen/mining-ops-console/issues/36) int
 integrados en backend 3de8694 y referenciados desde frontend
 [PR #50](https://github.com/JpSiesquen/mining-ops-console/pull/50), merge 15afc15a.
 Vercel READY y alias de producción contrastados con ese merge. Esto acredita publicación
-documental; endpoints de eventos, validadores y pantallas integradas siguen pendientes.
+documental; endpoints y validadores backend ya integrados; pantallas pendientes.
 La corrección transitiva de seguridad [frontend #49](https://github.com/JpSiesquen/mining-ops-console/pull/49)
 está integrada, con build local y despliegue verificados; no completa la selección de T02.
 El frontend publicado se preserva: antes de publicar cambios en su repo, verificar versión
@@ -45,7 +47,7 @@ servida y desencadenantes de preview/producción; no asumir que un PR carece de 
 Spec 005 revisión 2 aprobada: Mining Ops Console en su propio repo, lectura primero y
 Material UI; atención persistente después. GET /api/events con arreglo directo y UTC ficticia
 aprobados, junto con evidencia sintética de demostración. Spec, plan y T01–T15 aprobados;
-T01–T02 completadas; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 integrada en PR #100; T06 validada en PR #101, pendiente integración y T07–T15 pendientes. PR #92 integrado; cinco issues backend y trece frontend publicadas con
+T01–T02 completadas; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 integrada en PR #100; T06 integrada en PR #101 (daf244ea) ; T07 integrada en PR frontend #55 y T08–T15 pendientes. PR #92 integrado; cinco issues backend y trece frontend publicadas con
 dependencias entre repos. [Mapa de tareas/issues](../specs/005-frontend-minimo/tasks.md#issues-de-ejecución).
 Corrección editorial frontend integrada en PR #35; no acredita migración ni contrato implementado.
 Instalaciones y ejecución de la migración siguen sujetas a las autorizaciones aplicables.
@@ -90,7 +92,7 @@ con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 | 1 | API Core compilable con CI obligatoria | Completada; milestone cerrado. |
 | 2 | Rutas, errores y pruebas de API Core | Completada y documentada: CA1–CA8 de 002 y 003; milestone cerrado. |
 | 3 | BFF consumiendo API Core | Implementado y verificado: 004/T01–T09, CA1–CA8. Cierre #67 integrado en PR #91; milestone aún abierto. |
-| 4 | Mining Ops Console consumiendo únicamente BFF | T01/CA1 y T02 completadas; T03 integrada en PR frontend #52; T04 integrada; T05 integrada; T06 validada en PR #101, pendiente integración. Contrato documentado en ambos repos; integración HTTP pendiente. Conservar contrato id/name existente. |
+| 4 | Mining Ops Console consumiendo únicamente BFF | T01/CA1 y T02 completadas; T03 integrada en PR frontend #52; T04 integrada; T05 integrada; T06 integrada en PR #101 (daf244ea); T07 integrada en PR frontend #55 (c1148ade). Consulta/proxy verificados; integración de pantallas pendiente. Conservar contrato id/name existente. |
 | 5 | Integración SQL Server y persistencia | Por especificar; mantener contrato entre capas. |
 | 6 | Empaquetado con Docker y entrada Nginx | Concretar ejecución y verificar flujo completo local antes de desplegar. |
 | 7 | Despliegue y validación DEV/QA | Milestone de topología renumerado; ejecutar 001 y verificar sus prerrequisitos. Validar costos antes de aprovisionar. |

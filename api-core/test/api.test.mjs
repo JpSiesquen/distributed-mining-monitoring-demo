@@ -270,7 +270,7 @@ describe("GET /api/events compiled fixture", () => {
     assert.equal(body.length, fixture.length);
     for (const item of body) {
       assert.deepEqual(item, fixture.find((candidate) => candidate.folio === item.folio));
-      assert.equal(item.evidencia, null);
+      assert.equal(item.evidencia === null, item.folio !== "EV-20261015-0002");
     }
   });
 

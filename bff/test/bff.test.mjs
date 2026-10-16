@@ -313,3 +313,16 @@ test("events validator accepts evidence metadata only through an isolated test c
   item.evidencia.boundingBoxes[0].ancho = 0.9;
   assert.throws(() => parseEvents([item], catalog), TypeError);
 });
+
+test('catalogued synthetic evidence passes through HTTP unchanged', async t => {
+  const { readFile } = await import('node:fs/promises');
+  const events = JSON.parse(await readFile(new URL('../../api-core/src/data/events.json', import.meta.url), 'utf8'))
+    .sort((a, b) => b.fechaHora.localeCompare(a.fechaHora) || a.folio.localeCompare(b.folio));
+  await withBff(t, (_req, res) => json(res, events), async ({ request }) => {
+    const response = await request('/api/events');
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), events);
+    assert.equal(events.filter(event => event.evidencia !== null).length, 1);
+    assert.equal(events.find(event => event.evidencia)?.evidencia.imagen, '/evidencia/demo/camion-tolva-elevada.png');
+  });
+});

@@ -1,7 +1,7 @@
 # Contrato de lectura de eventos v1
 
 Registro: 2026-10-15. Derivado del [plan 005 aprobado](../../specs/005-frontend-minimo/plan.md).
-Estado: contrato aprobado; API Core #94 integrada en PR #100 (b774cf38); BFF #95 validada en PR #101 (pendiente integración).
+Estado: contrato aprobado; API Core #94 integrada en PR #100 (b774cf38); BFF #95 integrada en PR #101 (daf244ea); CI main 38929191630 correcta.
 No modifica la aplicación frontend publicada ni acredita integración HTTP existente.
 
 ## Recorrido y respuesta
@@ -64,12 +64,21 @@ etiqueta es texto opcional; cuando no exista, se omite. No admitir claves adicio
 Las imágenes son ilustraciones de demostración servidas por el propio frontend. API Core
 transporta rutas/recuadros; BFF no hace proxy de imágenes. No admitir URLs externas, query,
 fragmentos, traversal ni rutas ajenas al catálogo. Un prefijo correcto por sí solo no valida
-una ruta. Los recursos concretos y su formato se verificarán en T11 contra canvas/PDF.
+una ruta. T11 valida el recurso concreto con imagen, canvas y un PDF de compatibilidad.
 `clip` queda fuera de v1. Una imagen ausente/fallida debe explicarse, sin simular evidencia.
 
-Secuencia inicial aprobada el 2026-10-16: #94 entrega evidencia: null y rechaza rutas no
-catalogadas. T11 incorporará el catálogo y las ilustraciones sintéticas verificadas. Las pruebas
-de evidencia usan un catálogo aislado; no registran recursos ni rutas de producción.
+Secuencia inicial: #94 se entregó con evidencia nula. Catálogo T11 aprobado el 2026-10-16,
+preparado y verificado localmente; pendiente de publicación e integración coordinada:
+
+| Recurso servido por el frontend | Evento ficticio | Dimensiones |
+|--------------------------------|-----------------|-------------|
+| `/evidencia/demo/camion-tolva-elevada.png` | `EV-20261015-0002` | 1672 × 941 px |
+
+SHA-256: `38fa4516bc3d7f9142cc4629e60e14bc37650c0d70892603c5d89f88b952c568`.
+Recuadro ilustrativo: x=0.32, y=0.03, ancho=0.22, alto=0.28, respecto de la imagen completa.
+Los otros cinco eventos conservan evidencia nula. API Core, BFF y frontend deben registrar
+la misma ruta exacta; ningún servicio backend almacena o sirve la imagen. Integrar los
+validadores del proveedor antes del consumidor; este registro no acredita despliegue.
 
 ### Atencion y Derivacion
 
@@ -123,17 +132,18 @@ Variante revision: sobre el evento anterior, cambiar estado a revision, conserva
 null y añadir `"derivacion": {"motivo": "baja_confianza"}`. La clasificación procede de
 la fuente; no se deduce de un umbral implícito. Cambiar folio si coexiste con el ejemplo anterior.
 
-Objeto Evidencia válido únicamente después de registrar/crear la ruta en el catálogo:
+Objeto Evidencia del catálogo T11 aprobado:
 
 ```json
 {
-  "imagen": "/evidencia/demo/ilustracion-01.png",
-  "boundingBoxes": [{"x": 0.1, "y": 0.2, "ancho": 0.5, "alto": 0.4}]
+  "imagen": "/evidencia/demo/camion-tolva-elevada.png",
+  "boundingBoxes": [{"x": 0.32, "y": 0.03, "ancho": 0.22, "alto": 0.28, "etiqueta": "Área ilustrativa de tolva elevada"}]
 }
 ```
 
-La ruta es un ejemplo de contrato, no un recurso existente ni una instrucción para copiar
-material del cliente. En T11, proveedor y frontend referenciarán el mismo catálogo validado.
+El recurso es una ilustración sintética de demostración, sin material del cliente. Su
+decodificación en navegador, exportación canvas e inclusión en un PDF real fueron verificadas
+localmente. La descarga y las cifras del reporte completo se validan aparte en T12.
 
 ## Casos inválidos para validadores y pruebas
 
