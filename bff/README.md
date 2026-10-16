@@ -155,7 +155,7 @@ T11 admite únicamente la ruta sintética acordada para EV-20261015-0002; los ot
 eventos conservan evidencia nula. El [catálogo](../docs/contratos/eventos-v1.md#evidencia)
 debe coincidir con API Core y frontend. BFF valida y transmite metadatos: no descarga ni sirve
 imágenes. Rutas no catalogadas rechazadas, sin material de faena. Ampliación verificada
-localmente con build, 47 pruebas e integración HTTP real; publicación/merge pendientes.
+localmente con build, 47 pruebas e integración HTTP real; publicada en PR #102, pendiente de integración en main.
 
 ### Validación reproducible
 
