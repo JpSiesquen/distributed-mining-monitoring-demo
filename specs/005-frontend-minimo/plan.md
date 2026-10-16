@@ -179,7 +179,7 @@ el demo anterior. Un artefacto previo solo se reutiliza si existe y está identi
 Plan completo aprobado, incluidas reglas de contrato, CI por repositorio y orden de PR.
 Las [tareas nuevas y sus issues](tasks.md#issues-de-ejecución) están aprobadas/publicadas;
 #70–#79 quedaron sustituidas con enlaces, sin acreditar implementación. Plan integrado en PR #92.
-T01/CA1 y T02–T04 completadas. Frontend PR #53 integrado en 88d5b589; CI main correcta y producción READY/alias verificados. T05 integrada en PR #100 (b774cf38), CI main correcta. Próxima entrega: T06 / #95, BFF validado localmente con API Core real, pendiente CI/PR. Aviso PDF preexistente registrado para #45.
+T01/CA1 y T02–T04 completadas. Frontend PR #53 integrado en 88d5b589; CI main correcta y producción READY/alias verificados. T05 integrada en PR #100 (b774cf38), CI main correcta. Próxima entrega: T06 / #95, BFF validado con API Core real y checks api-core/bff correctos en PR #101, pendiente integración. Aviso PDF preexistente registrado para #45.
 Definir recursos concretos de evidencia al implementar. Instalaciones, ejecución de CI y cambios de rulesets conservan sus
 autorizaciones concretas pendientes; publicar backlog no autoriza esas operaciones.
 

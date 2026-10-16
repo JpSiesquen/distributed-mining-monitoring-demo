@@ -174,3 +174,5 @@ sin .env ni credenciales heredadas; instalación existente contrastada y sin paq
 La suite de 46 casos entra en el job bff por su npm test existente. La integración real
 se ejecuta explícitamente tras compilar ambos servicios; no se añade al workflow en #95.
 Estado y CI: [tareas 005](../specs/005-frontend-minimo/tasks.md). No acreditar consumo de la consola todavía.
+
+[PR #101](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/101): [CI 38924815677](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38924815677) con api-core/bff correctos. Integración local sobre el código backend ae8007ce3f30863d96a264a9eb88a5f153edf734; proveedor integrado en b774cf38ae9888f46dfe166c369b869c28fe25b8, sin diferencias en su código. PR pendiente de integrar. No se acredita todavía la pareja frontend/backend.

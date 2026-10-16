@@ -18,7 +18,7 @@ de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02
 **Próxima entrega:** [T06](../specs/005-frontend-minimo/tasks.md), eventos a través del
 BFF en [#95](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/95).
 Validación estricta, 502/504 y pruebas preparadas; 46 casos BFF y la integración real
-con API Core pasan localmente. PR y verificación de CI pendientes.
+con API Core pasan localmente. [PR #101](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/101) con api-core/bff verdes; pendiente integración.
 T05 completada: [PR #100](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/100)
 integrado en b774cf38; #94 cerrada, CI main 38923275808 correcta. BFF consume únicamente
 la fuente HTTP ya integrada. Evidencia nula hasta T11; sin paquetes nuevos.
@@ -45,7 +45,7 @@ servida y desencadenantes de preview/producción; no asumir que un PR carece de 
 Spec 005 revisión 2 aprobada: Mining Ops Console en su propio repo, lectura primero y
 Material UI; atención persistente después. GET /api/events con arreglo directo y UTC ficticia
 aprobados, junto con evidencia sintética de demostración. Spec, plan y T01–T15 aprobados;
-T01–T02 completadas; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 integrada en PR #100; T06 en validación y T07–T15 pendientes. PR #92 integrado; cinco issues backend y trece frontend publicadas con
+T01–T02 completadas; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 integrada en PR #100; T06 validada en PR #101, pendiente integración y T07–T15 pendientes. PR #92 integrado; cinco issues backend y trece frontend publicadas con
 dependencias entre repos. [Mapa de tareas/issues](../specs/005-frontend-minimo/tasks.md#issues-de-ejecución).
 Corrección editorial frontend integrada en PR #35; no acredita migración ni contrato implementado.
 Instalaciones y ejecución de la migración siguen sujetas a las autorizaciones aplicables.
@@ -90,7 +90,7 @@ con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 | 1 | API Core compilable con CI obligatoria | Completada; milestone cerrado. |
 | 2 | Rutas, errores y pruebas de API Core | Completada y documentada: CA1–CA8 de 002 y 003; milestone cerrado. |
 | 3 | BFF consumiendo API Core | Implementado y verificado: 004/T01–T09, CA1–CA8. Cierre #67 integrado en PR #91; milestone aún abierto. |
-| 4 | Mining Ops Console consumiendo únicamente BFF | T01/CA1 y T02 completadas; T03 integrada en PR frontend #52; T04 integrada; T05 integrada; T06 en validación. Contrato documentado en ambos repos; integración HTTP pendiente. Conservar contrato id/name existente. |
+| 4 | Mining Ops Console consumiendo únicamente BFF | T01/CA1 y T02 completadas; T03 integrada en PR frontend #52; T04 integrada; T05 integrada; T06 validada en PR #101, pendiente integración. Contrato documentado en ambos repos; integración HTTP pendiente. Conservar contrato id/name existente. |
 | 5 | Integración SQL Server y persistencia | Por especificar; mantener contrato entre capas. |
 | 6 | Empaquetado con Docker y entrada Nginx | Concretar ejecución y verificar flujo completo local antes de desplegar. |
 | 7 | Despliegue y validación DEV/QA | Milestone de topología renumerado; ejecutar 001 y verificar sus prerrequisitos. Validar costos antes de aprovisionar. |

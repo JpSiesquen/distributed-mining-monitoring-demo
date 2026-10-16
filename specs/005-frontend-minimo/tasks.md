@@ -2,7 +2,7 @@
 
 - **Spec:** [revisión 2](spec.md), aprobada el 2026-10-13.
 - **Plan:** [005](plan.md), aprobado el 2026-10-13.
-- **Estado:** Aprobadas el 2026-10-13; T01 completada el 2026-10-15, T02 completada; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 integrada en PR #100; T06 en validación y T07–T15 pendientes.
+- **Estado:** Aprobadas el 2026-10-13; T01 completada el 2026-10-15, T02 completada; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 integrada en PR #100; T06 validada en PR #101, pendiente integración y T07–T15 pendientes.
 
 Una secuencia para dos repos: **backend** = distributed-mining-monitoring-demo;
 **frontend** = mining-ops-console. No crear una segunda aplicación frontend aquí.
@@ -98,7 +98,7 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
   demora de cabeceras/cuerpo → 504. Health/equipment permanecen correctos. Fuente real API Core
   consultada por HTTP; BFF no lee fixture ni accede a SQL. Integrar proveedor antes del consumidor.
   **Depende:** T05. **Cobertura:** R1/R2/R3/R8; CA2 y prerrequisito CA3.
-  **Avance local (2026-10-16):** build y 46 pruebas BFF correctos; integración reproducible con API Core compilado real por HTTP, incluyendo eventos/equipos, caída → 502 y health disponible. Sin paquetes, acceso a fixtures desde BFF ni cambios del workflow. Ver [operación](../../bff/README.md#eventos-de-lectura--95). Pendiente CI e integración del PR.
+  **Avance local (2026-10-16):** build y 46 pruebas BFF correctos; integración reproducible con API Core compilado real por HTTP, incluyendo eventos/equipos, caída → 502 y health disponible. Sin paquetes, acceso a fixtures desde BFF ni cambios del workflow. Ver [operación](../../bff/README.md#eventos-de-lectura--95). [PR #101](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/101); [CI 38924815677](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38924815677) correcta con api-core/bff. Pendiente integración.
 
 - [ ] **T07 — Preparar consulta y contrato en frontend.** Crear src/api/events.ts,
   validador y consulta Query; proxy dev/preview con BFF_URL validado, escucha/puertos aprobados,
