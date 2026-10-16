@@ -1,6 +1,6 @@
 # Roadmap técnico
 
-Actualizado: 2026-10-15.
+Actualizado: 2026-10-16.
 
 ## Objetivo
 
@@ -15,8 +15,18 @@ Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); GET /health, GET /api/equipment con datos simulados y errores 404/500 en JSON integrados
 (002/T06–T08); pruebas de contratos con `npm test` (002/T09), ejecutadas en CI (003/T04).
 
-**Próxima entrega:** [T02](../specs/005-frontend-minimo/tasks.md), revisión de dependencias
-en [frontend #37](https://github.com/JpSiesquen/mining-ops-console/issues/37), sin nuevas instalaciones.
+**Próxima entrega:** [T05](../specs/005-frontend-minimo/tasks.md), eventos sintéticos de
+API Core en [#94](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/94).
+Validador, fixture y ruta preparados localmente; validación/PR pendientes de cierre.
+T04 completada: [frontend PR #53](https://github.com/JpSiesquen/mining-ops-console/pull/53)
+integrado en 88d5b589; #39 cerrada, CI main 38920171582 correcta y producción READY/alias
+verificados. Ruleset exige frontend en ese repo; #54 restaurado y cerrado sin integrar.
+#94 entrega evidencia: null; catálogo/ilustraciones se completan en T11, según decisión aprobada.
+T02 completada en PR #51; T03 integrada en
+[frontend PR #52](https://github.com/JpSiesquen/mining-ops-console/pull/52), merge 5172e9f7.
+Producción READY y alias contrastados con ese merge. Instalación/build, TS2322 controlado
+y restauración verificados; descarga e imágenes PDF confirmadas por el usuario.
+Aviso Buffer localizado en código PDF idéntico al anterior, registrado para #45.
 T01/CA1 completadas: [backend #93](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/93)
 y [frontend #36](https://github.com/JpSiesquen/mining-ops-console/issues/36) integradas.
 [Contrato eventos v1](contratos/eventos-v1.md) y [ADR 0012](adr/0012-repositorios-separados-y-contrato-eventos.md)
@@ -31,7 +41,7 @@ servida y desencadenantes de preview/producción; no asumir que un PR carece de 
 Spec 005 revisión 2 aprobada: Mining Ops Console en su propio repo, lectura primero y
 Material UI; atención persistente después. GET /api/events con arreglo directo y UTC ficticia
 aprobados, junto con evidencia sintética de demostración. Spec, plan y T01–T15 aprobados;
-T01 completada, T02 en revisión y T03–T15 pendientes. PR #92 integrado; cinco issues backend y trece frontend publicadas con
+T01–T02 completadas; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 en implementación y T06–T15 pendientes. PR #92 integrado; cinco issues backend y trece frontend publicadas con
 dependencias entre repos. [Mapa de tareas/issues](../specs/005-frontend-minimo/tasks.md#issues-de-ejecución).
 Corrección editorial frontend integrada en PR #35; no acredita migración ni contrato implementado.
 Instalaciones y ejecución de la migración siguen sujetas a las autorizaciones aplicables.
@@ -76,7 +86,7 @@ con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 | 1 | API Core compilable con CI obligatoria | Completada; milestone cerrado. |
 | 2 | Rutas, errores y pruebas de API Core | Completada y documentada: CA1–CA8 de 002 y 003; milestone cerrado. |
 | 3 | BFF consumiendo API Core | Implementado y verificado: 004/T01–T09, CA1–CA8. Cierre #67 integrado en PR #91; milestone aún abierto. |
-| 4 | Mining Ops Console consumiendo únicamente BFF | T01/CA1 completadas; T02 en revisión. Contrato documentado en ambos repos; integración HTTP pendiente. Conservar contrato id/name existente. |
+| 4 | Mining Ops Console consumiendo únicamente BFF | T01/CA1 y T02 completadas; T03 integrada en PR frontend #52; T04 integrada; T05 en implementación. Contrato documentado en ambos repos; integración HTTP pendiente. Conservar contrato id/name existente. |
 | 5 | Integración SQL Server y persistencia | Por especificar; mantener contrato entre capas. |
 | 6 | Empaquetado con Docker y entrada Nginx | Concretar ejecución y verificar flujo completo local antes de desplegar. |
 | 7 | Despliegue y validación DEV/QA | Milestone de topología renumerado; ejecutar 001 y verificar sus prerrequisitos. Validar costos antes de aprovisionar. |

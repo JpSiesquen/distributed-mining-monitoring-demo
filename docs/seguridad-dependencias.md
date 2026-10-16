@@ -1,6 +1,6 @@
 # Seguridad de dependencias y ejecución
 
-Actualizado: 2026-10-15. Selección backend aprobada; revisión de dependencias de migración frontend en curso.
+Actualizado: 2026-10-16. Selecciones backend y frontend aprobadas; frontend #38 integrado; CI #39 integrada en frontend PR #53.
 
 ## Riesgo documentado
 
@@ -47,8 +47,10 @@ Revisión del frontend existente: corrección transitiva de PostCSS integrada en
 [mining-ops-console PR #49](https://github.com/JpSiesquen/mining-ops-console/pull/49), con
 build local y despliegue verificados. Su [registro canónico](https://github.com/JpSiesquen/mining-ops-console/blob/4a1ca1f2c4d51120ec9192f02aad9129bc92a824/docs/seguridad-dependencias.md)
 documenta versiones, controles y límites. La selección adicional de MUI/Emotion, Query y
-herramientas DOM sigue en [frontend #37](https://github.com/JpSiesquen/mining-ops-console/issues/37);
-no se considera aprobada por la corrección del grafo anterior. Esta referencia no acredita
+herramientas DOM fue aprobada e integrada en [frontend PR #51](https://github.com/JpSiesquen/mining-ops-console/pull/51).
+Registro canónico del grafo: [revisión 9e243722](https://github.com/JpSiesquen/mining-ops-console/blob/9e243722f16f1731d135126f8f5ab05beef128f5/docs/seguridad-dependencias.md).
+#38: instalación con scripts bloqueados, grafo contrastado y build/fallo de tipos verificados localmente;
+PDF descargado con imágenes según el usuario; aviso Buffer localizado en código PDF idéntico al anterior; seguimiento en #45 y cambios integrados en [frontend PR #52](https://github.com/JpSiesquen/mining-ops-console/pull/52), merge 5172e9f7; producción verificada. Esta referencia no acredita
 que las alertas/configuración del frontend sean las mismas que las del backend.
 
 ## Alertas de Dependabot
@@ -213,3 +215,7 @@ Ejecución npm test en CI BFF autorizada el 2026-10-13 en #66. Suite correcta y 
 independientes de aserción, instalación y política verificados; pasos posteriores omitidos
 cuando correspondía. PR temporal #90 restaurado/cerrado sin integrar; recuperación correcta.
 No se añadieron dependencias, permisos ni secretos. [Evidencia](ci.md#pruebas-bff-y-detención-de-pasos--issue-66).
+
+CI frontend #39 autorizada y validada: Actions oficiales por SHA, Node 24.21.0, lectura y cinco minutos. .npmrc omitido en #38 se versiona en [PR frontend #53](https://github.com/JpSiesquen/mining-ops-console/pull/53); instalaciones previas usaron --ignore-scripts explícito. Falta de política bloquea antes de instalar; TS2322 y recuperación verificados. Ruleset exige frontend, sin force push/eliminación. [Evidencia](https://github.com/JpSiesquen/mining-ops-console/blob/9c45cafb31e4195456d0d6c597a70cfcaf60ad27/docs/ci.md). Backend sin cambios. PR #53 integrado en 88d5b589; CI main y producción verificadas. No hay nuevas dependencias ni excepciones de scripts.
+
+Backend #94 conserva manifiesto, lockfile e ignore-scripts aprobados. Dependencias instaladas contrastadas por versión/integridad; build y pruebas en copia aislada sin .env ni credenciales heredadas. No se instalaron paquetes. Fixture íntegramente sintético y evidencia nula; catálogo de prueba no habilita recursos en producción.

@@ -11,7 +11,7 @@ El job `api-core` usa `ubuntu-22.04`, Node.js `24.21.0` y un límite de cinco mi
 Los comandos se ejecutan en `api-core/`.
 
 ```text
-Checkout → Node.js → política npm → instalación → build → seis pruebas
+Checkout → Node.js → política npm → instalación → build → pruebas de contrato/HTTP
 ```
 
 | Paso | Comprobación |
@@ -21,8 +21,9 @@ Checkout → Node.js → política npm → instalación → build → seis prueb
 | Build | `npm run build` comprueba tipos, compila y copia el JSON mock a `dist/data/`. |
 | Test | `npm test` ejecuta `node --test test/api.test.mjs` sobre la aplicación compilada. |
 
-Las seis pruebas cubren salud, listado mock, ruta inexistente, ausencia de X-Powered-By,
-error de lectura del mock y disponibilidad de salud sin el archivo de datos.
+La suite conserva salud, equipos, 404 y errores seguros, y añade eventos v1: validación estricta,
+UTC, orden, folios, evidencia de prueba y respuestas 500 ante fuente ausente o inválida.
+La ampliación #94 pasa 65 pruebas localmente; sus ejecuciones CI se registran con el PR.
 El archivo de pruebas se indica explícitamente para evitar un patrón sin coincidencias.
 Un fallo detiene los pasos posteriores; no hay `continue-on-error`.
 
@@ -61,7 +62,7 @@ de la app GitHub Actions (15368), sin retirar controles previos. Incorporado tra
 | Recuperación | Error retirado, árbol temporal idéntico al cambio real; ambos jobs correctos: [ejecución 38477303301](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38477303301). PR #84 cerrado sin integrar. |
 
 Los casos de #61 acreditan compilación y bloqueo por tipos. La suite HTTP y sus fallos en CI
-se verifican a continuación. El futuro check frontend no se exige todavía.
+se verifican a continuación. El check frontend se exige únicamente en su propio repo; no se añade al ruleset backend.
 
 ## Pruebas BFF y detención de pasos — issue #66
 
@@ -114,3 +115,11 @@ de la ejecución que se quiera diagnosticar.
 PRs temporales #53 y #54 cerrados sin integrar. La restauración de #54 terminó en
 [verde](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38330429291)
 y su árbol se contrastó idéntico a `main`.
+
+## CI de la consola en su propio repositorio
+
+Frontend #39 integrado en [PR #53](https://github.com/JpSiesquen/mining-ops-console/pull/53),
+merge 88d5b589. El job frontend compila con política npm previa, scripts bloqueados, lectura
+y cinco minutos; tipos/política/recuperación verificados. Ruleset exige frontend en ese repo;
+backend conserva api-core/bff. [Registro frontend](https://github.com/JpSiesquen/mining-ops-console/blob/88d5b58977ccc10c0501713490d5f58d1f739d2a/docs/ci.md).
+CI de main y producción Vercel contrastadas tras el merge. Esto no acredita integración de eventos ni pruebas DOM, pendientes de sus tareas.
