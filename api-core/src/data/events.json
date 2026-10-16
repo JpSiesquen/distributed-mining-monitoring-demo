@@ -1,0 +1,125 @@
+[
+  {
+    "folio": "EV-20261016-0001",
+    "estado": "no_conforme",
+    "categoria": "sobrellenado_visual",
+    "confianza": 0.93,
+    "fechaHora": "2026-10-16T00:00:00Z",
+    "puntoCaptura": "Punto demo",
+    "turno": "C",
+    "camara": "Camara demo",
+    "patente": null,
+    "tipoTolva": "convencional",
+    "empresa": null,
+    "versionModelo": "demo-v1",
+    "observacion": "Registro ficticio de sobrellenado visual.",
+    "evidencia": null,
+    "atencion": {
+      "estado": "pendiente",
+      "atendidoPor": "Operador demo",
+      "fechaHora": "2026-10-16T00:01:00Z"
+    }
+  },
+  {
+    "folio": "EV-20261015-0005",
+    "estado": "revision",
+    "categoria": null,
+    "confianza": 0.67,
+    "fechaHora": "2026-10-15T23:59:59Z",
+    "puntoCaptura": "Punto demo",
+    "turno": "C",
+    "camara": "Camara demo",
+    "patente": null,
+    "tipoTolva": "convencional",
+    "empresa": null,
+    "versionModelo": "demo-v1",
+    "observacion": "Registro ficticio derivado a revisión por polvo.",
+    "evidencia": null,
+    "atencion": null,
+    "derivacion": {
+      "motivo": "polvo_en_suspension"
+    }
+  },
+  {
+    "folio": "EV-20261015-0004",
+    "estado": "conforme",
+    "categoria": null,
+    "confianza": 0.98,
+    "fechaHora": "2026-10-15T23:59:59Z",
+    "puntoCaptura": "Punto demo",
+    "turno": "C",
+    "camara": "Camara demo",
+    "patente": null,
+    "tipoTolva": "convencional",
+    "empresa": null,
+    "versionModelo": "demo-v1",
+    "observacion": "Registro ficticio conforme.",
+    "evidencia": null,
+    "atencion": null
+  },
+  {
+    "folio": "EV-20261015-0003",
+    "estado": "no_conforme",
+    "categoria": "mala_distribucion",
+    "confianza": 0.87,
+    "fechaHora": "2026-10-15T18:00:00Z",
+    "puntoCaptura": "Punto demo",
+    "turno": "B",
+    "camara": "Camara demo",
+    "patente": null,
+    "tipoTolva": "convencional",
+    "empresa": null,
+    "versionModelo": "demo-v1",
+    "observacion": "Registro ficticio de distribución de carga.",
+    "evidencia": null,
+    "atencion": {
+      "estado": "en_seguimiento",
+      "atendidoPor": "Operador demo",
+      "fechaHora": "2026-10-15T18:01:00Z",
+      "comentario": "Seguimiento ficticio."
+    }
+  },
+  {
+    "folio": "EV-20261015-0002",
+    "estado": "no_conforme",
+    "categoria": "tolva_levantada",
+    "confianza": 0.88,
+    "fechaHora": "2026-10-15T12:00:00Z",
+    "puntoCaptura": "Punto demo",
+    "turno": "A",
+    "camara": "Camara demo",
+    "patente": null,
+    "tipoTolva": "convencional",
+    "empresa": null,
+    "versionModelo": "demo-v1",
+    "observacion": "Registro ficticio de tolva levantada.",
+    "evidencia": null,
+    "atencion": {
+      "estado": "cerrado",
+      "atendidoPor": "Operador demo",
+      "fechaHora": "2026-10-15T14:00:00Z",
+      "comentario": "Cierre ficticio de lectura."
+    }
+  },
+  {
+    "folio": "EV-20261015-0001",
+    "estado": "revision",
+    "categoria": null,
+    "confianza": 0.62,
+    "fechaHora": "2026-10-15T08:00:00Z",
+    "puntoCaptura": "Punto demo",
+    "turno": "A",
+    "camara": "Camara demo",
+    "patente": null,
+    "tipoTolva": "convencional",
+    "empresa": null,
+    "versionModelo": "demo-v1",
+    "observacion": "Registro ficticio revisado, sin medición operativa.",
+    "evidencia": null,
+    "atencion": null,
+    "derivacion": {
+      "motivo": "baja_confianza",
+      "resolucion": "confirmado_conforme"
+    }
+  }
+]

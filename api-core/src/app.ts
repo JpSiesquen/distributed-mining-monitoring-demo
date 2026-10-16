@@ -1,5 +1,6 @@
 import express, { type NextFunction, type Request, type Response } from "express";
 import { equipmentRouter } from "./routes/equipment.js";
+import { eventsRouter } from "./routes/events.js";
 
 export const app = express();
 
@@ -10,6 +11,7 @@ app.get("/health", (_req, res) => {
 });
 
 app.use("/api/equipment", equipmentRouter);
+app.use("/api/events", eventsRouter);
 
 app.use((_req, res) => {
   res.status(404).json({ error: "Not found" });

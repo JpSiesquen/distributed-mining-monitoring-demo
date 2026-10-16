@@ -1,7 +1,7 @@
 # Contrato de lectura de eventos v1
 
 Registro: 2026-10-15. Derivado del [plan 005 aprobado](../../specs/005-frontend-minimo/plan.md).
-Estado: especificado; endpoints y validadores pendientes de implementación en #94/#95.
+Estado: contrato aprobado; API Core #94 validada en PR #100 (pendiente integración) y BFF #95 pendiente.
 No modifica la aplicación frontend publicada ni acredita integración HTTP existente.
 
 ## Recorrido y respuesta
@@ -66,6 +66,10 @@ transporta rutas/recuadros; BFF no hace proxy de imágenes. No admitir URLs exte
 fragmentos, traversal ni rutas ajenas al catálogo. Un prefijo correcto por sí solo no valida
 una ruta. Los recursos concretos y su formato se verificarán en T11 contra canvas/PDF.
 `clip` queda fuera de v1. Una imagen ausente/fallida debe explicarse, sin simular evidencia.
+
+Secuencia inicial aprobada el 2026-10-16: #94 entrega evidencia: null y rechaza rutas no
+catalogadas. T11 incorporará el catálogo y las ilustraciones sintéticas verificadas. Las pruebas
+de evidencia usan un catálogo aislado; no registran recursos ni rutas de producción.
 
 ### Atencion y Derivacion
 

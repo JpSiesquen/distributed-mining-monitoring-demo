@@ -1,7 +1,7 @@
 # API Core
 
 Servicio HTTP con Node.js 24.21.0, Express 4.22.3 y TypeScript 5.9.3.
-El alcance actual sirve equipos ficticios desde un JSON; no se conecta a SQL Server.
+Sirve equipos y eventos ficticios desde JSON; no se conecta a SQL Server.
 Contratos y aceptación: [spec 002](../specs/002-api-core-minimo/spec.md).
 
 ## Preparación local
@@ -59,9 +59,9 @@ npm run build
 npm test
 ```
 
-Las seis pruebas usan servidores temporales con puertos asignados por el sistema y datos ficticios.
-Comprueban salud, equipos, 404, ausencia de X-Powered-By, 500 por mock ausente y salud disponible
-sin mock. Cierran servidores y eliminan sus copias temporales.
+Las pruebas usan servidores temporales con puertos asignados por el sistema y datos ficticios.
+Conservan salud, equipos, 404 y errores seguros, y amplían el contrato de eventos. Cierran
+servidores y eliminan únicamente sus copias temporales dentro de dist/.
 
 ## Rutas y comprobación manual
 
@@ -71,6 +71,7 @@ Confirmar después desde otra terminal:
 ```powershell
 curl.exe -i http://127.0.0.1:3002/health
 curl.exe -i http://127.0.0.1:3002/api/equipment
+curl.exe -i http://127.0.0.1:3002/api/events
 curl.exe -i http://127.0.0.1:3002/does-not-exist
 ```
 
@@ -78,6 +79,7 @@ curl.exe -i http://127.0.0.1:3002/does-not-exist
 |------|-----------|
 | /health | 200 JSON: `{"status":"ok"}`. Solo confirma que API Core responde; no verifica SQL Server ni la disponibilidad de los datos. |
 | /api/equipment | 200 JSON: arreglo del mock con id/name de texto. |
+| /api/events | 200 JSON: arreglo de eventos v1; fechaHora UTC descendente y folio ascendente en empates. [] es válido. |
 | Ruta desconocida | 404 JSON: `{"error":"Not found"}`. |
 | Fallo al leer/interpretar el mock | 500 JSON: `{"error":"Internal server error"}`; detalle seguro en el log. |
 
@@ -97,7 +99,7 @@ configurado en esta entrega; la retención de los servidores se concretará al d
 | `[request_error] ... SyntaxError` | Revisar sintaxis del JSON fuente y recompilar; no devolver su contenido al cliente. |
 
 Un 404 indica que la ruta solicitada no existe; no demuestra una caída del servidor.
-Un `/health` exitoso no descarta un fallo en `/api/equipment`.
+Un `/health` exitoso no descarta un fallo en `/api/equipment` o `/api/events`.
 No registrar credenciales, el entorno completo, rutas internas ni contenido del mock.
 
 ## Evidencia de cierre
@@ -119,3 +121,28 @@ los procesos y archivos temporales se limpiaron. [CI y fallos controlados](../do
 
 Este cierre corresponde únicamente a API Core. El flujo Frontend → BFF → API Core de
 001/T02 sigue pendiente hasta disponer de las otras capas.
+
+## Eventos de lectura — #94
+
+Contrato: [eventos v1](../docs/contratos/eventos-v1.md). El build existente copia events.json
+a dist/data; se comprueba igualdad con la fuente. No cambia equipo id/name ni sus rutas.
+
+La ruta lee y valida el conjunto completo antes de responder. Rechaza claves desconocidas,
+campos/tipos inválidos, UTC sin fecha real, combinaciones estado/categoría/derivación
+incompatibles, atención anterior al evento y folios duplicados. No convierte valores,
+clasifica por confianza ni omite registros inválidos. Ordena una copia sin alterar la fuente.
+Fixture ausente, JSON inválido o contrato incumplido → 500 genérico; los logs solo muestran
+categorías ENOENT/SyntaxError/TypeError. Salud y equipos siguen disponibles.
+
+El fixture contiene seis eventos totalmente ficticios. Evidencia nula hasta T11, decisión
+aprobada el 2026-10-16; cualquier imagen no catalogada se rechaza. Las pruebas de metadatos
+usan un catálogo aislado y no acreditan recursos existentes ni trasladan imágenes de faena.
+Atención/derivación son lectura ficticia, no una escritura ni una sesión confirmada.
+
+Validación local en copia aislada sin .env ni credenciales heredadas; dependencias sin cambios,
+instalación existente contrastada con lockfile. Build y pruebas nativas de contrato/HTTP
+comprueban fuente vacía, orden y empates, copia de JSON, error seguro y aislamiento entre rutas.
+CI y estado de entrega: [tareas 005](../specs/005-frontend-minimo/tasks.md). BFF #95 y el
+consumo de la consola siguen pendientes: esta ruta aislada no acredita integración completa.
+
+Resultado de #94: build y 65 pruebas locales correctas; [CI 38921955929](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38921955929) con api-core/bff verdes. [PR #100](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/100) pendiente de integrar. Los logs no contienen cuerpo del fixture ni rutas internas, y los temporales de pruebas quedaron limpios.

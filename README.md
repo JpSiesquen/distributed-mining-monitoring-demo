@@ -37,13 +37,14 @@ Frontend → BFF → API Core → Base de datos
 
 ```
 distributed-mining-monitoring-demo/
-├─ frontend/    # Aplicación React
 ├─ bff/         # Backend for Frontend
 ├─ api-core/    # API principal
 ├─ docs/        # Documentación técnica y ADR
 ├─ specs/       # Especificaciones por funcionalidad
 └─ README.md
 ```
+
+La consola frontend se mantiene en [mining-ops-console](https://github.com/JpSiesquen/mining-ops-console); no se duplica en este repositorio.
 
 ## Configuración
 
@@ -52,14 +53,14 @@ de cada componente, sin valores sensibles.
 
 ## Estado
 
-API Core implementa salud, equipos simulados, errores JSON y seis pruebas de contrato.
+API Core implementa salud, equipos y eventos sintéticos de lectura, errores JSON y pruebas de contrato/HTTP.
 La [CI verificada](docs/ci.md) comprueba compilación y pruebas de API Core y BFF;
 `main` exige pull request y checks api-core/bff exitosos.
 La [operación de API Core](api-core/README.md) está documentada y la spec 002 verificada.
 BFF cuenta con [arranque, salud y equipos vía API Core verificados](bff/README.md),
 con errores seguros y once pruebas HTTP verificadas e integradas en CI. La spec 004
 acredita CA1–CA8; su [matriz operativa](bff/README.md#evidencia-de-aceptación) recoge la evidencia.
-Frontend, integración de base de datos y despliegue pendientes. La topología está aprobada.
+La base compilable y CI del frontend están integradas en su repo; la conexión de eventos vía BFF sigue pendiente. Integración SQL y despliegue distribuido pendientes; topología aprobada.
 Los estados de cada entregable se registran en el [índice de specs](specs/README.md).
 
 Continuar desde el [roadmap técnico](docs/roadmap.md). Consultar el

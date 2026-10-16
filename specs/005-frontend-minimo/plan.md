@@ -60,8 +60,8 @@ Atención ficticia puede describir eventos ya atendidos; no equivale a sesión, 
 ni registro de acciones reales. Si se aporta, fechaHora debe ser UTC válida y no anterior al evento.
 BoundingBoxes: x/y finitos >=0; ancho/alto >0; x+ancho e y+alto <=1; etiqueta opcional de texto.
 
-Contrato canónico: [eventos v1](../../docs/contratos/eventos-v1.md), redactado en #93; vincular
-su revisión/commit desde frontend al integrar. Mantener validadores explícitos de JSON y ejemplos equivalentes
+Contrato canónico: [eventos v1](../../docs/contratos/eventos-v1.md), integrado en #93 (3de8694)
+y referenciado desde frontend #36 (PR #50, merge 15afc15a). Mantener validadores explícitos de JSON y ejemplos equivalentes
 por componente, sin paquete compartido/generador/Zod añadido por anticipado.
 
 ### Evidencia y fechas
@@ -179,6 +179,8 @@ el demo anterior. Un artefacto previo solo se reutiliza si existe y está identi
 Plan completo aprobado, incluidas reglas de contrato, CI por repositorio y orden de PR.
 Las [tareas nuevas y sus issues](tasks.md#issues-de-ejecución) están aprobadas/publicadas;
 #70–#79 quedaron sustituidas con enlaces, sin acreditar implementación. Plan integrado en PR #92.
-Próxima entrega: T01, contrato y documentación por repositorio. Definir recursos concretos de
-evidencia al implementar. Instalaciones, ejecución de CI y cambios de rulesets conservan sus
+T01/CA1 y T02–T04 completadas. Frontend PR #53 integrado en 88d5b589; CI main correcta y producción READY/alias verificados. Próxima entrega: T05 / #94 validada en PR #100 con api-core/bff verdes, pendiente integración; BFF #95 pendiente. Aviso PDF preexistente registrado para #45.
+Definir recursos concretos de evidencia al implementar. Instalaciones, ejecución de CI y cambios de rulesets conservan sus
 autorizaciones concretas pendientes; publicar backlog no autoriza esas operaciones.
+
+Secuencia de evidencia aprobada el 2026-10-16: fixture inicial con evidencia: null y catálogo de producción vacío hasta T11. Validación de metadatos con catálogo aislado de pruebas; no se publican rutas sin recursos aprobados.

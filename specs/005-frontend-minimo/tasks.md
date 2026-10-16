@@ -2,7 +2,7 @@
 
 - **Spec:** [revisión 2](spec.md), aprobada el 2026-10-13.
 - **Plan:** [005](plan.md), aprobado el 2026-10-13.
-- **Estado:** Aprobadas el 2026-10-13; T01–T15 pendientes de ejecución.
+- **Estado:** Aprobadas el 2026-10-13; T01 completada el 2026-10-15, T02 completada; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 validada en PR #100, pendiente de integración y T06–T15 pendientes.
 
 Una secuencia para dos repos: **backend** = distributed-mining-monitoring-demo;
 **frontend** = mining-ops-console. No crear una segunda aplicación frontend aquí.
@@ -35,46 +35,53 @@ T01/T13/T15 se dividen por repo. Prefijos 4-N identifican el orden conjunto, no 
 | T15 | [#97](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/97) | [#48](https://github.com/JpSiesquen/mining-ops-console/issues/48) |
 
 Las antiguas #70–#79 se cerraron como sustituidas, con enlaces a los reemplazos, y salieron
-del milestone activo. Su cierre no acredita implementación. T01–T15 siguen pendientes;
+del milestone activo. Su cierre no acredita implementación. T01–T04 completadas; T05–T15 pendientes de cierre;
 la corrección editorial del frontend en PR #35 no completa el contrato ni la integración.
 
 ## Secuencia y comprobaciones
 
-- [ ] **T01 — Alinear contrato y documentación de ambos repos.** Backend: crear
+- [x] **T01 — Alinear contrato y documentación de ambos repos.** Backend: crear
   docs/contratos/eventos-v1.md desde el plan aprobado, con ejemplos sintéticos válidos/ inválidos;
   registrar ADR de repos/CI y ampliaciones 002/004. Frontend: revisar docs/spec.md y tasks/plan.md,
   referenciar contrato y mantener el demo histórico diferenciado. Proponer reconciliación de issues.
   **Comprobar:** mismas rutas/campos/reglas/UTC/evidencia en ambos documentos; ninguna tarea crea
   frontend duplicado ni exige su check en backend. Reglas heredadas revisadas, sin material restringido.
   **Cobertura:** R1/R2/R9; CA1. Prerrequisito documental de la implementación.
-  **Avance backend (#93):** contrato [eventos v1](../../docs/contratos/eventos-v1.md) y
-  [ADR 0012](../../docs/adr/0012-repositorios-separados-y-contrato-eventos.md) redactados;
-  revisión/integración pendientes. No completar T01/CA1 hasta que frontend #36 referencie
-  la revisión integrada. Endpoints/validadores e integración real siguen sin implementar.
+  **Evidencia:** backend [PR #99](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/99),
+  merge 3de8694, integra contrato [eventos v1](../../docs/contratos/eventos-v1.md) y
+  [ADR 0012](../../docs/adr/0012-repositorios-separados-y-contrato-eventos.md).
+  Frontend [PR #50](https://github.com/JpSiesquen/mining-ops-console/pull/50), merge 15afc15a,
+  referencia esa revisión inmutable; preview y producción Vercel verificados. #93/#36 cerradas.
+  CA1 cumplido; endpoints/validadores e integración HTTP siguen pendientes.
 
-- [ ] **T02 — Revisar dependencias y autorizar comandos del frontend.** Revisar package.json,
+- [x] **T02 — Revisar dependencias y autorizar comandos del frontend.** Revisar package.json,
   lockfile y grafo existente; compatibilidad React19/Vite6/Node24.21.0, MUI/Emotion, Query,
   PDF y Vitest/RTL/jsdom. Verificar scripts transitivos, incluidos esbuild/fsevents; registrar
   finalidad, tipo, versión y comando exactos antes de instalar/ejecutar. Revalidar cambios de grafo.
   **Comprobar:** selección sin paquetes anticipados; ignore-scripts no se desactiva; cualquier
   script necesario tiene necesidad/contenido/comando revisados y aprobados. Sin credenciales.
   **Depende:** T01. **Cobertura:** R10; habilita T03, sin instalar en esta tarea.
+  **Avance:** corrección del grafo existente integrada en
+  [frontend PR #49](https://github.com/JpSiesquen/mining-ops-console/pull/49), con build correcto.
+  Selección y comandos aprobados; revisión completa integrada en [frontend PR #51](https://github.com/JpSiesquen/mining-ops-console/pull/51), merge 9e243722. #37 cerrada; producción READY y alias contrastados. La instalación corresponde a T03.
 
-- [ ] **T03 — Establecer baseline compilable del frontend existente.** Preparar .npmrc,
+- [x] **T03 — Establecer baseline compilable del frontend existente.** Preparar .npmrc,
   engines/scripts finitos, configuración de tipos y herramientas autorizadas sin regenerar el repo.
   Ejecutar solo comandos aprobados, contrastar lockfile y documentar revisión. Registrar baseline
   de pantallas/dominio con acceso permitido; corregir fallos identificados antes de migrar.
   **Comprobar:** build produce dist; tipo incorrecto falla antes del empaquetado; fuente restaurada.
   No asumir que el demo ya compila o que sus decisiones son correctas. Entorno sin secretos.
   **Depende:** T02. **Cobertura:** R6/R8/R10; prepara CA6/CA7/CA8.
+  **Evidencia (2026-10-16):** instalación con scripts bloqueados, grafo contrastado, build correcto y TS2322 con restauración. PDF descargado con imágenes según el usuario; aviso Buffer preexistente registrado para #45. [Frontend PR #52](https://github.com/JpSiesquen/mining-ops-console/pull/52) integrado, merge 5172e9f7; #38 cerrada, producción READY y alias verificados.
 
-- [ ] **T04 — Introducir CI inicial en el repo frontend.** Revalidar Actions/SHA, comandos,
+- [x] **T04 — Introducir CI inicial en el repo frontend.** Revalidar Actions/SHA, comandos,
   runtime y cuotas/costos del repo privado; preparar job frontend de build con controles npm,
   permisos mínimos y cinco minutos. Autorizar ejecución concreta antes de habilitarla; validar
   caso correcto y fallo de tipos antes de exigir check en su ruleset. Backend conserva sus dos checks.
   **Comprobar:** falta de política falla antes de instalar; build incorrecto bloquea el PR del
   frontend; recuperación verificada, negativos sin integrar. Sin tokens entre repos ni despliegue.
   **Depende:** T03. **Cobertura:** R8/R10; CA8 parcial.
+  **Evidencia (2026-10-16):** [frontend PR #53](https://github.com/JpSiesquen/mining-ops-console/pull/53), head 9c45cafb, check frontend/Vercel verdes. Correcto 38914865846; TS2322 38915009193; política ausente 38915155808 (instalación/build omitidos); recuperación 38915316327; head final correcto 38915533974. Ruleset 25246100 exige PR/frontend, sin force push/eliminación; #54 BLOCKED y cerrado restaurado sin integrar. PR #53 integrado en 88d5b589; #39 cerrada, CI main 38920171582 correcta y producción verificada. [Registro](https://github.com/JpSiesquen/mining-ops-console/blob/9c45cafb31e4195456d0d6c597a70cfcaf60ad27/docs/ci.md).
 
 - [ ] **T05 — Entregar eventos desde API Core.** Backend: fixture sintético events.json,
   validación explícita y GET /api/events; asegurar copia del JSON al artefacto compilado.
@@ -82,6 +89,8 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
   **Comprobar:** arreglo/orden/folios únicos, vacío y reglas de contrato; fixture ausente/ inválido
   causa 500 seguro. Health/equipment y pruebas previas siguen pasando; sin SQL ni paquetes nuevos.
   **Depende:** T01. **Cobertura:** R1/R2/R3; CA1/CA2.
+  **Decisión (2026-10-16):** evidencia nula hasta T11; imágenes no catalogadas rechazadas, metadatos comprobados con catálogo aislado de pruebas. No se copian imágenes de faena.
+  **Evidencia:** [PR #100](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/100); build y 65 pruebas locales correctas en copia sin entorno real. [CI 38921955929](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38921955929) correcta con api-core/bff. Contrato, JSON copiado, vacío, orden/empates, rechazo íntegro y 500/logs seguros verificados; sin paquetes nuevos. Pendiente integración; #95 sigue pendiente.
 
 - [ ] **T06 — Exponer eventos a través del BFF.** Backend: nueva ruta y validación de JSON;
   usar timeout existente, rechazo de redirecciones y mensajes/logs seguros. Añadir pruebas HTTP.

@@ -102,3 +102,7 @@ Instalaciones y ejecución de Actions requieren su autorización; esta lista no 
   y dev, contratos 200/404/500, puerto cambiado, fallo de escucha y logs seguros correctos;
   seis pruebas pasan. Procesos y temporales limpiados; 001/T02 permanece pendiente.
   [Matriz CA1–CA8](../../api-core/README.md#evidencia-de-cierre); 003 cerrada por sus propios criterios.
+
+## Ampliación posterior 005/T05
+
+La ruta GET /api/events y su validación se ejecutan en [#94](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/94), con seguimiento en [tareas 005](../005-frontend-minimo/tasks.md). Los criterios históricos de 002 siguen verificados; no acreditan por sí mismos eventos ni integración con la consola.

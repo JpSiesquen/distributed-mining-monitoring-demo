@@ -154,3 +154,7 @@ Ver [runner nativo de Node.js](https://nodejs.org/docs/latest-v24.x/api/test.htm
 - **Errores asíncronos sin respuesta:** capturarlos y entregarlos al manejador 500 de Express 4.
 - **Sobreingeniería:** mantener una ruta y un archivo mock; diseñar el acceso SQL cuando exista
   ese requisito, sin añadir capas o librerías por anticipado.
+
+## Ampliación de lectura aprobada en 005
+
+T05/#94 añade routes/events.ts, domain/events.ts y data/events.json bajo el contrato eventos v1. El build ya copia la carpeta de datos; no se añaden paquetes, SQL ni capas nuevas. Evidencia nula hasta T11; pruebas de contrato y HTTP en la suite existente. Equipos/health conservados. [Estado y evidencia](../005-frontend-minimo/tasks.md).
