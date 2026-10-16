@@ -156,3 +156,160 @@ for (const phase of ["headers", "body"]) {
     }, 50);
   });
 }
+
+function event(overrides = {}) {
+  return {
+    folio: "EV-20261015-0001", estado: "conforme", categoria: null,
+    confianza: 0.95, fechaHora: "2026-10-15T12:00:00Z", puntoCaptura: "Punto demo",
+    turno: "A", camara: "Camara demo", patente: null, tipoTolva: "convencional",
+    empresa: null, versionModelo: "demo-v1", observacion: "Registro ficticio conforme.",
+    evidencia: null, atencion: null, ...overrides,
+  };
+}
+
+test("events preserve the complete valid array over the events HTTP route", async t => {
+  const events = [event(),
+    event({ folio: "EV-20261015-0002", estado: "revision", derivacion: { motivo: "baja_confianza" } }),
+    event({ folio: "EV-20261015-0003", estado: "no_conforme", categoria: "mala_distribucion", atencion: {
+      estado: "en_seguimiento", atendidoPor: "Operador demo", fechaHora: "2026-10-15T12:01:00Z", comentario: "Seguimiento ficticio.",
+    } }),
+  ];
+  const calls = [];
+  await withBff(t, (req, res) => { calls.push([req.method, req.url]); json(res, events); }, async ({ request, logs }) => {
+    await expectJson(await request("/api/events"), 200, events);
+    assert.deepEqual(calls, [["GET", "/api/events"]]);
+    assert.deepEqual(logs, []);
+  });
+});
+
+test("empty events source is a valid 200 array", async t => {
+  await withBff(t, (_req, res) => json(res, []), async ({ request }) => {
+    await expectJson(await request("/api/events"), 200, []);
+  });
+});
+
+test("events source unavailable returns safe 502 and preserves independent health", async t => {
+  let calls = 0;
+  await withBff(t, (_req, res) => { calls++; json(res, []); }, async ({ request, source, logs }) => {
+    await close(source);
+    await expectJson(await request("/api/events"), 502, { error: "Bad gateway" });
+    await expectJson(await request("/health"), 200, { status: "ok" });
+    assert.equal(calls, 0);
+    assert.deepEqual(logs, ["[upstream_error] network."]);
+  });
+});
+
+test("non-200 events source does not expose its body", async t => {
+  for (const status of [204, 500, 503]) {
+    await withBff(t, (_req, res) => json(res, { detail: "private-fixture-detail" }, status), async ({ request, logs }) => {
+      await expectJson(await request("/api/events"), 502, { error: "Bad gateway" });
+      assert.deepEqual(logs, ["[upstream_error] upstream_status."]);
+    });
+  }
+});
+
+test("malformed events JSON produces safe invalid_json log", async t => {
+  await withBff(t, (_req, res) => {
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end("{private-fixture-detail");
+  }, async ({ request, logs }) => {
+    await expectJson(await request("/api/events"), 502, { error: "Bad gateway" });
+    assert.deepEqual(logs, ["[upstream_error] invalid_json."]);
+  });
+});
+
+test("events reject a wrong media type even if its body is valid JSON", async t => {
+  await withBff(t, (_req, res) => {
+    res.writeHead(200, { "content-type": "text/plain" });
+    res.end("[]");
+  }, async ({ request, logs }) => {
+    await expectJson(await request("/api/events"), 502, { error: "Bad gateway" });
+    assert.deepEqual(logs, ["[upstream_error] invalid_contract."]);
+  });
+});
+
+const invalidEvents = [
+  ["wrapped response", () => ({ events: [] })],
+  ["null root", () => null],
+  ["null record", () => [null]],
+  ["missing required field", () => { const item = event(); delete item.empresa; return [item]; }],
+  ["unknown record field", () => [event({ privateField: "private-fixture-detail" })]],
+  ["coerced confidence", () => [event({ confianza: "0.95" })]],
+  ["out-of-range confidence", () => [event({ confianza: 1.1 })]],
+  ["blank text", () => [event({ puntoCaptura: " " })]],
+  ["invalid folio", () => [event({ folio: "EV-20261015-0001\n" })]],
+  ["missing UTC zone", () => [event({ fechaHora: "2026-10-15T12:00:00" })]],
+  ["impossible calendar day", () => [event({ fechaHora: "2026-02-30T12:00:00Z" })]],
+  ["normalized clock", () => [event({ fechaHora: "2026-10-15T24:00:00Z" })]],
+  ["invalid shift", () => [event({ turno: "D" })]],
+  ["invalid truck type", () => [event({ tipoTolva: "demo" })]],
+  ["invalid classification/category", () => [event({ categoria: "tolva_levantada" })]],
+  ["inactive category", () => [event({ estado: "no_conforme", categoria: "cubre_lona" })]],
+  ["revision without derivation", () => [event({ estado: "revision" })]],
+  ["null optional resolution", () => [event({ estado: "revision", derivacion: { motivo: "baja_confianza", resolucion: null } })]],
+  ["attention before event", () => [event({ atencion: { estado: "pendiente", atendidoPor: "Operador demo", fechaHora: "2026-10-15T11:59:59Z" } })]],
+  ["null optional attention comment", () => [event({ atencion: { estado: "pendiente", atendidoPor: "Operador demo", fechaHora: "2026-10-15T12:00:00Z", comentario: null } })]],
+  ["uncatalogued evidence", () => [event({ evidencia: { imagen: "/evidencia/demo/ilustracion-01.png", boundingBoxes: [] } })]],
+  ["duplicate folios", () => [event(), event()]],
+  ["wrong UTC order", () => [event({ fechaHora: "2026-10-15T11:00:00Z" }), event({ folio: "EV-20261015-0002" })]],
+  ["wrong folio tie order", () => [event({ folio: "EV-20261015-0002" }), event()]],
+  ["one invalid record among valid ones", () => [event(), event({ folio: "EV-20261015-0002", confianza: null })]],
+];
+for (const [name, value] of invalidEvents) {
+  test(`events reject entire source: ${name}`, async t => {
+    await withBff(t, (req, res) => json(res, req.url === "/api/equipment" ? equipment : value()), async ({ request, logs }) => {
+      await expectJson(await request("/api/events"), 502, { error: "Bad gateway" });
+      assert.deepEqual(logs, ["[upstream_error] invalid_contract."]);
+      await expectJson(await request("/health"), 200, { status: "ok" });
+      await expectJson(await request("/api/equipment"), 200, equipment);
+    });
+  });
+}
+
+test("events reject redirects without contacting the destination", async t => {
+  let calls = 0;
+  const destination = createServer((_req, res) => { calls++; json(res, [event()]); });
+  try {
+    const destinationUrl = await listen(destination);
+    await withBff(t, (_req, res) => {
+      res.writeHead(302, { location: destinationUrl + "/api/events" }); res.end();
+    }, async ({ request, logs }) => {
+      await expectJson(await request("/api/events"), 502, { error: "Bad gateway" });
+      assert.deepEqual(logs, ["[upstream_error] network."]);
+      assert.equal(calls, 0);
+    });
+  } finally { await close(destination); }
+});
+
+for (const phase of ["headers", "body"]) {
+  test(`events timeout includes delayed ${phase} and preserves health`, async t => {
+    let bodyStarted = false;
+    await withBff(t, (_req, res) => {
+      if (phase === "body") {
+        res.writeHead(200, { "content-type": "application/json" });
+        res.write("["); bodyStarted = true;
+      }
+      const timer = setTimeout(() => {
+        if (phase === "body") res.end(JSON.stringify(event()) + "]");
+        else json(res, [event()]);
+      }, 1000);
+      res.once("close", () => clearTimeout(timer));
+    }, async ({ request, logs }) => {
+      const pending = request("/api/events");
+      await expectJson(await request("/health"), 200, { status: "ok" });
+      await expectJson(await pending, 504, { error: "Gateway timeout" });
+      if (phase === "body") assert.equal(bodyStarted, true);
+      assert.deepEqual(logs, ["[upstream_error] timeout."]);
+    }, 100);
+  });
+}
+
+test("events validator accepts evidence metadata only through an isolated test catalog", async () => {
+  const { parseEvents } = await import("../dist/domain/events.js");
+  const image = "/evidencia/demo/ilustracion-01.png";
+  const catalog = new Set([image]);
+  const item = event({ evidencia: { imagen: image, boundingBoxes: [{ x: 0.2, y: 0.1, ancho: 0.8, alto: 0.9 }] } });
+  assert.deepEqual(parseEvents([item], catalog), [item]);
+  item.evidencia.boundingBoxes[0].ancho = 0.9;
+  assert.throws(() => parseEvents([item], catalog), TypeError);
+});

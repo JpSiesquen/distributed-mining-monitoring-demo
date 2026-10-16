@@ -1,8 +1,8 @@
 # BFF
 
 Servidor compilado de la [spec 004](../specs/004-bff-minimo/spec.md), con configuración externa
-y logs de arranque. /health verifica la disponibilidad propia; /api/equipment consulta
-únicamente API Core. Once pruebas HTTP se ejecutan en CI; ambos checks son obligatorios.
+y logs de arranque. /health verifica la disponibilidad propia; /api/equipment y /api/events
+consultan únicamente API Core. La suite HTTP se ejecuta en CI; api-core/bff son obligatorios.
 
 ## Configuración y comandos
 
@@ -92,7 +92,7 @@ Después de compilar:
 npm test
 ```
 
-Once pruebas node:test sobre la app compilada y fuentes HTTP controladas: salud independiente,
+La suite node:test sobre la app compilada y fuentes HTTP controladas conserva los casos de salud independiente,
 contrato id/name, arreglo vacío, 404, fuente inaccesible, estados no-200, JSON inválido,
 contratos inválidos, redirección rechazada y timeout de cabeceras/cuerpo. Verifican respuestas
 y logs seguros, sin SQL ni credenciales. Puertos del sistema; servidores/conexiones cerrados
@@ -102,7 +102,7 @@ El archivo se indica explícitamente para que su ausencia falle. Expectativa inc
 verificada en copia temporal: salida 1; suite de trabajo sin cambios y copia retirada.
 
 El job bff de [CI](../docs/ci.md#ampliación-bff--issue-61) comprueba política npm,
-instalación, build y once pruebas. Build integrado en PR #83; ejecución de pruebas y bloqueo
+instalación, build y la suite HTTP. Build integrado en PR #83; ejecución de pruebas y bloqueo
 por aserción/fallos previos verificados e integrados en PR #89. Ver [evidencia](../docs/ci.md).
 
 ## Operación y diagnóstico
@@ -115,7 +115,7 @@ de configuración, detener y volver a iniciar; `start` requiere un build correct
 |-------|--------------|
 | `[startup_error]` | Revisar las cuatro variables y que host/puerto estén disponibles; el proceso termina con salida 1. |
 | 502 / `network` | Comprobar que API Core esté iniciado y accesible desde el BFF en el origen configurado. |
-| 502 / `upstream_status`, `invalid_json` o `invalid_contract` | Revisar estado y contrato de `/api/equipment` en API Core. |
+| 502 / `upstream_status`, `invalid_json` o `invalid_contract` | Revisar estado y contrato de la ruta solicitada en API Core. |
 | 504 / `timeout` | Revisar disponibilidad y tiempo de respuesta de API Core; el límite incluye la lectura del cuerpo. |
 | `/health` devuelve 200, pero equipos falla | El BFF está disponible; revisar la comunicación y respuesta de API Core. |
 
@@ -137,3 +137,40 @@ usa API Core compilado real y datos simulados, en dev y build/start; no requiere
 
 La spec 004 acredita el tramo BFF → API Core. La tarea 001/T02 sigue pendiente hasta
 verificar también el frontend en el flujo completo.
+
+## Eventos de lectura — #95
+
+GET /api/events consulta la misma ruta de API Core por HTTP, sin leer sus fixtures ni
+acceder a SQL. Valida [eventos v1](../docs/contratos/eventos-v1.md) completo y conserva
+el arreglo recibido. Rechaza claves adicionales, tipos/calendario UTC inválidos, folios
+duplicados y orden incorrecto; no normaliza ni elimina registros. [] es una respuesta válida.
+Solo acepta 200 con application/json, incluidos sus parámetros como charset.
+
+Fuente inaccesible, redirección, estado no-200, JSON o contrato inválidos → 502 genérico.
+Demora de cabeceras o cuerpo → 504 genérico; API_CORE_TIMEOUT_MS conserva el valor inicial
+aprobado de 5000 ms. Sin caché ni reintentos. Logs únicamente por categoría, sin cuerpos,
+URLs de origen, datos de atención ni stack. Health/equipment conservados.
+
+Evidencia nula hasta T11; rutas no catalogadas rechazadas. El catálogo de metadatos usado
+en pruebas no registra imágenes de producción ni incorpora material de faena.
+
+### Validación reproducible
+
+Tras revisar/preparar dependencias de ambos servicios, desde la raíz:
+
+```powershell
+npm run build --prefix api-core
+npm run build --prefix bff
+node --test bff/test/events.integration.test.mjs
+```
+
+La comprobación inicia las apps compiladas reales en puertos locales del sistema: BFF
+consulta API Core por HTTP, conserva eventos/equipos y devuelve 502 tras su caída con
+health disponible. No carga .env ni consulta archivos de datos desde BFF. Cierra servidores
+y conexiones en finally. No es una prueba de frontend ni sustituye el arranque dev/start.
+
+Resultado local #95: build, 46 pruebas BFF y una integración real correctos en copia
+sin .env ni credenciales heredadas; instalación existente contrastada y sin paquetes nuevos.
+La suite de 46 casos entra en el job bff por su npm test existente. La integración real
+se ejecuta explícitamente tras compilar ambos servicios; no se añade al workflow en #95.
+Estado y CI: [tareas 005](../specs/005-frontend-minimo/tasks.md). No acreditar consumo de la consola todavía.

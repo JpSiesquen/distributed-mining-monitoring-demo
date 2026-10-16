@@ -125,3 +125,7 @@ Actualizar documentación de CI y comprobar un fallo BFF bloqueado con API Core 
 - Integración prematura: habilitar el check bff cuando exista un job validado; conservar api-core.
 - Complejidad anticipada: revisar adaptación de datos al especificar frontend (004/P1);
   no añadir campos, caché o reintentos sin requisito concreto.
+
+## Ampliación de eventos 005/T06
+
+#95 incorpora GET /api/events y un validador local de eventos v1, sin compartir módulos de ejecución con API Core. Conserva timeout completo y rechazo de redirecciones, 502/504 seguros, sin caché ni paquetes nuevos. La fuente real se verifica por HTTP tras integrar #94. [Estado/evidencia](../005-frontend-minimo/tasks.md).

@@ -57,8 +57,8 @@ API Core implementa salud, equipos y eventos sintéticos de lectura, errores JSO
 La [CI verificada](docs/ci.md) comprueba compilación y pruebas de API Core y BFF;
 `main` exige pull request y checks api-core/bff exitosos.
 La [operación de API Core](api-core/README.md) está documentada y la spec 002 verificada.
-BFF cuenta con [arranque, salud y equipos vía API Core verificados](bff/README.md),
-con errores seguros y once pruebas HTTP verificadas e integradas en CI. La spec 004
+BFF cuenta con [arranque, salud, equipos y eventos vía API Core](bff/README.md),
+con validación estricta, errores seguros y pruebas HTTP en CI. La spec 004
 acredita CA1–CA8; su [matriz operativa](bff/README.md#evidencia-de-aceptación) recoge la evidencia.
 La base compilable y CI del frontend están integradas en su repo; la conexión de eventos vía BFF sigue pendiente. Integración SQL y despliegue distribuido pendientes; topología aprobada.
 Los estados de cada entregable se registran en el [índice de specs](specs/README.md).

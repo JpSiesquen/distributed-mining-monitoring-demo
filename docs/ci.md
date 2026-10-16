@@ -47,7 +47,7 @@ despliegue, disponibilidad de los servidores ni ausencia de malware.
 Job bff verificado e integrado el 2026-10-13 en PR #83. Ejecuta en bff/:
 política npm → npm ci --ignore-scripts → npm run build. Reutiliza runner, runtime, Actions
 fijadas y permisos de API Core, con cinco minutos y caché desactivada. El paso npm test
-ejecuta once pruebas HTTP tras build, validado e integrado en PR #89.
+ejecuta la suite HTTP tras build. La base de once pruebas se integró en PR #89; #95 la amplía a 46 sin cambiar el workflow.
 
 Los SHA oficiales y runtime node24 de ambas Actions se revalidaron el 2026-10-13.
 El repositorio es público; la ejecución usa runners estándar hospedados, gratuitos
@@ -123,3 +123,7 @@ merge 88d5b589. El job frontend compila con política npm previa, scripts bloque
 y cinco minutos; tipos/política/recuperación verificados. Ruleset exige frontend en ese repo;
 backend conserva api-core/bff. [Registro frontend](https://github.com/JpSiesquen/mining-ops-console/blob/88d5b58977ccc10c0501713490d5f58d1f739d2a/docs/ci.md).
 CI de main y producción Vercel contrastadas tras el merge. Esto no acredita integración de eventos ni pruebas DOM, pendientes de sus tareas.
+
+## Eventos BFF — #95
+
+46 casos de la suite bff cubren equipos y eventos v1, 502/504, cabeceras/cuerpo, rechazo de redirecciones y logs seguros. Integración adicional con API Core real ejecutada localmente con ambos compilados; su comando y límites están en [BFF](../bff/README.md#eventos-de-lectura--95). No se incorpora esa comprobación entre servicios al workflow en #95. Sin cambios de dependencias, jobs, permisos ni política npm; verificación CI del PR pendiente.

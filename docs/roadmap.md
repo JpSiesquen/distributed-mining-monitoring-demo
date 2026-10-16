@@ -15,9 +15,13 @@ Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
 de API Core integrados (002/T03–T04); workflow de compilación creado (003/T02); GET /health, GET /api/equipment con datos simulados y errores 404/500 en JSON integrados
 (002/T06–T08); pruebas de contratos con `npm test` (002/T09), ejecutadas en CI (003/T04).
 
-**Próxima entrega:** [T05](../specs/005-frontend-minimo/tasks.md), eventos sintéticos de
-API Core en [#94](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/94).
-Validador, fixture y ruta validados en [PR #100](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/100); [CI 38921955929](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/actions/runs/38921955929) correcta con api-core/bff. Pendiente de integración.
+**Próxima entrega:** [T06](../specs/005-frontend-minimo/tasks.md), eventos a través del
+BFF en [#95](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/issues/95).
+Validación estricta, 502/504 y pruebas preparadas; 46 casos BFF y la integración real
+con API Core pasan localmente. PR y verificación de CI pendientes.
+T05 completada: [PR #100](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/100)
+integrado en b774cf38; #94 cerrada, CI main 38923275808 correcta. BFF consume únicamente
+la fuente HTTP ya integrada. Evidencia nula hasta T11; sin paquetes nuevos.
 T04 completada: [frontend PR #53](https://github.com/JpSiesquen/mining-ops-console/pull/53)
 integrado en 88d5b589; #39 cerrada, CI main 38920171582 correcta y producción READY/alias
 verificados. Ruleset exige frontend en ese repo; #54 restaurado y cerrado sin integrar.
@@ -41,7 +45,7 @@ servida y desencadenantes de preview/producción; no asumir que un PR carece de 
 Spec 005 revisión 2 aprobada: Mining Ops Console en su propio repo, lectura primero y
 Material UI; atención persistente después. GET /api/events con arreglo directo y UTC ficticia
 aprobados, junto con evidencia sintética de demostración. Spec, plan y T01–T15 aprobados;
-T01–T02 completadas; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 validada en PR #100, pendiente de integración y T06–T15 pendientes. PR #92 integrado; cinco issues backend y trece frontend publicadas con
+T01–T02 completadas; T03 integrada en PR frontend #52; T04 integrada en PR frontend #53; T05 integrada en PR #100; T06 en validación y T07–T15 pendientes. PR #92 integrado; cinco issues backend y trece frontend publicadas con
 dependencias entre repos. [Mapa de tareas/issues](../specs/005-frontend-minimo/tasks.md#issues-de-ejecución).
 Corrección editorial frontend integrada en PR #35; no acredita migración ni contrato implementado.
 Instalaciones y ejecución de la migración siguen sujetas a las autorizaciones aplicables.
@@ -86,7 +90,7 @@ con el lockfile. Lockfile y CI no sustituyen esta comprobación.
 | 1 | API Core compilable con CI obligatoria | Completada; milestone cerrado. |
 | 2 | Rutas, errores y pruebas de API Core | Completada y documentada: CA1–CA8 de 002 y 003; milestone cerrado. |
 | 3 | BFF consumiendo API Core | Implementado y verificado: 004/T01–T09, CA1–CA8. Cierre #67 integrado en PR #91; milestone aún abierto. |
-| 4 | Mining Ops Console consumiendo únicamente BFF | T01/CA1 y T02 completadas; T03 integrada en PR frontend #52; T04 integrada; T05 validada en PR #100, pendiente de integración. Contrato documentado en ambos repos; integración HTTP pendiente. Conservar contrato id/name existente. |
+| 4 | Mining Ops Console consumiendo únicamente BFF | T01/CA1 y T02 completadas; T03 integrada en PR frontend #52; T04 integrada; T05 integrada; T06 en validación. Contrato documentado en ambos repos; integración HTTP pendiente. Conservar contrato id/name existente. |
 | 5 | Integración SQL Server y persistencia | Por especificar; mantener contrato entre capas. |
 | 6 | Empaquetado con Docker y entrada Nginx | Concretar ejecución y verificar flujo completo local antes de desplegar. |
 | 7 | Despliegue y validación DEV/QA | Milestone de topología renumerado; ejecutar 001 y verificar sus prerrequisitos. Validar costos antes de aprovisionar. |

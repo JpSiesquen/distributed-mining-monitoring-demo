@@ -120,3 +120,7 @@ T01–T09 corresponden, en orden, a las issues
   configuración externa, errores y limpieza correctos. CI de pruebas integrada en PR #89.
   README, plan, ADR, índice y roadmap contrastados con scripts, fuentes y workflow.
   001/T02 conserva su casilla pendiente: falta incorporar frontend.
+
+## Ampliación posterior 005/T06
+
+#95 amplía la suite HTTP existente y añade una comprobación explícita con API Core real compilado. El seguimiento está en [tareas 005](../005-frontend-minimo/tasks.md); no modifica los criterios históricos de equipos ni acredita integración del frontend.
