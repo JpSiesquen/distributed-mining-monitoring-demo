@@ -140,14 +140,14 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
   explicado. Sin URLs arbitrarias ni material real; al cambiar folio no queda detalle/encuadre viejo.
   Verificación real de imágenes y pruebas DOM; tomar/cerrar siguen deshabilitados.
   **Depende:** T10. **Cobertura:** R2/R4/R5/R6/R10; CA3/CA5/CA6 parcial.
-    **Avance local (2026-10-16):** preparada sobre PR #57 (d6c239d1), sin publicar. Catálogo
+    **Avance local (2026-10-16):** preparada sobre PR #57 (d6c239d1). Catálogo
     aprobado coordinado: un PNG sintético 1672×941 para EV-20261015-0002, resto sin imagen.
     Build y 90 pruebas frontend, 65 API Core, 47 BFF e integración HTTP real correctos.
     Navegador a 360/1280 px: recorte/completa, foco/Escape/retorno, reapertura/cambio de folio,
     ausencia y fallo real sin recuadros; archivo restaurado y hash contrastado. Canvas y PDF
     de compatibilidad correctos; reporte completo pendiente de T12. Servicios detenidos,
     viewport restaurado; aviso chunk 529,58 kB. Sin dependencias ni cambios de producción.
-    Publicación del proveedor y borrador frontend dependiente pendientes de autorización;
+    [PR backend #102](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/102) y [PR frontend #59](https://github.com/JpSiesquen/mining-ops-console/pull/59) publicados con autorización; frontend borrador en 81050e9b. Preview READY/SHA y producción intacta verificados. Actions frontend no ejecutado por filtro main; App del preview sin revisar por login Vercel. Sin merge;
     T11 permanece abierta hasta entrega y comprobaciones de integración.
 
 - [ ] **T12 — Adaptar reporte y verificar PDF.** Migrar VistaReporte/BotonReporte a MUI;
