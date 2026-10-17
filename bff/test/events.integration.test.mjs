@@ -45,7 +45,8 @@ test("BFF reads events/equipment from compiled API Core over HTTP and survives i
     const expectedEvents = await readJson(coreUrl + "/api/events", 200);
     const expectedEquipment = await readJson(coreUrl + "/api/equipment", 200);
     assert.ok(expectedEvents.length > 0);
-    assert.ok(expectedEvents.every(item => item.evidencia === null));
+    assert.equal(expectedEvents.filter(item => item.evidencia !== null).length, 1);
+    assert.equal(expectedEvents.find(item => item.evidencia)?.evidencia.imagen, "/evidencia/demo/camion-tolva-elevada.png");
     calls.length = 0;
 
     bffServer = createServer(createApp({ apiCoreUrl: coreUrl, apiCoreTimeoutMs: 5000 }));

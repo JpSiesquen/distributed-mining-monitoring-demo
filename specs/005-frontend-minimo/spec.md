@@ -75,7 +75,7 @@ repo público; usar evidencia sintética/autorizada. Conservar identificación d
   Evidencia: backend [PR #99](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/99)
   y frontend [PR #50](https://github.com/JpSiesquen/mining-ops-console/pull/50), integrados;
   frontend fija el contrato al commit backend 3de8694. Resto de criterios pendiente.
-- [ ] **CA2:** proveedor API Core → BFF cumple contrato y conserva equipos/health; pruebas
+- [x] **CA2:** proveedor API Core → BFF cumple contrato y conserva equipos/health; pruebas
   cubren vacío, datos inválidos, indisponibilidad y timeout de cabeceras/cuerpo.
 - [ ] **CA3:** panel/histórico/detalle usan eventos del BFF; inspección de red confirma que
   no se consulta API Core directamente ni se usa seed/simulador en el recorrido integrado.

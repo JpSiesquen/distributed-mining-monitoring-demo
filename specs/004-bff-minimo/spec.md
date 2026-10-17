@@ -69,7 +69,7 @@ comandos y cambios de CI se revisarán en el plan antes de cualquier instalació
 ## Preguntas abiertas
 
 Ampliación posterior aprobada en [005](../005-frontend-minimo/spec.md): GET /api/events vía
-API Core según [eventos v1](../../docs/contratos/eventos-v1.md), implementada en #95 y en validación antes de integrar.
+API Core según [eventos v1](../../docs/contratos/eventos-v1.md), integrada en PR #101 (daf244ea), #95 cerrada; CI main 38929191630 correcta.
 Equipos/health, sus contratos y CA1–CA8 siguen vigentes. Documentar esta ampliación no acredita
 las rutas nuevas ni cambia la aplicación frontend publicada.
 

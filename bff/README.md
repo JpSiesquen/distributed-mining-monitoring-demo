@@ -151,8 +151,11 @@ Demora de cabeceras o cuerpo → 504 genérico; API_CORE_TIMEOUT_MS conserva el 
 aprobado de 5000 ms. Sin caché ni reintentos. Logs únicamente por categoría, sin cuerpos,
 URLs de origen, datos de atención ni stack. Health/equipment conservados.
 
-Evidencia nula hasta T11; rutas no catalogadas rechazadas. El catálogo de metadatos usado
-en pruebas no registra imágenes de producción ni incorpora material de faena.
+T11 admite únicamente la ruta sintética acordada para EV-20261015-0002; los otros cinco
+eventos conservan evidencia nula. El [catálogo](../docs/contratos/eventos-v1.md#evidencia)
+debe coincidir con API Core y frontend. BFF valida y transmite metadatos: no descarga ni sirve
+imágenes. Rutas no catalogadas rechazadas, sin material de faena. Ampliación verificada
+localmente con build, 47 pruebas e integración HTTP real; publicada en PR #102, pendiente de integración en main.
 
 ### Validación reproducible
 
