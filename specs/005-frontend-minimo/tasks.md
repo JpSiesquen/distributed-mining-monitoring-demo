@@ -170,9 +170,9 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
   con `npm test` después del build y ejecutar `pull_request` hacia cualquier rama para validar
   PR dependientes; `push` sigue limitado a main. Conservar job frontend, controles npm,
   SHA de Actions, Node/Ubuntu, lectura, límite de cinco minutos y ruleset. Preparación local
-  autorizada; publicación/ejecución en GitHub pendientes de autorización. Casos negativos
+  autorizada; publicación/ejecución en GitHub aprobadas y realizadas en PR frontend #60/backend #103. Casos negativos
   temporales sin integrar. Build y npm test (90/90) correctos localmente, lockfile sin cambios;
-  no se ejecutó CI remota de este adelanto. No cerrar #46/T13, CA8, T14 ni T15 sin completar T12.
+  CI Linux 39086214889 correcta (90 pruebas). Fallos separados 39086291613/39086359462/39086409184 y recuperación 39086468528 verificados; #61 restaurado/cerrado sin merge. Reglas main sin cambios; no se acredita bloqueo obligatorio en ramas dependientes. No cerrar #46/T13, CA8, T14 ni T15 sin completar T12.
 
 - [ ] **T14 — Acreditar la pareja frontend/backend real.** Ejecutar dev y build/preview con
   BFF/API Core reales y datos ficticios. Registrar ambos SHA completos y revisión del contrato;
