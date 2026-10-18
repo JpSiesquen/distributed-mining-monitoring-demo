@@ -187,10 +187,13 @@ en main frontend sigue pendiente de conectividad publicada al BFF y checks reque
 Ajuste aprobado el 2026-10-17: posponer #45/T12 y adelantar parcialmente #46/T13. Añadir
 `npm test` después del build al job frontend y comprobar PR hacia cualquier rama; push
 permanece solo en main. Conservar controles npm, SHA, runtime, lectura, cinco minutos y
-ruleset. Sin paquetes nuevos. Preparación local autorizada; publicación y ejecución remota
-requieren autorización posterior. El adelanto cubre solo la suite existente: el reporte,
-CA4 y cierre completo de CA8/T13–T15 siguen pendientes. No habilita producción ni elimina
-la dependencia de T12 para el cierre. Aviso PDF preexistente permanece registrado para #45.
+ruleset. Sin paquetes nuevos. Preparación, publicación y ejecución remota aprobadas y
+verificadas. #60 se integró solo en la rama de #57 (merge `a976f209`, CI `39087386484`
+correcta); #103 registró el ajuste en main del backend (merge `4611ca87`, CI `39087376500`
+correcta). La entrega a main del frontend sigue pendiente. El adelanto cubre solo la suite
+existente: el reporte #45/T12, CA4 y el cierre completo de #46/T13, CA8 y T14–T15 siguen
+pendientes. No habilita producción ni elimina la dependencia de T12 para el cierre.
+El aviso PDF preexistente permanece registrado para #45.
 
 Secuencia de evidencia: fixture inicial con evidencia nula; T11 registra la ilustración
 sintética acordada para EV-20261015-0002. Los otros cinco eventos conservan evidencia nula.
