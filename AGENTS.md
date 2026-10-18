@@ -143,6 +143,21 @@ Criterios de evaluación de paquetes:
 checks `api-core` y `bff` exitosos; push directo, force push y eliminación están bloqueados.
 Renombrar cualquiera de estos jobs exige actualizar el ruleset en el mismo cambio.
 
+### Cierre y limpieza de ramas
+
+- Después de un merge, comprobar CI y PR dependientes antes de retirar la rama de origen.
+- Conservar `main`, ramas protegidas y cualquier rama que sea origen o base de un PR abierto.
+- Para ramas de pruebas negativas, verificar restauración y cierre sin merge antes de proponer su eliminación.
+- Preparar la lista exacta de ramas y comprobar sus SHA/estado antes de solicitar la aprobación de limpieza.
+- Preferir la eliminación automática nativa de GitHub tras merge, si está aprobada y habilitada;
+  no añadir permisos de escritura a CI únicamente para borrar ramas.
+- En una cadena de PR, integrar primero los dependientes antes de sus ramas base, o acordar
+  expresamente el cambio de base antes de eliminar una rama que aún sostenga otros PR.
+- Configuración por repositorio: `Settings → General → Pull Requests → Automatically delete
+  head branches`. Activada en `mining-ops-console` el 2026-10-17; no se activó en el backend.
+- No borrar por antigüedad ni usar force/reset para realizar la limpieza. Las eliminaciones
+  masivas y las demás operaciones destructivas conservan su aprobación explícita.
+
 Revisar el estado antes de cada commit:
 
 ```

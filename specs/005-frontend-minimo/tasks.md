@@ -149,6 +149,7 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
     viewport restaurado; aviso chunk 529,58 kB. Sin dependencias ni cambios de producción.
     [PR backend #102](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/102) y [PR frontend #59](https://github.com/JpSiesquen/mining-ops-console/pull/59) publicados con autorización; frontend borrador en 81050e9b. Preview READY/SHA y producción intacta verificados. Actions frontend no ejecutado por filtro main; App del preview sin revisar por login Vercel. Sin merge;
     T11 permanece abierta hasta entrega y comprobaciones de integración.
+    **Integración (2026-10-17):** backend PR #102 integrado en main (0a280a64), CI main 39069149305 correcta. Frontend PR #59 integrado únicamente en la rama de #57 (6e1084ed); main/producción c1148ade intactos y #44 abierta. Pausa solicitada; T12 no iniciada. Preview del merge frontend correcto según Vercel en GitHub; árbol idéntico al validado de #59. Consulta adicional CLI Vercel agotó 45 s, sin reintento: alias actual no reconsultado. No se acredita revisión de App autenticada.
 
 - [ ] **T12 — Adaptar reporte y verificar PDF.** Migrar VistaReporte/BotonReporte a MUI;
   conservar carga diferida y renderizador/estilos PDF propios. Revisar Portada/config para retirar
@@ -163,7 +164,15 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
   de expectativa, política npm e instalación; documentar etapas omitidas y recuperación.
   **Comprobar:** cada PR bloqueado por los checks de su repo; api-core/bff conservados,
   frontend requerido en el suyo. Casos negativos sin integrar, recursos limpios. Sin SQL/secrets/dispatch.
-  **Depende:** T04/T06/T12. **Cobertura:** R8/R10; CA8.
+  **Depende:** T04/T06 para el adelanto aprobado; T12 para completar la cobertura y cerrar.
+  **Cobertura:** R8/R10; CA8.
+  **Ajuste aprobado (2026-10-17):** #45/T12 pospuesta. Adelantar en #46 la suite existente
+  con `npm test` después del build y ejecutar `pull_request` hacia cualquier rama para validar
+  PR dependientes; `push` sigue limitado a main. Conservar job frontend, controles npm,
+  SHA de Actions, Node/Ubuntu, lectura, límite de cinco minutos y ruleset. Preparación local
+  autorizada; publicación/ejecución en GitHub aprobadas y realizadas en PR frontend #60/backend #103. Casos negativos
+  temporales sin integrar. Build y npm test (90/90) correctos localmente, lockfile sin cambios;
+  CI Linux 39086214889 correcta (90 pruebas). Fallos separados 39086291613/39086359462/39086409184 y recuperación 39086468528 verificados; #61 restaurado/cerrado sin merge. Reglas main sin cambios; no se acredita bloqueo obligatorio en ramas dependientes. No cerrar #46/T13, CA8, T14 ni T15 sin completar T12.
 
 - [ ] **T14 — Acreditar la pareja frontend/backend real.** Ejecutar dev y build/preview con
   BFF/API Core reales y datos ficticios. Registrar ambos SHA completos y revisión del contrato;
