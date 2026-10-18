@@ -151,6 +151,10 @@ Renombrar cualquiera de estos jobs exige actualizar el ruleset en el mismo cambi
 - Preparar la lista exacta de ramas y comprobar sus SHA/estado antes de solicitar la aprobación de limpieza.
 - Preferir la eliminación automática nativa de GitHub tras merge, si está aprobada y habilitada;
   no añadir permisos de escritura a CI únicamente para borrar ramas.
+- En una cadena de PR, integrar primero los dependientes antes de sus ramas base, o acordar
+  expresamente el cambio de base antes de eliminar una rama que aún sostenga otros PR.
+- Configuración por repositorio: `Settings → General → Pull Requests → Automatically delete
+  head branches`. Activada en `mining-ops-console` el 2026-10-17; no se activó en el backend.
 - No borrar por antigüedad ni usar force/reset para realizar la limpieza. Las eliminaciones
   masivas y las demás operaciones destructivas conservan su aprobación explícita.
 
