@@ -179,8 +179,19 @@ el demo anterior. Un artefacto previo solo se reutiliza si existe y está identi
 Plan completo aprobado, incluidas reglas de contrato, CI por repositorio y orden de PR.
 Las [tareas nuevas y sus issues](tasks.md#issues-de-ejecución) están aprobadas/publicadas;
 #70–#79 quedaron sustituidas con enlaces, sin acreditar implementación. Plan integrado en PR #92.
-T01/CA1 y T02–T04 completadas. Frontend PR #53 integrado en 88d5b589; CI main correcta y producción READY/alias verificados. T05 integrada en PR #100 (b774cf38), CI main correcta. Próxima entrega: T06 / #95, BFF validado con API Core real y checks api-core/bff correctos en PR #101, pendiente integración. Aviso PDF preexistente registrado para #45.
-Definir recursos concretos de evidencia al implementar. Instalaciones, ejecución de CI y cambios de rulesets conservan sus
-autorizaciones concretas pendientes; publicar backlog no autoriza esas operaciones.
+T01–T07 integradas. Proveedor de eventos API Core/BFF integrado en PR #100/#101; catálogo
+sintético T11 integrado en backend PR #102 (0a280a64). Frontend T08–T11 preparado en los
+PR dependientes #56/#57; #59 integrado únicamente en la rama de #57 (6e1084ed). La entrega
+en main frontend sigue pendiente de conectividad publicada al BFF y checks requeridos.
 
-Secuencia de evidencia aprobada el 2026-10-16: fixture inicial con evidencia: null y catálogo de producción vacío hasta T11. Validación de metadatos con catálogo aislado de pruebas; no se publican rutas sin recursos aprobados.
+Ajuste aprobado el 2026-10-17: posponer #45/T12 y adelantar parcialmente #46/T13. Añadir
+`npm test` después del build al job frontend y comprobar PR hacia cualquier rama; push
+permanece solo en main. Conservar controles npm, SHA, runtime, lectura, cinco minutos y
+ruleset. Sin paquetes nuevos. Preparación local autorizada; publicación y ejecución remota
+requieren autorización posterior. El adelanto cubre solo la suite existente: el reporte,
+CA4 y cierre completo de CA8/T13–T15 siguen pendientes. No habilita producción ni elimina
+la dependencia de T12 para el cierre. Aviso PDF preexistente permanece registrado para #45.
+
+Secuencia de evidencia: fixture inicial con evidencia nula; T11 registra la ilustración
+sintética acordada para EV-20261015-0002. Los otros cinco eventos conservan evidencia nula.
+Catálogo, recurso y verificación: [contrato](../../docs/contratos/eventos-v1.md#evidencia).

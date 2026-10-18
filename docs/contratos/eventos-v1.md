@@ -68,7 +68,7 @@ una ruta. T11 valida el recurso concreto con imagen, canvas y un PDF de compatib
 `clip` queda fuera de v1. Una imagen ausente/fallida debe explicarse, sin simular evidencia.
 
 Secuencia inicial: #94 se entregó con evidencia nula. Catálogo T11 aprobado el 2026-10-16,
-verificado localmente y publicado en backend PR #102/frontend PR #59 (borrador); integración coordinada pendiente:
+verificado localmente; backend PR #102 integrado en main (0a280a64), frontend PR #59 integrado solo en la rama de #57 (6e1084ed). Entrega frontend en main pendiente:
 
 | Recurso servido por el frontend | Evento ficticio | Dimensiones |
 |--------------------------------|-----------------|-------------|
