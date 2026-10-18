@@ -173,6 +173,7 @@ la corrección editorial del frontend en PR #35 no completa el contrato ni la in
   autorizada; publicación/ejecución en GitHub aprobadas y realizadas en PR frontend #60/backend #103. Casos negativos
   temporales sin integrar. Build y npm test (90/90) correctos localmente, lockfile sin cambios;
   CI Linux 39086214889 correcta (90 pruebas). Fallos separados 39086291613/39086359462/39086409184 y recuperación 39086468528 verificados; #61 restaurado/cerrado sin merge. Reglas main sin cambios; no se acredita bloqueo obligatorio en ramas dependientes. No cerrar #46/T13, CA8, T14 ni T15 sin completar T12.
+  **Integración parcial (2026-10-17):** PR #103 integrado en main backend (4611ca87), CI 39087376500 correcta. PR #60 integrado solo en #57 (a976f209), CI frontend 39087386484 y preview READY verificados. Árbol idéntico al validado; rama de #60 eliminada automáticamente. Main frontend c1148ade y alias de producción intactos. #46 abierta; T12 pospuesta.
 
 - [ ] **T14 — Acreditar la pareja frontend/backend real.** Ejecutar dev y build/preview con
   BFF/API Core reales y datos ficticios. Registrar ambos SHA completos y revisión del contrato;
