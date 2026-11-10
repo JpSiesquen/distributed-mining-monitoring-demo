@@ -22,6 +22,15 @@ y `tasks.md`; las reservas vacías permiten ver la ruta y no aprueban alcance ni
 
 ## Flujo
 
+Mejora transversal propuesta: [010 — Orquestación y revisión especializada](010-orquestacion-agentes/spec.md).
+Spec y [plan](010-orquestacion-agentes/plan.md) aprobados el 2026-11-09;
+[tareas T01–T08](010-orquestacion-agentes/tasks.md) aprobadas. T01–T02 preparadas y verificadas
+localmente: protocolo y diez perfiles. T03 verificada con dos perfiles transmitidos
+explícitamente y ejercicios sintéticos; carga nativa no acreditada. Refuerzo de permisos
+T03b aprobado: prueba local acotada de lectura/escritura correcta; capacidades de la sesión
+revisora y restricciones remotas pendientes de verificar antes del piloto.
+No añade una fase de producto.
+
 1. **`spec.md`** — qué se construye y por qué. Sin decisiones técnicas.
 2. **`plan.md`** — cómo se construye. Enlaza a los ADR relacionados.
 3. **`tasks.md`** — tareas pequeñas, ordenadas y verificables.

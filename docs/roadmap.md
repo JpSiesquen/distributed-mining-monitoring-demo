@@ -1,6 +1,6 @@
 # Roadmap técnico
 
-Actualizado: 2026-10-17.
+Actualizado: 2026-11-09.
 
 ## Objetivo
 
@@ -8,6 +8,16 @@ Monitoreo de maquinaria minera mediante Frontend → BFF → API Core → SQL Se
 con DEV consolidado y QA distribuido según la topología aprobada.
 
 ## Punto actual y próxima acción
+
+**Propuesta transversal (2026-11-09):** [spec 010 — Orquestación y revisión especializada](../specs/010-orquestacion-agentes/spec.md)
+aprobada el 2026-11-09; catálogo de diez roles acordado, con infraestructura reservado para sus fases.
+[Plan 010](../specs/010-orquestacion-agentes/plan.md) aprobado el 2026-11-09;
+[tareas T01–T08](../specs/010-orquestacion-agentes/tasks.md) aprobadas el 2026-11-09.
+T01–T02 completadas localmente: [protocolo](orquestacion-agentes.md), enlace en AGENTS.md y diez perfiles `.codex/agents/` con validación estática; carga nativa y ejecución no acreditadas.
+T03 completada: dos perfiles transmitidos explícitamente a subagentes, ejercicios sintéticos correctos y comparación de estado/hashes sin cambios en los 17 archivos examinados. Carga nativa no acreditada; no equivale a validación de los diez roles.
+Refuerzo T03b aprobado el 2026-11-09; [viabilidad](../specs/010-orquestacion-agentes/plan.md#viabilidad-comprobada-y-siguiente-validación) en curso. Prueba local autorizada con CLI existente y perfil `:read-only`: `READ_OK`, `WRITE_DENIED` y marcador ausente, tras adaptar el método de prueba a cmdlets de PowerShell restringido. Esto no acredita todas las herramientas de un agente. Próxima acción: concretar y verificar la sesión revisora y sus límites remotos. T03b/T04 pendientes; sin cambios de configuración o conectores.
+Piloto propuesto: revisar evidencia de integración frontend–BFF sin modificar código ni producción.
+No sustituye las fases del producto ni reactiva el PDF pospuesto; solo se ejecutaron ejercicios T03, sin dependencias, consultas remotas, publicaciones o automatizaciones.
 
 Diseño de topología aprobado ([001](../specs/001-topologia-despliegue/plan.md)); validación práctica pendiente.
 Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y

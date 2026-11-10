@@ -63,6 +63,11 @@ Las funcionalidades relevantes siguen un flujo guiado por especificaciones (ver 
 - Si la implementación cambia el alcance, actualizar la spec en el mismo cambio.
 - Las decisiones de arquitectura derivadas de un plan se registran como ADR en `docs/adr/`.
 
+Para encargos con agentes especializados, seguir el [protocolo de orquestación](docs/orquestacion-agentes.md):
+alcance aprobado, un único escritor y revisores que entregan hallazgos. Los perfiles no
+conceden permisos ni sustituyen las aprobaciones existentes; su validación y piloto se
+siguen en las [tareas 010](specs/010-orquestacion-agentes/tasks.md).
+
 ## Control de la sobreingeniería
 
 Cada pieza de complejidad debe responder a un requisito actual, no a uno hipotético.
