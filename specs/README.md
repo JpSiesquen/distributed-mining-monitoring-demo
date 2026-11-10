@@ -27,8 +27,9 @@ Spec y [plan](010-orquestacion-agentes/plan.md) aprobados el 2026-11-09;
 [tareas T01–T08](010-orquestacion-agentes/tasks.md) aprobadas. T01–T02 preparadas y verificadas
 localmente: protocolo y diez perfiles. T03 verificada con dos perfiles transmitidos
 explícitamente y ejercicios sintéticos; carga nativa no acreditada. Refuerzo de permisos
-T03b aprobado: prueba local acotada de lectura/escritura correcta; capacidades de la sesión
-revisora y restricciones remotas pendientes de verificar antes del piloto.
+T03b verificada para modalidad de paquete local mediante CLI independiente y sin acceso
+remoto delegado; lectura/escritura y capacidades seleccionadas contrastadas. No acredita
+aislamiento exhaustivo ni accesos remotos directos. Piloto T04–T08 pendiente.
 No añade una fase de producto.
 
 1. **`spec.md`** — qué se construye y por qué. Sin decisiones técnicas.

@@ -2,7 +2,7 @@
 
 - **Spec:** [010](spec.md), aprobada el 2026-11-09.
 - **Plan:** [010](plan.md), aprobado el 2026-11-09.
-- **Estado:** Base y T03b aprobados el 2026-11-09; T01–T03 completadas. Viabilidad T03b en curso y piloto T04–T08 pendientes.
+- **Estado:** Base y T03b aprobados el 2026-11-09; T01–T03 y T03b completadas para modalidad de evidencia local. Piloto T04–T08 pendiente.
 
 Secuencia aprobada; inicio de T01–T02 autorizado el 2026-11-09.
 No autoriza instalaciones, cambios de permisos/CI, publicación de issues/PR, merges ni
@@ -59,7 +59,7 @@ Las casillas se cierran solo con evidencia; catálogo definido no significa agen
   aislamiento técnico ni funcionamiento de los ocho perfiles restantes. Registro temporal
   en notas ignoradas; evidencia del piloto real aún pendiente.
 
-- [ ] **T03b — Verificar límites técnicos antes del piloto.** Comprobar las
+- [x] **T03b — Verificar límites técnicos antes del piloto.** Comprobar las
   opciones efectivas de solo lectura, elevaciones y herramientas remotas según el refuerzo
   propuesto en el plan. Preparar la configuración concreta y su comprobación acotada antes
   de cambiar permisos o ejecutar una prueba de escritura. Confirmar qué capacidades reciben
@@ -79,11 +79,37 @@ Las casillas se cierran solo con evidencia; catálogo definido no significa agen
   `:read-only` y requisitos administrados: lectura correcta, escritura denegada, salida 0
   y marcador ausente. Sin modelo ni conectores. No acredita restricciones de herramientas
   de una sesión de agentes; T03b permanece abierta por esa validación y controles remotos.
+  **Preparación de sesión (2026-11-09):** diagnósticos del CLI confirmaron diez capacidades
+  seleccionadas en false y cero MCP habilitados con opciones temporales; sin cambios
+  persistentes. Prueba sintética `Test-ReviewerSession.ps1` preparada, con sintaxis y modo
+  sin ejecución comprobados. Falta autorizar el turno de IA y examinar sus eventos; no se
+  acredita aún el inventario del modelo ni el bloqueo mediante todas sus herramientas.
+  **Sesión sintética autorizada (2026-11-09):** primer intento detenido antes del modelo
+  por stdin no UTF-8; segundo con codificación corregida, salida 0 y sin timeout. La política
+  bloqueó lectura y escritura antes de PowerShell; fuente intacta y marcador ausente.
+  No se acreditó lectura útil ni ausencia técnica de otras interfaces enumeradas por el
+  modelo. Los eventos examinados no muestran uso de repos reales o conectores. Resultado
+  no concluyente: T03b abierta, T04 no iniciada; no ampliar permisos ni ignorar reglas.
+  **Corrección autorizada del motor (2026-11-09):** `windows.sandbox="elevated"`
+  explícito conservando read-only/never. Eventos reales: lectura con salida 0 y fixture
+  correcto; escritura con acceso denegado y salida 1. Fuente intacta y marcador ausente.
+  Generación de imágenes aún enumerada por el modelo: control CLI identificado y script
+  preparado para deshabilitarlo, sin nuevo turno. Restricción final de herramientas
+  pendiente; T03b no se cierra con la sola comprobación local.
+  **Cierre acotado (2026-11-09):** comprobación autorizada con imágenes deshabilitadas:
+  eventos de lectura correcta (salida 0) y escritura denegada (salida 1), fuente intacta y
+  marcador ausente. Diagnósticos: once capacidades seleccionadas en false y cero MCP
+  habilitados; enumeración del modelo auxiliar, sin generación de imágenes. Se selecciona
+  la alternativa aprobada de paquete local, sin accesos remotos delegados. Cada revisor se
+  ejecutará en CLI independiente con estos límites, no como subagente con escritura heredada
+  de esta conversación. No se acredita aislamiento exhaustivo ni accesos remotos directos.
 
 - [ ] **T04 — Fijar el alcance y estado inicial del piloto.** Consultar PR frontend
   #56/#57, sus bases y SHA actuales; identificar la revisión backend y contrato pertinentes.
   Comparar con los registros históricos y preparar encargos acotados. Guardar estado Git
   y hashes de cambios/archivos no versionados pertinentes en notas ignoradas.
+  El coordinador prepara el paquete local de evidencia con SHA/fecha/hashes para los
+  revisores según la modalidad de T03b; no les delega herramientas remotas.
   **Comprobar:** revisiones completas y fuentes identificadas; se conserva el trabajo local
   existente. Sin restauración/reset, lectura de secretos, cambios remotos ni ejecución de
   dependencias. Si falta acceso, registrar el límite antes de delegar.

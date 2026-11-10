@@ -1,7 +1,7 @@
 # Plan 010 — Orquestación y revisión especializada
 
 - **Spec:** [010](spec.md), aprobada el 2026-11-09.
-- **Estado:** Base y refuerzo T03b aprobados el 2026-11-09; T01–T03 completadas. Prueba local de solo lectura verificada; T03b pendiente de capacidades de la sesión revisora y controles remotos.
+- **Estado:** Base y refuerzo aprobados el 2026-11-09; T01–T03 y T03b completadas para revisión mediante evidencia local. Piloto T04–T08 pendiente; accesos remotos directos desde revisores no habilitados ni validados.
 - **Fecha:** 2026-11-09.
 
 ## Enfoque
@@ -152,6 +152,65 @@ configurado ni demostrado la restricción técnica.
   real de herramientas verificado. Es una alternativa pendiente de validar, no una
   configuración ya demostrada. Un paquete local de evidencia reduce la necesidad de
   conectores en los revisores; su preparación por el coordinador usa consultas autorizadas.
+- Configuración temporal contrastada con `features list` y `mcp list`: apps, plugins,
+  navegador, Computer Use, hooks, multiagente, memoria y solicitud de permisos deshabilitados;
+  cero MCP habilitados tras desactivar el servidor de usuario y las capacidades que aportan
+  servidores de app/plugins. Son diagnósticos de configuración, no inventario de un turno de IA.
+- Prueba de sesión preparada en notas ignoradas, pendiente de autorización: CLI existente
+  con `read-only`, `never`, `--ignore-user-config`, búsqueda deshabilitada y las capacidades
+  anteriores desactivadas. Usa una carpeta temporal nueva y texto ficticio; no adjunta el
+  repo real ni variables de credenciales del proceso padre. El CLI conserva su mecanismo
+  oficial de autenticación. Inspeccionar eventos reales y resultados de lectura/escritura
+  antes de dar T03b por completada; una declaración del modelo no acredita aislamiento.
+- Prueba de sesión autorizada y ejecutada el 2026-11-09. Primer intento rechazado por
+  stdin no UTF-8; se corrigió únicamente la codificación de los flujos. El segundo terminó
+  con salida 0, pero la política bloqueó tanto `Get-Content` como `Set-Content` antes de
+  ejecutar PowerShell. Fuente ficticia intacta y marcador ausente: no hubo lectura útil,
+  por lo que esta prueba no acredita una sesión revisora funcional.
+- El modelo enumeró otras interfaces, incluidas imágenes y recursos MCP. Su declaración
+  es auxiliar; no demuestra qué capacidades estaban técnicamente bloqueadas. El diagnóstico
+  previo de flags y servidores no basta como inventario técnico del turno real. No se
+  observaron llamadas a conectores o uso de repos reales en los eventos examinados.
+- Decisión tras la prueba: mantener T03b abierta y no iniciar T04. No ampliar permisos,
+  ignorar reglas o desactivar controles para convertir un fallo en éxito. Revisar el diseño
+  de la ejecución acotada antes de otra prueba; evidencia incluida en el encargo con
+  herramientas técnicamente limitadas es una alternativa aún no validada.
+- Corrección posterior autorizada: seleccionar por ejecución el motor Windows existente
+  con `windows.sandbox="elevated"`, conservando `read-only` y `never`. Los eventos del
+  nuevo turno muestran `Get-Content` con contenido correcto y salida 0; `Set-Content`
+  devuelve acceso denegado y salida 1. Fuente intacta y marcador ausente. El caso acredita
+  esas operaciones locales, no todas las rutas/herramientas. La omisión de la selección
+  del motor al ignorar configuración de usuario es consistente con el fallo anterior.
+- El modelo aún enumeró generación de imágenes. Se identificó `image_generation` como
+  capacidad estable del CLI y su desactivación temporal devolvió false. El script queda
+  preparado con esa restricción adicional; no se ejecutó un nuevo turno con ella. T03b
+  sigue pendiente de acreditar las capacidades finales; no confundir configuración
+  preparada con herramientas verificadas en la sesión.
+- Comprobación posterior autorizada con `image_generation` deshabilitada: eventos de dos
+  comandos acreditan lectura correcta y escritura denegada, fuente intacta y marcador
+  ausente. El diagnóstico de once capacidades seleccionadas devolvió false y el inventario
+  MCP no dejó servidores habilitados. El modelo ya no enumeró generación de imágenes;
+  su enumeración sigue siendo auxiliar y no demuestra todos los canales posibles.
+
+### Modalidad seleccionada para el piloto
+
+Se utiliza la alternativa de **paquete de evidencia local** prevista en el refuerzo.
+El coordinador consulta GitHub y, si corresponde, Vercel mediante lecturas autorizadas;
+fija SHA, fecha y hashes del paquete. Los revisores solo examinan esos datos locales,
+sin recibir conectores GitHub/Vercel ni credenciales del proceso padre.
+
+Ejecutar cada revisor en una sesión CLI independiente con el motor Windows explícito,
+read-only/never, configuración de usuario omitida, búsqueda deshabilitada y las once
+capacidades probadas desactivadas. Los perfiles se transmiten en el encargo. No sustituir
+esta ejecución por subagentes de la conversación actual que hereden escritura. El límite
+de dos ejecuciones simultáneas y el escritor único se mantiene.
+
+Comprobar capacidades y fuentes antes de cada lote. Los resultados del caso sintético
+acreditan las operaciones y configuración examinadas, no aislamiento exhaustivo de todo
+el equipo, todas las herramientas o futuras versiones. Si aparecen servidores adicionales,
+una configuración incompatible o una necesidad de acceso remoto del revisor, detenerse.
+No probar mutaciones en GitHub/Vercel para verificar restricciones. El coordinador redacta
+el informe después de finalizar las sesiones revisoras, en su fase de escritura separada.
 
 ## Secuencia del piloto
 
@@ -247,4 +306,5 @@ durante el piloto.
 - Plan y [tareas](tasks.md) aprobados; protocolo y perfiles preparados localmente en T01–T02.
   T03 verificada mediante transmisión explícita de dos perfiles y ejercicios sintéticos,
   sin acreditar carga nativa. Refuerzo aprobado y prueba local acotada correcta; siguiente
-  paso: concretar y verificar capacidades de la sesión revisora y límites remotos antes de T04.
+  paso: T04, fijar revisiones actuales y preparar evidencia local. T03b solo acredita la
+  modalidad acotada descrita; no habilita accesos remotos directos desde revisores.

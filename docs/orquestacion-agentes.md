@@ -88,6 +88,16 @@ instalaciones, workflows ni despliegues. Solo consultas remotas autorizadas con 
 existentes; Vercel conserva su skill y restricciones GET. No leer secretos ni publicar.
 PDF #45 permanece pospuesto; no cerrar #46 por completar este piloto.
 
+Modalidad validada en T03b: el coordinador obtiene evidencia mediante consultas de lectura
+autorizadas y prepara un paquete local identificado por SHA/fecha/hashes. Los revisores
+usan sesiones CLI independientes con motor Windows explícito, read-only/never, sin
+configuración de usuario heredada, búsqueda y capacidades remotas no necesarias deshabilitadas.
+No reciben conectores GitHub/Vercel o variables de credenciales. Comprobar los controles
+antes de cada lote; no usar en su lugar subagentes que hereden escritura de esta conversación.
+La prueba sintética acreditó lectura y escritura denegada en rutas desechables, junto con
+los diagnósticos de capacidades seleccionadas. No es una garantía exhaustiva para todas
+las rutas, herramientas o versiones futuras; detenerse ante capacidades inesperadas.
+
 Antes y después de cada lote, comparar estado Git y hashes de archivos versionados
 modificados y no versionados pertinentes. Guardar los registros temporales en notas
 ignoradas, fuera de esa comparación. La revisión final conserva el trabajo local previo;
