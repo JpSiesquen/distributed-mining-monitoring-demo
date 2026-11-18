@@ -22,6 +22,10 @@ y `tasks.md`; las reservas vacías permiten ver la ruta y no aprueban alcance ni
 
 ## Flujo
 
+[010 — Orquestación y revisión especializada](010-orquestacion-agentes/spec.md) es una mejora
+transversal del flujo de contribución. El piloto finalizó el 2026-11-18. El
+[informe de cierre](../docs/revisiones/010-piloto-integracion.md) recoge las comprobaciones y sus límites.
+
 1. **`spec.md`** — qué se construye y por qué. Sin decisiones técnicas.
 2. **`plan.md`** — cómo se construye. Enlaza a los ADR relacionados.
 3. **`tasks.md`** — tareas pequeñas, ordenadas y verificables.
