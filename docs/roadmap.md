@@ -1,6 +1,6 @@
 # Roadmap técnico
 
-Actualizado: 2026-10-17.
+Actualizado: 2026-11-18.
 
 ## Objetivo
 
@@ -8,6 +8,13 @@ Monitoreo de maquinaria minera mediante Frontend → BFF → API Core → SQL Se
 con DEV consolidado y QA distribuido según la topología aprobada.
 
 ## Punto actual y próxima acción
+
+**Orquestación y revisión especializada.** [Spec 010](../specs/010-orquestacion-agentes/spec.md),
+[plan](../specs/010-orquestacion-agentes/plan.md) y [tareas](../specs/010-orquestacion-agentes/tasks.md)
+aprobados el 2026-11-09. Piloto completado el 2026-11-18. Se prepararon diez perfiles y se
+ejecutaron seis roles de revisión en sesiones independientes de solo lectura. Se verificaron
+el estado Git y los hashes de la evidencia. La carga nativa sigue pendiente de acreditación.
+[Informe de cierre](revisiones/010-piloto-integracion.md) · [Protocolo](orquestacion-agentes.md)
 
 Diseño de topología aprobado ([001](../specs/001-topologia-despliegue/plan.md)); validación práctica pendiente.
 Spec, plan y tareas de [API Core](../specs/002-api-core-minimo/tasks.md) y
