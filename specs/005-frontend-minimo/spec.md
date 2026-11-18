@@ -1,9 +1,9 @@
 # Spec 005 — Integración de Mining Ops Console
 
-- **Estado:** Revisión 2 aprobada el 2026-10-13; implementación pendiente.
+- **Estado:** Revisión 2 aprobada el 2026-10-13. Plan y tareas aprobados. CA1 y CA2 completos.
+  Las pantallas de lectura están en revisión. CA3–CA9 siguen abiertos.
 - **Decisiones aprobadas:** frontend en repo separado; primera entrega de lectura;
   atención/cierre persistentes después; mantener Material UI y adaptar la consola.
-- La aprobación de esta revisión no aprueba todavía su plan ni ejecución.
 
 ## Motivo del cambio
 
@@ -13,8 +13,8 @@ histórico, detalle y reporte. Su fuente actual y las acciones son simuladas/en 
 la integración sustituirá esa fuente por HTTP. Git conserva la revisión anterior.
 
 El frontend permanece en su repo; este mantiene API Core, BFF e infraestructura.
-Los servicios se comunican mediante contratos HTTP. Las tareas/issues #70–#79 necesitan
-adaptación antes de ejecutarse; crear un frontend nuevo ya no es el resultado acordado.
+Los servicios se comunican mediante contratos HTTP. La ejecución sigue el
+[mapa vigente de tareas e issues](tasks.md#issues-de-ejecución).
 
 ## Objetivo
 
@@ -74,7 +74,7 @@ repo público; usar evidencia sintética/autorizada. Conservar identificación d
   referencian la misma revisión. Ruta, fechas y evidencia acordadas antes de implementar.
   Evidencia: backend [PR #99](https://github.com/JpSiesquen/distributed-mining-monitoring-demo/pull/99)
   y frontend [PR #50](https://github.com/JpSiesquen/mining-ops-console/pull/50), integrados;
-  frontend fija el contrato al commit backend 3de8694. Resto de criterios pendiente.
+  frontend fija el contrato al commit backend 3de8694.
 - [x] **CA2:** proveedor API Core → BFF cumple contrato y conserva equipos/health; pruebas
   cubren vacío, datos inválidos, indisponibilidad y timeout de cabeceras/cuerpo.
 - [ ] **CA3:** panel/histórico/detalle usan eventos del BFF; inspección de red confirma que
@@ -93,7 +93,7 @@ repo público; usar evidencia sintética/autorizada. Conservar identificación d
   repos. 001/T02 solo se completa con la vista de equipos y restantes requisitos de esa tarea;
   consultar eventos no sustituye esa evidencia ni acredita SQL/despliegue/DEV/QA.
 
-## Decisiones y preguntas para el plan
+## Decisiones aprobadas
 
 - Aprobado el 2026-10-13: dos repos; lectura en panel, histórico, detalle y reporte primero;
   atención/cierre persistentes después.
@@ -107,10 +107,10 @@ repo público; usar evidencia sintética/autorizada. Conservar identificación d
   decisiones o reglas como fuente absoluta de verdad.
 - Vigentes salvo revisión: React 19/Vite 6/TypeScript, TanStack Query, estrategia DOM, proxy
   local y espera frontend de diez segundos. Versiones y comandos siguen sujetos a revisión.
-- Contrato v1 documentado y referenciado por ambos repos. Pendientes: recursos concretos de evidencia, configuración
-  concreta de CI por repo y orden de adaptación. No añadir polling automáticamente.
+- Contrato v1 referenciado por ambos repos. El [plan](plan.md) registra el orden de adaptación
+  y las decisiones sobre CI y evidencia sintética. No añadir polling automáticamente.
 
-Esta revisión completa precede al nuevo plan y tareas/issues. Specs 002/004 conservan su
-verificación de equipos y salud; documentar sus ampliaciones de eventos contra esta revisión
-antes de implementar. Registrar repos separados y consecuencias de CI/topología mediante ADR
-aprobado. Este documento no autoriza instalaciones, implementación ni cambios de infraestructura.
+Las specs 002 y 004 conservan sus criterios de equipos y salud. El
+[ADR de repositorios separados](../../docs/adr/0012-repositorios-separados-y-contrato-eventos.md)
+registra la decisión de arquitectura. Instalaciones y cambios de infraestructura requieren
+su propia autorización.
